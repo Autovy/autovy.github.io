@@ -295,4 +295,191 @@
         <tag>入门教程</tag>
       </tags>
   </entry>
+  <entry>
+    <title>开发笔记：自动化脚本实战手册</title>
+    <url>/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<img src="https://i2.wp.com/www.weizhiyong.com/wp-content/uploads/2017/04/Python-for-LabVIEW-by-Enthought-Product-Icon-800x582-Trans.png?fit=800%2C582&ssl=1" height="300" alt="git" align="center">
+
+
+
+<span id="more"></span>
+
+<h2 id="Python-自动化实战手册"><a href="#Python-自动化实战手册" class="headerlink" title="Python 自动化实战手册"></a>Python 自动化实战手册</h2><h4 id="调用系统终端（cmd）"><a href="#调用系统终端（cmd）" class="headerlink" title="调用系统终端（cmd）"></a>调用系统终端（cmd）</h4><h5 id="1-运用场景"><a href="#1-运用场景" class="headerlink" title="1.运用场景"></a>1.运用场景</h5><p>有一些工具是使用命令行来执行的，这时可以调用系统终端来实现自动化</p>
+<p>如：</p>
+<p>swftool：<a href="http://www.swftools.org/（swf转换工具）">http://www.swftools.org/（swf转换工具）</a></p>
+<p>ffmpeg：<a href="https://ffmpeg.org/（视频转码工具）">https://ffmpeg.org/（视频转码工具）</a></p>
+<h5 id="2-实例"><a href="#2-实例" class="headerlink" title="2.实例"></a>2.实例</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># pdf转swf</span></span><br><span class="line">os.system(<span class="string">&#x27;E:\swftools\pdf2swf.exe -b E:\swftools\pdf\%s.pdf -o E:\swftools\swf\%s.swf&#x27;</span> % (name, name))</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-语法解释"><a href="#3-语法解释" class="headerlink" title="3.语法解释"></a>3.语法解释</h5><ul>
+<li><p><code>import os</code>引入os模块，该模块主要提供与操作系统相关的功能的便捷式途径</p>
+</li>
+<li><p><code>os.system</code>可以在系统的子shell中执行命令，在windows上即相当于在cmd运行命令行，其返回值为命令退出的状态</p>
+</li>
+<li><p><code>os.system</code>运行命令行时无法实时显示运行过程，只能最终返回运行结果，这是和在cmd运行时的差别</p>
+</li>
+<li><p>使用<code>system</code>函数，会创建一个子进程，但是子进程无法影响父进程中的环境变量。简单来说，就是使用第一个<code>system</code>函数用cd切换目录，第二个<code>system</code>函数的环境变量仍然继承父进程的环境变量。所以第二个子进程的目录位置没有被第一条语句改变</p>
+</li>
+<li><p>关于新进程的生成和跟踪执行结果，往往用<code>subprocess</code>模块代替<code>system</code></p>
+</li>
+<li><p>在<code>system</code>函数执行多条语句的方法，可以使用复合语句，如：<code>os.system(&#39;cd path-to-repo &amp;&amp; svn ci&#39;)</code>，即都在一个子进程中运行命令</p>
+</li>
+<li><p>或者使用<code>os.chdir</code>切换父进程的目录，再执行子进程</p>
+</li>
+</ul>
+<h4 id="文件遍历筛选"><a href="#文件遍历筛选" class="headerlink" title="文件遍历筛选"></a>文件遍历筛选</h4><h5 id="1-运用场景-1"><a href="#1-运用场景-1" class="headerlink" title="1.运用场景"></a>1.运用场景</h5><p>在自动化批量操作文件时，一定少不了文件遍历，并且可以筛选出需要的文件</p>
+<h5 id="2-实例-1"><a href="#2-实例-1" class="headerlink" title="2.实例"></a>2.实例</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 引入python的标准库os库</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="comment"># 遍历文件夹</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">file</span>(<span class="params">name</span>):</span></span><br><span class="line">    <span class="comment"># 初始化一个空列表存储文件</span></span><br><span class="line">    list_all = []</span><br><span class="line">    <span class="comment"># 搜索一个目录下的所有文件夹和所有文件内的指定类型文件</span></span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(<span class="string">&#x27;E:\swftools\%s&#x27;</span> % name):</span><br><span class="line">        <span class="comment"># 获得文件名</span></span><br><span class="line">        <span class="keyword">for</span> name <span class="keyword">in</span> files:</span><br><span class="line">            <span class="comment"># 加上文件路径</span></span><br><span class="line">            dir_path = os.path.join(root, name)</span><br><span class="line">            <span class="comment"># 切割出文件名</span></span><br><span class="line">            dir_name = os.path.split(dir_path)[-<span class="number">1</span>]</span><br><span class="line">            <span class="comment"># 筛选文件</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;.pdf&#x27;</span> <span class="keyword">or</span> <span class="string">&#x27;.swf&#x27;</span> <span class="keyword">in</span> name:</span><br><span class="line">                list_all.append(dir_name)</span><br><span class="line">        <span class="keyword">return</span> list_all</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-语法解释-1"><a href="#3-语法解释-1" class="headerlink" title="3.语法解释"></a>3.语法解释</h5><ul>
+<li><code>os.walk(根目录)</code>可返回3元组 (dirpath, dirnames, filenames)【文件夹相对路径, 文件夹名字, 文件名】</li>
+<li><code>os.path.join</code>拼接路径</li>
+<li><code>os.path.split(path)</code>拆分路径为<code>(head, tail)</code></li>
+</ul>
+<h4 id="服务器操作"><a href="#服务器操作" class="headerlink" title="服务器操作"></a>服务器操作</h4><h5 id="1-运用场景-2"><a href="#1-运用场景-2" class="headerlink" title="1.运用场景"></a>1.运用场景</h5><p>可以运用在将本地文件上传到服务器或者操作服务器上的文件，还可以调用服务器的终端（可用于在服务器上制作视频流）</p>
+<h5 id="2-实例-2"><a href="#2-实例-2" class="headerlink" title="2.实例"></a>2.实例</h5><p>参考博客：</p>
+<p><a href="https://www.jianshu.com/p/486dd9993125">https://www.jianshu.com/p/486dd9993125</a></p>
+<p><a href="https://juejin.cn/post/6844904078057668615">https://juejin.cn/post/6844904078057668615</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"><span class="comment"># 建立ssh连接的同时，建立一个加密的文件传输通道</span></span><br><span class="line"><span class="comment"># 设置连接服务器信息</span></span><br><span class="line">t = paramiko.Transport((<span class="string">&quot;host（主机号）&quot;</span>, 端口（一般为<span class="number">22</span>）))</span><br><span class="line">t.connect(username=<span class="string">&quot;用户名&quot;</span>, password=<span class="string">&quot;密码&quot;</span>)</span><br><span class="line"><span class="comment"># 将sshclient的对象的transport指定为以上的t，即进行ssh连接</span></span><br><span class="line">ssh = paramiko.SSHClient()</span><br><span class="line">ssh._transport = t</span><br><span class="line"><span class="comment"># ssh连接后在服务器终端运行命令，此处为复合语句</span></span><br><span class="line">stdin, stdout, stderr = ssh.exec_command(<span class="string">&#x27;cd /../var/www/;pwd;&#x27;</span>)</span><br><span class="line"><span class="comment"># 开启sftp通道，传输文件</span></span><br><span class="line">sftp = ssh.open_sftp()</span><br><span class="line"><span class="comment"># 文件传输</span></span><br><span class="line">sftp.put(localpath=<span class="string">&#x27;本地路径&#x27;</span>, remotepath=<span class="string">&#x27;远程路径’)</span></span><br><span class="line"><span class="string"># 关闭通道</span></span><br><span class="line"><span class="string">sftp.close</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-语法解释-2"><a href="#3-语法解释-2" class="headerlink" title="3. 语法解释"></a>3. 语法解释</h5><ul>
+<li><p>paramiko模块主要用于远程操作服务器，利用该模块，可以方便的进行ssh连接和sftp协议进行sftp文件传输</p>
+</li>
+<li><p><code>pip install paramiko</code>下载安装paramiko模块</p>
+</li>
+<li><p>使用paramiko模块有两种连接方式，一种是通过<code>paramiko.SSHClient()</code>函数，另外一种是通过<code>paramiko.Transport()</code>函数</p>
+</li>
+<li><p><code>exec_command</code>函数调用会返回3个变量，其中stdout为标准输出，在输出内容比较少时，可以通过直接使用read读取出所有的输出</p>
+</li>
+<li><p>sftp用get函数即下载远程文件，put函数即上传本地文件</p>
+</li>
+</ul>
+<h4 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h4><h5 id="1-运用场景-3"><a href="#1-运用场景-3" class="headerlink" title="1.运用场景"></a>1.运用场景</h5><p>筛选统计数据库，或者可以利用数据库批量快捷发布网站内容（如基于wordpress的站点）</p>
+<h5 id="2-实例-3"><a href="#2-实例-3" class="headerlink" title="2.实例"></a>2.实例</h5><p>参考文章：<a href="https://www.runoob.com/python3/python3-mysql.html">https://www.runoob.com/python3/python3-mysql.html</a></p>
+<p>（1）引入所需库</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">from</span> sshtunnel <span class="keyword">import</span> SSHTunnelForwarder</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）连接一般数据库</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">link</span>():</span></span><br><span class="line">	data = pymysql.connect(host=<span class="string">&#x27;数据库主机号&#x27;</span>, port=端口, user=<span class="string">&#x27;用户名&#x27;</span>, passwd=<span class="string">&#x27;密码&#x27;</span>, db=<span class="string">&#x27;数据库名&#x27;</span>, charset=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> data</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（3）连接需要跳板机的数据库</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">link_base</span>():</span></span><br><span class="line">    server = SSHTunnelForwarder(</span><br><span class="line">            (<span class="string">&#x27;跳板机主机号&#x27;</span>, <span class="number">22</span>),  <span class="comment"># B机器的配置</span></span><br><span class="line">            ssh_password=<span class="string">&quot;跳板机密码&quot;</span>,</span><br><span class="line">            ssh_username=<span class="string">&quot;跳板机用户名&quot;</span>,</span><br><span class="line">            remote_bind_address=(<span class="string">&#x27;数据库主机号&#x27;</span>, 数据库端口))</span><br><span class="line">	</span><br><span class="line">    server.start()</span><br><span class="line"></span><br><span class="line">    data = pymysql.connect(host=<span class="string">&#x27;127.0.0.1&#x27;</span>,  <span class="comment"># 此处必须是是127.0.0.1</span></span><br><span class="line">                               port=server.local_bind_port,</span><br><span class="line">                               user=<span class="string">&#x27;数据库用户名&#x27;</span>,</span><br><span class="line">                               passwd=<span class="string">&#x27;数据库密码&#x27;</span>,</span><br><span class="line">                               db=<span class="string">&#x27;数据库名&#x27;</span></span><br><span class="line">                               )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> data</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（4） 利用sql语句操作数据库</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取目标id</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mysql</span>():</span></span><br><span class="line">    <span class="comment"># 获得连接后的数据库</span></span><br><span class="line">    data = link()</span><br><span class="line">    <span class="comment"># 使用 cursor() 方法创建一个游标对象 cursor</span></span><br><span class="line">    cursor = data.cursor()</span><br><span class="line">    <span class="comment"># 用execute执行sql语句操作数据库</span></span><br><span class="line">    sql = <span class="string">&quot;sql语句&quot;</span></span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 如果为查询操作</span></span><br><span class="line">    <span class="comment"># 获取指针指向的数据</span></span><br><span class="line">    result = cursor.fetchall()</span><br><span class="line">    <span class="comment"># 输出获取的元组数据</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">	</span><br><span class="line">    <span class="comment"># 如果为增删改操作</span></span><br><span class="line">	<span class="comment"># 提交到数据库执行</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">       <span class="comment"># 执行sql语句</span></span><br><span class="line">       cursor.execute(sql)</span><br><span class="line">       <span class="comment"># 提交到数据库执行</span></span><br><span class="line">       db.commit()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">       <span class="comment"># 如果发生错误则回滚</span></span><br><span class="line">       db.rollback()</span><br><span class="line">    <span class="comment"># 关闭数据库连接</span></span><br><span class="line">	db.close()    </span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-语法解释-3"><a href="#3-语法解释-3" class="headerlink" title="3.语法解释"></a>3.语法解释</h5><ul>
+<li>连接数据库的核心模块为pymysql,可以通过<code>pip install PyMySQL</code>安装</li>
+<li>当需要跳板机连接服务器对象时（可以说数据库服务器也可以是文件服务器），要用到sshtunnel模块，可以通过<code>pip install sshtunnel</code>安装</li>
+<li>数据库由多张关系表构成，往往需要查询多个表才能得到自己需要的批量数据</li>
+<li>通过cursor可以不断指定执行新的sql语句</li>
+<li>sql语句可以善用where筛选语句，应选择查询对象是某个字段，而不是*（全表）</li>
+</ul>
+<h4 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h4><h5 id="1-运用场景-4"><a href="#1-运用场景-4" class="headerlink" title="1.运用场景"></a>1.运用场景</h5><p>自动化操作往往会涉及到字符串的筛选和修改，这时候就要用到python的字符串操作和正则匹配</p>
+<h5 id="2-实例-4"><a href="#2-实例-4" class="headerlink" title="2.实例"></a>2.实例</h5><p>（1）python字符串处理</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 简单筛选出含有指定子字符串的字符串</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;.pdf&#x27;</span> <span class="keyword">or</span> <span class="string">&#x27;.swf&#x27;</span> <span class="keyword">in</span> name:</span><br><span class="line">	print(name)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 简单字符串切片，利用find找到切点，再用字符串索引取出所需的字符串</span></span><br><span class="line">num = <span class="built_in">str</span>(i).find(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">title = <span class="built_in">str</span>(i)[:num]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）正则表达式处理字符串</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用正则匹配筛选字符串，并修改取代字符串</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span>(<span class="params">content</span>):</span></span><br><span class="line">    <span class="comment"># 正则匹配</span></span><br><span class="line">    pattern = re.<span class="built_in">compile</span>(<span class="string">r&#x27;&lt;embed&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> pattern.search(content):</span><br><span class="line">      content = <span class="built_in">str</span>(content).replace(<span class="string">&#x27;.pdf&#x27;</span>, <span class="string">&#x27;.swf&#x27;</span>).replace(<span class="string">&#x27;pdf&#x27;</span>, <span class="string">&#x27;x-shockwave-flash&#x27;</span>).replace(<span class="string">&#x27;height=&quot;100%&quot;&#x27;</span>, <span class="string">&#x27;height=&quot;400&quot;&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> content</span><br><span class="line"></span><br><span class="line"><span class="comment"># 正则匹配的两种方法</span></span><br><span class="line">prog = re.<span class="built_in">compile</span>(pattern)</span><br><span class="line">result = prog.match(string)</span><br><span class="line"><span class="comment"># 等价于</span></span><br><span class="line">result = re.match(pattern, string)</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-语法解释-4"><a href="#3-语法解释-4" class="headerlink" title="3.语法解释"></a>3.语法解释</h5><ul>
+<li>正则表达式往往是用大于看，看是很难看懂的，比较有用的正则工具：<a href="https://regex101.com/">https://regex101.com/</a></li>
+<li>正则查找有match和search两种方式</li>
+<li><code>re.match()</code> 从第一个字符开始找, 如果第一个字符就不匹配就返回None, 不继续匹配. 用于判断字符串开头或整个字符串是否匹配,速度快</li>
+<li><code>re.search()</code> 会整个字符串查找,直到找到一个匹配</li>
+<li><code>re.compile()</code>将正则表达式的样式编译为一个正则对象，如果需要多次使用这个正则表达式的话，使用 <code>re.compile()</code>和保存这个正则对象以便复用，可以让程序更加高效</li>
+</ul>
+<h4 id="Word文档操作"><a href="#Word文档操作" class="headerlink" title="Word文档操作"></a>Word文档操作</h4><h5 id="1-运用场景-5"><a href="#1-运用场景-5" class="headerlink" title="1.运用场景"></a>1.运用场景</h5><p>在办公中可以批量生成只有日期和名字改动的模板，可以读取一篇word文档生成计算机可以处理的数据</p>
+<h5 id="2-实例-5"><a href="#2-实例-5" class="headerlink" title="2.实例"></a>2.实例</h5><p>（1）引入基本模块</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 负责新建文档</span></span><br><span class="line"><span class="keyword">from</span> docx <span class="keyword">import</span> Document</span><br><span class="line"><span class="comment"># 对齐</span></span><br><span class="line"><span class="keyword">from</span> docx.enum.text <span class="keyword">import</span> WD_ALIGN_PARAGRAPH</span><br><span class="line"><span class="comment"># 磅数</span></span><br><span class="line"><span class="keyword">from</span> docx.shared <span class="keyword">import</span> Pt</span><br><span class="line"><span class="comment"># 中文格式</span></span><br><span class="line"><span class="keyword">from</span> docx.oxml.ns <span class="keyword">import</span> qn</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）文档基础设置</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 新建一个文档</span></span><br><span class="line">document = Document()</span><br><span class="line"><span class="comment"># 设置文档基础字体,注意该处的styles有个s</span></span><br><span class="line">document.styles[<span class="string">&#x27;Normal&#x27;</span>].font.name = <span class="string">u&#x27;微软雅黑&#x27;</span></span><br><span class="line">document.styles[<span class="string">&#x27;Normal&#x27;</span>].font.size = Pt(<span class="number">14</span>)</span><br><span class="line"><span class="comment"># 设置文档基础中文字体</span></span><br><span class="line">document.styles[<span class="string">&#x27;Normal&#x27;</span>].element.rPr.rFonts.<span class="built_in">set</span>(qn(<span class="string">&#x27;w:eastAsia&#x27;</span>), <span class="string">u&#x27;微软雅黑&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（3）创建纯文字模板</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_context</span>(<span class="params">context</span>):</span></span><br><span class="line">	<span class="comment"># 创建自然段</span></span><br><span class="line">	p = document.add_paragraph()</span><br><span class="line">	<span class="comment"># 设置该自然段对齐方式</span></span><br><span class="line">	p.alignment = WD_ALIGN_PARAGRAPH.LEFT</span><br><span class="line">	<span class="comment"># 在该自然段添加文字</span></span><br><span class="line">	r = p.add_run(<span class="built_in">str</span>(context))</span><br><span class="line">	<span class="comment"># 设置字体格式</span></span><br><span class="line">	r.font.size = Pt(<span class="number">16</span>)</span><br><span class="line">    <span class="comment"># 段后距离5磅</span></span><br><span class="line">    p1.space_after = Pt(<span class="number">5</span>)</span><br><span class="line">    <span class="comment"># 段前距离5磅</span></span><br><span class="line">    p1.space_after = Pt(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（4）创建表格</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">height = <span class="built_in">len</span>(<span class="built_in">list</span>)</span><br><span class="line"><span class="comment"># 文档插入表格</span></span><br><span class="line">table = document.add_table(rows=height, cols=<span class="number">5</span>, style=<span class="string">&#x27;Table Grid&#x27;</span>)</span><br><span class="line"><span class="comment"># 填写字段</span></span><br><span class="line">table.cell(<span class="number">0</span>, <span class="number">0</span>).text = <span class="string">&#x27;序号&#x27;</span></span><br><span class="line">table.cell(<span class="number">0</span>, <span class="number">1</span>).text = <span class="string">&#x27;网址名称&#x27;</span></span><br><span class="line">table.cell(<span class="number">0</span>, <span class="number">2</span>).text = <span class="string">&#x27;网址&#x27;</span></span><br><span class="line">table.cell(<span class="number">0</span>, <span class="number">3</span>).text = <span class="string">&#x27;责任部门&#x27;</span></span><br><span class="line">table.cell(<span class="number">0</span>, <span class="number">4</span>).text = <span class="string">&#x27;负责人姓名&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>（5）存储文档</p>
+<p>注意要标注后缀为docx，否则打不开文件，储存位置为程序根目录</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">document.save(<span class="string">&#x27;test.docx&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（6）读取文档</p>
+<p>可用于将记录题目的word文档转换为计算机可以处理的数据</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> docx <span class="keyword">import</span> Document</span><br><span class="line"><span class="comment"># 打开一个文档</span></span><br><span class="line">document = Document(<span class="string">&quot;C语言.docx&quot;</span>)</span><br><span class="line"><span class="comment"># 获取所有段落</span></span><br><span class="line">all_paragraphs = document.paragraphs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建二维数组存储一道题</span></span><br><span class="line">passage = [[]]</span><br><span class="line">sent = []</span><br><span class="line"><span class="comment"># 逐个读取段落,一般不读取run中的，因为会出现文字割裂的问题</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(all_paragraphs)):</span><br><span class="line">    pattern = re.<span class="built_in">compile</span>(<span class="string">r&#x27;^\d&#x27;</span>)</span><br><span class="line">    matching = pattern.findall(all_paragraphs[i].text)</span><br><span class="line">    <span class="keyword">if</span> matching:</span><br><span class="line">        <span class="comment"># 重置单个题目的列表</span></span><br><span class="line">        passage.append(sent)</span><br><span class="line">        sent = []</span><br><span class="line">        sent.append(all_paragraphs[i].text)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        sent.append(all_paragraphs[i].text)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（7）修改文档</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> docx <span class="keyword">import</span> Document</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取word文件</span></span><br><span class="line">document = Document(<span class="string">&quot;资料2.0.docx&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_text</span>(<span class="params">old_text, new_text</span>):</span></span><br><span class="line">    <span class="comment"># 修改纯文本</span></span><br><span class="line">    <span class="comment"># 复制粘贴word文档内容包括格式</span></span><br><span class="line">    all_paragraphs = document.paragraphs</span><br><span class="line">    <span class="keyword">for</span> paragraphs <span class="keyword">in</span> all_paragraphs:</span><br><span class="line">        <span class="keyword">for</span> run <span class="keyword">in</span> paragraphs.runs:</span><br><span class="line">            <span class="comment"># 修改文字</span></span><br><span class="line">            run_text = run.text.replace(old_text, new_text)</span><br><span class="line">            run.text = run_text</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 修改表格</span></span><br><span class="line">    all_tables = document.tables</span><br><span class="line">    <span class="keyword">for</span> table <span class="keyword">in</span> all_tables:</span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> table.rows:</span><br><span class="line">           <span class="keyword">for</span> cell <span class="keyword">in</span> row.cells:</span><br><span class="line">                cell_text = cell.text.replace(old_text, new_text)</span><br><span class="line">                cell.text = cell_text</span><br><span class="line"></span><br><span class="line"><span class="comment"># 替换字符串</span></span><br><span class="line">change_text(<span class="string">&#x27;社团&#x27;</span>, <span class="string">&#x27;协会&#x27;</span>)</span><br><span class="line"><span class="comment"># 可以覆盖保存，但注意要将打开程序关闭</span></span><br><span class="line">document.save(<span class="string">&quot;资料2.0.docx&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>8.word转pdf</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用win32模板的功能</span></span><br><span class="line"><span class="keyword">from</span> win32com.client <span class="keyword">import</span> Dispatch, constants, gencache</span><br><span class="line"></span><br><span class="line"><span class="comment"># 确定读取docx的路径，保存pdf路径</span></span><br><span class="line">docx_path = <span class="string">&#x27;资料2.0.docx&#x27;</span></span><br><span class="line">pdf_path = <span class="string">&#x27;资料.pdf&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指向offic的功能并调用</span></span><br><span class="line">gencache.EnsureModule(<span class="string">&#x27;&#123;00020905-0000-0000-C000-000000000046&#125;&#x27;</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用word服务，开始转换</span></span><br><span class="line">wd = Dispatch(<span class="string">&quot;Word.Application&quot;</span>)</span><br><span class="line">doc = wd.Documents.Open(docx_path, ReadOnly=<span class="number">1</span>)</span><br><span class="line">doc.ExportAsFixedFormat(pdf_path, constants.wdExportFormatPDF, Item=constants.wdExportDocumentWithMarkup,CreateBookmarks=constants.wdExportCreateHeadingBookmarks)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出并保存</span></span><br><span class="line">wd.Quit(constants.wdDoNotSaveChanges)</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-语法解释-5"><a href="#3-语法解释-5" class="headerlink" title="3.语法解释"></a>3.语法解释</h5><ul>
+<li>安装docx模块，<code>pip install python-docx</code></li>
+<li>读取文档时要注意，<code>document.paragraphs</code>返回的数组的每一个元素即一行的内容</li>
+<li>一维数组的增加可以直接使用append不断扩展数组<code>sent.append(&#39;str&#39;)</code></li>
+<li>二维数组的二维增加，可以直接填入数组<code>passage.append(array)</code>，一维增加的前提的二维存在，否则会报错超出范围<code>passage[1].append(&#39;str&#39;)</code></li>
+</ul>
+<h4 id="Excel文档操作"><a href="#Excel文档操作" class="headerlink" title="Excel文档操作"></a>Excel文档操作</h4><h5 id="1-运用场景-6"><a href="#1-运用场景-6" class="headerlink" title="1.运用场景"></a>1.运用场景</h5><p>办公中经常会用到excel表格来整理统计数据，利用python可以批量读取和写入表格，提高工作效率</p>
+<h5 id="2-实例-6"><a href="#2-实例-6" class="headerlink" title="2.实例"></a>2.实例</h5><p>（1）xlrd库读取execl内容</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> xlrd  <span class="comment"># 引入xlrd库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 引入工作簿路径</span></span><br><span class="line">xlsx = xlrd.open_workbook(<span class="string">&#x27;E://考勤表.xlsx&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 确定读取的工作表，也可以用工作表名字来索引</span></span><br><span class="line"><span class="comment"># table = xlsx.sheet_by_name(&quot;表名&quot;)</span></span><br><span class="line">table = xlsx.sheet_by_index(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 确定单元格的坐标值，并打印，注意不要超过单元格所有的内容否则会报错,以下三种形式是一致的</span></span><br><span class="line">print(table.cell_value(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">print(table.cell(<span class="number">1</span>, <span class="number">2</span>).value)</span><br><span class="line">print(table.row(<span class="number">1</span>)[<span class="number">2</span>].value)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）xlwt库写入execl工作表</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 引入xlwt库</span></span><br><span class="line"><span class="keyword">import</span> xlwt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建一个工作簿</span></span><br><span class="line">new_workbook = xlwt.Workbook()</span><br><span class="line"><span class="comment"># 新建一个工作表</span></span><br><span class="line">worksheet = new_workbook.add_sheet(<span class="string">&#x27;sheet1&#x27;</span>)</span><br><span class="line"><span class="comment"># 在工作表指定坐标写入值</span></span><br><span class="line">worksheet.write(<span class="number">0</span>, <span class="number">0</span>, <span class="string">&#x27;test&#x27;</span>)</span><br><span class="line"><span class="comment"># 保存工作簿</span></span><br><span class="line">new_workbook.save(<span class="string">&#x27;test.xls&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Pandas分析数据"><a href="#Pandas分析数据" class="headerlink" title="Pandas分析数据"></a>Pandas分析数据</h4><h5 id="1-运用场景-7"><a href="#1-运用场景-7" class="headerlink" title="1.运用场景"></a>1.运用场景</h5><p>Pandas是一个强大的分析结构化数据的工具集；用于数据挖掘和数据分析，同时也提供数据清洗功能。</p>
+<h5 id="2-案例"><a href="#2-案例" class="headerlink" title="2.案例"></a>2.案例</h5><p>参考文档：<a href="https://www.pypandas.cn/">https://www.pypandas.cn/</a></p>
+<p>读取excel数据</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用pandas打开excel</span></span><br><span class="line">file = pd.ExcelFile(<span class="string">&#x27;test.xlsx&#x27;</span>)</span><br><span class="line"><span class="comment"># 指定表名，excel的数据以数组的形式返回</span></span><br><span class="line">data = file.parse(<span class="string">&#x27;Sheet1&#x27;</span>)</span><br><span class="line">print(data)</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>开发笔记</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>开发实战</tag>
+        <tag>脚本学习</tag>
+      </tags>
+  </entry>
 </search>
