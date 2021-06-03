@@ -1,57 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>开发笔记：基于python开发学生管理系统</title>
-    <url>/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<img src="https://developer-tech.com/wp-content/uploads/sites/3/2020/12/python-right-business-programming-language-software-development-enterprise-2048x1318.jpg" height="300" alt="git" align="center">
-
-
-
-<span id="more"></span>
-
-<h3 id="模拟数据库"><a href="#模拟数据库" class="headerlink" title="模拟数据库"></a>模拟数据库</h3><p>用列表为主体储存全部学生信息，方便读取。用字典这种数据类型放置一个学生信息。方便对列表操作时整块操作</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = [   <span class="comment">#列表</span></span><br><span class="line">		   <span class="comment">#字典	</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Tom&quot;</span>,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;男&quot;</span>,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>:<span class="string">&quot;佛山&quot;</span>,</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Mary&quot;</span>,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;女&quot;</span>,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>: <span class="string">&quot;广州&quot;</span>,</span><br><span class="line"></span><br><span class="line">    &#125;,  </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Jhon&quot;</span>,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;男&quot;</span>,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>: <span class="string">&quot;厦门&quot;</span>,</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="操作框架"><a href="#操作框架" class="headerlink" title="操作框架"></a>操作框架</h3><p>写代码优先规划好主框架，然后再补充功能函数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    print(</span><br><span class="line">            <span class="string">&quot;&quot;&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            欢迎使用【学生管理系统】</span></span><br><span class="line"><span class="string">            0.退出系统</span></span><br><span class="line"><span class="string">            1.显示所有学生信息</span></span><br><span class="line"><span class="string">            2.新建学生信息</span></span><br><span class="line"><span class="string">            3.查询学生信息</span></span><br><span class="line"><span class="string">            4.修改学生信息</span></span><br><span class="line"><span class="string">            5.删除学生信息                            </span></span><br><span class="line"><span class="string">            &quot;&quot;&quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">          )</span><br><span class="line"></span><br><span class="line">    op = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入你的操作：&quot;</span>)) <span class="comment">#转化输入的值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> op==<span class="number">1</span> :</span><br><span class="line">        print(<span class="string">&quot;显示所有学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">2</span> :</span><br><span class="line">        print(<span class="string">&quot;新建学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">3</span> :</span><br><span class="line">        print(<span class="string">&quot;查询学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">4</span> :</span><br><span class="line">        print(<span class="string">&quot;修改学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">5</span> :</span><br><span class="line">        print(<span class="string">&quot;删除学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">0</span> :</span><br><span class="line">        <span class="keyword">break</span>  						<span class="comment">#退出循环</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="显示信息"><a href="#显示信息" class="headerlink" title="显示信息"></a>显示信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">showall</span>() :</span></span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> datas :</span><br><span class="line">        <span class="built_in">print</span> (<span class="string">&quot;学生信息：&quot;</span>, data)</span><br></pre></td></tr></table></figure>
-
-<p>1.Python for循环可以遍历任何序列的项目，如一个列表或者一个字符串，相当于用data逐个存储列表datas的信息</p>
-<p>2.值得注意的是，python的函数必须写在调用函数之前（毕竟没有声明嘛）</p>
-<h3 id="新增学生"><a href="#新增学生" class="headerlink" title="新增学生"></a>新增学生</h3><p>用字典存储学生信息，用赋值的方法修改（添加）信息</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">creat</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;新增学生名字：&quot;</span>)</span><br><span class="line">    sex = <span class="built_in">input</span>(<span class="string">&quot;新增学生性别：&quot;</span>)</span><br><span class="line">    adress = <span class="built_in">input</span>(<span class="string">&quot;新增学生地址：&quot;</span>) <span class="comment">#变量储存</span></span><br><span class="line">    student = &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: name,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: sex,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>: adress</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    datas.append(student) <span class="comment">#新增列表的项</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="查询学生"><a href="#查询学生" class="headerlink" title="查询学生"></a>查询学生</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">req</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;查询学生姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            print(data)</span><br></pre></td></tr></table></figure>
-
-<p>列表+字典的信息储存形式用循环遍历字典内容，data就是字典名</p>
-<h3 id="修改学生信息"><a href="#修改学生信息" class="headerlink" title="修改学生信息"></a>修改学生信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;修改学生的姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            print(<span class="string">&quot;修改前学生信息：&quot;</span>,data)</span><br><span class="line">            data[<span class="string">&quot;name&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改的名字：&quot;</span>)</span><br><span class="line">            data[<span class="string">&quot;sex&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改性别：&quot;</span>)</span><br><span class="line">            data[<span class="string">&quot;adress&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改地址：&quot;</span>)</span><br><span class="line">            print(<span class="string">&quot;修改后学生信息：&quot;</span>,data)</span><br></pre></td></tr></table></figure>
-
-<p>循环遍历字典内容，赋值修改信息</p>
-<h4 id="删除学生信息"><a href="#删除学生信息" class="headerlink" title="删除学生信息"></a>删除学生信息</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;删除学生的姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            datas.remove(data)</span><br></pre></td></tr></table></figure>
-
-<p>data中相当于存储了整个字典，把他一整个删去即可</p>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>学习笔记</category>
-        <category>入门级</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>学习笔记</tag>
-        <tag>开发实战</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>学习笔记：学点docker</title>
     <url>/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<img src="https://blog.adacore.com/uploads/_2400x1200_crop_center-center_none/iStock-1144628524.jpg" height="300" alt="git" align="center">
@@ -290,8 +239,8 @@
         <category>入门级</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>docker</tag>
+        <tag>学习笔记</tag>
         <tag>入门教程</tag>
       </tags>
   </entry>
@@ -306,8 +255,8 @@
 
 <h2 id="Python-自动化实战手册"><a href="#Python-自动化实战手册" class="headerlink" title="Python 自动化实战手册"></a>Python 自动化实战手册</h2><h4 id="调用系统终端（cmd）"><a href="#调用系统终端（cmd）" class="headerlink" title="调用系统终端（cmd）"></a>调用系统终端（cmd）</h4><h5 id="1-运用场景"><a href="#1-运用场景" class="headerlink" title="1.运用场景"></a>1.运用场景</h5><p>有一些工具是使用命令行来执行的，这时可以调用系统终端来实现自动化</p>
 <p>如：</p>
-<p>swftool：<a href="http://www.swftools.org/（swf转换工具）">http://www.swftools.org/（swf转换工具）</a></p>
-<p>ffmpeg：<a href="https://ffmpeg.org/（视频转码工具）">https://ffmpeg.org/（视频转码工具）</a></p>
+<p>swftool：<a href="http://www.swftools.org/">http://www.swftools.org/</a>     （swf转换工具）</p>
+<p>ffmpeg：<a href="https://ffmpeg.org/">https://ffmpeg.org/</a>    （视频转码工具）</p>
 <h5 id="2-实例"><a href="#2-实例" class="headerlink" title="2.实例"></a>2.实例</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># pdf转swf</span></span><br><span class="line">os.system(<span class="string">&#x27;E:\swftools\pdf2swf.exe -b E:\swftools\pdf\%s.pdf -o E:\swftools\swf\%s.swf&#x27;</span> % (name, name))</span><br></pre></td></tr></table></figure>
 
 
@@ -478,8 +427,59 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>开发实战</tag>
         <tag>脚本学习</tag>
+        <tag>开发实战</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>开发笔记：基于python开发学生管理系统</title>
+    <url>/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<img src="https://developer-tech.com/wp-content/uploads/sites/3/2020/12/python-right-business-programming-language-software-development-enterprise-2048x1318.jpg" height="300" alt="git" align="center">
+
+
+
+<span id="more"></span>
+
+<h3 id="模拟数据库"><a href="#模拟数据库" class="headerlink" title="模拟数据库"></a>模拟数据库</h3><p>用列表为主体储存全部学生信息，方便读取。用字典这种数据类型放置一个学生信息。方便对列表操作时整块操作</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = [   <span class="comment">#列表</span></span><br><span class="line">		   <span class="comment">#字典	</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Tom&quot;</span>,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;男&quot;</span>,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>:<span class="string">&quot;佛山&quot;</span>,</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Mary&quot;</span>,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;女&quot;</span>,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>: <span class="string">&quot;广州&quot;</span>,</span><br><span class="line"></span><br><span class="line">    &#125;,  </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Jhon&quot;</span>,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;男&quot;</span>,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>: <span class="string">&quot;厦门&quot;</span>,</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="操作框架"><a href="#操作框架" class="headerlink" title="操作框架"></a>操作框架</h3><p>写代码优先规划好主框架，然后再补充功能函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    print(</span><br><span class="line">            <span class="string">&quot;&quot;&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            欢迎使用【学生管理系统】</span></span><br><span class="line"><span class="string">            0.退出系统</span></span><br><span class="line"><span class="string">            1.显示所有学生信息</span></span><br><span class="line"><span class="string">            2.新建学生信息</span></span><br><span class="line"><span class="string">            3.查询学生信息</span></span><br><span class="line"><span class="string">            4.修改学生信息</span></span><br><span class="line"><span class="string">            5.删除学生信息                            </span></span><br><span class="line"><span class="string">            &quot;&quot;&quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">          )</span><br><span class="line"></span><br><span class="line">    op = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入你的操作：&quot;</span>)) <span class="comment">#转化输入的值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> op==<span class="number">1</span> :</span><br><span class="line">        print(<span class="string">&quot;显示所有学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">2</span> :</span><br><span class="line">        print(<span class="string">&quot;新建学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">3</span> :</span><br><span class="line">        print(<span class="string">&quot;查询学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">4</span> :</span><br><span class="line">        print(<span class="string">&quot;修改学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">5</span> :</span><br><span class="line">        print(<span class="string">&quot;删除学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">0</span> :</span><br><span class="line">        <span class="keyword">break</span>  						<span class="comment">#退出循环</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="显示信息"><a href="#显示信息" class="headerlink" title="显示信息"></a>显示信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">showall</span>() :</span></span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> datas :</span><br><span class="line">        <span class="built_in">print</span> (<span class="string">&quot;学生信息：&quot;</span>, data)</span><br></pre></td></tr></table></figure>
+
+<p>1.Python for循环可以遍历任何序列的项目，如一个列表或者一个字符串，相当于用data逐个存储列表datas的信息</p>
+<p>2.值得注意的是，python的函数必须写在调用函数之前（毕竟没有声明嘛）</p>
+<h3 id="新增学生"><a href="#新增学生" class="headerlink" title="新增学生"></a>新增学生</h3><p>用字典存储学生信息，用赋值的方法修改（添加）信息</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">creat</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;新增学生名字：&quot;</span>)</span><br><span class="line">    sex = <span class="built_in">input</span>(<span class="string">&quot;新增学生性别：&quot;</span>)</span><br><span class="line">    adress = <span class="built_in">input</span>(<span class="string">&quot;新增学生地址：&quot;</span>) <span class="comment">#变量储存</span></span><br><span class="line">    student = &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: name,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: sex,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>: adress</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    datas.append(student) <span class="comment">#新增列表的项</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="查询学生"><a href="#查询学生" class="headerlink" title="查询学生"></a>查询学生</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">req</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;查询学生姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            print(data)</span><br></pre></td></tr></table></figure>
+
+<p>列表+字典的信息储存形式用循环遍历字典内容，data就是字典名</p>
+<h3 id="修改学生信息"><a href="#修改学生信息" class="headerlink" title="修改学生信息"></a>修改学生信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;修改学生的姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            print(<span class="string">&quot;修改前学生信息：&quot;</span>,data)</span><br><span class="line">            data[<span class="string">&quot;name&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改的名字：&quot;</span>)</span><br><span class="line">            data[<span class="string">&quot;sex&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改性别：&quot;</span>)</span><br><span class="line">            data[<span class="string">&quot;adress&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改地址：&quot;</span>)</span><br><span class="line">            print(<span class="string">&quot;修改后学生信息：&quot;</span>,data)</span><br></pre></td></tr></table></figure>
+
+<p>循环遍历字典内容，赋值修改信息</p>
+<h4 id="删除学生信息"><a href="#删除学生信息" class="headerlink" title="删除学生信息"></a>删除学生信息</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;删除学生的姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            datas.remove(data)</span><br></pre></td></tr></table></figure>
+
+<p>data中相当于存储了整个字典，把他一整个删去即可</p>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>学习笔记</category>
+        <category>入门级</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+        <tag>python</tag>
+        <tag>开发实战</tag>
       </tags>
   </entry>
 </search>
