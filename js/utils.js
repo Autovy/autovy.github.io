@@ -223,6 +223,7 @@ NexT.utils = {
         var tar = event.currentTarget.getAttribute('href').replace('#', '')
         tar = decodeURIComponent(tar)
         var target = document.getElementById(tar);
+        var offset = target.getBoundingClientRect().top + window.scrollY;
         window.anime({
           targets  : document.scrollingElement,
           duration : 500,
