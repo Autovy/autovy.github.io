@@ -239,8 +239,8 @@
         <category>入门级</category>
       </categories>
       <tags>
-        <tag>docker</tag>
         <tag>学习笔记</tag>
+        <tag>docker</tag>
         <tag>入门教程</tag>
       </tags>
   </entry>
@@ -427,8 +427,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>脚本学习</tag>
         <tag>开发实战</tag>
+        <tag>脚本学习</tag>
       </tags>
   </entry>
   <entry>
@@ -477,8 +477,8 @@
         <category>入门级</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>python</tag>
+        <tag>学习笔记</tag>
         <tag>开发实战</tag>
       </tags>
   </entry>
