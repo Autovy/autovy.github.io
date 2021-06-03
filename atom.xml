@@ -18,8 +18,8 @@
   
   <entry>
     <title>学习笔记：学点docker</title>
-    <link href="https://autovy.github.io/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://autovy.github.io/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/</id>
+    <link href="https://autovy.github.io/2021/05/28/ckpge1ofp0003pkudfgosfzfh/"/>
+    <id>https://autovy.github.io/2021/05/28/ckpge1ofp0003pkudfgosfzfh/</id>
     <published>2021-05-28T06:30:00.000Z</published>
     <updated>2021-06-02T13:28:23.327Z</updated>
     
@@ -49,8 +49,8 @@
   
   <entry>
     <title>开发笔记：自动化脚本实战手册</title>
-    <link href="https://autovy.github.io/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/"/>
-    <id>https://autovy.github.io/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/</id>
+    <link href="https://autovy.github.io/2021/03/28/ckpge1ofm0001pkud5p4feb78/"/>
+    <id>https://autovy.github.io/2021/03/28/ckpge1ofm0001pkud5p4feb78/</id>
     <published>2021-03-28T06:30:00.000Z</published>
     <updated>2021-06-02T13:52:12.779Z</updated>
     
@@ -78,8 +78,8 @@
   
   <entry>
     <title>开发笔记：基于python开发学生管理系统</title>
-    <link href="https://autovy.github.io/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"/>
-    <id>https://autovy.github.io/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</id>
+    <link href="https://autovy.github.io/2020/05/28/ckpge1ofy000rpkuda6xw6igq/"/>
+    <id>https://autovy.github.io/2020/05/28/ckpge1ofy000rpkuda6xw6igq/</id>
     <published>2020-05-28T06:30:00.000Z</published>
     <updated>2021-06-02T13:47:32.804Z</updated>
     
@@ -99,11 +99,11 @@
       <category term="入门级" scheme="https://autovy.github.io/categories/python/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%85%A5%E9%97%A8%E7%BA%A7/"/>
     
     
-      <category term="学习笔记" scheme="https://autovy.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="python" scheme="https://autovy.github.io/tags/python/"/>
     
       <category term="开发实战" scheme="https://autovy.github.io/tags/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/"/>
+    
+      <category term="学习笔记" scheme="https://autovy.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
