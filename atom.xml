@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://autovy.github.io/"/>
-  <updated>2021-06-02T13:28:23.327Z</updated>
+  <updated>2021-07-21T03:05:50.403Z</updated>
   <id>https://autovy.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>B站分P随机播放脚本</title>
+    <link href="https://autovy.github.io/2021/07/20/B%E7%AB%99%E5%88%86P%E9%9A%8F%E6%9C%BA%E6%92%AD%E6%94%BE%E8%84%9A%E6%9C%AC/"/>
+    <id>https://autovy.github.io/2021/07/20/B%E7%AB%99%E5%88%86P%E9%9A%8F%E6%9C%BA%E6%92%AD%E6%94%BE%E8%84%9A%E6%9C%AC/</id>
+    <published>2021-07-20T06:30:00.000Z</published>
+    <updated>2021-07-21T03:05:50.403Z</updated>
+    
+    <content type="html"><![CDATA[<img src="images/a236a86c5631210815bc7b4a5fa543eeddcedb9b.png" height="300"><span id="more"></span><h3 id="应用途径"><a href="#应用途径" class="headerlink" title="应用途径"></a>应用途径</h3><p>主要用于网页端溜梓宝歌回切片：<a href="https://www.bilibili.com/video/BV1nh411h7dF">https://www.bilibili.com/video/BV1nh411h7dF</a></p><p>也适用于其他分P视频</p><p>无技术力，纯把B站当作音乐播放器</p><h3 id="脚本代码"><a href="#脚本代码" class="headerlink" title="脚本代码"></a>脚本代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 【网页端】B站分P随机播放脚本</span></span><br><span class="line"><span class="comment">// f12再复制到控制台运行即可，刷新页面后停止运行</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="built_in">document</span>.querySelector(<span class="string">&quot;#multi_page &gt; div.head-con &gt; div.head-left &gt; span&quot;</span>).textContent</span><br><span class="line"><span class="keyword">var</span> regex = <span class="regexp">/\/(\d+)/gm</span>;</span><br><span class="line"><span class="keyword">var</span> p = regex.exec(str)[<span class="number">1</span>] - <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> aud = <span class="built_in">document</span>.querySelector(<span class="string">&quot;video&quot;</span>);</span><br><span class="line">aud.onended = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> num = <span class="built_in">Math</span>.floor((<span class="built_in">Math</span>.random()*p)+<span class="number">1</span>);</span><br><span class="line">     <span class="keyword">var</span> aim = <span class="string">&quot;#multi_page &gt; div.cur-list &gt; ul &gt; li:nth-child(&quot;</span>+ num +<span class="string">&quot;) &gt; a &gt; div&quot;</span></span><br><span class="line">     <span class="built_in">document</span>.querySelector(aim).click()</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>网页端f12打开开发者工具，将脚本复制到控制台运行即可开溜，刷新页面后脚本停止运行</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;img src=&quot;images/a236a86c5631210815bc7b4a5fa543eeddcedb9b.png&quot; height=&quot;300&quot;&gt;
+    
+    </summary>
+    
+    
+      <category term="js" scheme="https://autovy.github.io/categories/js/"/>
+    
+    
+      <category term="js" scheme="https://autovy.github.io/tags/js/"/>
+    
+      <category term="实用脚本" scheme="https://autovy.github.io/tags/%E5%AE%9E%E7%94%A8%E8%84%9A%E6%9C%AC/"/>
+    
+  </entry>
   
   <entry>
     <title>学习笔记：学点docker</title>
@@ -39,9 +64,9 @@
       <category term="入门级" scheme="https://autovy.github.io/categories/docker/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%85%A5%E9%97%A8%E7%BA%A7/"/>
     
     
-      <category term="学习笔记" scheme="https://autovy.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="docker" scheme="https://autovy.github.io/tags/docker/"/>
+    
+      <category term="学习笔记" scheme="https://autovy.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
       <category term="入门教程" scheme="https://autovy.github.io/tags/%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/"/>
     
@@ -70,9 +95,9 @@
     
       <category term="python" scheme="https://autovy.github.io/tags/python/"/>
     
-      <category term="开发实战" scheme="https://autovy.github.io/tags/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/"/>
-    
       <category term="脚本学习" scheme="https://autovy.github.io/tags/%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="开发实战" scheme="https://autovy.github.io/tags/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/"/>
     
   </entry>
   
@@ -99,9 +124,9 @@
       <category term="入门级" scheme="https://autovy.github.io/categories/python/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%85%A5%E9%97%A8%E7%BA%A7/"/>
     
     
-      <category term="python" scheme="https://autovy.github.io/tags/python/"/>
-    
       <category term="学习笔记" scheme="https://autovy.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="python" scheme="https://autovy.github.io/tags/python/"/>
     
       <category term="开发实战" scheme="https://autovy.github.io/tags/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/"/>
     
