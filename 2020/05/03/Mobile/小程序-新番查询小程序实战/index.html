@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/gear48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/gear32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="true"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="小程序|新番查询小程序">
+<meta property="og:url" content="https://autovy.github.io/2020/05/03/Mobile/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E6%96%B0%E7%95%AA%E6%9F%A5%E8%AF%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:site_name" content="Autovy&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://autovy.github.io/2020/05/03/Mobile/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E6%96%B0%E7%95%AA%E6%9F%A5%E8%AF%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98/C:%5CUsers%5Clinghao%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210904155423003.png">
+<meta property="article:published_time" content="2020-05-03T06:30:00.000Z">
+<meta property="article:modified_time" content="2021-09-04T07:55:21.107Z">
+<meta property="article:author" content="Autovy">
+<meta property="article:tag" content="开发实战">
+<meta property="article:tag" content="小程序">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://autovy.github.io/2020/05/03/Mobile/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E6%96%B0%E7%95%AA%E6%9F%A5%E8%AF%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98/C:%5CUsers%5Clinghao%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210904155423003.png">
+
+<link rel="canonical" href="https://autovy.github.io/2020/05/03/Mobile/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E6%96%B0%E7%95%AA%E6%9F%A5%E8%AF%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>小程序|新番查询小程序 | Autovy's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Autovy's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Autovy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Just For Interest</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">34</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">30</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2020/05/03/Mobile/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E6%96%B0%E7%95%AA%E6%9F%A5%E8%AF%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="新时代农民工的数字农田">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          小程序|新番查询小程序
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020/05/03 14:30:00" itemprop="dateCreated datePublished" datetime="2020-05-03T14:30:00+08:00">2020/05/03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" itemprop="url" rel="index"><span itemprop="name">小程序</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/03/Mobile/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E6%96%B0%E7%95%AA%E6%9F%A5%E8%AF%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/03/Mobile/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E6%96%B0%E7%95%AA%E6%9F%A5%E8%AF%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.8k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/2020/05/03/Mobile/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E6%96%B0%E7%95%AA%E6%9F%A5%E8%AF%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98/C:%5CUsers%5Clinghao%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210904155423003.png" alt="image-20210904155423003"></p>
+<span id="more"></span>
+
+<h4 id="窗口栏"><a href="#窗口栏" class="headerlink" title="窗口栏"></a>窗口栏</h4><p>在app.json中修改窗口栏</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&quot;window&quot;: &#123;</span><br><span class="line">  &quot;navigationBarBackgroundColor&quot;: &quot;#ec1380&quot;,</span><br><span class="line">  &quot;navigationBarTextStyle&quot;: &quot;white&quot;,</span><br><span class="line">  &quot;navigationBarTitleText&quot;: &quot;新番查询&quot;,</span><br><span class="line">  &quot;navigationStyle&quot;: &quot;default&quot;,</span><br><span class="line">  &quot;backgroundColor&quot;: &quot;#ec1380&quot;,</span><br><span class="line">  &quot;backgroundTextStyle&quot;: &quot;dark&quot;,</span><br><span class="line">  &quot;backgroundColorTop&quot;: &quot;#ffffff&quot;,</span><br><span class="line">  &quot;backgroundColorBottom&quot;: &quot;#ffffff&quot;,</span><br><span class="line">  &quot;enablePullDownRefresh&quot;: true,</span><br><span class="line">  &quot;onReachBottomDistance&quot;: 50</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>常用属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>默认值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>navigationBarBackgroundColor</td>
+<td>#000000</td>
+<td>导航栏背景颜色，如 <code>#000000</code></td>
+</tr>
+<tr>
+<td>navigationBarTitleText</td>
+<td></td>
+<td>导航栏标题文字内容</td>
+</tr>
+</tbody></table>
+<h4 id="轮播图"><a href="#轮播图" class="headerlink" title="轮播图"></a>轮播图</h4><h5 id="1-index-wxml添加元素"><a href="#1-index-wxml添加元素" class="headerlink" title="1.index.wxml添加元素"></a>1.index.wxml添加元素</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">swiper</span> <span class="attr">class</span>=<span class="string">&quot;swiper&quot;</span> <span class="attr">indicator-dots</span>=<span class="string">&quot;&#123;&#123;true&#125;&#125;&quot;</span> <span class="attr">autoplay</span>=<span class="string">&quot;&#123;&#123;true&#125;&#125;&quot;</span> <span class="attr">interval</span>=<span class="string">&quot;5000&quot;</span> <span class="attr">duration</span>=<span class="string">&quot;500&quot;</span> <span class="attr">circular</span>=<span class="string">&quot;&#123;&#123;true&#125;&#125;&quot;</span> <span class="attr">current</span>=<span class="string">&quot;0&quot;</span> <span class="attr">bindchange</span>=<span class="string">&quot;swiperChange&quot;</span>  &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">block</span> <span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;imgUrls&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;unique&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">swiper-item</span> &gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;item&#125;&#125;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;img&quot;</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">swiper-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">block</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">swiper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（1）swiper标签，微信小程序滑块视图容器，以下是其常用属性</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>indicator-dots</td>
+<td>false</td>
+<td>是否显示面板指示点</td>
+</tr>
+<tr>
+<td>autoplay</td>
+<td>false</td>
+<td>是否自动切换</td>
+</tr>
+<tr>
+<td>current</td>
+<td>0</td>
+<td>当前所在滑块的 index</td>
+</tr>
+<tr>
+<td>interval</td>
+<td>5000</td>
+<td>自动切换时间间隔</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>500</td>
+<td>滑动动画时长</td>
+</tr>
+<tr>
+<td>circular</td>
+<td>false</td>
+<td>是否采用衔接滑动</td>
+</tr>
+<tr>
+<td>bindchange</td>
+<td>无</td>
+<td>current 改变时会触发 change 事件，event.detail = {current, source}</td>
+</tr>
+</tbody></table>
+<p>（2）block标签，可在wxml文件实现逻辑，常用的有wx:for和wx：if</p>
+<ul>
+<li>在组件上使用 <code>wx:for</code> 控制属性绑定一个数组，可以理解为该元素储存了一个数组（imgUrls），通过wx：for遍历了这个数组</li>
+<li>wx:key用于指定列表中项目的唯一的标识符，相当于数组的下标，确定轮播图的顺序</li>
+</ul>
+<p>（3）swiper-item，放置在swiper标签中，用于确定轮播对象，代码的轮播对象是图片</p>
+<h5 id="2-index-wxss排布元素"><a href="#2-index-wxss排布元素" class="headerlink" title="2.index.wxss排布元素"></a>2.index.wxss排布元素</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.swiper-con</span>&#123;</span><br><span class="line">          <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">swiper&#123;</span><br><span class="line">          <span class="attribute">height</span>: <span class="number">421</span>rpx;          </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">swiper-item image&#123;</span><br><span class="line">          <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">          <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.swiper-con</span> <span class="selector-class">.swiper</span>&#123;</span><br><span class="line">          <span class="attribute">height</span>:<span class="number">300</span>rpx;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.swiper-con</span> <span class="selector-class">.swiper</span> <span class="selector-class">.img</span>&#123;</span><br><span class="line">          <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">          <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与css类似的语法，确定轮播图的排布</p>
+<h5 id="3-index-js实现逻辑"><a href="#3-index-js实现逻辑" class="headerlink" title="3.index.js实现逻辑"></a>3.index.js实现逻辑</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  imgUrls:[</span><br><span class="line">    <span class="string">&quot;https://i0.hdslb.com/bfs/bangumi/image/bc3c51659027a8f54a8a0a5894c83cafe582139f.jpg@2320w_664h.jpg&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://i0.hdslb.com/bfs/bangumi/image/8f11a567cf9bed9035c4250584cec6847a7f42cb.jpg@2320w_664h.jpg&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://i0.hdslb.com/bfs/bangumi/image/ba2a537e388881d4e0c9aec097b7ab690ab9849a.jpg@2320w_664h.jpg&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://i0.hdslb.com/bfs/bangumi/image/b719ed2a2856345a57c4a68fddcc9de3c01a0ddc.jpg@2320w_664h.jpg&quot;</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>data内数据是wxml变量的初始数据，wxml通过wx:for遍历imgUrls，并存储在item变量中输出（注意变量名一定要为item）</li>
+<li>函数swiperChange被触发，函数写法为： 函数名：function（参数）{内容}</li>
+<li>this.setData更改变量，可用console.log(e)输出数据数组</li>
+</ul>
+<h4 id="接入API"><a href="#接入API" class="headerlink" title="接入API"></a>接入API</h4><h5 id="1-index-js实现逻辑"><a href="#1-index-js实现逻辑" class="headerlink" title="1.index.js实现逻辑"></a>1.index.js实现逻辑</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">   url:<span class="string">&quot;https://bangumi.bilibili.com/web_api/timeline_global&quot;</span>,</span><br><span class="line">   data:&#123;<span class="attr">x</span>:<span class="string">&quot;result&quot;</span>&#125;,</span><br><span class="line">   header: &#123;</span><br><span class="line">     <span class="string">&#x27;content-type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span> </span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="function"><span class="title">success</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(res.data)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>url，填入请求的域名，记住要勾选不校验域名合法或在微信平台填写该域名否则报错</li>
+<li>data，返回的数据</li>
+<li>header，一般默认不填，返回json型数据</li>
+<li>success()，请求成功后执行的语句，一般都会用console.log(res.data)输出数据数组，以便检索出数据</li>
+</ul>
+<h4 id="构建选择器"><a href="#构建选择器" class="headerlink" title="构建选择器"></a>构建选择器</h4><h5 id="1-index-wxml添加元素-1"><a href="#1-index-wxml添加元素-1" class="headerlink" title="1.index.wxml添加元素"></a>1.index.wxml添加元素</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;choose&quot;</span>&gt;</span>      </span><br><span class="line"><span class="tag">&lt;<span class="name">picker</span> <span class="attr">bindchange</span>=<span class="string">&quot;bindPickerChange&quot;</span> <span class="attr">range</span>=<span class="string">&quot;&#123;&#123;array&#125;&#125;&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span> =<span class="string">&quot;picker&quot;</span>&gt;</span></span><br><span class="line">      日期选择：&#123;&#123;array[index]&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">picker</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（1）<picker>标签构建选择器，用mode确定选择器的类型</picker></p>
+<ul>
+<li>selector，普通选择器，mode不填时，默认使用</li>
+<li>time，时间选择器，小程序内置的可以选择时间的选择器</li>
+<li>date，日期选择器</li>
+<li>region，省市区选择器</li>
+</ul>
+<p>（2）range属性，填入一个数组作为选择器的项，这个数组在index.js的初始数据中填写</p>
+<p>（3）value属性，填写的是数组的下标，数据同样在data中填入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  array: [],  <span class="comment">//由于我的选择器是从api获取的，所以置空</span></span><br><span class="line">  index: <span class="number">6</span>, <span class="comment">//index代表下标，在B站新番api中，下标6的数据就是今日数据</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>（4）bindchang属性，填入触发的函数，函数在index.js文件中构建</p>
+<p>（5）以上内容都是处理了选择器的数据，接下来就要在页面上展示选择器</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;choose&quot;</span>&gt;</span>      </span><br><span class="line"><span class="tag">&lt;<span class="name">picker</span> <span class="attr">bindchange</span>=<span class="string">&quot;bindPickerChange&quot;</span> <span class="attr">range</span>=<span class="string">&quot;&#123;&#123;array&#125;&#125;&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&#123;&#123;index&#125;&#125;&quot;</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span> =<span class="string">&quot;picker&quot;</span>&gt;</span></span><br><span class="line">      日期选择：&#123;&#123;array[index]&#125;&#125;  //填入可变的数据</span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">picker</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-index-wxss选择器布局"><a href="#2-index-wxss选择器布局" class="headerlink" title="2.index.wxss选择器布局"></a>2.index.wxss选择器布局</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.choose</span>&#123;</span><br><span class="line">          <span class="attribute">height</span>:<span class="number">10</span>rpx;</span><br><span class="line">          <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">          <span class="attribute">display</span>:flex;</span><br><span class="line">          <span class="attribute">flex-direction</span>: column;</span><br><span class="line">          <span class="attribute">align-items</span>: center;</span><br><span class="line">          <span class="attribute">margin-top</span>: <span class="number">25</span>rpx;</span><br><span class="line">          </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.picker</span>&#123;</span><br><span class="line">          <span class="attribute">border-bottom</span>: <span class="number">5px</span> solid <span class="number">#70bcf6</span>; </span><br><span class="line">          <span class="attribute">border-radius</span>: <span class="number">2px</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-index-js构建函数"><a href="#3-index-js构建函数" class="headerlink" title="3.index.js构建函数"></a>3.index.js构建函数</h5><p>本项目需要实现的是，获取B站新番的数据，通过选择器来查看该日的新番</p>
+<p>（1）填写数据：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  array: [], <span class="comment">//由于我的选择器是从api获取的，所以置空</span></span><br><span class="line">  index: <span class="number">6</span>,</span><br><span class="line">  arr_png:[]  <span class="comment">//获取api中新番的图片</span></span><br><span class="line"> </span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>（2）初始化页面加载数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">onLoad: <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> that = <span class="built_in">this</span></span><br><span class="line">  wx.request(&#123;</span><br><span class="line">    url:<span class="string">&quot;https://bangumi.bilibili.com/web_api/timeline_global&quot;</span>,</span><br><span class="line">    data:&#123;<span class="attr">x</span>:<span class="string">&quot;result&quot;</span>&#125;,</span><br><span class="line">    header: &#123;</span><br><span class="line">      <span class="string">&#x27;content-type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span> </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">success</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(); </span><br><span class="line">      <span class="keyword">var</span> arr_gif = <span class="keyword">new</span> <span class="built_in">Array</span>(); </span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i &lt;= <span class="number">11</span>;i++)&#123;</span><br><span class="line">        arr[i] = res.data.result[i].date</span><br><span class="line">        arr_gif[i] = res.data.result[i].seasons</span><br><span class="line">      &#125;</span><br><span class="line">      that.setData(&#123;</span><br><span class="line">        array:arr,</span><br><span class="line">        arr_png:arr_gif[<span class="number">6</span>] <span class="comment">//下标6是当天数</span></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>onLoad: function (options) 函数专门用于数据初始化，加载完页面，即加载完数据</p>
+</li>
+<li><p>在处理api的数据时不能直接用this，而是用that取代this</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>观察api返回的数据，用.符号获取对应数据，通过循环遍历将数据存储在数组中</p>
+</li>
+<li><p>setDate负责更换数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">that.setData(&#123;</span><br><span class="line">   array:arr, <span class="comment">//data中的array空数组填入获取的日期数据</span></span><br><span class="line">   arr_png:arr_gif[<span class="number">6</span>]  <span class="comment">//填入新番相关数据</span></span><br><span class="line">       &#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<p>（3）选择器触发数据重新加载</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">bindPickerChange:<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> that = <span class="built_in">this</span></span><br><span class="line">  <span class="keyword">var</span> value = e.detail.value</span><br><span class="line">  wx.request(&#123;</span><br><span class="line">    url:<span class="string">&quot;https://bangumi.bilibili.com/web_api/timeline_global&quot;</span>,</span><br><span class="line">    data:&#123;<span class="attr">x</span>:<span class="string">&quot;result&quot;</span>&#125;,</span><br><span class="line">    header: &#123;</span><br><span class="line">      <span class="string">&#x27;content-type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span> </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="title">success</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(); </span><br><span class="line">      <span class="keyword">var</span> arr_gif = <span class="keyword">new</span> <span class="built_in">Array</span>(); </span><br><span class="line">      <span class="built_in">console</span>.log(res.data);</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i &lt;= <span class="number">11</span>;i++)&#123;</span><br><span class="line">        arr[i] = res.data.result[i].date</span><br><span class="line">        arr_gif[i] = res.data.result[i].seasons</span><br><span class="line">      &#125;</span><br><span class="line">      that.setData(&#123;</span><br><span class="line">        array:arr,</span><br><span class="line">        index:value,</span><br><span class="line">        arr_png:arr_gif[value]</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>和上面一个函数的获取数据方法一致，用setDate更换数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">that.setData(&#123;</span><br><span class="line">  array:arr,</span><br><span class="line">  index:value,</span><br><span class="line">  arr_png:arr_gif[value]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="展示页面的实现"><a href="#展示页面的实现" class="headerlink" title="展示页面的实现"></a>展示页面的实现</h4><h5 id="1-index-wxml展示页面元素"><a href="#1-index-wxml展示页面元素" class="headerlink" title="1.index.wxml展示页面元素"></a>1.index.wxml展示页面元素</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;anime&quot;</span><span class="attr">wx:for</span>=<span class="string">&quot;&#123;&#123;arr_png&#125;&#125;&quot;</span> <span class="attr">wx:key</span>=<span class="string">&quot;unique&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;png&quot;</span> &gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;item.cover&#125;&#125;&quot;</span>/&gt;</span>         </span><br><span class="line">          <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">text</span>&gt;</span> &#123;&#123;item.pub_index&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span>                             </span><br><span class="line">          <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;a&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;link&quot;</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;item.url&#125;&#125;&quot;</span>&gt;</span>&#123;&#123;item.title&#125;&#125; <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">view</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>wx:for，填写需要获取的数据，从data中获取（经过js的函数后，此时的数据是从api中的）</p>
+</li>
+<li><p>通过观察api，用的形式获取数据</p>
+</li>
+</ul>
+<h5 id="2-index-wxss调整布局"><a href="#2-index-wxss调整布局" class="headerlink" title="2.index.wxss调整布局"></a>2.index.wxss调整布局</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.png</span>&#123;</span><br><span class="line">          <span class="attribute">display</span>: flex;</span><br><span class="line">          <span class="attribute">flex-direction</span>: column; <span class="comment">/*垂直布局*/</span></span><br><span class="line">          <span class="attribute">align-items</span>: center; <span class="comment">/*水平方向居中*/</span></span><br><span class="line">          <span class="attribute">margin-top</span>: <span class="number">40</span>rpx;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.png</span> image &#123; </span><br><span class="line">          <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">          <span class="attribute">height</span>:<span class="number">300px</span>;</span><br><span class="line">          <span class="attribute">margin-top</span>: <span class="number">50</span>rpx;</span><br><span class="line">          <span class="attribute">margin-left</span>: <span class="number">10</span>rpx;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.text</span>&#123;    </span><br><span class="line">          <span class="attribute">position</span>: relative;</span><br><span class="line">          <span class="attribute">top</span>: <span class="number">10</span>rpx;</span><br><span class="line">          <span class="attribute">text-align</span>: center;</span><br><span class="line">          <span class="attribute">color</span>: deepskyblue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.a</span>&#123;       <span class="attribute">position</span>: relative;</span><br><span class="line">          <span class="attribute">top</span>: <span class="number">20</span>rpx;</span><br><span class="line">          <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>至此一个简单的小程序就完成啦！</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2020/05/03/Mobile/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E6%96%B0%E7%95%AA%E6%9F%A5%E8%AF%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98/" title="小程序|新番查询小程序">https://autovy.github.io/2020/05/03/Mobile/小程序-新番查询小程序实战/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> 开发实战</a>
+              <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag"><i class="fa fa-tag"></i> 小程序</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/03/Tool/2020-5-3-%E6%96%B0%E7%95%AA%E6%9F%A5%E8%AF%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98/" rel="prev" title="新番查询小程序实战">
+      <i class="fa fa-chevron-left"></i> 新番查询小程序实战
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/28/Python/Python-%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" rel="next" title="Python|基于python开发学生管理系统">
+      Python|基于python开发学生管理系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+
+
+
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AA%97%E5%8F%A3%E6%A0%8F"><span class="nav-text">窗口栏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AE%E6%92%AD%E5%9B%BE"><span class="nav-text">轮播图</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-index-wxml%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-text">1.index.wxml添加元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-index-wxss%E6%8E%92%E5%B8%83%E5%85%83%E7%B4%A0"><span class="nav-text">2.index.wxss排布元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-index-js%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="nav-text">3.index.js实现逻辑</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%85%A5API"><span class="nav-text">接入API</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-index-js%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="nav-text">1.index.js实现逻辑</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-text">构建选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-index-wxml%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0-1"><span class="nav-text">1.index.wxml添加元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-index-wxss%E9%80%89%E6%8B%A9%E5%99%A8%E5%B8%83%E5%B1%80"><span class="nav-text">2.index.wxss选择器布局</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-index-js%E6%9E%84%E5%BB%BA%E5%87%BD%E6%95%B0"><span class="nav-text">3.index.js构建函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-text">展示页面的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-index-wxml%E5%B1%95%E7%A4%BA%E9%A1%B5%E9%9D%A2%E5%85%83%E7%B4%A0"><span class="nav-text">1.index.wxml展示页面元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-index-wxss%E8%B0%83%E6%95%B4%E5%B8%83%E5%B1%80"><span class="nav-text">2.index.wxss调整布局</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<a href="/">  <img class="site-author-image" itemprop="image" alt="Autovy"
+      src="/images/2.png">  </a>
+  <p class="site-author-name" itemprop="name">Autovy</p>
+  <div class="site-description" itemprop="description">新时代农民工的数字农田</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Autovy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Autovy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/JohnSmith232" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;JohnSmith232" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-code"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Autovy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">343k</span>
+</div>
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/01/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'RVJRabsBhxWXvhMcG8CH5wbc-gzGzoHsz',
+      appKey     : 'JSGLk7guOagDPMFN9wbASkEh',
+      placeholder: "说点什么吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+  <script src="/js/bloom.js" type="text/javascript"></script>
