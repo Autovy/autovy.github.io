@@ -1,36 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>B站分P随机播放脚本</title>
-    <url>/2021/07/20/B%E7%AB%99%E5%88%86P%E9%9A%8F%E6%9C%BA%E6%92%AD%E6%94%BE%E8%84%9A%E6%9C%AC/</url>
-    <content><![CDATA[<img src="https://autovy.github.io/images/a236a86c5631210815bc7b4a5fa543eeddcedb9b.png" height="300">
-
-<span id="more"></span>
-
-<h3 id="应用途径"><a href="#应用途径" class="headerlink" title="应用途径"></a>应用途径</h3><p>主要用于网页端溜梓宝歌回切片：<a href="https://www.bilibili.com/video/BV1nh411h7dF">https://www.bilibili.com/video/BV1nh411h7dF</a></p>
-<p>也适用于其他分P视频</p>
-<p>无技术力，纯把B站当作音乐播放器</p>
-<h3 id="脚本代码"><a href="#脚本代码" class="headerlink" title="脚本代码"></a>脚本代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 【网页端】B站分P随机播放脚本</span></span><br><span class="line"><span class="comment">// f12再复制到控制台运行即可，刷新页面后停止运行</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="built_in">document</span>.querySelector(<span class="string">&quot;#multi_page &gt; div.head-con &gt; div.head-left &gt; span&quot;</span>).textContent</span><br><span class="line"><span class="keyword">var</span> regex = <span class="regexp">/\/(\d+)/gm</span>;</span><br><span class="line"><span class="keyword">var</span> p = regex.exec(str)[<span class="number">1</span>] - <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> aud = <span class="built_in">document</span>.querySelector(<span class="string">&quot;video&quot;</span>);</span><br><span class="line">aud.onended = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> num = <span class="built_in">Math</span>.floor((<span class="built_in">Math</span>.random()*p)+<span class="number">1</span>);</span><br><span class="line">     <span class="keyword">var</span> aim = <span class="string">&quot;#multi_page &gt; div.cur-list &gt; ul &gt; li:nth-child(&quot;</span>+ num +<span class="string">&quot;) &gt; a &gt; div&quot;</span></span><br><span class="line">     <span class="built_in">document</span>.querySelector(aim).click()</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>网页端f12打开开发者工具，将脚本复制到控制台运行即可开溜，刷新页面后脚本停止运行</p>
-]]></content>
-      <categories>
-        <category>js</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-        <tag>实用脚本</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>学习笔记：学点docker</title>
     <url>/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<img src="https://blog.adacore.com/uploads/_2400x1200_crop_center-center_none/iStock-1144628524.jpg" height="300" alt="git" align="center">
-
-
-
+    <content><![CDATA[<p><img src="https://blog.adacore.com/uploads/_2400x1200_crop_center-center_none/iStock-1144628524.jpg" alt="git"></p>
 <span id="more"></span>
 
 <h3 id="Docker概述"><a href="#Docker概述" class="headerlink" title="Docker概述"></a>Docker概述</h3><h4 id="Docker应用"><a href="#Docker应用" class="headerlink" title="Docker应用"></a>Docker应用</h4><ul>
@@ -166,7 +139,7 @@
 
 <p>拷贝是一个手动过程，从封闭的容器中拿到需要留存的数据，而使用数据卷</p>
 <p>则可以实现自动同步</p>
-<h3 id="Docker镜d像"><a href="#Docker镜d像" class="headerlink" title="Docker镜d像"></a>Docker镜d像</h3><p>推荐文章：<a href="http://linyishui.top/2019101101.html">docker镜像讲解</a></p>
+<h3 id="Docker镜像"><a href="#Docker镜像" class="headerlink" title="Docker镜像"></a>Docker镜像</h3><p>推荐文章：<a href="http://linyishui.top/2019101101.html">docker镜像讲解</a></p>
 <h4 id="1-Portainer可视化工具"><a href="#1-Portainer可视化工具" class="headerlink" title="1.Portainer可视化工具"></a>1.Portainer可视化工具</h4><h4 id="2-镜像简介"><a href="#2-镜像简介" class="headerlink" title="2.镜像简介"></a>2.镜像简介</h4><ul>
 <li>镜像就是一种轻量级，可执行的独立软件包，用来打包软件运行环境和基于环境开会的软件（包括代码，运行时，库，环境变量，配置文件）</li>
 <li>镜像来源：<ul>
@@ -271,10 +244,7 @@
   <entry>
     <title>开发笔记：自动化脚本实战手册</title>
     <url>/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<img src="https://autovy.github.io/images/python.jpg" height="300" alt="git" align="center">
-
-
-
+    <content><![CDATA[<p><img src="https:cdn.jsdelivr.net/gh/Autovy/Image/img/202109040841155.jpg" alt="python"></p>
 <span id="more"></span>
 
 <h2 id="Python-自动化实战手册"><a href="#Python-自动化实战手册" class="headerlink" title="Python 自动化实战手册"></a>Python 自动化实战手册</h2><h4 id="调用系统终端（cmd）"><a href="#调用系统终端（cmd）" class="headerlink" title="调用系统终端（cmd）"></a>调用系统终端（cmd）</h4><h5 id="1-运用场景"><a href="#1-运用场景" class="headerlink" title="1.运用场景"></a>1.运用场景</h5><p>有一些工具是使用命令行来执行的，这时可以调用系统终端来实现自动化</p>
@@ -443,7 +413,6 @@
 <p>读取excel数据</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用pandas打开excel</span></span><br><span class="line">file = pd.ExcelFile(<span class="string">&#x27;test.xlsx&#x27;</span>)</span><br><span class="line"><span class="comment"># 指定表名，excel的数据以数组的形式返回</span></span><br><span class="line">data = file.parse(<span class="string">&#x27;Sheet1&#x27;</span>)</span><br><span class="line">print(data)</span><br></pre></td></tr></table></figure>
 
-
 ]]></content>
       <categories>
         <category>python</category>
@@ -491,7 +460,7 @@
 <h3 id="修改学生信息"><a href="#修改学生信息" class="headerlink" title="修改学生信息"></a>修改学生信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;修改学生的姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            print(<span class="string">&quot;修改前学生信息：&quot;</span>,data)</span><br><span class="line">            data[<span class="string">&quot;name&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改的名字：&quot;</span>)</span><br><span class="line">            data[<span class="string">&quot;sex&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改性别：&quot;</span>)</span><br><span class="line">            data[<span class="string">&quot;adress&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改地址：&quot;</span>)</span><br><span class="line">            print(<span class="string">&quot;修改后学生信息：&quot;</span>,data)</span><br></pre></td></tr></table></figure>
 
 <p>循环遍历字典内容，赋值修改信息</p>
-<h4 id="删除学生信息"><a href="#删除学生信息" class="headerlink" title="删除学生信息"></a>删除学生信息</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;删除学生的姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            datas.remove(data)</span><br></pre></td></tr></table></figure>
+<h3 id="删除学生信息"><a href="#删除学生信息" class="headerlink" title="删除学生信息"></a>删除学生信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;删除学生的姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            datas.remove(data)</span><br></pre></td></tr></table></figure>
 
 <p>data中相当于存储了整个字典，把他一整个删去即可</p>
 ]]></content>
