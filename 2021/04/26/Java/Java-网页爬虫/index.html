@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/gear48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/gear32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="true"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Java|网络爬虫项目">
+<meta property="og:url" content="https://autovy.github.io/2021/04/26/Java/Java-%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/index.html">
+<meta property="og:site_name" content="Autovy&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040942707.jpeg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040940118.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941220.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941155.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941147.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941626.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941483.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941163.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941753.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941641.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941178.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941715.png">
+<meta property="article:published_time" content="2021-04-26T06:30:00.000Z">
+<meta property="article:modified_time" content="2021-09-04T02:05:01.685Z">
+<meta property="article:author" content="Autovy">
+<meta property="article:tag" content="开发实战">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="后端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040942707.jpeg">
+
+<link rel="canonical" href="https://autovy.github.io/2021/04/26/Java/Java-%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Java|网络爬虫项目 | Autovy's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Autovy's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Autovy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Just For Interest</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/04/26/Java/Java-%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="新时代农民工的数字农田">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java|网络爬虫项目
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021/04/26 14:30:00" itemprop="dateCreated datePublished" datetime="2021-04-26T14:30:00+08:00">2021/04/26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/04/26/Java/Java-%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/26/Java/Java-%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.7k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040942707.jpeg" alt="logo"></p>
+<span id="more"></span>
+
+<h3 id="idea基本设置"><a href="#idea基本设置" class="headerlink" title="idea基本设置"></a>idea基本设置</h3><p>File&gt;Setting打开idea基本设置，可以更改字体主题，安装插件等</p>
+<p>建议安装中文翻译插件和Codota插件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040940118.png" alt="image-20210507095023736"></p>
+<h3 id="idea创建项目"><a href="#idea创建项目" class="headerlink" title="idea创建项目"></a>idea创建项目</h3><h4 id="1-参考文章"><a href="#1-参考文章" class="headerlink" title="1.参考文章"></a>1.参考文章</h4><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e2c17c3460de">IDEA新建一般Java项目</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shaxu123/article/details/97097296">语言版本和环境版本不一致导致错误</a>：Error:java: 无效的源发行版</p>
+<h4 id="2-注意事项"><a href="#2-注意事项" class="headerlink" title="2.注意事项"></a>2.注意事项</h4><h5 id="（1）配置"><a href="#（1）配置" class="headerlink" title="（1）配置"></a>（1）配置</h5><p>新建一般Java项目时，一般选择默认配置进行</p>
+<h5 id="（2）打开项目"><a href="#（2）打开项目" class="headerlink" title="（2）打开项目"></a>（2）打开项目</h5><p>打开的项目文件时，文件结构如下，文件路径多出一层或少一层文件，idea都不能识别出该项目（程序文件都要放到src文件中）：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941220.png" alt="image-20210507092554533"></p>
+<h5 id="（3）配置修改"><a href="#（3）配置修改" class="headerlink" title="（3）配置修改"></a>（3）配置修改</h5><p>项目结构（文件 &gt; 项目结构）中可以修改项目的一些配置（可设置项目，模块的语言级别）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941155.png" alt="image-20210507095156216"></p>
+<h5 id="（4）标记目录"><a href="#（4）标记目录" class="headerlink" title="（4）标记目录"></a>（4）标记目录</h5><p>标记目录可以自定义源根目录等，一般不改动，默认src为源根目录</p>
+<h5 id="（5）添加Maven框架"><a href="#（5）添加Maven框架" class="headerlink" title="（5）添加Maven框架"></a>（5）添加Maven框架</h5><p>在Java一般项目中没有meavn的选项，可以在后期加上Maven框架支持</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941147.png" alt="image-20210507101055813"></p>
+<p>添加了Maven框架后，还需要重新加载Maven项目即可完成框架添加</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941626.png" alt="image-20210507101357206"></p>
+<h3 id="配置meavn"><a href="#配置meavn" class="headerlink" title="配置meavn"></a>配置meavn</h3><h4 id="1-参考文章-1"><a href="#1-参考文章-1" class="headerlink" title="1.参考文章"></a>1.参考文章</h4><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/122429605">Meavn配置过程</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/stone_fall/article/details/108140716">依赖添加错误</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34412985/article/details/104410574">手动添加jar包</a></p>
+<h4 id="2-注意事项-1"><a href="#2-注意事项-1" class="headerlink" title="2.注意事项"></a>2.注意事项</h4><h5 id="（1）maven配置"><a href="#（1）maven配置" class="headerlink" title="（1）maven配置"></a>（1）maven配置</h5><p>idea有自己自带的maven，如果想自定义到自己下载的maven文件，可以在设置中修改（这样的修改只是针对该项目，新建的项目还是使用默认的maven）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941483.png" alt="image-20210507100212095"></p>
+<ul>
+<li>设置主目录</li>
+<li>用户设置文件指向maven的setting文件</li>
+<li>可以新建一个文件用于存储本地库</li>
+</ul>
+<h5 id="（2）Meavn创建项目"><a href="#（2）Meavn创建项目" class="headerlink" title="（2）Meavn创建项目"></a>（2）Meavn创建项目</h5><p>除了在一般项目创建后再添加Maven框架，我们也可以直接使用Meavn框架创建项目</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941163.png" alt="image-20210507101919573"></p>
+<p>区别于一般的Java项目，使用Meavn框架创建的会在src新建两个文件夹：main（放主程序）和test（放测试程序）</p>
+<h5 id="（3）meavn添加包"><a href="#（3）meavn添加包" class="headerlink" title="（3）meavn添加包"></a>（3）meavn添加包</h5><ul>
+<li>通过pom.xml添加依赖</li>
+</ul>
+<p>在pom.xml文件中添加<code>&lt;dependency&gt;&lt;/dependency&gt;</code>标签，如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.6.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>要注意要是在<code>&lt;dependencies&gt;&lt;/dependencies&gt;</code>内添加依赖</p>
+<p>我们可以通过<a target="_blank" rel="noopener" href="https://mvnrepository.com/artifact/org.eclipse.ditto/ditto-base-api/2.0.0">Maven Repositor</a>查找对应包的依赖项xml文本</p>
+<p>最后加载Maven包变更完成依赖项的添加</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941753.png" alt="image-20210507103208170"></p>
+<ul>
+<li>手动添加jar包</li>
+</ul>
+<p>meavn找不到相关包时，可以直接下载jar文件到本地包，放在刚刚设置Maven本地库存储文件中，然后使用maven导入</p>
+<h3 id="爬虫配置"><a href="#爬虫配置" class="headerlink" title="爬虫配置"></a>爬虫配置</h3><h4 id="1-参考文章-2"><a href="#1-参考文章-2" class="headerlink" title="1.参考文章"></a>1.参考文章</h4><p><a target="_blank" rel="noopener" href="http://webmagic.io/docs/zh/">WebMagic 文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/justcooooode/p/7913365.html#_label0">出现log4j警告解决方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/justlove/p/7637681.html">出现了SLF4J的报错解决方法</a>：添加依赖即解决</p>
+<p><a target="_blank" rel="noopener" href="http://webmagic.io/docs/zh/posts/ch4-basic-page-processor/">文档中爬虫基本使用介绍</a></p>
+<h4 id="2-注意事项-2"><a href="#2-注意事项-2" class="headerlink" title="2.注意事项"></a>2.注意事项</h4><h5 id="（1）爬虫框架添加"><a href="#（1）爬虫框架添加" class="headerlink" title="（1）爬虫框架添加"></a>（1）爬虫框架添加</h5><p>爬虫框架采用了易于上手的WebMagic框架，在pom.xml文件中添加相关依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>us.codecraft<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>webmagic-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.7.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>us.codecraft<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>webmagic-extension<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.7.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="（2）无法爬取网页"><a href="#（2）无法爬取网页" class="headerlink" title="（2）无法爬取网页"></a>（2）无法爬取网页</h5><p>无法爬取TLS1.2协议站点的问题</p>
+<p>在依赖中把WebMagica改成最新版本（0.7.4以上）即可解决</p>
+<h5 id="（3）SLF4J报错"><a href="#（3）SLF4J报错" class="headerlink" title="（3）SLF4J报错"></a>（3）SLF4J报错</h5><p>出现了SLF4J报错可以添加以下依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-nop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="（4）爬取方法"><a href="#（4）爬取方法" class="headerlink" title="（4）爬取方法"></a>（4）爬取方法</h5><ul>
+<li>实现实现PageProcessor接口，设置爬虫相关配置</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Site site = Site.me()</span><br><span class="line">        .setCharset(<span class="string">&quot;UTF-8&quot;</span>)</span><br><span class="line">        .setRetryTimes(<span class="number">3</span>)</span><br><span class="line">        .setSleepTime(<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>process编写抽取逻辑，可以定义爬取页面的规则</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Page page)</span></span>&#123;</span><br><span class="line"></span><br><span class="line"> 	<span class="comment">// 爬取title放入父类私有属性中</span></span><br><span class="line">    List title = page.getHtml()</span><br><span class="line">        .css(<span class="string">&quot;li &gt; div &gt; div.details &gt; span.link.h-cite.u-repost-of &gt; a&quot;</span>)</span><br><span class="line">        .regex(<span class="string">&quot;&gt;(.+)&lt;/a&gt;&quot;</span>,<span class="number">1</span>)</span><br><span class="line">        .all();</span><br><span class="line">        </span><br><span class="line">    	set_title(title);</span><br><span class="line">        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>Spider类执行爬虫</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Spider.create(obj)</span><br><span class="line">      .addUrl(url)</span><br><span class="line">      <span class="comment">//开启4个线程抓取</span></span><br><span class="line">      .thread(<span class="number">4</span>)</span><br><span class="line">      <span class="comment">//启动爬虫</span></span><br><span class="line">      .run();</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="（5）正则匹配问题"><a href="#（5）正则匹配问题" class="headerlink" title="（5）正则匹配问题"></a>（5）正则匹配问题</h5><p>WebMagic链式抽取元素中使用的正则是不区分大小写的</p>
+<h3 id="调试方法"><a href="#调试方法" class="headerlink" title="调试方法"></a>调试方法</h3><h4 id="1-参考文章-3"><a href="#1-参考文章-3" class="headerlink" title="1.参考文章"></a>1.参考文章</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/XJ0927/article/details/108229970">IDEA单元测试设置过程</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.justdojava.com/2019/07/20/debug-in-idea/">深入学习 Intellij IDEA 调试技巧</a></p>
+<h4 id="2-单元测试"><a href="#2-单元测试" class="headerlink" title="2.单元测试"></a>2.单元测试</h4><h5 id="（1）单元测试理解"><a href="#（1）单元测试理解" class="headerlink" title="（1）单元测试理解"></a>（1）单元测试理解</h5><p>单元测试实质上是在主运行程序之外，为某个方法创建单独的测试程序，而不必只有一个执行入口进入程序</p>
+<h5 id="（2）单元测试特殊情况"><a href="#（2）单元测试特殊情况" class="headerlink" title="（2）单元测试特殊情况"></a>（2）单元测试特殊情况</h5><p>抽象方法在单元测试时不能被调用，因为抽象类不能有实例不能直接调用</p>
+<h5 id="（3）单元测试使用案例"><a href="#（3）单元测试使用案例" class="headerlink" title="（3）单元测试使用案例"></a>（3）单元测试使用案例</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 爬取工具类测试</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">spider</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Tool().spider(<span class="keyword">new</span> Lobsters() ,<span class="string">&quot;https://lobste.rs/&quot;</span>);</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="（4）单元测试生成"><a href="#（4）单元测试生成" class="headerlink" title="（4）单元测试生成"></a>（4）单元测试生成</h5><p>idea可以快捷为类生成一个测试类，并可以勾选生成测试方法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941641.png" alt="image-20210508081411414"></p>
+<h4 id="3-单步调试"><a href="#3-单步调试" class="headerlink" title="3.单步调试"></a>3.单步调试</h4><h5 id="（1）断点设置"><a href="#（1）断点设置" class="headerlink" title="（1）断点设置"></a>（1）断点设置</h5><p>设置断点可以让程序在调试时从入口开始执行到断点所在代码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941178.png" alt="image-20210508083551638"></p>
+<p>不设断点调试，程序会执行完全部代码，无法实现单步调试</p>
+<h5 id="（2）调试显示"><a href="#（2）调试显示" class="headerlink" title="（2）调试显示"></a>（2）调试显示</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040941715.png" alt="image-20210508084409131"></p>
+<ul>
+<li>重新调试：当单步调试进入加载类等奇怪的地方时，可以重新调试，直到断点出现勾号，说明调试成功</li>
+<li>调试过程中，步过（<strong>Setp Over</strong>）使用频率最高，当碰到方法时，不会进入方法内，而是直接调用方法，然后进入下一行</li>
+<li>步进（ <strong>Step Into</strong>）则会进入方法内</li>
+</ul>
+<h3 id="构造子类"><a href="#构造子类" class="headerlink" title="构造子类"></a>构造子类</h3><h4 id="1-参考文章-4"><a href="#1-参考文章-4" class="headerlink" title="1.参考文章"></a>1.参考文章</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/HD243608836/article/details/89155433">java中父类与子类有相同属性调谁？取决于左边</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dxtianlei/article/details/99299051">父类私有属性和私有方法的继承</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ccpat/article/details/44515335">Java this 关键字用法</a></p>
+<h4 id="2-注意事项-3"><a href="#2-注意事项-3" class="headerlink" title="2.注意事项"></a>2.注意事项</h4><h5 id="（1）子类属性继承问题"><a href="#（1）子类属性继承问题" class="headerlink" title="（1）子类属性继承问题"></a>（1）子类属性继承问题</h5><ul>
+<li><p>子类是继承了父类的私有属性和私有方法，只是子类没有权限直接访问父类的私有属性和私有方法。但是我们可以通过继承父类get和set方法访问到父类的私有属性</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改私有属性方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set_title</span><span class="params">(List title)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.title = title;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 访问私有属性方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List <span class="title">show_title</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">this</span>.title;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>父类属性不可被重写,只会被调用,父类方法可以被重写,也可以被调用</p>
+</li>
+<li><p>当子类中存在和父类同名属性,父类属性会隐藏起来,在多态的情况下属性被调用时会激活父类属性子类属性隐藏起来,而方法不会隐藏,一旦被重写,只能使用super来在子类调用</p>
+</li>
+</ul>
+<h5 id="（2）继承中this指向问题"><a href="#（2）继承中this指向问题" class="headerlink" title="（2）继承中this指向问题"></a>（2）继承中this指向问题</h5><ul>
+<li>对于方法的覆盖，new的谁就调谁，这就是多态。</li>
+<li>对于成员变量的覆盖，this在哪个类就指向哪个类的成员变量，没有多态。</li>
+<li>无论子类是否覆盖成员变量，this始终访问父类的成员变量</li>
+<li>静态方法中，无法使用this引用上下文内容（属性，方法）</li>
+</ul>
+<h5 id="（3）抽象方法使用问题"><a href="#（3）抽象方法使用问题" class="headerlink" title="（3）抽象方法使用问题"></a>（3）抽象方法使用问题</h5><ul>
+<li>抽象类是作为一个模板存在的，不能创建抽象类对象，需要用子类实现所有其抽象方法后变为非抽象类才能间接实例化</li>
+<li>抽象方法只有声明没有实现（对于不知道该怎么实现的方法，我们可以声明为抽象方法），强制子类必须重写抽象方法</li>
+</ul>
+<h3 id="Http请求"><a href="#Http请求" class="headerlink" title="Http请求"></a>Http请求</h3><h4 id="1-参考文章-5"><a href="#1-参考文章-5" class="headerlink" title="1.参考文章"></a>1.参考文章</h4><p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/md5-hash-in-java/">Java实现md5加密</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Littleflowers/article/details/113955196">Java内部类实现http请求</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liaohuiqiang/p/7627022.html">http请求与多线程</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/foxpeter/article/details/23475293">URL中关于空格的编码</a></p>
+<h4 id="2-注意事项-4"><a href="#2-注意事项-4" class="headerlink" title="2.注意事项"></a>2.注意事项</h4><h5 id="（1）Http请求实现"><a href="#（1）Http请求实现" class="headerlink" title="（1）Http请求实现"></a>（1）Http请求实现</h5><ul>
+<li><p>get请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">String urlNameString = url + <span class="string">&#x27;?&#x27;</span> + param;</span><br><span class="line">URL realUrl = <span class="keyword">new</span> URL(urlNameString);</span><br><span class="line"><span class="comment">// 打开链接，强转换为httpURLConnection类</span></span><br><span class="line">URLConnection connection = realUrl.openConnection();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置通用请求属性</span></span><br><span class="line">connection.setRequestProperty(<span class="string">&quot;accept&quot;</span>, <span class="string">&quot;*/*&quot;</span>);</span><br><span class="line">connection.setRequestProperty(<span class="string">&quot;connection&quot;</span>, <span class="string">&quot;Keep-Alive&quot;</span>);</span><br><span class="line">connection.setRequestProperty(<span class="string">&quot;user-agent&quot;</span>,<span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)&quot;</span>);</span><br><span class="line"><span class="comment">// 建立实际链接</span></span><br><span class="line">connection.connect();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 请求成功获得输入流</span></span><br><span class="line">BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(connection.getInputStream()));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获得返回结果</span></span><br><span class="line">String res = in.readLine();</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>post请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">URL realUrl = <span class="keyword">new</span> URL(url);</span><br><span class="line"><span class="comment">// 打开和URL之间的连接</span></span><br><span class="line">URLConnection conn = realUrl.openConnection();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置通用的请求属性</span></span><br><span class="line">conn.setRequestProperty(<span class="string">&quot;accept&quot;</span>, <span class="string">&quot;*/*&quot;</span>);</span><br><span class="line">conn.setRequestProperty(<span class="string">&quot;connection&quot;</span>, <span class="string">&quot;Keep-Alive&quot;</span>);</span><br><span class="line">conn.setRequestProperty(<span class="string">&quot;user-agent&quot;</span>,</span><br><span class="line"><span class="string">&quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送POST请求必须设置如下两行</span></span><br><span class="line">conn.setDoOutput(<span class="keyword">true</span>);</span><br><span class="line">conn.setDoInput(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取URLConnection对象对应的输出流</span></span><br><span class="line">out = <span class="keyword">new</span> PrintWriter(conn.getOutputStream());</span><br><span class="line"><span class="comment">// 发送请求参数</span></span><br><span class="line">out.print(param);</span><br><span class="line"><span class="comment">// flush输出流的缓冲</span></span><br><span class="line">out.flush();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义BufferedReader输入流来读取URL的响应</span></span><br><span class="line">in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(conn.getInputStream()));</span><br><span class="line"></span><br><span class="line"><span class="comment">//获得返回结果 </span></span><br><span class="line">String res = in.readLine();</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li>Java发起http请求后，返回值为String类型</li>
+<li>注意请求api的QPS（每秒请求量），我们可以通过<code>Thread.currentThread().sleep(1000);//毫秒</code> 简单实现延时</li>
+<li>链接编码问题，有时候链接请求失败是因为空格没有编码为%20,而导致请求失败</li>
+</ul>
+<h5 id="（2）Java加密问题"><a href="#（2）Java加密问题" class="headerlink" title="（2）Java加密问题"></a>（2）Java加密问题</h5><p>​    实现md5加密</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// md5加密工具</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getMd5</span><span class="params">(String input)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用哈希MD5调用静态getInstance方法</span></span><br><span class="line">        MessageDigest md = MessageDigest.getInstance(<span class="string">&quot;MD5&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// digest() 方法调用来计算消息摘要</span></span><br><span class="line">        <span class="comment">//  of an input digest() return array of byte</span></span><br><span class="line">        <span class="keyword">byte</span>[] messageDigest = md.digest(input.getBytes());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将字节数组转换为符号表示</span></span><br><span class="line">        BigInteger no = <span class="keyword">new</span> BigInteger(<span class="number">1</span>, messageDigest);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将消息摘要转换为十六进制值</span></span><br><span class="line">        String hashtext = no.toString(<span class="number">16</span>);</span><br><span class="line">        <span class="keyword">while</span> (hashtext.length() &lt; <span class="number">32</span>) &#123;</span><br><span class="line">            hashtext = <span class="string">&quot;0&quot;</span> + hashtext;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hashtext;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 用于指定错误的消息摘要算法</span></span><br><span class="line">    <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="Java数据处理"><a href="#Java数据处理" class="headerlink" title="Java数据处理"></a>Java数据处理</h4><h4 id="1-参考文章-6"><a href="#1-参考文章-6" class="headerlink" title="1.参考文章"></a>1.参考文章</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenkaibsw/article/details/78989459">Java数组遍历方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/WZH577/article/details/90453762">java遍历List方法</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/goloving/p/7740100.html">List和Array相互转换 </a></p>
+<h4 id="2-注意事项-5"><a href="#2-注意事项-5" class="headerlink" title="2.注意事项"></a>2.注意事项</h4><h5 id="（1）字符串与数组转换"><a href="#（1）字符串与数组转换" class="headerlink" title="（1）字符串与数组转换"></a>（1）字符串与数组转换</h5><ul>
+<li><p>字符串转换成数组</p>
+<p>String.split() 方法，Java 中通常用 split() 分割字符串，返回的是一个数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">&quot;123abc&quot;</span>;</span><br><span class="line">String[] arr = str.split(<span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123; <span class="comment">// String数组</span></span><br><span class="line">    System.out.print(arr[i]); <span class="comment">// 输出 1 2 3 a b c</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组转换为字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String[] arr = &#123; <span class="string">&quot;123&quot;</span>, <span class="string">&quot;abc&quot;</span> &#125;;</span><br><span class="line">StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    sb.append(arr[i]); <span class="comment">// String并不拥有append方法，所以借助 StringBuffer</span></span><br><span class="line">&#125;</span><br><span class="line">String sb1 = sb.toString();</span><br><span class="line">System.out.println(sb1); <span class="comment">// 输出123abc</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h5 id="（2）数组遍历方法"><a href="#（2）数组遍历方法" class="headerlink" title="（2）数组遍历方法"></a>（2）数组遍历方法</h5><ul>
+<li><p>传统for循环方法</p>
+</li>
+<li><p>for each循环（foreach只能用于普通数组）</p>
+</li>
+<li><p>利用Array类中的toString方法（不能直接打印数组，<code>System.out.println(array)</code>这样打印是的是数组的首地址）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] array = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">System.out.println(Arrays.toString(array))</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h5 id="（3）List遍历方法"><a href="#（3）List遍历方法" class="headerlink" title="（3）List遍历方法"></a>（3）List遍历方法</h5><ul>
+<li>迭代器遍历（hasNext和next方法）</li>
+<li>for each遍历（从List中获得的元素是对象）</li>
+<li>传统for循环遍历（使用size方法获得List长度）</li>
+<li>Lambda表达式</li>
+</ul>
+<h5 id="（3）Java中的正则表达式"><a href="#（3）Java中的正则表达式" class="headerlink" title="（3）Java中的正则表达式"></a>（3）Java中的正则表达式</h5><ul>
+<li>注意该正则方法，一定是先find后group，group()方法通过前一个成功的find()方法调用返回找到的字符串</li>
+</ul>
+<h5 id="（5）List与Array的转换"><a href="#（5）List与Array的转换" class="headerlink" title="（5）List与Array的转换"></a>（5）List与Array的转换</h5><ul>
+<li><p>List to Array</p>
+<p>使用List 提供的toArray的接口对List进行转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指定类型转换</span></span><br><span class="line">String[] array=list.toArray(<span class="keyword">new</span> String[list.size()]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Array to List</p>
+<p>使用ArrayList的构造方法进行转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;(Arrays.asList(array));</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2021/04/26/Java/Java-%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/" title="Java|网络爬虫项目">https://autovy.github.io/2021/04/26/Java/Java-网页爬虫/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> 开发实战</a>
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 后端</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/11/Java/Java-%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6/" rel="prev" title="Java|知识框架">
+      <i class="fa fa-chevron-left"></i> Java|知识框架
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/07/Java/Java-SSM%E6%A1%86%E6%9E%B6/" rel="next" title="Java|SSM框架学习">
+      Java|SSM框架学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+
+
+
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#idea%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE"><span class="nav-text">idea基本设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#idea%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-text">idea创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-text">1.参考文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">2.注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E9%85%8D%E7%BD%AE"><span class="nav-text">（1）配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%89%93%E5%BC%80%E9%A1%B9%E7%9B%AE"><span class="nav-text">（2）打开项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E9%85%8D%E7%BD%AE%E4%BF%AE%E6%94%B9"><span class="nav-text">（3）配置修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E6%A0%87%E8%AE%B0%E7%9B%AE%E5%BD%95"><span class="nav-text">（4）标记目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%885%EF%BC%89%E6%B7%BB%E5%8A%A0Maven%E6%A1%86%E6%9E%B6"><span class="nav-text">（5）添加Maven框架</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEmeavn"><span class="nav-text">配置meavn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0-1"><span class="nav-text">1.参考文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-1"><span class="nav-text">2.注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89maven%E9%85%8D%E7%BD%AE"><span class="nav-text">（1）maven配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89Meavn%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-text">（2）Meavn创建项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89meavn%E6%B7%BB%E5%8A%A0%E5%8C%85"><span class="nav-text">（3）meavn添加包</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E9%85%8D%E7%BD%AE"><span class="nav-text">爬虫配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0-2"><span class="nav-text">1.参考文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-2"><span class="nav-text">2.注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6%E6%B7%BB%E5%8A%A0"><span class="nav-text">（1）爬虫框架添加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%97%A0%E6%B3%95%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5"><span class="nav-text">（2）无法爬取网页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89SLF4J%E6%8A%A5%E9%94%99"><span class="nav-text">（3）SLF4J报错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E7%88%AC%E5%8F%96%E6%96%B9%E6%B3%95"><span class="nav-text">（4）爬取方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%885%EF%BC%89%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98"><span class="nav-text">（5）正则匹配问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-text">调试方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0-3"><span class="nav-text">1.参考文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="nav-text">2.单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%90%86%E8%A7%A3"><span class="nav-text">（1）单元测试理解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5"><span class="nav-text">（2）单元测试特殊情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="nav-text">（3）单元测试使用案例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E7%94%9F%E6%88%90"><span class="nav-text">（4）单元测试生成</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%8D%95%E6%AD%A5%E8%B0%83%E8%AF%95"><span class="nav-text">3.单步调试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%96%AD%E7%82%B9%E8%AE%BE%E7%BD%AE"><span class="nav-text">（1）断点设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E8%B0%83%E8%AF%95%E6%98%BE%E7%A4%BA"><span class="nav-text">（2）调试显示</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%AD%90%E7%B1%BB"><span class="nav-text">构造子类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0-4"><span class="nav-text">1.参考文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-3"><span class="nav-text">2.注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%AD%90%E7%B1%BB%E5%B1%9E%E6%80%A7%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98"><span class="nav-text">（1）子类属性继承问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E7%BB%A7%E6%89%BF%E4%B8%ADthis%E6%8C%87%E5%90%91%E9%97%AE%E9%A2%98"><span class="nav-text">（2）继承中this指向问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%8A%BD%E8%B1%A1%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98"><span class="nav-text">（3）抽象方法使用问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Http%E8%AF%B7%E6%B1%82"><span class="nav-text">Http请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0-5"><span class="nav-text">1.参考文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-4"><span class="nav-text">2.注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89Http%E8%AF%B7%E6%B1%82%E5%AE%9E%E7%8E%B0"><span class="nav-text">（1）Http请求实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89Java%E5%8A%A0%E5%AF%86%E9%97%AE%E9%A2%98"><span class="nav-text">（2）Java加密问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="nav-text">Java数据处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0-6"><span class="nav-text">1.参考文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-5"><span class="nav-text">2.注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2"><span class="nav-text">（1）字符串与数组转换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%95%B0%E7%BB%84%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95"><span class="nav-text">（2）数组遍历方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89List%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95"><span class="nav-text">（3）List遍历方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89Java%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-text">（3）Java中的正则表达式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%885%EF%BC%89List%E4%B8%8EArray%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-text">（5）List与Array的转换</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<a href="/">  <img class="site-author-image" itemprop="image" alt="Autovy"
+      src="/images/2.png">  </a>
+  <p class="site-author-name" itemprop="name">Autovy</p>
+  <div class="site-description" itemprop="description">新时代农民工的数字农田</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Autovy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Autovy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/JohnSmith232" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;JohnSmith232" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-code"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Autovy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">286k</span>
+</div>
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/01/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'RVJRabsBhxWXvhMcG8CH5wbc-gzGzoHsz',
+      appKey     : 'JSGLk7guOagDPMFN9wbASkEh',
+      placeholder: "说点什么吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+  <script src="/js/bloom.js" type="text/javascript"></script>

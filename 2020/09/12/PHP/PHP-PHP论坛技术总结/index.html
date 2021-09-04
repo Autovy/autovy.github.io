@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/gear48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/gear32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="true"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="PHP|基于PHP开发论坛">
+<meta property="og:url" content="https://autovy.github.io/2020/09/12/PHP/PHP-PHP%E8%AE%BA%E5%9D%9B%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Autovy&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041004045.png">
+<meta property="article:published_time" content="2020-09-12T06:30:00.000Z">
+<meta property="article:modified_time" content="2021-09-04T02:17:34.116Z">
+<meta property="article:author" content="Autovy">
+<meta property="article:tag" content="开发实战">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="Bootstrap">
+<meta property="article:tag" content="php">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041004045.png">
+
+<link rel="canonical" href="https://autovy.github.io/2020/09/12/PHP/PHP-PHP%E8%AE%BA%E5%9D%9B%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>PHP|基于PHP开发论坛 | Autovy's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Autovy's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Autovy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Just For Interest</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2020/09/12/PHP/PHP-PHP%E8%AE%BA%E5%9D%9B%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="新时代农民工的数字农田">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP|基于PHP开发论坛
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020/09/12 14:30:00" itemprop="dateCreated datePublished" datetime="2020-09-12T14:30:00+08:00">2020/09/12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/09/12/PHP/PHP-PHP%E8%AE%BA%E5%9D%9B%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/12/PHP/PHP-PHP%E8%AE%BA%E5%9D%9B%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.7k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041004045.png" alt="image-20210904100404823"></p>
+<span id="more"></span>
+
+<h4 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h4><p>本项目的前端都是通过Bootstrap来实现，我们只需要在页面头部加载Bootstrap的层级样式表，即可非常快捷地使用Bootstrap的组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Bootstrap官方文档：<a target="_blank" rel="noopener" href="https://v3.bootcss.com/">https://v3.bootcss.com/</a></p>
+<h4 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h4><p>我实现图片上传的思路如下：</p>
+<ul>
+<li><p>前端打开文件，获取文件信息</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;file&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;inpfile&quot;</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">accept</span>=<span class="string">&quot;image/gif, image/jpeg, image/png&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default btn-lg&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;glyphicon glyphicon-picture&quot;</span> <span class="attr">aria-hidden</span>=<span class="string">&quot;true&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过ajax技术将图片发给后端</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$( <span class="built_in">document</span> ).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">          $(<span class="string">&#x27;#inpfile&#x27;</span>).change(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;    </span><br><span class="line">          </span><br><span class="line">            <span class="keyword">var</span> file_data = $(<span class="string">&#x27;#inpfile&#x27;</span>).prop(<span class="string">&#x27;files&#x27;</span>)[<span class="number">0</span>];   </span><br><span class="line">            <span class="keyword">var</span> form_data = <span class="keyword">new</span> FormData();                  </span><br><span class="line">            form_data.append(<span class="string">&#x27;file&#x27;</span>, file_data);</span><br><span class="line">          </span><br><span class="line">              $.ajax(&#123;</span><br><span class="line">              url:<span class="string">&#x27;pic.php&#x27;</span>,</span><br><span class="line">              type:<span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">              dataType: <span class="string">&#x27;text&#x27;</span>,  </span><br><span class="line">              cache: <span class="literal">false</span>,</span><br><span class="line">              contentType: <span class="literal">false</span>,</span><br><span class="line">              processData: <span class="literal">false</span>,</span><br><span class="line">              data:form_data,</span><br><span class="line"></span><br><span class="line">      success:<span class="function"><span class="keyword">function</span>(<span class="params">data1</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">var</span> pic = <span class="string">&quot;&lt;br&gt;&lt;img src =&quot;</span>+data1+<span class="string">&quot; /&gt;&lt;br&gt;&quot;</span></span><br><span class="line"></span><br><span class="line">          <span class="built_in">document</span>.execCommand(<span class="string">&quot;insertHTML&quot;</span>,<span class="string">&quot;false&quot;</span>,pic);</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>后端处理并存储图像（放在服务器或本地的某个文件夹）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$imgname</span> = <span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;name&quot;</span>]; <span class="comment">//获取上传的文件名称</span></span><br><span class="line"><span class="variable">$filetype</span> = pathinfo(<span class="variable">$imgname</span>, PATHINFO_EXTENSION);<span class="comment">//获取后缀</span></span><br><span class="line"><span class="variable">$newname</span> = date(<span class="string">&quot;Ymdhis&quot;</span>).<span class="string">&quot;.&quot;</span>.<span class="variable">$filetype</span>; </span><br><span class="line"><span class="comment">//构建新名称</span></span><br><span class="line"><span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;name&#x27;</span>] = <span class="variable">$newname</span>;</span><br><span class="line"><span class="comment">// 构建传输路径</span></span><br><span class="line"><span class="variable">$dir</span> = <span class="string">&#x27;img/&#x27;</span>.iconv(<span class="string">&#x27;UTF-8&#x27;</span>,<span class="string">&#x27;gbk&#x27;</span>,basename(<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;name&#x27;</span>])); </span><br><span class="line"><span class="comment">// 将路径存入数据库</span></span><br><span class="line"><span class="variable">$result</span> = mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;UPDATE  users SET tx = &#x27;<span class="subst">&#123;$dir&#125;</span>&#x27; WHERE id = &#x27;<span class="subst">&#123;$id&#125;</span>&#x27;&quot;</span>);</span><br><span class="line"><span class="comment">// 移动文件到指定路径</span></span><br><span class="line">move_uploaded_file(<span class="variable">$_FILES</span>[<span class="string">&#x27;file&#x27;</span>][<span class="string">&#x27;tmp_name&#x27;</span>],<span class="variable">$dir</span>);        </span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$dir</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ul>
+<h4 id="表单与后端"><a href="#表单与后端" class="headerlink" title="表单与后端"></a>表单与后端</h4><h5 id="1-构建表单"><a href="#1-构建表单" class="headerlink" title="1.构建表单"></a>1.构建表单</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;君の名は？&quot;</span> <span class="attr">aria-describedby</span>=<span class="string">&quot;basic-addon1&quot;</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;Password&quot;</span> <span class="attr">aria-describedby</span>=<span class="string">&quot;basic-addon1&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-default&quot;</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>from标签</strong>：表单标签，action属于填发送信息的后端文件（login.php），空白则发给自己；method属性确定发送信息的方式，一般表单都用”POST”</li>
+<li><strong>input标签</strong>：设置一个表单域，type属性为表单填写的数据类型（甚至有密码和日期等内置的类型），placeholder属性即表单域提示文字，name属性为该表单域数据起名方便后端识别</li>
+<li><strong>button标签</strong>：当button放在from标签内，且type属性为“submit”，可以起到提交表单信息到后端的功能</li>
+</ul>
+<h5 id="2-后端接收表单信息"><a href="#2-后端接收表单信息" class="headerlink" title="2.后端接收表单信息"></a>2.后端接收表单信息</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$name</span> = <span class="variable">$_POST</span>[<span class="string">&quot;name&quot;</span>];</span><br><span class="line"><span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">&quot;password&quot;</span>];</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-表单重复提交问题"><a href="#3-表单重复提交问题" class="headerlink" title="3.表单重复提交问题"></a>3.表单重复提交问题</h5><p>表单与后端交互时会出现一个经典的问题：当页面刷新是，表单会重复提交用户输入的数据，导致出现插入重复的数据或者发出空白数据这样的问题</p>
+<p>这个问题的解决方案有很多，这里提供两种简单的解决方案</p>
+<ul>
+<li><p><strong>页面重定向</strong></p>
+<p>最简单最有效的解决方法，在用户提交表单后，立刻重定向到新页面或者到本页面</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">&quot;refresh:1; url=login.php&quot;</span>); </span><br></pre></td></tr></table></figure>
+
+<p>问题：一个页面不能有多个重定向，否则会报错</p>
+</li>
+<li><p><strong>js代码禁止页面刷新</strong></p>
+<p>一种比较奇葩的思路，但是某些时候会十分有效</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.history.replaceState ) &#123;</span><br><span class="line">        <span class="built_in">window</span>.history.replaceState( <span class="literal">null</span>, <span class="literal">null</span>, <span class="built_in">window</span>.location.href );</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><strong>参考文章（更多解决方案）</strong></p>
+<p>一些大佬们的讨论：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/6320113/how-to-prevent-form-resubmission-when-page-is-refreshed-f5-ctrlr">https://stackoverflow.com/questions/6320113/how-to-prevent-form-resubmission-when-page-is-refreshed-f5-ctrlr</a></p>
+<p>总结得比较好的文章：<a target="_blank" rel="noopener" href="https://makitweb.com/prevent-page-from-submit-on-refresh-in-php/#conclusion">https://makitweb.com/prevent-page-from-submit-on-refresh-in-php/#conclusion</a></p>
+</li>
+</ul>
+<h4 id="前端发送信息的其他方式"><a href="#前端发送信息的其他方式" class="headerlink" title="前端发送信息的其他方式"></a>前端发送信息的其他方式</h4><p>表单提交信息到后端有个致命的问题，那就是每一次提交都需要刷新一次页面，这种现象叫同步请求。</p>
+<p>但是很多时候我们只需要局部刷新页面，这时候就需要用到异步请求了。</p>
+<p>JavaScript中的Ajax技术就可以实现这样的异步请求，其相当于在表单与后端之间加入一个干活更加利索的信息搬运工</p>
+<h5 id="1-js实现Ajax"><a href="#1-js实现Ajax" class="headerlink" title="1.js实现Ajax"></a>1.js实现Ajax</h5><p>js实现Ajax技术需要用到<code>XMLHttpRequest()</code>对象</p>
+<p>ajax的工作过程：</p>
+<ul>
+<li>创建XMLHTTPRequest对象</li>
+<li>设置请求的url等参数</li>
+<li>发送请求</li>
+<li>注册事件</li>
+<li>在注册事件中获取返回的内容，并修改页面显示，实现局部刷新</li>
+</ul>
+<p>我们一般用post的方式，前端send发送，后端$_POST，最后一个echo返回数据，前端ajax.responseText接收返回数据</p>
+<p><strong>前端</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>post方式发送数据<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>注册名字<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;userName&quot;</span> <span class="attr">id</span>=<span class="string">&quot;btnName&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">id</span>=<span class="string">&quot;tishi&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">//绑定失去焦点事件</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#btnName&#x27;</span>).onblur=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 发送ajax请求到服务器</span></span></span><br><span class="line"><span class="javascript">      <span class="comment">//1.创建异步对象</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> ajax = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"><span class="javascript">      <span class="comment">//2.设置请求的url等参数</span></span></span><br><span class="line"><span class="javascript">      ajax.open(<span class="string">&#x27;post&#x27;</span>,<span class="string">&#x27;example.php&#x27;</span>);</span></span><br><span class="line"><span class="javascript">      <span class="comment">/*如果需要像 HTML 表单那样 POST 数据，请使用 setRequestHeader() 来添加 HTTP 头。然后在 send() 方法中规定您希望发送的数据：*/</span></span></span><br><span class="line"><span class="javascript">      ajax.setRequestHeader(<span class="string">&quot;Content-type&quot;</span>,<span class="string">&quot;application/x-www-form-urlencoded&quot;</span>);</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 3.发送请求</span></span></span><br><span class="line"><span class="javascript">      ajax.send(<span class="string">&#x27;Name=&#x27;</span>+<span class="built_in">document</span>.querySelector(<span class="string">&#x27;#btnName&#x27;</span>).value);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="comment">// 4.注册事件</span></span></span><br><span class="line"><span class="javascript">      ajax.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line">        if (ajax.readyState ==4&amp;&amp;ajax.status==200) &#123;</span><br><span class="line"><span class="javascript">            <span class="comment">// 5.在注册事件中接收返回的内容并修改数据</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(ajax.responseText);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> show = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#tishi&#x27;</span>);</span></span><br><span class="line"><span class="javascript">                show.style.display=<span class="string">&#x27;block&#x27;</span>;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (ajax.responseText ==<span class="string">&quot;exist&quot;</span>) &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">                show.innerHTML=<span class="string">&#x27;该用户已经注册了！&#x27;</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">                show.innerHTML=<span class="string">&#x27;你可以使用该名字！&#x27;</span></span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>后端：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">     header(<span class="string">&#x27;content-type:text/html;charset=utf-8&#x27;</span>);</span><br><span class="line">     <span class="variable">$name</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;Name&#x27;</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     <span class="comment">// 准备一个数据 模拟已经存在的用户</span></span><br><span class="line">     <span class="variable">$nameArray</span> = <span class="keyword">array</span>(<span class="string">&#x27;jack&#x27;</span>,<span class="string">&#x27;kong&#x27;</span>,<span class="string">&#x27;rose&#x27;</span>,<span class="string">&#x27;ice&#x27;</span>);</span><br><span class="line"></span><br><span class="line">     <span class="comment">// 检验是否存在，并且接受返回值</span></span><br><span class="line">     <span class="variable">$result</span>=in_array(<span class="variable">$name</span>, <span class="variable">$nameArray</span>);</span><br><span class="line">     <span class="comment">// 通过if else返回不同的值给浏览器</span></span><br><span class="line">     <span class="keyword">if</span>(<span class="variable">$result</span>)&#123;</span><br><span class="line">     <span class="keyword">echo</span> <span class="string">&quot;exist&quot;</span>;</span><br><span class="line">     &#125; </span><br><span class="line">	 <span class="keyword">else</span>&#123;</span><br><span class="line">     <span class="keyword">echo</span> <span class="string">&quot;not exist&quot;</span>;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/diligentkong/article/details/72833577">https://blog.csdn.net/diligentkong/article/details/72833577</a></p>
+<h5 id="2-jquery实现Ajax"><a href="#2-jquery实现Ajax" class="headerlink" title="2.jquery实现Ajax"></a>2.jquery实现Ajax</h5><p>相对于原生的js，jq实现Ajax的方法无疑简单很多，也是本项目主要使用的方法</p>
+<ul>
+<li><p>首先使用jq需要引入jq的文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后使用jq构造Ajax</p>
+<p><strong>前端</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    <span class="comment">// 请求的后端文件</span></span><br><span class="line">	url:<span class="string">&#x27;love.php&#x27;</span>,</span><br><span class="line">    <span class="comment">// 请求方式</span></span><br><span class="line">    type:<span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">    <span class="comment">// 发送的数据</span></span><br><span class="line">    data:&#123;<span class="attr">id</span>:id, <span class="attr">choose</span>:tj_count&#125;,</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 成功发送后触发的函数，data2为后端返回的数据</span></span><br><span class="line">    success:<span class="function"><span class="keyword">function</span>(<span class="params">data2</span>)</span>&#123;</span><br><span class="line">    	<span class="comment">//修改文本不能用直接等于</span></span><br><span class="line">    	$(e).find(<span class="string">&#x27;.badge&#x27;</span>).text(data2)</span><br><span class="line">      &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>后端</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接收前端ajax发来的数据</span></span><br><span class="line"><span class="variable">$id</span> = <span class="variable">$_POST</span>[<span class="string">&quot;id&quot;</span>];</span><br><span class="line"><span class="variable">$choose</span> = <span class="variable">$_POST</span>[<span class="string">&quot;choose&quot;</span>];</span><br><span class="line"><span class="keyword">if</span>(id==<span class="number">1</span> &amp;&amp; choose==<span class="number">1</span>)&#123;	</span><br><span class="line">	<span class="variable">$num</span> = <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 返回数据</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$num</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+</li>
+</ul>
+<h4 id="后端获取信息的其他方式"><a href="#后端获取信息的其他方式" class="headerlink" title="后端获取信息的其他方式"></a>后端获取信息的其他方式</h4><p>除了从前端的表单中获取，后端还可以从url,cookie和session中获取信息，当然还有存储信息更为强大的数据库（这里先不讲，后面单独会有专题）</p>
+<h5 id="1-以GET的形式获取url中的信息"><a href="#1-以GET的形式获取url中的信息" class="headerlink" title="1.以GET的形式获取url中的信息"></a>1.以GET的形式获取url中的信息</h5><p>通过这种方法可以渲染出数据不同的页面，如文章页，个人主页。</p>
+<ul>
+<li><p><strong>前端构造url</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;passage.php?id=&#x27;.$passage_row[&quot;</span><span class="attr">id</span>&quot;]<span class="attr">.</span>&#x27;&amp;<span class="attr">method</span>=<span class="string">2</span>&quot; /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>‘?’后面是数据，如method的值为’2’</p>
+</li>
+<li><p><strong>后端获取数据</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$id</span> = <span class="variable">$_GET</span>[<span class="string">&quot;id&quot;</span>]; </span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h5 id="2-把信息存在cookie中"><a href="#2-把信息存在cookie中" class="headerlink" title="2.把信息存在cookie中"></a>2.把信息存在cookie中</h5><p>cookie是将用户信息储存在客户端即浏览器中，供各个页面使用这些在cookie中存储的数据</p>
+<p>cookie具备有效期，当有效期结束之后，Cookie会自动的从客户端删除</p>
+<p>cookie的数据极易被修改，所以一般来说不会把敏感信息和重要信息存在cookie中</p>
+<ul>
+<li><p><strong>创建cookie</strong></p>
+<p>设置一个名叫”userid”的数据，值为$row[“id”]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setcookie(<span class="string">&quot;userid&quot;</span>, <span class="variable">$row</span>[<span class="string">&quot;id&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>也可以通过header来设置cookie</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">&quot;Set-Cookie:cookie_name=value&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><strong>读取cookie</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$belong_id</span> = <span class="variable">$_COOKIE</span>[<span class="string">&quot;userid&quot;</span>];</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h5 id="3-把信息存在session中"><a href="#3-把信息存在session中" class="headerlink" title="3.把信息存在session中"></a>3.把信息存在session中</h5><p>如果说cookie相当于存折，可以看到里面的信息。那么session就像银行卡，你只能用而不能看到被加密的信息，所以信息安全性会更高</p>
+<ul>
+<li><p><strong>创建session</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">session_start();</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&#x27;sessionName&#x27;</span>] = <span class="string">&#x27;sessionValue&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;session_id:&quot;</span>.session_id(); <span class="comment">// 显示当前的session_id</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>读取session</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$session</span> = <span class="variable">$_SESSION</span>[<span class="string">&#x27;sessionName&#x27;</span>];</span><br></pre></td></tr></table></figure>
+
+
+
+
+</li>
+</ul>
+<h4 id="PHP请求API"><a href="#PHP请求API" class="headerlink" title="PHP请求API"></a>PHP请求API</h4><h5 id="1-file-get-contents请求API"><a href="#1-file-get-contents请求API" class="headerlink" title="1.file_get_contents请求API"></a>1.file_get_contents请求API</h5><p>file_get_contents请求api的方法相对简单，适合请求相对简单的api和网页页面</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求api</span></span><br><span class="line"><span class="variable">$api</span> = file_get_contents(<span class="string">&quot;http://api.bilibili.com/x/emote/user/panel/web?business=reply&quot;</span>);</span><br><span class="line"><span class="comment">// 将api返回的数据转换为json数据处理</span></span><br><span class="line"><span class="variable">$data</span> =json_decode(<span class="variable">$api</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="comment">// 索引json中的数据</span></span><br><span class="line"><span class="variable">$str</span> =  <span class="variable">$data</span> [<span class="string">&quot;data&quot;</span>][<span class="string">&quot;packages&quot;</span>][<span class="variable">$num</span>][<span class="string">&quot;emote&quot;</span>];</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-curl请求API"><a href="#2-curl请求API" class="headerlink" title="2.curl请求API"></a>2.curl请求API</h5><p>curl来请求api才是主流的方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个curl的会话</span></span><br><span class="line"><span class="variable">$ch</span> = curl_init();</span><br><span class="line"><span class="comment">// 设置请求的URL</span></span><br><span class="line">curl_setopt(<span class="variable">$ch</span>, CURLOPT_URL, <span class="string">&quot;http://api.gochati.cn/htapi.phpq=&#x27;<span class="subst">&#123;$str&#125;</span>&#x27;&amp;token=test123&quot;</span>);</span><br><span class="line"><span class="comment">// 设置否将响应结果存入变量，1是存入，0是直接echo出</span></span><br><span class="line">curl_setopt(<span class="variable">$ch</span>, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line"><span class="comment">// 得到响应结果存入变量中</span></span><br><span class="line"><span class="variable">$output</span> = curl_exec(<span class="variable">$ch</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$output</span>;</span><br><span class="line"><span class="comment">// 关闭这个curl会话</span></span><br><span class="line">curl_close(<span class="variable">$ch</span>);    </span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="把信息存在数据库"><a href="#把信息存在数据库" class="headerlink" title="把信息存在数据库"></a>把信息存在数据库</h4><p>终于来到本文的重头戏了——数据库，后端处理完数据后就可以将数据存在数据表中，方便下一次去使用，更重要的在于可以构建数据间的关系。</p>
+<p>本项目用了面向过程的方法，其实和面向对象差别不大</p>
+<h5 id="1-连接数据库"><a href="#1-连接数据库" class="headerlink" title="1.连接数据库"></a>1.连接数据库</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$servername</span> = <span class="string">&quot;127.0.0.1&quot;</span>;<span class="comment">//以下四行为数据库信息</span></span><br><span class="line"><span class="variable">$user</span> = <span class="string">&quot;user&quot;</span>;<span class="comment">//用户名</span></span><br><span class="line"><span class="variable">$password_all</span> = <span class="string">&quot;123456&quot;</span>;<span class="comment">//密码</span></span><br><span class="line"><span class="variable">$data</span> = <span class="string">&quot;acg&quot;</span>;<span class="comment">//要使用的数据库名称</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="variable">$conn</span> = mysqli_connect(<span class="variable">$servername</span>, <span class="variable">$user</span>, <span class="variable">$password_all</span>, <span class="variable">$data</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检测连接</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">&quot;连接失败: &quot;</span> . mysqli_connect_error());</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;连接成功&quot;</span>;</span><br><span class="line"><span class="comment">// 修改字符集的编码方式，现在不推荐使用</span></span><br><span class="line">mysqli_query(<span class="variable">$conn</span>,<span class="string">&quot;set names &#x27;utf8&#x27;;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-创建数据表"><a href="#2-创建数据表" class="headerlink" title="2.创建数据表"></a>2.创建数据表</h5><p>一般的数据表可以提前建好，不用代码来形成。可以使用如Navicat等可视化mysql工具</p>
+<p>建表注意事项：</p>
+<ul>
+<li>表的字段名不要与语言的关键字重复</li>
+<li>主键只能设一个，一般设id为主键</li>
+<li>注意数据类型和长度，一般的整型数据长度用1，短的字符串用varchar类型，如果要存储文章之类的则需要text类型，长度设为0</li>
+<li>字符串的字符集一般是utf8，排序规则一般utf8_general_ci</li>
+<li>设置能否为null是特别容易出错的地方，如果设置为不是null即该数据不能为空，在插入数据时如果该数据不插入则会出现数据无法插入的错误（但是是不会报错的（：）</li>
+</ul>
+<h5 id="3-插入数据"><a href="#3-插入数据" class="headerlink" title="3.插入数据"></a>3.插入数据</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$query</span> = mysqli_query(<span class="variable">$conn</span>,<span class="string">&quot;INSERT INTO wz (sj, ht, ms, zz, pl, tj) VALUES ( &#x27;<span class="subst">$time</span>&#x27; ,&#x27;<span class="subst">&#123;$topic&#125;</span>&#x27;,&#x27;<span class="subst">&#123;$passage&#125;</span>&#x27;, &#x27;<span class="subst">&#123;$name&#125;</span>&#x27;, 0, 0);&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>mysqli_query</code>是对连接的数据库执行sql语句</li>
+<li>sql语句，<code>INSERT INTO</code>即执行插入命令</li>
+<li>wz指插入的对象表格，(sj, ht, ms, zz, pl, tj)则是表格的字段，注意如果构建表时设置了某字段为不为null，则该字段一定要填入其中，否则所有的数据都无法插入</li>
+<li>VALUES 后面即字段对应的值</li>
+</ul>
+<h5 id="4-读取数据"><a href="#4-读取数据" class="headerlink" title="4.读取数据"></a>4.读取数据</h5><p>本项目用的最频繁的一定是读取mysql数据了，而且还非常频繁地使用了禁术<code>SELECT *</code>  （：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$passage_result</span> = mysqli_query(<span class="variable">$conn</span>, <span class="string">&#x27;SELECT * FROM wz;&#x27;</span>);</span><br><span class="line"><span class="keyword">while</span>( <span class="variable">$passage_row</span> = mysqli_fetch_assoc(<span class="variable">$passage_result</span>))&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$passage_row</span>[<span class="string">&quot;id&quot;</span>] == <span class="variable">$id</span> )&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$choose</span> == <span class="number">0</span>)&#123;   </span><br><span class="line">            <span class="variable">$num</span> =  ++<span class="variable">$passage_row</span>[<span class="string">&#x27;tj&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;   </span><br><span class="line">             <span class="variable">$num</span> =  --<span class="variable">$passage_row</span>[<span class="string">&#x27;tj&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>SELECT * FROM</code>搜索整个表格的所有字段，但里面填写了字段名，则只搜索该表的该字段。最终整合成一堆关联数组</li>
+<li>from后面接数据表名</li>
+<li><code>mysqli_fetch_assoc</code>提取出一条关联数组</li>
+<li><code>while( $passage_row = mysqli_fetch_assoc($passage_result))</code>逐个遍历之前生成一堆关联数组</li>
+<li><code>$passage_row[&quot;id&quot;]</code>索引一条关联数组的id</li>
+</ul>
+<h5 id="5-整合数据"><a href="#5-整合数据" class="headerlink" title="5.整合数据"></a>5.整合数据</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$result</span>  = mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;select * from comment where passage_id = &#x27;<span class="subst">&#123;$id&#125;</span>&#x27;&quot;</span>);</span><br><span class="line"><span class="variable">$all</span> = mysqli_num_rows(<span class="variable">$result</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$all</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>where</code>可以达到批量操作同一个数据表的多个数据的操作，也常常用于统计数据表的相同数据</p>
+<h5 id="6-更新数据"><a href="#6-更新数据" class="headerlink" title="6.更新数据"></a>6.更新数据</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询插入即更新已有数据</span></span><br><span class="line"><span class="variable">$comment_add</span> = mysqli_query(<span class="variable">$conn</span>, <span class="string">&quot;UPDATE wz SET pl = &#x27;<span class="subst">&#123;$all&#125;</span>&#x27; WHERE id = &#x27;<span class="subst">&#123;$id&#125;</span>&#x27; &quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>update比较简单，值得一提的是，它可以和where结合更新指定数据（相当于if的作用，还不用遍历）</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2020/09/12/PHP/PHP-PHP%E8%AE%BA%E5%9D%9B%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" title="PHP|基于PHP开发论坛">https://autovy.github.io/2020/09/12/PHP/PHP-PHP论坛技术总结/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> 开发实战</a>
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 后端</a>
+              <a href="/tags/Bootstrap/" rel="tag"><i class="fa fa-tag"></i> Bootstrap</a>
+              <a href="/tags/php/" rel="tag"><i class="fa fa-tag"></i> php</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/15/C%20language/C%E8%AF%AD%E8%A8%80-%E6%9C%80%E7%AE%80%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" rel="prev" title="C语言|最简管理系统">
+      <i class="fa fa-chevron-left"></i> C语言|最简管理系统
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/20/Tool/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-matlab%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" rel="next" title="开发工具|matlab查询文档">
+      开发工具|matlab查询文档 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+
+
+
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bootstrap"><span class="nav-text">Bootstrap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0"><span class="nav-text">图片上传</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E4%B8%8E%E5%90%8E%E7%AB%AF"><span class="nav-text">表单与后端</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E6%9E%84%E5%BB%BA%E8%A1%A8%E5%8D%95"><span class="nav-text">1.构建表单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%90%8E%E7%AB%AF%E6%8E%A5%E6%94%B6%E8%A1%A8%E5%8D%95%E4%BF%A1%E6%81%AF"><span class="nav-text">2.后端接收表单信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E8%A1%A8%E5%8D%95%E9%87%8D%E5%A4%8D%E6%8F%90%E4%BA%A4%E9%97%AE%E9%A2%98"><span class="nav-text">3.表单重复提交问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E5%8F%91%E9%80%81%E4%BF%A1%E6%81%AF%E7%9A%84%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F"><span class="nav-text">前端发送信息的其他方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-js%E5%AE%9E%E7%8E%B0Ajax"><span class="nav-text">1.js实现Ajax</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-jquery%E5%AE%9E%E7%8E%B0Ajax"><span class="nav-text">2.jquery实现Ajax</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF%E8%8E%B7%E5%8F%96%E4%BF%A1%E6%81%AF%E7%9A%84%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F"><span class="nav-text">后端获取信息的其他方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E4%BB%A5GET%E7%9A%84%E5%BD%A2%E5%BC%8F%E8%8E%B7%E5%8F%96url%E4%B8%AD%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="nav-text">1.以GET的形式获取url中的信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E6%8A%8A%E4%BF%A1%E6%81%AF%E5%AD%98%E5%9C%A8cookie%E4%B8%AD"><span class="nav-text">2.把信息存在cookie中</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E6%8A%8A%E4%BF%A1%E6%81%AF%E5%AD%98%E5%9C%A8session%E4%B8%AD"><span class="nav-text">3.把信息存在session中</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP%E8%AF%B7%E6%B1%82API"><span class="nav-text">PHP请求API</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-file-get-contents%E8%AF%B7%E6%B1%82API"><span class="nav-text">1.file_get_contents请求API</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-curl%E8%AF%B7%E6%B1%82API"><span class="nav-text">2.curl请求API</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%8A%E4%BF%A1%E6%81%AF%E5%AD%98%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">把信息存在数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">1.连接数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-text">2.创建数据表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-text">3.插入数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-text">4.读取数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E6%95%B4%E5%90%88%E6%95%B0%E6%8D%AE"><span class="nav-text">5.整合数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="nav-text">6.更新数据</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<a href="/">  <img class="site-author-image" itemprop="image" alt="Autovy"
+      src="/images/2.png">  </a>
+  <p class="site-author-name" itemprop="name">Autovy</p>
+  <div class="site-description" itemprop="description">新时代农民工的数字农田</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Autovy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Autovy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/JohnSmith232" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;JohnSmith232" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-code"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Autovy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">286k</span>
+</div>
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/01/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'RVJRabsBhxWXvhMcG8CH5wbc-gzGzoHsz',
+      appKey     : 'JSGLk7guOagDPMFN9wbASkEh',
+      placeholder: "说点什么吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+  <script src="/js/bloom.js" type="text/javascript"></script>

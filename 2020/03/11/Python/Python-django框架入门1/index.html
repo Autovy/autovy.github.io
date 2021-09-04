@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/gear48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/gear32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="true"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="django学习第一弹，原理，配置及URL规则！！！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python|django框架入门1">
+<meta property="og:url" content="https://autovy.github.io/2020/03/11/Python/Python-django%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A81/index.html">
+<meta property="og:site_name" content="Autovy&#39;s blog">
+<meta property="og:description" content="django学习第一弹，原理，配置及URL规则！！！">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-11T06:30:00.000Z">
+<meta property="article:modified_time" content="2021-09-04T02:36:48.816Z">
+<meta property="article:author" content="Autovy">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="django">
+<meta property="article:tag" content="框架学习">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://autovy.github.io/2020/03/11/Python/Python-django%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Python|django框架入门1 | Autovy's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Autovy's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Autovy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Just For Interest</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2020/03/11/Python/Python-django%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="新时代农民工的数字农田">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python|django框架入门1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020/03/11 14:30:00" itemprop="dateCreated datePublished" datetime="2020-03-11T14:30:00+08:00">2020/03/11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/03/11/Python/Python-django%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A81/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/03/11/Python/Python-django%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A81/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.5k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>django学习第一弹，原理，配置及URL规则！！！</p>
+<span id="more"></span>
+
+<h3 id="Django建站基础"><a href="#Django建站基础" class="headerlink" title="Django建站基础"></a>Django建站基础</h3><h4 id="网站组成"><a href="#网站组成" class="headerlink" title="网站组成"></a>网站组成</h4><p>一个完整的网站大概包含域名、网站应用和服务器</p>
+<p><strong>域名：</strong>域名可理解为网站的链接，用于标识一个或多个IP地址（门牌号）</p>
+<p><strong>网站应用：</strong>网站应用是指这个网站有哪些页面，这些页面有什么功能并且如何实现这些功能（房子内部装饰）</p>
+<p><strong>服务器：</strong>服务器是连接到互联网的计算机算机，用于网站应用的部署和上线</p>
+<p><strong>虚拟主机：</strong>虚拟主机是在网络服务器上划分出一定的磁盘空间供用户放置站占和应用组件，提供必要的站点功能、数据存放和传输功能（供租用的房子）</p>
+<h4 id="网站运行原理"><a href="#网站运行原理" class="headerlink" title="网站运行原理"></a>网站运行原理</h4><p><strong>客户端:</strong>在计算机上运行并连接到互联网的应用程序，简称浏览器</p>
+<p><strong>服务器:</strong>能连接到互联网且具有IP地址的计算机，服务器主要接收和处理用户的请求信息。</p>
+<p>用户在客户端操作网页时，实质是向网站发送一个HTTP请求，网站的服务器接收到请求后今步行相应的处理，最后将处理结果返回到客户端并生成相应的网页信息</p>
+<p><strong>IP地址：</strong>互联网上的每台计算机都有一个IP地址，用于识别和通信，即为逻辑地址。在定位设备中则转换为MAC地址，即物理地址</p>
+<p><strong>DNS:</strong>域名系统，用于跟踪计算机的域名及共在互联网上相应的IP地址</p>
+<p><strong>TCP/IP:</strong>传输控制协议/互联网协议，是广泛使用的通信协议</p>
+<p><strong>HTTP:</strong>超文本传输协议，是浏览器和服务器通过互联网进行通信的协议</p>
+<p>了解了网站运行的原理后，感觉豁然开朗呀！多看一些理论也是非常有用的</p>
+<h4 id="走进Django"><a href="#走进Django" class="headerlink" title="走进Django"></a>走进Django</h4><p>Django采用了MTV的框架模式，即模型( Model)、模板(Template )和视图(Views)，三者之间各自负责不同的职责。这些也是学习的重点板块</p>
+<p>Django的主要目的是简便、快速地开发数据库驱动的网站，有许多功能强大的第三方插件，强调代码复用性——so，快速开发和DRY ( Do Not Repeat Yourself)是Django的处事原则</p>
+<p><strong>Django有什么：</strong></p>
+<table>
+<thead>
+<tr>
+<th>组成</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>对象关系映射</td>
+<td>将模型与关系数据库连接起来</td>
+</tr>
+<tr>
+<td>URL设计</td>
+<td>开发者可以设计任意的URL 网站地址</td>
+</tr>
+<tr>
+<td>模板系统</td>
+<td>模板之间具有可继承性</td>
+</tr>
+<tr>
+<td>Cache系统</td>
+<td>完善的缓存系统，可支持多种缓存方式</td>
+</tr>
+<tr>
+<td>用户管理系统</td>
+<td>提供用户认证、权限设置和用户组功能</td>
+</tr>
+<tr>
+<td>admin管理系统</td>
+<td>内置admin管理系统，系统扩展性强</td>
+</tr>
+</tbody></table>
+<p>感觉在为Django打广告（尴尬……）</p>
+<h4 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h4><h5 id="1-创建项目主体"><a href="#1-创建项目主体" class="headerlink" title="1.创建项目主体"></a>1.创建项目主体</h5><p>在目标文件通过cmd输入该命令，即可创建一个名叫“MyDjang”的主文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject MyDjang</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-创建项目应用"><a href="#2-创建项目应用" class="headerlink" title="2.创建项目应用"></a>2.创建项目应用</h5><p>项目应用简称为App,相当于网站的功能。每个App代表网站的一个或多个网页</p>
+<p>在新建项目主体下输入命令：分别创建了index和user两个网页</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python manage.Py startapp</span><br><span class="line">index</span><br><span class="line"></span><br><span class="line">python manage.Py startapp user</span><br></pre></td></tr></table></figure>
+
+
+
+<p>对各个文件的功能的解释</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>manage.py</td>
+<td>命令行工具</td>
+</tr>
+<tr>
+<td><em>init</em>.py</td>
+<td>初始化文件，不需要修改</td>
+</tr>
+<tr>
+<td>settings.py</td>
+<td>项目的配置文件，经常要修改</td>
+</tr>
+<tr>
+<td>urls.py</td>
+<td>项目的URL设置，网站的地址信息</td>
+</tr>
+<tr>
+<td>wsgi.py</td>
+<td>Python应用与Web服务器之间的接口，用于Django项目在服务器上的部署和上线，一般不需要修改</td>
+</tr>
+<tr>
+<td>admin.py</td>
+<td>后台管理系统</td>
+</tr>
+<tr>
+<td>apps.py</td>
+<td>当前应用的配置，无需修改</td>
+</tr>
+<tr>
+<td>mdoels.py</td>
+<td>实现数据库和表单的地方</td>
+</tr>
+<tr>
+<td>views.py</td>
+<td>视图，生成页面处理信息，是django主要写代码的地方</td>
+</tr>
+</tbody></table>
+<h5 id="3-启动项目"><a href="#3-启动项目" class="headerlink" title="3.启动项目"></a>3.启动项目</h5><p>在项目下输入命令行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h5 id="4-PyCharm"><a href="#4-PyCharm" class="headerlink" title="4.PyCharm"></a>4.PyCharm</h5><p>另外也可以在PyCharm（要钱的开发者版）搭建开发环境，它会自动生成一些重要的文件夹。</p>
+<p>用社区版的PyCharm则需要用上述的命令行操作，也要自己添加重要文件如：templates（存放html文件）</p>
+<h3 id="Django配置信息"><a href="#Django配置信息" class="headerlink" title="Django配置信息"></a>Django配置信息</h3><p>配置信息存放在setting.py，在此处修改相关配置信息</p>
+<h4 id="基本配置信息"><a href="#基本配置信息" class="headerlink" title="基本配置信息"></a>基本配置信息</h4><h5 id="1-调试模式"><a href="#1-调试模式" class="headerlink" title="1.调试模式"></a>1.调试模式</h5><p>开发阶段时是True，上线部署时一定要改成False，否则会泄露信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#调试模式</span></span><br><span class="line">DEBUG = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-App列表"><a href="#2-App列表" class="headerlink" title="2.App列表"></a>2.App列表</h5><p>把自己创建的App添加到App列表 ,否则这些app是无法被运行的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">&#x27;django.contrib.admin&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.auth&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.contenttypes&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.sessions&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.messages&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.staticfiles&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;index&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;user&#x27;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h4><p>存放网页的css和js，图片音频等</p>
+<p>存放位置，在setting.py中设置，此处设置的是在App目录下的static文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Static files (CSS, JavaScript, Images)</span></span><br><span class="line"><span class="comment"># https://docs.djangoproject.com/en/3.0/howto/static-files/</span></span><br><span class="line"></span><br><span class="line">STATIC_URL = <span class="string">&#x27;/static/&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在app文件下新建static文件来存放js和css文件</p>
+<h4 id="模板路径"><a href="#模板路径" class="headerlink" title="模板路径"></a>模板路径</h4><p>模板在web开发中是指一种特殊的HTML文档，其中嵌入了一些可以被python识别的指令。</p>
+<p>模板配置信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">TEMPLATES = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&#x27;BACKEND&#x27;</span>: <span class="string">&#x27;django.template.backends.django.DjangoTemplates&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;DIRS&#x27;</span>: [], <span class="comment">#此处可以配置模板路径，留空则默认在templates文件下存放</span></span><br><span class="line">        <span class="string">&#x27;APP_DIRS&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line">        <span class="string">&#x27;OPTIONS&#x27;</span>: &#123;</span><br><span class="line">            <span class="string">&#x27;context_processors&#x27;</span>: [</span><br><span class="line">                <span class="string">&#x27;django.template.context_processors.debug&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;django.template.context_processors.request&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;django.contrib.auth.context_processors.auth&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;django.contrib.messages.context_processors.messages&#x27;</span>,</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>templates文件可放于根目录下（共用模板文件）和app文件下</p>
+<p>配置模板代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;DIRS&#x27;</span>: [os.path.join(BASE_DIR, <span class="string">&#x27;templates&#x27;</span>),</span><br><span class="line"><span class="comment">#配置存放于根目录下的templates                    os.path.join(BASE_DIR, &#x27;index/templates&#x27;)],</span></span><br><span class="line"><span class="comment">#配置存放于app下的templates</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h4><p>django有四种数据库引擎</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;django.db.backends.postgresql&#x27;</span></span><br><span class="line"><span class="string">&#x27;django.db.backends.mysql&#x27;</span></span><br><span class="line"><span class="string">&#x27;django.db.backends.sqlite3&#x27;</span></span><br><span class="line"><span class="string">&#x27;django.db.backends.oracle&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>项目默认使用轻型数据库——Sqlite3，其常用于嵌入式开发，其配置信息如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.sqlite3&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: os.path.join(BASE_DIR, <span class="string">&#x27;db.sqlite3&#x27;</span>),</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>但是比较常用的是MySQL数据库，配置连接的数据库为MySQL数据库</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line"><span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line"><span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django . db.backends .mysql&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;django_db&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;USER&#x27;</span> : <span class="string">&#x27; root&#x27;</span> ,</span><br><span class="line"><span class="string">&#x27;PASSWORD&#x27;</span> : <span class="string">&#x27;1234&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;HOST&#x27;</span> : <span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;PORT&#x27;</span>:<span class="string">&#x27;3306&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此处只连接了MySQL中一个名叫django_db</p>
+<p>的数据库，实际开发中要连接多个数据库</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line"><span class="comment">#第一个数据库</span></span><br><span class="line"><span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line"><span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django . db.backends .mysql&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;django_db&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;USER&#x27;</span> : <span class="string">&#x27; root&#x27;</span> ,</span><br><span class="line"><span class="string">&#x27;PASSWORD&#x27;</span> : <span class="string">&#x27;1234&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;HOST&#x27;</span> : <span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;PORT&#x27;</span>:<span class="string">&#x27;3306&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">#第二个数据库</span></span><br><span class="line"><span class="string">&#x27;MyDjango&#x27;</span>: &#123;</span><br><span class="line"><span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django . db.backends .mysql&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;django_db&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;USER&#x27;</span> : <span class="string">&#x27; root&#x27;</span> ,</span><br><span class="line"><span class="string">&#x27;PASSWORD&#x27;</span> : <span class="string">&#x27;1234&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;HOST&#x27;</span> : <span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;PORT&#x27;</span>:<span class="string">&#x27;3306&#x27;</span>,</span><br><span class="line">&#125;       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际上就是python中的两个字典</p>
+<h4 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h4><p>中间件是处理Django的request和response对象的钩子。</p>
+<p><strong>请求（request）：</strong>如用户在网站点击了某个按钮就会发送请求</p>
+<p><strong>处理( response)：</strong>网页会根据用户的操作返回相关的网页内容，即为响应处理</p>
+<p>而中间件就是处理请求信息的中枢点</p>
+<p>开发者可以自定义中间件，但一般来说，django默认的中间件已满足了大部分需求</p>
+<h3 id="编写URL"><a href="#编写URL" class="headerlink" title="编写URL"></a>编写URL</h3><p>url简单来说就是网址，每个地址代表不同的网页</p>
+<h4 id="URL规则"><a href="#URL规则" class="headerlink" title="URL规则"></a>URL规则</h4><h5 id="1-目录调整"><a href="#1-目录调整" class="headerlink" title="1.目录调整"></a>1.目录调整</h5><p>每一个app都添加独立的静态资源（static文件）和模板文件夹（templates文件），以及urls.py文件。app中的urls.py文件管理属于该app的url，而项目根目录的urls.py统一管理每一个app的urls.py。</p>
+<h5 id="2-运行原理"><a href="#2-运行原理" class="headerlink" title="2.运行原理"></a>2.运行原理</h5><p>程序收到用户请求时，根目录uels.py查找URL属于哪个app，然后在app的urls.py里找到具体urls.py信息</p>
+<h5 id="3-案例"><a href="#3-案例" class="headerlink" title="3.案例"></a>3.案例</h5><p><strong>根目录下的urls.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin        <span class="comment">#导入admin功能模板</span></span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path,include    <span class="comment">#导入URL编写模板</span></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),    <span class="comment">#admin站点管理地址</span></span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>,include(<span class="string">&#x27;index.urls&#x27;</span>)),      <span class="comment">#首页地址</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>URL为空即为网站域名，include是将该URL交给index的urls.py处理</p>
+<p><strong>index的urls.py</strong></p>
+<p>编写URL信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> .<span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>,views.index), <span class="comment">#导入同目录下的views.py文件，并应用其中的index方法</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>views.py的编写</strong></p>
+<p>views.py用于编写视图函数（功能函数），处理URL请求的信息返回网页内容给用户（所以可以和html联系起来）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span> (<span class="params">request</span>) :</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&quot;Hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>（1）index函数内必须设置request代表当前用户的请求对象（包含用户名，请求内容，请求方式）</p>
+<p>（2）视图函数执行完后，必须要用return返回处理结果，否则报错</p>
+<h4 id="带变量的URL"><a href="#带变量的URL" class="headerlink" title="带变量的URL"></a>带变量的URL</h4><p>想要一个URL代表多个不同页面，这时候就要用到带变量的URL了</p>
+<h5 id="1-变量类型"><a href="#1-变量类型" class="headerlink" title="1.变量类型"></a>1.变量类型</h5><table>
+<thead>
+<tr>
+<th align="center">变量类型</th>
+<th align="center">简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">字符类型</td>
+<td align="center">匹配任何非空字符串，默认类型</td>
+</tr>
+<tr>
+<td align="center">整型</td>
+<td align="center">匹配0和正整数。</td>
+</tr>
+<tr>
+<td align="center">slug</td>
+<td align="center">理解为注释、后缀，用作URL解释性字符</td>
+</tr>
+<tr>
+<td align="center">uuid</td>
+<td align="center">匹配一个uid格式的对象</td>
+</tr>
+</tbody></table>
+<h5 id="2-案例"><a href="#2-案例" class="headerlink" title="2.案例"></a>2.案例</h5><p><strong>在index的urls.py中编写</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> .<span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>,views.index),</span><br><span class="line">    <span class="comment">##添加带有字符类型、整型和slug的URL</span></span><br><span class="line">    path(<span class="string">&#x27;&lt;year&gt;/&lt;int:month&gt;/&lt;slug:day&gt; &#x27;</span>,views.mydate)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>URL用符号”&lt;&gt;”设置变量，如上</p>
+<ul>
+<li><year> ：字符类型变量year</year></li>
+<li><a href="int:month">int:month</a> : 整型变量month</li>
+</ul>
+<p><strong>在views.py中编写</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取URL中的参数year，month，day</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mydate</span>(<span class="params">request,year,month,day</span>) :</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="built_in">str</span> (year) +<span class="string">&#x27;/&#x27;</span>+ <span class="built_in">str</span> (month) +<span class="string">&#x27;/&#x27;</span>+ <span class="built_in">str</span> (day) )</span><br></pre></td></tr></table></figure>
+
+<p>URL的变量要与视图函数的函数一一对应（一个空格都要对应）</p>
+<h5 id="3-url中的正则表达式"><a href="#3-url中的正则表达式" class="headerlink" title="3.url中的正则表达式"></a>3.url中的正则表达式</h5><p>正则表达式的作用是对URL的变量进行截取和判断</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path,re_path <span class="comment">#引入re_path功能模板</span></span><br><span class="line"><span class="keyword">from</span> .<span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>,views.index),</span><br><span class="line">    <span class="comment">#添加带有字符类型、整型和slug的URL</span></span><br><span class="line">    re_path(<span class="string">&#x27;(?P&lt;year&gt;[0-9]&#123;4&#125;)/(?P&lt;month&gt;[0-9] &#123;2&#125;)/(?P&lt;day&gt;[0-9]&#123;2&#125;).html&#x27;</span>,views.mydate)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>以(?P<code>&lt;year&gt;</code>[0-9]{4})为例介绍：</p>
+<ul>
+<li>?P是固定格式</li>
+<li><code>&lt;year&gt;</code>为变量的编写规则</li>
+<li>[0-9]{4}为匹配模式，代表变量长度为4，只允许取0~9值</li>
+</ul>
+<h4 id="设置name参数"><a href="#设置name参数" class="headerlink" title="设置name参数"></a>设置name参数</h4><p>实际就是为URL命名，再在html中用<code>&#123;% url 'name' value %&#125;</code>的格式引用，即href属性的链接是动态链接。（name是URL的名字，value是URL中设置的参数）</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2020/03/11/Python/Python-django%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A81/" title="Python|django框架入门1">https://autovy.github.io/2020/03/11/Python/Python-django框架入门1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/django/" rel="tag"><i class="fa fa-tag"></i> django</a>
+              <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 框架学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/04/Python/Python-django%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A82/" rel="next" title="Python|django框架入门2">
+      Python|django框架入门2 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+
+
+
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Django%E5%BB%BA%E7%AB%99%E5%9F%BA%E7%A1%80"><span class="nav-text">Django建站基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E7%BB%84%E6%88%90"><span class="nav-text">网站组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="nav-text">网站运行原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B5%B0%E8%BF%9BDjango"><span class="nav-text">走进Django</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-text">创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E4%B8%BB%E4%BD%93"><span class="nav-text">1.创建项目主体</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%BA%94%E7%94%A8"><span class="nav-text">2.创建项目应用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE"><span class="nav-text">3.启动项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-PyCharm"><span class="nav-text">4.PyCharm</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Django%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-text">Django配置信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-text">基本配置信息</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F"><span class="nav-text">1.调试模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-App%E5%88%97%E8%A1%A8"><span class="nav-text">2.App列表</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90"><span class="nav-text">静态资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E8%B7%AF%E5%BE%84"><span class="nav-text">模板路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE"><span class="nav-text">数据库配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-text">中间件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99URL"><span class="nav-text">编写URL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#URL%E8%A7%84%E5%88%99"><span class="nav-text">URL规则</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E7%9B%AE%E5%BD%95%E8%B0%83%E6%95%B4"><span class="nav-text">1.目录调整</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="nav-text">2.运行原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E6%A1%88%E4%BE%8B"><span class="nav-text">3.案例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%A6%E5%8F%98%E9%87%8F%E7%9A%84URL"><span class="nav-text">带变量的URL</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="nav-text">1.变量类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E6%A1%88%E4%BE%8B"><span class="nav-text">2.案例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-url%E4%B8%AD%E7%9A%84%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-text">3.url中的正则表达式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEname%E5%8F%82%E6%95%B0"><span class="nav-text">设置name参数</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<a href="/">  <img class="site-author-image" itemprop="image" alt="Autovy"
+      src="/images/2.png">  </a>
+  <p class="site-author-name" itemprop="name">Autovy</p>
+  <div class="site-description" itemprop="description">新时代农民工的数字农田</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Autovy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Autovy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/JohnSmith232" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;JohnSmith232" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-code"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Autovy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">286k</span>
+</div>
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/01/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'RVJRabsBhxWXvhMcG8CH5wbc-gzGzoHsz',
+      appKey     : 'JSGLk7guOagDPMFN9wbASkEh',
+      placeholder: "说点什么吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+  <script src="/js/bloom.js" type="text/javascript"></script>

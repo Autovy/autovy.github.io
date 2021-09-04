@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/gear48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/gear32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="true"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="开发工具|matlab查询文档">
+<meta property="og:url" content="https://autovy.github.io/2020/12/20/Tool/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-matlab%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="Autovy&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040959763.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040958630.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040958737.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040958930.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040958852.png">
+<meta property="og:image" content="c:/Users/linghao/AppData/Roaming/Typora/typora-user-images/image-20201214215652329.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040958323.png">
+<meta property="article:published_time" content="2020-12-20T06:30:00.000Z">
+<meta property="article:modified_time" content="2021-09-04T02:00:04.708Z">
+<meta property="article:author" content="Autovy">
+<meta property="article:tag" content="入门教程">
+<meta property="article:tag" content="开发工具">
+<meta property="article:tag" content="matlab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040959763.png">
+
+<link rel="canonical" href="https://autovy.github.io/2020/12/20/Tool/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-matlab%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>开发工具|matlab查询文档 | Autovy's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Autovy's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Autovy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Just For Interest</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2020/12/20/Tool/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-matlab%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="新时代农民工的数字农田">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          开发工具|matlab查询文档
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020/12/20 14:30:00" itemprop="dateCreated datePublished" datetime="2020-12-20T14:30:00+08:00">2020/12/20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/12/20/Tool/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-matlab%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/12/20/Tool/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-matlab%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040959763.png" alt="image-20210904095937186"></p>
+<span id="more"></span>
+
+<h4 id="matlab算数运算"><a href="#matlab算数运算" class="headerlink" title="matlab算数运算"></a>matlab算数运算</h4><p>快速查询：<a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/arithmetic.html?searchHighlight=算术&s_tid=srchtitle">算术运算 - MATLAB &amp; Simulink - MathWorks 中国</a></p>
+<h5 id="1-基本运算"><a href="#1-基本运算" class="headerlink" title="1.基本运算"></a>1.基本运算</h5><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.*</td>
+<td>乘法</td>
+</tr>
+<tr>
+<td>*</td>
+<td>矩阵乘法</td>
+</tr>
+<tr>
+<td>./</td>
+<td>数组右除</td>
+</tr>
+<tr>
+<td>.\</td>
+<td>数组左除</td>
+</tr>
+<tr>
+<td>x = B/A</td>
+<td>对线性方程组 xA = B 求解 x（矩阵适用）</td>
+</tr>
+<tr>
+<td>x=A\B</td>
+<td>对线性方程组 Ax = B 求解 x（矩阵适用）</td>
+</tr>
+<tr>
+<td>b = mod(<a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/ref/mod.html#btvg3sl-1-a"><code>a</code></a>,<a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/ref/mod.html#btvg3sl-1-m"><code>m</code></a>)</td>
+<td>返回 <code>a</code> 除以 <code>m</code> 后的余数，其中 <code>a</code> 是被除数，<code>m</code> 是除数</td>
+</tr>
+</tbody></table>
+<h5 id="2-基本数数学函数"><a href="#2-基本数数学函数" class="headerlink" title="2.基本数数学函数"></a>2.基本数数学函数</h5><p>快速查询：<a target="_blank" rel="noopener" href="https://blog.csdn.net/cc198877/article/details/8106016">Matlab常用数学函数和数学运算符_cc198877的专栏-CSDN博客_matlab数学运算符</a></p>
+<h4 id="matlab数组与矩阵运算"><a href="#matlab数组与矩阵运算" class="headerlink" title="matlab数组与矩阵运算"></a>matlab数组与矩阵运算</h4><p>矩阵运算遵循线性代数的法则。与之不同，数组运算则是执行逐元素运算并支持多维数组</p>
+<p>快速查询：<a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/matlab_prog/array-vs-matrix-operations.html?searchHighlight=矩阵运算&s_tid=srchtitle">数组与矩阵运算 - MATLAB &amp; Simulink - MathWorks 中国</a></p>
+<h5 id="1-矩阵加法"><a href="#1-矩阵加法" class="headerlink" title="1.矩阵加法"></a>1.矩阵加法</h5><p>由于矩阵运算和数组运算在加法和减法的运算上相同，因此没有必要使用字符组合 <code>.+</code> 和 <code>.-</code>。</p>
+<h5 id="2-矩阵数乘"><a href="#2-矩阵数乘" class="headerlink" title="2.矩阵数乘"></a>2.矩阵数乘</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040958630.png" alt="image-20201201103241881"></p>
+<h5 id="3-矩阵乘法"><a href="#3-矩阵乘法" class="headerlink" title="3.矩阵乘法"></a>3.矩阵乘法</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040958737.png" alt="image-20201201103558855"></p>
+<h5 id="4-数组运算"><a href="#4-数组运算" class="headerlink" title="4.数组运算"></a>4.数组运算</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040958930.png" alt="image-20201201103711838"></p>
+<h5 id="5-矩阵运算"><a href="#5-矩阵运算" class="headerlink" title="5.矩阵运算"></a>5.矩阵运算</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040958852.png" alt="image-20201201103757776"></p>
+<h4 id="矩阵简单操作"><a href="#矩阵简单操作" class="headerlink" title="矩阵简单操作"></a>矩阵简单操作</h4><p>快速查询：<a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/matrices-and-arrays.html?searchHighlight=矩阵&s_tid=srchtitle">矩阵和数组 - MATLAB &amp; Simulink - MathWorks 中国</a></p>
+<p>详细总结：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ran_ran/archive/2010/12/11/1903070.html">matlab矩阵的表示和简单操作 - Hello_Word - 博客园 (cnblogs.com)</a></p>
+<h5 id="1-矩阵创建"><a href="#1-矩阵创建" class="headerlink" title="1.矩阵创建"></a>1.矩阵创建</h5><p>（1）直接输入法</p>
+<p>（2）利用MATLAB函数创建矩阵</p>
+<p>​          常用的如下</p>
+<ul>
+<li>ones()函数：产生全为1的矩阵，ones(n)：产生n<em>n维的全1矩阵，ones(m,n)：产生m</em>n维的全1矩阵；</li>
+<li>zeros()函数：产生全为0的矩阵；</li>
+<li>rand()函数：产生在（0，1）区间均匀分布的随机阵；</li>
+<li>eye()函数：产生单位阵；</li>
+<li>randn()函数：产生均值为0，方差为1的标准正态分布随机矩阵。</li>
+</ul>
+<p>（3）利用运算确定范围</p>
+<p>如：产生一个均匀分布在（-5，5）之间的随即矩阵（10×2）</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span> = <span class="title">my</span><span class="params">()</span></span></span><br><span class="line">    A = <span class="number">-5</span> + <span class="number">10</span> * <span class="built_in">rand</span>(<span class="number">10</span>,<span class="number">2</span>);</span><br><span class="line">    A = roundn(A,<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="2-矩阵索引"><a href="#2-矩阵索引" class="headerlink" title="2.矩阵索引"></a>2.矩阵索引</h5><p>（1）索引矩阵中一个元素</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 表示索引A矩阵第i行、第j列的元素</span><br><span class="line">A(<span class="built_in">i</span>,<span class="built_in">j</span>)</span><br></pre></td></tr></table></figure>
+
+<p>（2）遍历一个矩阵中所有元素</p>
+<p>一般用例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">A = <span class="built_in">randn</span>(<span class="number">3</span>,<span class="number">4</span>)     <span class="comment">% 创建3行4列随机矩阵</span></span><br><span class="line">[r,c] = <span class="built_in">size</span>(A)    <span class="comment">% 读取行r、列c</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:r        <span class="comment">% 建立for循环嵌套</span></span><br><span class="line">    <span class="keyword">for</span> k = <span class="number">1</span>:c</span><br><span class="line">        A(<span class="built_in">i</span>,k)     <span class="comment">% 读取矩阵每个位置数据，先行后列</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>find方法（查找非零元素的索引和值）：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># k = find(X) 返回一个包含数组 X 中每个非零元素的线性索引的向量，用length可以统计个数</span><br><span class="line">X = [<span class="number">18</span> <span class="number">3</span> <span class="number">1</span> <span class="number">11</span>; <span class="number">8</span> <span class="number">10</span> <span class="number">11</span> <span class="number">3</span>; <span class="number">9</span> <span class="number">14</span> <span class="number">6</span> <span class="number">1</span>; <span class="number">4</span> <span class="number">3</span> <span class="number">15</span> <span class="number">21</span>]</span><br><span class="line"># 通过find查找矩阵中的所有符合条件的元素，并把其索引组成数组</span><br><span class="line">[row,col] = <span class="built_in">find</span>(X&gt;<span class="number">0</span> &amp; X&lt;<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p>实用案例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 需要用到两个循环来遍历元素</span><br><span class="line">a = [</span><br><span class="line"><span class="number">0</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">-2</span>, <span class="number">8</span>;</span><br><span class="line"><span class="number">3</span>, <span class="number">-4</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">-8</span>;</span><br><span class="line"><span class="number">0</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">-1</span>;</span><br><span class="line"><span class="number">0</span>, <span class="number">0</span>, <span class="number">55</span>, <span class="number">1</span>, <span class="number">-2</span>;</span><br><span class="line">];</span><br><span class="line"># 创建一个空矩阵存储符合条件的元素</span><br><span class="line">b  = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:<span class="number">4</span></span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:<span class="number">5</span></span><br><span class="line">        <span class="keyword">if</span> a(<span class="built_in">i</span>,<span class="built_in">j</span>) &gt; <span class="number">1</span></span><br><span class="line">        # 矩阵添加元素（子矩阵）的方法</span><br><span class="line">            b = [b a(<span class="built_in">i</span>,<span class="built_in">j</span>)];</span><br><span class="line">        <span class="keyword">end</span>    </span><br><span class="line">    <span class="keyword">end</span>    </span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line"><span class="built_in">disp</span>(b);</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-矩阵拆分和组合"><a href="#3-矩阵拆分和组合" class="headerlink" title="3.矩阵拆分和组合"></a>3.矩阵拆分和组合</h5><p>（1）组合（串联）</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 将两个行向量串联起来，形成一个更长的行向量</span><br><span class="line">A = <span class="built_in">ones</span>(<span class="number">1</span>,<span class="number">4</span>);</span><br><span class="line">B = <span class="built_in">zeros</span>(<span class="number">1</span>,<span class="number">4</span>);</span><br><span class="line">C = [A B]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 将 A 和 B 排列为一个矩阵的两行</span><br><span class="line">D = [A;B]</span><br></pre></td></tr></table></figure>
+
+<p>（2）拆分（取出一个子矩阵）</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A(:,j) # 表示取A矩阵的第j列全部元素</span><br><span class="line">A(i,:) # 表示A矩阵第i行的全部元素</span><br><span class="line">A(i:i+m,:) # 表示取A矩阵第i~i+m行的全部元素</span><br><span class="line">A(i:i+m,k:k+m) # 表示取A矩阵第i~i+m行内，并在第k~k+m列中的所有元素</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="4-矩阵的相关计算"><a href="#4-矩阵的相关计算" class="headerlink" title="4.矩阵的相关计算"></a>4.矩阵的相关计算</h5><p>v为矩阵的特征值，d为特征向量</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">0.5</span>; <span class="number">1</span>,<span class="number">1</span>,<span class="number">0.25</span>; <span class="number">0.5</span>,<span class="number">0.25</span>,<span class="number">2</span>;];</span><br><span class="line">[v,d] = eig(a);</span><br><span class="line"><span class="built_in">disp</span>(v);</span><br><span class="line"><span class="built_in">disp</span>(d);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="MATLAB的图形绘制"><a href="#MATLAB的图形绘制" class="headerlink" title="MATLAB的图形绘制"></a>MATLAB的图形绘制</h4><p>快速查询：<a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/learn_matlab/basic-plotting-functions.html#responsive_offcanvas">https://ww2.mathworks.cn/help/matlab/learn_matlab/basic-plotting-functions.html#responsive_offcanvas</a></p>
+<h5 id="一-绘制一般曲线（二维线图）"><a href="#一-绘制一般曲线（二维线图）" class="headerlink" title="一.绘制一般曲线（二维线图）"></a>一.绘制一般曲线（二维线图）</h5><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># x定周期，通过加减表示无意义点</span><br><span class="line">x = [<span class="number">0</span>:<span class="number">0.01</span>:<span class="built_in">pi</span>/<span class="number">2</span><span class="number">-0.01</span>, <span class="built_in">pi</span>/<span class="number">2</span>+<span class="number">0.01</span>:<span class="number">0.01</span>:(<span class="number">3</span>*<span class="built_in">pi</span>/<span class="number">2</span>)<span class="number">-0.01</span>, (<span class="number">3</span>*<span class="built_in">pi</span>/<span class="number">2</span>)+<span class="number">0.01</span>:<span class="number">0.01</span>:<span class="number">2</span>*<span class="built_in">pi</span>];</span><br><span class="line"># 定义y的函数（此处分别为正割和余割）</span><br><span class="line">y1 = <span class="built_in">sec</span>(x);</span><br><span class="line">y2 = <span class="built_in">csc</span>(x);</span><br><span class="line"></span><br><span class="line"># subplot 命令用于在同一窗口中显示多个绘图，此处表示的意思是将窗口划分为2*1（即上下两幅图），并选择第一处</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>)</span><br><span class="line"># 绘制图形，r-表示绘制红色点划线</span><br><span class="line"><span class="built_in">plot</span>(x,y1,<span class="string">&#x27;r-.&#x27;</span>)</span><br><span class="line"># 注意要绘制完图形后，才能加上标注</span><br><span class="line">xlabel(<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;正割公式&#x27;</span>)</span><br><span class="line"></span><br><span class="line"># 选定第二处绘图</span><br><span class="line">subplot(<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line"><span class="built_in">plot</span>(x,y2,<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">xlabel(<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">title(<span class="string">&#x27;余割公式&#x27;</span>)</span><br><span class="line"># axis设置坐标轴范围，x为0-3，y为0-12</span><br><span class="line">axis([<span class="number">0</span> <span class="number">3</span> <span class="number">0</span> <span class="number">12</span>]);</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="二-绘制极坐标曲线"><a href="#二-绘制极坐标曲线" class="headerlink" title="二.绘制极坐标曲线"></a>二.绘制极坐标曲线</h5><p>快速查询：<a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/matlab/ref/polarplot.html#d122e940353">https://ww2.mathworks.cn/help/matlab/ref/polarplot.html#d122e940353</a></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># theta参数为极坐标曲线的角度值，此处表示从0-2pi</span><br><span class="line">theta = <span class="number">0</span>:<span class="number">0.01</span>:<span class="number">2</span>*<span class="built_in">pi</span>;</span><br><span class="line"># input输入数据</span><br><span class="line">a = input(<span class="string">&#x27;a=&#x27;</span>);</span><br><span class="line">b = input(<span class="string">&#x27;b=&#x27;</span>);</span><br><span class="line">n = input(<span class="string">&#x27;n=&#x27;</span>);</span><br><span class="line"># rho参数为半径值，即极坐标曲线的ρ</span><br><span class="line">rho = a*<span class="built_in">sin</span>(b+n*theta);</span><br><span class="line"># 生成曲线图，r设定曲线为红色</span><br><span class="line">polarplot(theta,rho,<span class="string">&#x27;r&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="三-绘制曲面图"><a href="#三-绘制曲面图" class="headerlink" title="三.绘制曲面图"></a>三.绘制曲面图</h5><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># meshgrid(x,y)基于向量 x 和 y 中包含的坐标返回二维网格坐标</span><br><span class="line">[x, y] = <span class="built_in">meshgrid</span>(<span class="number">0</span>: <span class="number">0.1</span>:<span class="number">100</span>);</span><br><span class="line"># 注意在绘图对象函数中，运算一般用点乘，点幂</span><br><span class="line">z = x.^<span class="number">2</span> + y.^<span class="number">2</span> + <span class="built_in">sin</span>(x.*y);</span><br><span class="line"># 绘制等高线</span><br><span class="line">contour(z,<span class="number">2</span>)</span><br><span class="line"># 创建一个三维曲面图</span><br><span class="line">surf(x, y, z)</span><br><span class="line"></span><br><span class="line">[x,y]=<span class="built_in">meshgrid</span>(<span class="number">-4</span>:<span class="number">0.1</span>:<span class="number">4</span>);</span><br><span class="line">z = x.^<span class="number">2</span> + y.^<span class="number">2</span>;</span><br><span class="line"># 创建一个网格图，该网格图为三维曲面</span><br><span class="line">mesh(x, y, z);</span><br><span class="line"># 设置当前颜色图（有一些预设的方案提供）</span><br><span class="line">colormap(hot)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="matlab程序设计"><a href="#matlab程序设计" class="headerlink" title="matlab程序设计"></a>matlab程序设计</h4><h5 id="1-if-else"><a href="#1-if-else" class="headerlink" title="1.if-else"></a>1.if-else</h5><p>编写求解方程根的函数</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">a = input(<span class="string">&#x27;a值：&#x27;</span>);</span><br><span class="line">b = input(<span class="string">&#x27;b值：&#x27;</span>);</span><br><span class="line">c = input(<span class="string">&#x27;c值：&#x27;</span>);</span><br><span class="line">t = b^<span class="number">2</span> - <span class="number">4</span>*a*c;</span><br><span class="line"></span><br><span class="line"># 通过条件判断分流</span><br><span class="line"># 每个if要用一个end结束</span><br><span class="line"><span class="keyword">if</span> a==<span class="number">0</span> &amp;&amp; b==<span class="number">0</span></span><br><span class="line">       <span class="built_in">disp</span>(<span class="string">&#x27;为恒不等式&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">elseif</span> a==<span class="number">0</span></span><br><span class="line">       x = -c/b;</span><br><span class="line">       <span class="built_in">disp</span>(x)    </span><br><span class="line"><span class="keyword">else</span>        </span><br><span class="line">    <span class="keyword">if</span> t&lt;<span class="number">0</span></span><br><span class="line">        <span class="built_in">disp</span>(<span class="string">&#x27;该方程无解&#x27;</span>)</span><br><span class="line">    <span class="keyword">elseif</span> t==<span class="number">0</span></span><br><span class="line">        x = -b/<span class="number">2</span>*a;</span><br><span class="line">        fprintf(<span class="string">&#x27;x1=x2=%d&#x27;</span>,x);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        x1 = (-b+<span class="built_in">sqrt</span>(t))/<span class="number">2</span>*a;</span><br><span class="line">        x2 = (-b-<span class="built_in">sqrt</span>(t))/<span class="number">2</span>*a;</span><br><span class="line">        fprintf(<span class="string">&#x27;x1=%d\nx2=%d&#x27;</span>,x1,x2);</span><br><span class="line">    <span class="keyword">end</span> </span><br><span class="line">       </span><br><span class="line"><span class="keyword">end</span> </span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-switch"><a href="#2-switch" class="headerlink" title="2.switch"></a>2.switch</h5><p>输入一个百分制成绩，要求输出成绩等级</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 取整分级</span></span><br><span class="line">sorce = input(<span class="string">&#x27;请输入你的成绩：&#x27;</span>);</span><br><span class="line">level = <span class="built_in">floor</span>(sorce/<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> sorce&gt;<span class="number">100</span> || sorce &lt;<span class="number">0</span></span><br><span class="line">    <span class="built_in">disp</span>(<span class="string">&#x27;error&#x27;</span>)</span><br><span class="line"><span class="keyword">end</span>    </span><br><span class="line"></span><br><span class="line"># matlab的switch不用break结束</span><br><span class="line"><span class="keyword">switch</span> level</span><br><span class="line">    <span class="keyword">case</span> <span class="number">10</span></span><br><span class="line">        <span class="built_in">disp</span>(<span class="string">&#x27;A+&#x27;</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="number">9</span></span><br><span class="line">        <span class="built_in">disp</span>(<span class="string">&#x27;A&#x27;</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="number">8</span></span><br><span class="line">        <span class="built_in">disp</span>(<span class="string">&#x27;B&#x27;</span>)    </span><br><span class="line">    <span class="keyword">case</span> <span class="number">7</span></span><br><span class="line">        <span class="built_in">disp</span>(<span class="string">&#x27;C&#x27;</span>) </span><br><span class="line">    <span class="keyword">case</span> <span class="number">6</span></span><br><span class="line">        <span class="built_in">disp</span>(<span class="string">&#x27;D&#x27;</span>)</span><br><span class="line">    <span class="keyword">otherwise</span></span><br><span class="line">        <span class="built_in">disp</span>(<span class="string">&#x27;E&#x27;</span>)</span><br><span class="line"><span class="keyword">end</span>        </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-for循环"><a href="#3-for循环" class="headerlink" title="3.for循环"></a>3.for循环</h5><p>利用for循环语句编写计算n!的函数程序</p>
+<p>累加法时定义初始数为0</p>
+<p>累积法时定义初始数为1</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span><span class="params">[res]</span> = <span class="title">work43</span><span class="params">(n)</span></span></span><br><span class="line">    res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> n&lt;<span class="number">0</span></span><br><span class="line">        res=<span class="string">&#x27;error&#x27;</span>;</span><br><span class="line">    <span class="keyword">elseif</span> n == <span class="number">0</span></span><br><span class="line">        res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:n</span><br><span class="line">        res = res*<span class="built_in">i</span>; </span><br><span class="line">        <span class="keyword">end</span>   </span><br><span class="line">    <span class="keyword">end</span>    </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="4-构建Fibonacci数组"><a href="#4-构建Fibonacci数组" class="headerlink" title="4.构建Fibonacci数组"></a>4.构建Fibonacci数组</h5><p>matlab的数组可以自动拓宽</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a(<span class="number">1</span>) = <span class="number">1</span>;</span><br><span class="line">a(<span class="number">2</span>) = <span class="number">1</span>;</span><br><span class="line">k = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> a(k) &lt; <span class="number">10000</span></span><br><span class="line">    a(k+<span class="number">2</span>) = a(k) + a(k+<span class="number">1</span>);</span><br><span class="line">    k = k + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">disp</span>(a(k))</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="SIMULINK仿真"><a href="#SIMULINK仿真" class="headerlink" title="SIMULINK仿真"></a>SIMULINK仿真</h4><p>快速入门：<a target="_blank" rel="noopener" href="https://ww2.mathworks.cn/help/simulink/getting-started-with-simulink.html">https://ww2.mathworks.cn/help/simulink/getting-started-with-simulink.html</a></p>
+<p>快速查询常用模块：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/dingdangsunny/p/12235689.html#_label1_2">https://www.cnblogs.com/dingdangsunny/p/12235689.html#_label1_2</a></p>
+<p>一.simulink表示微分方程</p>
+<p><img src="C:/Users/linghao/AppData/Roaming/Typora/typora-user-images/image-20201214215652329.png" alt="image-20201214215652329"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040958323.png" alt="image-20201214221002667"></p>
+<ul>
+<li>Step：跃迁信号</li>
+<li>Gain：支持标量、向量或矩阵形式的增益。（可以看作是高级的乘法）</li>
+<li>Add：加法模块（sum模块也很常用）</li>
+<li>Integrator：积分模块</li>
+<li>Scope：示波器</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2020/12/20/Tool/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-matlab%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3/" title="开发工具|matlab查询文档">https://autovy.github.io/2020/12/20/Tool/开发工具-matlab查询文档/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 入门教程</a>
+              <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag"><i class="fa fa-tag"></i> 开发工具</a>
+              <a href="/tags/matlab/" rel="tag"><i class="fa fa-tag"></i> matlab</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/12/PHP/PHP-PHP%E8%AE%BA%E5%9D%9B%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/" rel="prev" title="PHP|基于PHP开发论坛">
+      <i class="fa fa-chevron-left"></i> PHP|基于PHP开发论坛
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/31/Java/Java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="next" title="Java|面向对象学习">
+      Java|面向对象学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+
+
+
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#matlab%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97"><span class="nav-text">matlab算数运算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97"><span class="nav-text">1.基本运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0"><span class="nav-text">2.基本数数学函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#matlab%E6%95%B0%E7%BB%84%E4%B8%8E%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97"><span class="nav-text">matlab数组与矩阵运算</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E7%9F%A9%E9%98%B5%E5%8A%A0%E6%B3%95"><span class="nav-text">1.矩阵加法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E7%9F%A9%E9%98%B5%E6%95%B0%E4%B9%98"><span class="nav-text">2.矩阵数乘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95"><span class="nav-text">3.矩阵乘法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E6%95%B0%E7%BB%84%E8%BF%90%E7%AE%97"><span class="nav-text">4.数组运算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97"><span class="nav-text">5.矩阵运算</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9C"><span class="nav-text">矩阵简单操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E7%9F%A9%E9%98%B5%E5%88%9B%E5%BB%BA"><span class="nav-text">1.矩阵创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E7%9F%A9%E9%98%B5%E7%B4%A2%E5%BC%95"><span class="nav-text">2.矩阵索引</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E7%9F%A9%E9%98%B5%E6%8B%86%E5%88%86%E5%92%8C%E7%BB%84%E5%90%88"><span class="nav-text">3.矩阵拆分和组合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E7%9F%A9%E9%98%B5%E7%9A%84%E7%9B%B8%E5%85%B3%E8%AE%A1%E7%AE%97"><span class="nav-text">4.矩阵的相关计算</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MATLAB%E7%9A%84%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6"><span class="nav-text">MATLAB的图形绘制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80-%E7%BB%98%E5%88%B6%E4%B8%80%E8%88%AC%E6%9B%B2%E7%BA%BF%EF%BC%88%E4%BA%8C%E7%BB%B4%E7%BA%BF%E5%9B%BE%EF%BC%89"><span class="nav-text">一.绘制一般曲线（二维线图）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C-%E7%BB%98%E5%88%B6%E6%9E%81%E5%9D%90%E6%A0%87%E6%9B%B2%E7%BA%BF"><span class="nav-text">二.绘制极坐标曲线</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%89-%E7%BB%98%E5%88%B6%E6%9B%B2%E9%9D%A2%E5%9B%BE"><span class="nav-text">三.绘制曲面图</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#matlab%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="nav-text">matlab程序设计</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-if-else"><span class="nav-text">1.if-else</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-switch"><span class="nav-text">2.switch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-for%E5%BE%AA%E7%8E%AF"><span class="nav-text">3.for循环</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E6%9E%84%E5%BB%BAFibonacci%E6%95%B0%E7%BB%84"><span class="nav-text">4.构建Fibonacci数组</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SIMULINK%E4%BB%BF%E7%9C%9F"><span class="nav-text">SIMULINK仿真</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<a href="/">  <img class="site-author-image" itemprop="image" alt="Autovy"
+      src="/images/2.png">  </a>
+  <p class="site-author-name" itemprop="name">Autovy</p>
+  <div class="site-description" itemprop="description">新时代农民工的数字农田</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Autovy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Autovy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/JohnSmith232" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;JohnSmith232" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-code"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Autovy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">286k</span>
+</div>
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/01/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'RVJRabsBhxWXvhMcG8CH5wbc-gzGzoHsz',
+      appKey     : 'JSGLk7guOagDPMFN9wbASkEh',
+      placeholder: "说点什么吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+  <script src="/js/bloom.js" type="text/javascript"></script>

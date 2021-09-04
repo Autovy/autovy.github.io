@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/gear48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/gear32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="true"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="PHP|Thinkphp学习">
+<meta property="og:url" content="https://autovy.github.io/2021/03/28/PHP/PHP-thinkphp5/index.html">
+<meta property="og:site_name" content="Autovy&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041014601.jpeg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041015470.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041015869.png">
+<meta property="article:published_time" content="2021-03-28T06:30:00.000Z">
+<meta property="article:modified_time" content="2021-09-04T02:15:25.780Z">
+<meta property="article:author" content="Autovy">
+<meta property="article:tag" content="开发实战">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="框架学习">
+<meta property="article:tag" content="thinkphp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041014601.jpeg">
+
+<link rel="canonical" href="https://autovy.github.io/2021/03/28/PHP/PHP-thinkphp5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>PHP|Thinkphp学习 | Autovy's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Autovy's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Autovy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Just For Interest</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/03/28/PHP/PHP-thinkphp5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="新时代农民工的数字农田">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP|Thinkphp学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021/03/28 14:30:00" itemprop="dateCreated datePublished" datetime="2021-03-28T14:30:00+08:00">2021/03/28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/03/28/PHP/PHP-thinkphp5/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/28/PHP/PHP-thinkphp5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>27k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041014601.jpeg" alt="img"></p>
+<span id="more"></span>
+
+<h2 id="URL解析模式"><a href="#URL解析模式" class="headerlink" title="URL解析模式"></a>URL解析模式</h2><h3 id="1-URL解析"><a href="#1-URL解析" class="headerlink" title="1.URL解析"></a>1.URL解析</h3><p>（1）分析</p>
+<p>tp应用入口：<code>https://severName/index.php/模块/控制器/操作/参数/值/</code></p>
+<ul>
+<li><strong>serverName：</strong>在本地为<code>localhost/tp5/public/</code>，部署后映射为域名</li>
+<li><strong>模块：</strong>位于根目录下的application下，默认下有一个index目录，它就是一个模块   </li>
+<li><strong>控制器：</strong>在上面index目录（index模块）下有一个controller控制器目录，其中的Index.php就是一个控制器</li>
+<li><strong>操作：</strong>在控制器的类中的方法就是操作如上面Index.php中的两个方法：<code>index()，hello()</code></li>
+<li><strong>参数 值</strong>：是对应上面操作的，如果操作有参数，则可以通过url传参</li>
+</ul>
+<p>（2）实例</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件位置：/tp5/appliction/test/controller/Abc.php</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 命名空间，索引到test模块的控制器文件</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">test</span>\<span class="title">controller</span>;</span><br><span class="line"><span class="comment">// 类要与文件名相同，且首字母要大写</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Abc</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"><span class="variable">$name</span>=<span class="string">&#x27;world&#x27;</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;hello&#x27;</span>.<span class="variable">$name</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>访问案例：<a target="_blank" rel="noopener" href="http://localhost/tp5/public/index.php/test/abc/hello/">http://localhost/tp5/public/index.php/test/abc/hello/</a></p>
+</li>
+<li><p>控制器名的首字母要大写如：Index，Abc。<strong>注意</strong>：如果控制器名初始化时首字母没有大写，之后改过来也无法生效了</p>
+</li>
+<li><p>如果方法的参数为$name，则url操作后面一定要加上<code>/参数/值/</code></p>
+</li>
+<li><p>注意url的最后要有/</p>
+</li>
+</ul>
+<p>（3）关于环境</p>
+<p>修改apache配置文件，开启伪静态，即可将index.php省略</p>
+<h2 id="模块设计"><a href="#模块设计" class="headerlink" title="模块设计"></a>模块设计</h2><h3 id="1-目录结构"><a href="#1-目录结构" class="headerlink" title="1.目录结构"></a>1.目录结构</h3><p>tp5默认为多模块结构</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041015470.png" alt="image-20210330203720332"></p>
+<ul>
+<li><p>模块下的类库文件命名空间统一为：app\模块名：<code>namespace app\test\controller\Index</code>;</p>
+</li>
+<li><p>当只有一个模块时，可以绑定这个模块:从而省略<strong>模块名</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件位置：tp5/public/index.php</span></span><br><span class="line">Container::get(<span class="string">&#x27;app&#x27;</span>)-&gt;bind(<span class="string">&#x27;test&#x27;</span>)-&gt;run()-&gt;send();</span><br></pre></td></tr></table></figure>
+
+<p>访问链接为：<a target="_blank" rel="noopener" href="http://localhost/tp5/public/index.php/abc/hello">http://localhost/tp5/public/index.php/abc/hello</a></p>
+</li>
+</ul>
+<ul>
+<li><p>当只有一个模块，一个控制器时，可以绑定模块和控制器，从而省略<strong>模块/控制器</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件位置：tp5/public/index.php</span></span><br><span class="line"></span><br><span class="line">Container::get(<span class="string">&#x27;app&#x27;</span>)-&gt;bind(<span class="string">&#x27;test/abc&#x27;</span>)-&gt;run()-&gt;send();</span><br></pre></td></tr></table></figure>
+
+<p>访问链接为：<a target="_blank" rel="noopener" href="http://localhost/tp5/public/index.php/hello">http://localhost/tp5/public/index.php/hello</a></p>
+</li>
+</ul>
+<h3 id="2-空模块"><a href="#2-空模块" class="headerlink" title="2.空模块"></a>2.空模块</h3><p>通过环境变量设置空模块，将不存在的目录统一指向指定目录</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 文件位置：tp5/config/app.php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认的空模块名</span></span><br><span class="line"><span class="string">&#x27;empty_module&#x27;</span>           =&gt; <span class="string">&#x27;404&#x27;</span>,</span><br></pre></td></tr></table></figure>
+
+<p>空模块只有在多模块开启，没有绑定模块情况下生效</p>
+<h3 id="3-环境变量"><a href="#3-环境变量" class="headerlink" title="3.环境变量"></a>3.环境变量</h3><p>tp5提供了一个类库Env来获取环境变量，如：<code>return env(&#39;app_path&#39;)</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041015869.png" alt="image-20210330210525103"></p>
+<h2 id="控制器定义"><a href="#控制器定义" class="headerlink" title="控制器定义"></a>控制器定义</h2><h3 id="1-控制器要点"><a href="#1-控制器要点" class="headerlink" title="1.控制器要点"></a>1.控制器要点</h3><ul>
+<li>可以继承控制器基类，方便使用功能，但不是必要的</li>
+<li>如果控制器名有两个大写字母，如：class HelloWorld用<code>public/hello_world</code>这样的方式访问</li>
+<li>如果想改变根命名app，可以在根目录创建.env文件写上键值对，如：<code>app_namespace=application</code></li>
+</ul>
+<h3 id="2-渲染方式"><a href="#2-渲染方式" class="headerlink" title="2.渲染方式"></a>2.渲染方式</h3><p>（1）初始化渲染</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化渲染内容（无论有没有调用都会渲染出来）,必须是继承了Controller</span></span><br><span class="line"><span class="comment">// 初始化中不能返回，只能用echo来输出</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">initialize</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">parent</span>::initialize(); <span class="comment">// <span class="doctag">TODO:</span> Change the autogenerated stub</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;&lt;img src=&quot;https://www.baidu.com/img/flexible/logo/pc/result.png&quot;  /&gt;&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）输出数组</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出数组</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">arr</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 建立数组</span></span><br><span class="line">    <span class="variable">$data</span> = <span class="keyword">array</span>(<span class="string">&#x27;a&#x27;</span>=&gt;<span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>=&gt;<span class="number">2</span>, <span class="string">&#x27;c&#x27;</span>=&gt;<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 输出数组，不能直接返回数组，需要转换为json格式</span></span><br><span class="line">    <span class="keyword">return</span> json(<span class="variable">$data</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（3）输出html模板</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模板输出，输出的是该模块文件下视图文件中的html文件</span></span><br><span class="line"><span class="comment">// 控制器名和视图目录下放html文件的对应</span></span><br><span class="line"><span class="comment">// 方法名和html文件名对应</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">demo</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> view();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="控制器操作"><a href="#控制器操作" class="headerlink" title="控制器操作"></a>控制器操作</h2><h3 id="1-前置操作"><a href="#1-前置操作" class="headerlink" title="1.前置操作"></a>1.前置操作</h3><p>可以灵活控制的页面初始化方法，需要继承至Controller类</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">test</span>\<span class="title">controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">think</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="comment">// 前置操作，即页面初始化，可以灵活控制是否渲染指定的初始化方法</span></span><br><span class="line"><span class="comment">// ---------------------------------------------------</span></span><br><span class="line"><span class="comment">// 需要继承controller类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Before</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置$beforeActionList属性绑定前置方法</span></span><br><span class="line"><span class="comment">//-------------------------------------------</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$beforeActionList</span>=[</span><br><span class="line">        <span class="string">&#x27;first&#x27;</span>,                            <span class="comment">// 允许该控制器下所有的方法触发frist前置方法</span></span><br><span class="line">        <span class="string">&#x27;second&#x27;</span> =&gt; [<span class="string">&#x27;except&#x27;</span>=&gt;<span class="string">&#x27;one&#x27;</span>],      <span class="comment">// 除了one这个方法，其他方法都允许触发</span></span><br><span class="line">        <span class="string">&#x27;third&#x27;</span> =&gt; [<span class="string">&#x27;only&#x27;</span> =&gt; <span class="string">&#x27;one, two&#x27;</span>]   <span class="comment">// 仅允许one，two两个方法触发</span></span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建对应的前置方法（初始化方法）,这些方法是无法直接访问的</span></span><br><span class="line"><span class="comment">// ------------------------------------------------</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">first</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;frist&lt;br/&gt;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">second</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;second&lt;br/&gt;&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">third</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;third&lt;br/&gt;&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建可调用的方法（前置方法作用对象）</span></span><br><span class="line"><span class="comment">// --------------------------------------------------</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">one</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">two</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-跳转和重定向"><a href="#2-跳转和重定向" class="headerlink" title="2.跳转和重定向"></a>2.跳转和重定向</h3><p>Controller类提供了两个跳转方法：success(msg,url)和error(msg)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">test</span>\<span class="title">controller</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">think</span>\<span class="title">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Url</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 跳转条件设置</span></span><br><span class="line"><span class="comment">// ------------------------------</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$flag</span> = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 跳转触发</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;flag)&#123;</span><br><span class="line">            <span class="comment">// 不指定url，默认返回上一层</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;success(<span class="string">&#x27;访问成功&#x27;</span>, <span class="string">&#x27;../test/before/one&#x27;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 自动后退到上一页</span></span><br><span class="line">            <span class="keyword">$this</span>-&gt;error(<span class="string">&#x27;访问失败了&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>成功和失败都有一个固定的页面模板：’thinkphp/tpl/dispatch_jump.tpl’；</li>
+<li>在config/app.php配置文件中可修改跳转页面对应的模板</li>
+</ul>
+<h3 id="3-空方法和空控制器"><a href="#3-空方法和空控制器" class="headerlink" title="3.空方法和空控制器"></a>3.空方法和空控制器</h3><p>（1）空方法    </p>
+<p>在控制器中使用_empty方法可以自动拦截不存在的方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 空链接（空方法） 拦截</span></span><br><span class="line"><span class="comment">// ------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">_empty</span>(<span class="params"><span class="variable">$name</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$string</span> = <span class="string">&#x27;此方法不存在:&#x27;</span>.<span class="variable">$name</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;error(<span class="variable">$string</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）空控制器</p>
+<p>在控制器文件下创建Error.php控制器，则可以处理控制器不存在的异常</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">test</span>\<span class="title">controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 控制器不存在异常处理</span></span><br><span class="line"><span class="comment">// ----------------------------</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">think</span>\<span class="title">Request</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Error</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params">Request <span class="variable">$request</span></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;当前控制器不存在&#x27;</span>.<span class="variable">$request</span>-&gt;controller();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="数据库与模型"><a href="#数据库与模型" class="headerlink" title="数据库与模型"></a>数据库与模型</h2><h3 id="1-连接数据库"><a href="#1-连接数据库" class="headerlink" title="1.连接数据库"></a>1.连接数据库</h3><ul>
+<li><p>thinkphp 采用内置抽象层将不同的数据库进行封装处理</p>
+</li>
+<li><p>数据抽象层基于PDO模式，无需针对不同的数据库编写相应的代码</p>
+</li>
+<li><p>数据库的连接是在config的database.php配置文件下修改连接信息</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据库类型</span></span><br><span class="line"><span class="string">&#x27;type&#x27;</span>            =&gt; <span class="string">&#x27;mysql&#x27;</span>,</span><br><span class="line"><span class="comment">// 服务器地址</span></span><br><span class="line"><span class="string">&#x27;hostname&#x27;</span>        =&gt; <span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line"><span class="comment">// 数据库名</span></span><br><span class="line"><span class="string">&#x27;database&#x27;</span>        =&gt; <span class="string">&#x27;tp_data&#x27;</span>,</span><br><span class="line"><span class="comment">// 用户名</span></span><br><span class="line"><span class="string">&#x27;username&#x27;</span>        =&gt; <span class="string">&#x27;test&#x27;</span>,</span><br><span class="line"><span class="comment">// 密码</span></span><br><span class="line"><span class="string">&#x27;password&#x27;</span>        =&gt; <span class="string">&#x27;123456&#x27;</span>,</span><br><span class="line"><span class="comment">// 端口</span></span><br><span class="line"><span class="string">&#x27;hostport&#x27;</span>        =&gt; <span class="string">&#x27;&#x27;</span>,</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="2-控制器访问"><a href="#2-控制器访问" class="headerlink" title="2.控制器访问"></a>2.控制器访问</h3><p>在控制器中直接调用db类的方法查询数据库</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 按表名查找数据库，必须加上前缀</span></span><br><span class="line"><span class="comment">// ------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getone</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$data</span> = Db::table(<span class="string">&#x27;tp_user&#x27;</span>)-&gt;select();</span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$data</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  自动加上索引内的前缀</span></span><br><span class="line"><span class="comment">// ----------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">gettwo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$data</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;select();</span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$data</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-模型访问"><a href="#3-模型访问" class="headerlink" title="3.模型访问"></a>3.模型访问</h3><p>Model就是用来处理和配置数据库的相关信息</p>
+<p>在模块中创建model文件夹，然后创建与表名对应的类（首字母大写）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">data</span>\<span class="title">model</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模型名类名与数据库的表名保持一致</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">think</span>\<span class="title">console</span>\<span class="title">command</span>\<span class="title">Make</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">think</span>\<span class="title">Model</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置好model与数据表的对应后，即可在控制器利用模型访问数据库</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用模型访问数据库</span></span><br><span class="line"><span class="comment">// ---------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getmod</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$data</span> = User::select();</span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$data</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h2><h3 id="1-查询一条数据"><a href="#1-查询一条数据" class="headerlink" title="1.查询一条数据"></a>1.查询一条数据</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询一条数据</span></span><br><span class="line"><span class="comment">// ------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">one</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// find()默认查询第一条语句</span></span><br><span class="line">        <span class="variable">$data</span> = Db::table(<span class="string">&#x27;tp_user&#x27;</span>)-&gt;find();</span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$data</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&#x27;</span>;</span><br><span class="line">        <span class="comment">// 输出最近执行的sql语句</span></span><br><span class="line">        <span class="keyword">echo</span> Db::getLastSql();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// where返回特定条件数据</span></span><br><span class="line">        <span class="variable">$data2</span> = Db::table(<span class="string">&#x27;tp_user&#x27;</span>)-&gt;where(<span class="string">&#x27;id&#x27;</span>,<span class="number">3</span>)-&gt;find();</span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$data2</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&#x27;</span>;</span><br><span class="line">        <span class="comment">// 输出最近执行的sql语句</span></span><br><span class="line">        <span class="keyword">echo</span> Db::getLastSql();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-数据查询异常处理"><a href="#2-数据查询异常处理" class="headerlink" title="2.数据查询异常处理"></a>2.数据查询异常处理</h3><p>主要使用findOrFail()抛出一个错误，catch语句才能捕捉到异常</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据不存在时异常处理</span></span><br><span class="line"><span class="comment">// -----------------------------------------------</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">two</span>(<span class="params"><span class="variable">$id</span></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 异常捕捉</span></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="variable">$data</span> = Db::table(<span class="string">&#x27;tp_user&#x27;</span>)-&gt;where(<span class="string">&#x27;id&#x27;</span>, <span class="variable">$id</span>)-&gt;findOrFail();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">catch</span> (DataNotFoundException <span class="variable">$e</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;查询不到数据！&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$data</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-查询多例数据"><a href="#3-查询多例数据" class="headerlink" title="3.查询多例数据"></a>3.查询多例数据</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询多列数据</span></span><br><span class="line"><span class="comment">// --------------------------------------------</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">three</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$data</span> = Db::table(<span class="string">&#x27;tp_user&#x27;</span>)-&gt;select();</span><br><span class="line">    <span class="keyword">return</span> json(<span class="variable">$data</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-返回指定数据"><a href="#4-返回指定数据" class="headerlink" title="4.返回指定数据"></a>4.返回指定数据</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指定返回数据查询</span></span><br><span class="line"><span class="comment">// --------------------------------------------</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">four</span>(<span class="params"><span class="variable">$id</span></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// value方法指定返回字段的值</span></span><br><span class="line">        <span class="variable">$data1</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;where(<span class="string">&#x27;id&#x27;</span>, <span class="variable">$id</span>)-&gt;value(<span class="string">&#x27;username&#x27;</span>);</span><br><span class="line">        <span class="comment">// 字符串</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$data1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// column方法返回指定列，并指定某字段作为索引</span></span><br><span class="line">        <span class="variable">$data2</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;column(<span class="string">&#x27;username&#x27;</span>,<span class="string">&#x27;password&#x27;</span>);</span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$data2</span>);</span><br><span class="line">    </span><br><span class="line">    	<span class="comment">// field返回指定列，还可以继续通过where进一步筛选（ column不行）</span></span><br><span class="line">    	 <span class="variable">$data1</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;field(<span class="string">&#x27;id&#x27;</span>)-&gt;select();</span><br><span class="line">        <span class="comment">// 字符串</span></span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$data1</span>);</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="链式查询"><a href="#链式查询" class="headerlink" title="链式查询"></a>链式查询</h2><h3 id="1-查询规则"><a href="#1-查询规则" class="headerlink" title="1.查询规则"></a>1.查询规则</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询规则</span></span><br><span class="line"><span class="comment">// ----------------------------------------------</span></span><br><span class="line">    <span class="comment">//只要还是数据库对象都可以继续使用链式查询</span></span><br><span class="line">    <span class="comment">// 用find()和select()方法时结果查询，输出不再是对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        print_r(Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;where(<span class="string">&#x27;id&#x27;</span>,<span class="number">3</span>)-&gt;order(<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;desc&#x27;</span>));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-链式的应用"><a href="#2-链式的应用" class="headerlink" title="2.链式的应用"></a>2.链式的应用</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 保存实例避免资源浪费（链式查询的特点，可以保存对象）</span></span><br><span class="line"><span class="comment">// --------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">one</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 保存数据库对象</span></span><br><span class="line">        <span class="variable">$user</span> = Db::name(<span class="string">&#x27;user&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通过上面一个对象分别进行查询</span></span><br><span class="line">        <span class="comment">// 但是要清除针对这个对象所有的链式查询项，才能下次查询</span></span><br><span class="line">        <span class="variable">$data1</span> = <span class="variable">$user</span>-&gt;where(<span class="string">&#x27;id&#x27;</span>, <span class="number">3</span>)-&gt;find();</span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$data1</span>).<span class="string">&#x27;:&#x27;</span>.Db::getLastSql();</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 不清除链式查询项的情况</span></span><br><span class="line">        <span class="variable">$data2</span> = <span class="variable">$user</span>-&gt;select();</span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$data2</span>).<span class="string">&#x27;:&#x27;</span>.Db::getLastSql();</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 清除链式查询项的情况</span></span><br><span class="line">        <span class="variable">$data3</span> = <span class="variable">$user</span>-&gt;removeOption(<span class="string">&#x27;where&#x27;</span>)-&gt;select();</span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$data3</span>).<span class="string">&#x27;:&#x27;</span>.Db::getLastSql();</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="增删改数据库"><a href="#增删改数据库" class="headerlink" title="增删改数据库"></a>增删改数据库</h2><h3 id="1-单条插入操作"><a href="#1-单条插入操作" class="headerlink" title="1.单条插入操作"></a>1.单条插入操作</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单条插入操作</span></span><br><span class="line"><span class="comment">// ------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insert</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 插入的数据</span></span><br><span class="line">        <span class="variable">$data</span>=[</span><br><span class="line"></span><br><span class="line">            <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;鲸落&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;password&#x27;</span> =&gt; <span class="string">&#x27;123456&#x27;</span></span><br><span class="line"></span><br><span class="line">        ];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 执行数据插入的两种方式</span></span><br><span class="line">        <span class="variable">$insert</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;insert(<span class="variable">$data</span>);</span><br><span class="line">        <span class="variable">$insert2</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;data(<span class="variable">$data</span>)-&gt;insert();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 插入成功返回值为插入数</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$insert</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-批量插入操作"><a href="#2-批量插入操作" class="headerlink" title="2.批量插入操作"></a>2.批量插入操作</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 批量插入操作</span></span><br><span class="line"><span class="comment">// ----------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insertall</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$data</span>=[</span><br><span class="line"></span><br><span class="line">            [</span><br><span class="line">                <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;autovy&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;password&#x27;</span> =&gt; <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">            ],</span><br><span class="line">            [</span><br><span class="line">                <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;233&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;password&#x27;</span> =&gt; <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">            ]</span><br><span class="line"></span><br><span class="line">        ];</span><br><span class="line"></span><br><span class="line">        <span class="variable">$insert</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;insertAll(<span class="variable">$data</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$insert</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-数据修改"><a href="#3-数据修改" class="headerlink" title="3.数据修改"></a>3.数据修改</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据修改</span></span><br><span class="line"><span class="comment">// -----------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$data</span> = [</span><br><span class="line">          <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;李白&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;id&#x27;</span> =&gt; <span class="number">34</span></span><br><span class="line">        ];</span><br><span class="line"></span><br><span class="line">        Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;where(<span class="string">&#x27;id&#x27;</span>,<span class="number">4</span>)-&gt;update(<span class="variable">$data</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-函数处理数据修改"><a href="#4-函数处理数据修改" class="headerlink" title="4.函数处理数据修改"></a>4.函数处理数据修改</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 利用mysql函数进行数据修改</span></span><br><span class="line"><span class="comment">// -----------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$data</span> = [</span><br><span class="line">            <span class="string">&#x27;username&#x27;</span> =&gt; Db::raw(<span class="string">&#x27;UPPER(username)&#x27;</span>),</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span> =&gt; Db::raw(<span class="string">&#x27;id + 10&#x27;</span>)</span><br><span class="line">        ];</span><br><span class="line"></span><br><span class="line">        Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;where(<span class="string">&#x27;id&#x27;</span>,<span class="number">3</span>)-&gt;update(<span class="variable">$data</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-删除数据"><a href="#5-删除数据" class="headerlink" title="5.删除数据"></a>5.删除数据</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除数据</span></span><br><span class="line"><span class="comment">// ------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">del</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 默认根据id进行删除，也可以用where方法指定字段删除</span></span><br><span class="line">        <span class="comment">// 删除一条</span></span><br><span class="line">        Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;delete(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 删除多条</span></span><br><span class="line">        Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;delete([<span class="number">1</span>,<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="查询表达式"><a href="#查询表达式" class="headerlink" title="查询表达式"></a>查询表达式</h2><h3 id="1-比较查询"><a href="#1-比较查询" class="headerlink" title="1.比较查询"></a>1.比较查询</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 比较查询</span></span><br><span class="line"><span class="comment">// ----------------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">one</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 输出id != 10的数据</span></span><br><span class="line">        <span class="variable">$result</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;where(<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;&lt;&gt;&#x27;</span>,<span class="number">10</span>)-&gt;select();</span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$result</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-模糊查询"><a href="#2-模糊查询" class="headerlink" title="2.模糊查询"></a>2.模糊查询</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模糊查询（即模糊查询字符串）</span></span><br><span class="line"><span class="comment">// -------------------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">two</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 模糊查询，密码（password）以12345开头的数据</span></span><br><span class="line">        <span class="variable">$result</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;whereLike(<span class="string">&#x27;password&#x27;</span>,<span class="string">&#x27;12345%&#x27;</span>)-&gt;select();</span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$result</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-区间查询"><a href="#3-区间查询" class="headerlink" title="3.区间查询"></a>3.区间查询</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 区间查询</span></span><br><span class="line"><span class="comment">// -----------------------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">three</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 查询id为1-10之间的数据</span></span><br><span class="line">        <span class="variable">$result</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;whereBetween(<span class="string">&#x27;id&#x27;</span>,[<span class="number">1</span>,<span class="number">10</span>])-&gt;select();</span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$result</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-多条查询"><a href="#4-多条查询" class="headerlink" title="4.多条查询"></a>4.多条查询</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 多条查询</span></span><br><span class="line"><span class="comment">// ------------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">four</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 查询id为7,8,10的数据</span></span><br><span class="line">        <span class="variable">$result</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;whereIn(<span class="string">&#x27;id&#x27;</span>,[<span class="number">7</span>,<span class="number">8</span>,<span class="number">10</span>])-&gt;select();</span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$result</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-自定义查询"><a href="#5-自定义查询" class="headerlink" title="5.自定义查询"></a>5.自定义查询</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义查询（可以自己构建sql查询语句）</span></span><br><span class="line"><span class="comment">// ----------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">five</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 查询id为7,8,10的数据</span></span><br><span class="line">        <span class="variable">$result</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;whereExp(<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;In(7,8,9)&#x27;</span>)-&gt;select();</span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$result</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="聚合查询"><a href="#聚合查询" class="headerlink" title="聚合查询"></a>聚合查询</h2><h3 id="1-数值计算查询"><a href="#1-数值计算查询" class="headerlink" title="1.数值计算查询"></a>1.数值计算查询</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 聚合查询</span></span><br><span class="line"><span class="comment">// -----------------------------------------</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算数值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">one</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 数量计算</span></span><br><span class="line">       <span class="variable">$result</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;count();</span><br><span class="line">       <span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line">       <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// 最值计算</span></span><br><span class="line">        <span class="variable">$result2</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;max(<span class="string">&#x27;id&#x27;</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$result2</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 平均值计算</span></span><br><span class="line">        <span class="variable">$result3</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;avg(<span class="string">&#x27;id&#x27;</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$result3</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 数据综合计算</span></span><br><span class="line">        <span class="variable">$result</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;sum(<span class="string">&#x27;id&#x27;</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-闭包查询"><a href="#2-闭包查询" class="headerlink" title="2.闭包查询"></a>2.闭包查询</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子查询</span></span><br><span class="line"><span class="comment">// ----------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">two</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// fetchSql:不执行sql语句，返回sql语句</span></span><br><span class="line">        <span class="variable">$result1</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;fetchSql(<span class="literal">true</span>)-&gt;select();</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$result1</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// buildSql:不执行sql语句，返回sql语句，相比fetchSql不需要写select()</span></span><br><span class="line">        <span class="variable">$result2</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;buildSql(<span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$result2</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 利用子查询，闭包查询实现多表查询</span></span><br><span class="line">        <span class="comment">// sql实现：SELECT * FROM tp_user WHERE id in (SELECT id FROM tp_two WHERE gender = &#x27;男&#x27;);</span></span><br><span class="line">        <span class="variable">$result3</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;where(<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;in&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"><span class="variable">$query</span></span>)</span>&#123;</span><br><span class="line">            <span class="variable">$query</span>-&gt;name(<span class="string">&#x27;two&#x27;</span>)-&gt;field(<span class="string">&#x27;id&#x27;</span>)-&gt;where(<span class="string">&#x27;gender&#x27;</span>, <span class="string">&#x27;男&#x27;</span>);</span><br><span class="line">        &#125;)-&gt;select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$result3</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="常用链式方法"><a href="#常用链式方法" class="headerlink" title="常用链式方法"></a>常用链式方法</h2><h3 id="1-where-：条件输出"><a href="#1-where-：条件输出" class="headerlink" title="1.where()：条件输出"></a>1.where()：条件输出</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// where()链式方法</span></span><br><span class="line"><span class="comment">// ------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">one</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 关联数组设置多个查询条件</span></span><br><span class="line">        <span class="variable">$result1</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;where([</span><br><span class="line"></span><br><span class="line">            <span class="string">&#x27;password&#x27;</span> =&gt; <span class="number">123456</span>,</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span> =&gt; [<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>]</span><br><span class="line"></span><br><span class="line">        ])-&gt;select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$result1</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 索引数组查询</span></span><br><span class="line">        <span class="comment">// 组装复杂数据，通过变量传递</span></span><br><span class="line">        <span class="variable">$map</span>[] = [<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;between&#x27;</span>, [<span class="number">7</span>,<span class="number">10</span>]];</span><br><span class="line">        <span class="variable">$map</span>[] = [<span class="string">&#x27;password&#x27;</span>,<span class="string">&#x27;=&#x27;</span>, <span class="number">123456</span>];</span><br><span class="line">        <span class="variable">$result2</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;where(<span class="variable">$map</span>)-&gt;select();</span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$result2</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 字符串形式传递查询</span></span><br><span class="line">        <span class="variable">$result3</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;where(<span class="string">&#x27;id in (7,10) and password=123456 &#x27;</span>)-&gt;select();</span><br><span class="line">        <span class="keyword">echo</span>  json_encode(<span class="variable">$result3</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-field-：指定字段输出"><a href="#2-field-：指定字段输出" class="headerlink" title="2.field() ：指定字段输出"></a>2.field() ：指定字段输出</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// field()链式方法</span></span><br><span class="line"><span class="comment">// -------------------------------------------------------------------</span></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">two</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 查询指定字段</span></span><br><span class="line">            <span class="variable">$result1</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;field(<span class="string">&#x27;id,username&#x27;</span>)-&gt;select();</span><br><span class="line">            <span class="keyword">echo</span> json_encode(<span class="variable">$result1</span>);</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// field()方法中设置mysql函数</span></span><br><span class="line">            <span class="variable">$result2</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;field(<span class="string">&#x27;sum(id)&#x27;</span>)-&gt;select();</span><br><span class="line">            <span class="keyword">echo</span> json_encode(<span class="variable">$result2</span>);</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 屏蔽掉指定字段</span></span><br><span class="line">            <span class="variable">$result2</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;field(<span class="string">&#x27;password&#x27;</span>,<span class="literal">true</span>)-&gt;select();</span><br><span class="line">            <span class="keyword">echo</span> json_encode(<span class="variable">$result2</span>);</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-limit-：限制输出条数"><a href="#3-limit-：限制输出条数" class="headerlink" title="3.limit()：限制输出条数"></a>3.limit()：限制输出条数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// limit()链式方法</span></span><br><span class="line"><span class="comment">// --------------------------------------------------------</span></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">three</span>(<span class="params"><span class="variable">$num</span>=<span class="number">3</span></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 限制输出数据个数</span></span><br><span class="line">            <span class="variable">$result1</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;limit(<span class="variable">$num</span>)-&gt;select();</span><br><span class="line">            <span class="keyword">echo</span> json_encode(<span class="variable">$result1</span>);</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 分页模式输出数据，但要严格计算开始位置</span></span><br><span class="line">            <span class="comment">//如：limit(2,5)：从第3条开始显示5条数据</span></span><br><span class="line">            <span class="comment">// 第一页</span></span><br><span class="line">            <span class="variable">$result2</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;limit(<span class="number">0</span>,<span class="variable">$num</span>)-&gt;select();</span><br><span class="line">            <span class="keyword">echo</span> json_encode(<span class="variable">$result2</span>);</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line">            <span class="comment">//第二页</span></span><br><span class="line">            <span class="variable">$result3</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;limit(<span class="variable">$num</span>,<span class="variable">$num</span>)-&gt;select();</span><br><span class="line">            <span class="keyword">echo</span> json_encode(<span class="variable">$result3</span>);</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-page-：输出分页"><a href="#4-page-：输出分页" class="headerlink" title="4.page()：输出分页"></a>4.page()：输出分页</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// page()链式方法</span></span><br><span class="line"><span class="comment">// -----------------------------------------------------------------------</span></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">four</span>(<span class="params"><span class="variable">$page</span>=<span class="number">1</span>,<span class="variable">$num</span>=<span class="number">3</span></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 循环输出页面</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="variable">$page</span>; <span class="variable">$page</span>&lt;<span class="number">5</span>; <span class="variable">$page</span>++)&#123;</span><br><span class="line">                <span class="comment">// page()分页方法，优化了limit()方法，无需进行分页条数计算</span></span><br><span class="line">                <span class="variable">$result1</span> = Db::name(<span class="string">&#x27;user&#x27;</span>)-&gt;page(<span class="variable">$page</span>, <span class="variable">$num</span>)-&gt;select();</span><br><span class="line">                <span class="comment">// 但数据为空，跳出循环</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="variable">$result1</span>==<span class="literal">NULL</span>)&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">echo</span> json_encode(<span class="variable">$result1</span>);</span><br><span class="line">                    <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-group-：数据分组"><a href="#5-group-：数据分组" class="headerlink" title="5.group()：数据分组"></a>5.group()：数据分组</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// group()链式方法</span></span><br><span class="line"><span class="comment">// --------------------------------------------------</span></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">five</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 对某字段进行分组然后统计（按性别分组统计id平均数）</span></span><br><span class="line">            <span class="variable">$result</span> = Db::name(<span class="string">&#x27;two&#x27;</span>)-&gt;group(<span class="string">&#x27;gender&#x27;</span>)-&gt;field(<span class="string">&#x27;gender, avg(id)&#x27;</span>)-&gt;select();</span><br><span class="line">            <span class="keyword">return</span> json(<span class="variable">$result</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-having-：分组条件输出"><a href="#6-having-：分组条件输出" class="headerlink" title="6.having()：分组条件输出"></a>6.having()：分组条件输出</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// having()链式方法</span></span><br><span class="line"><span class="comment">// -------------------------------------------------------------</span></span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">six</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 对分组后的数据进行筛选</span></span><br><span class="line">            <span class="variable">$result</span> = Db::name(<span class="string">&#x27;two&#x27;</span>)</span><br><span class="line">                    -&gt;group(<span class="string">&#x27;gender&#x27;</span>)</span><br><span class="line">                    -&gt;field(<span class="string">&#x27;gender, avg(id) as avg&#x27;</span>)</span><br><span class="line">                    -&gt;having(<span class="string">&#x27;avg(id)&lt;10&#x27;</span>)</span><br><span class="line">                    -&gt;select();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> json(<span class="variable">$result</span>);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模型定义"><a href="#模型定义" class="headerlink" title="模型定义"></a>模型定义</h2><h3 id="1-模型设置"><a href="#1-模型设置" class="headerlink" title="1.模型设置"></a>1.模型设置</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果控制器中的类名和model的类名相同，就需要引入,设置别名</span></span><br><span class="line"><span class="comment">// 也可以加入后缀以示区分</span></span><br><span class="line"><span class="keyword">use</span> \<span class="title">app</span>\<span class="title">mod</span>\<span class="title">model</span>\<span class="title">User</span> <span class="title">as</span> <span class="title">UseModel</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-模型操作"><a href="#2-模型操作" class="headerlink" title="2.模型操作"></a>2.模型操作</h3><p>（1）构建模型：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模型名会自动对应到数据表</span></span><br><span class="line"><span class="comment">// 模型类与表名的差别：1.去除前缀tp_，2.变成大驼峰式命名</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置模型的方式</span></span><br><span class="line"><span class="comment">// -------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 改变主键</span></span><br><span class="line">        <span class="keyword">protected</span> <span class="variable">$pk</span> = <span class="string">&#x27;username&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置其他表</span></span><br><span class="line">        <span class="comment">// User默认绑定了数据库中tp_user这张表，但是也可以让其指向其他表</span></span><br><span class="line">        <span class="keyword">protected</span> <span class="variable">$table</span> = <span class="string">&#x27;tp_two&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 模型初始化，与控制器初始化类似，可以初始化渲染内容</span></span><br><span class="line">        <span class="keyword">protected</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&#x27;hello,world&lt;br/&gt;&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）控制器调用模型进行操作：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  使用模型基本操作数据库</span></span><br><span class="line"><span class="comment">// -------------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">one</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="variable">$result</span> = UseModel::select();</span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$result</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更改主键后删除</span></span><br><span class="line"><span class="comment">// -----------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">two</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 但主键为id时，可以生效</span></span><br><span class="line">        UseModel::destroy(<span class="number">11</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 主键改为username后，做删除操作</span></span><br><span class="line">        UseModel::destroy(<span class="string">&#x27;李白&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以通过数据库类去操作数据库，但是这样无法使用模型的事件功能</p>
+<h2 id="模型添加与删除"><a href="#模型添加与删除" class="headerlink" title="模型添加与删除"></a>模型添加与删除</h2><h3 id="1-插入一条数据"><a href="#1-插入一条数据" class="headerlink" title="1.插入一条数据"></a>1.插入一条数据</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 利用模型进行数据添加（一条）</span></span><br><span class="line"><span class="comment">// -------------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insert</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建一个模型实例</span></span><br><span class="line">        <span class="variable">$user</span> = <span class="keyword">new</span> UseModel();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 插入操作，返回布尔值</span></span><br><span class="line">        <span class="variable">$insert</span> = <span class="variable">$user</span>-&gt;save([</span><br><span class="line">            <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;Emiria&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;password&#x27;</span> =&gt; <span class="string">&#x27;486&#x27;</span></span><br><span class="line">        ]);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 新增后，可输出主键</span></span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$user</span>-&gt;id.<span class="string">&#x27;&lt;br/&gt;&#x27;</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$insert</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-批量插入数据"><a href="#2-批量插入数据" class="headerlink" title="2.批量插入数据"></a>2.批量插入数据</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 利用模型批量插入数据</span></span><br><span class="line"><span class="comment">// -------------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insertall</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建一个模型实例</span></span><br><span class="line">        <span class="variable">$user</span> = <span class="keyword">new</span> UseModel();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置数据</span></span><br><span class="line">        <span class="variable">$dataAll</span> =[</span><br><span class="line"></span><br><span class="line">            [</span><br><span class="line">                <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;Emiria&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;password&#x27;</span> =&gt; <span class="string">&#x27;486&#x27;</span></span><br><span class="line">            ],</span><br><span class="line"></span><br><span class="line">            [</span><br><span class="line">                <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;Subaru&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;password&#x27;</span> =&gt; <span class="string">&#x27;EMT&#x27;</span></span><br><span class="line">            ],</span><br><span class="line"></span><br><span class="line">            [</span><br><span class="line">                <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;Eem&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;password&#x27;</span> =&gt; <span class="string">&#x27;486&#x27;</span></span><br><span class="line">            ],</span><br><span class="line"></span><br><span class="line">        ];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 插入全部数据，返回插入数据对象</span></span><br><span class="line">        <span class="variable">$result</span> = <span class="variable">$user</span>-&gt;saveAll(<span class="variable">$dataAll</span>);</span><br><span class="line">        print_r(<span class="variable">$result</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-delete-删除数据"><a href="#3-delete-删除数据" class="headerlink" title="3.delete()删除数据"></a>3.delete()删除数据</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据删除delete()方法</span></span><br><span class="line"><span class="comment">// -------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">del</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 指定主键值然后删除，返回布尔值</span></span><br><span class="line">        <span class="variable">$user</span> = UseModel::get(<span class="number">41</span>)-&gt;delete();</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$user</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-destroy-删除数据"><a href="#4-destroy-删除数据" class="headerlink" title="4.destroy()删除数据"></a>4.destroy()删除数据</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据删除destroy()方法</span></span><br><span class="line"><span class="comment">// -------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">del2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 静态方法调用destroy()方法，通过主键删除数据</span></span><br><span class="line">        UseModel::destroy(<span class="number">41</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 也可以进行批量删除</span></span><br><span class="line">        UseModel::destroy([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-条件删除"><a href="#5-条件删除" class="headerlink" title="5.条件删除"></a>5.条件删除</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 条件删除</span></span><br><span class="line"><span class="comment">// -----------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">del3</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通过数据库类的条件查询删除</span></span><br><span class="line">        UseModel::where(<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="number">10</span>)-&gt;delete();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 闭包方式删除</span></span><br><span class="line">        UseModel::destroy(<span class="function"><span class="keyword">function</span> (<span class="params"><span class="variable">$query</span></span>)</span>&#123;</span><br><span class="line">           <span class="variable">$query</span>-&gt;where(<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;&lt;&#x27;</span>,<span class="number">10</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模型更新与查询"><a href="#模型更新与查询" class="headerlink" title="模型更新与查询"></a>模型更新与查询</h2><h3 id="1-数据修改"><a href="#1-数据修改" class="headerlink" title="1.数据修改"></a>1.数据修改</h3><p>（1）get方法获取然后修改</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// get方法获取数据，然后修改</span></span><br><span class="line"><span class="comment">// 字段出错，没有报错 :(</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">one</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// get方法获取主键</span></span><br><span class="line">    <span class="variable">$user</span> = UseModel::get(<span class="number">8</span>);</span><br><span class="line">    <span class="variable">$user</span>-&gt;username = <span class="string">&#x27;鲨掉&#x27;</span>;</span><br><span class="line">    <span class="variable">$user</span>-&gt;password = <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line">    <span class="comment">// 最后通过save()方法保存修改</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$user</span>-&gt;save();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）where()+find()</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// where方法结合find()方法获得数据，然后修改</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">two</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$user</span> = UseModel::where(<span class="string">&#x27;username&#x27;</span>,<span class="string">&#x27;Eem&#x27;</span>)-&gt;find();</span><br><span class="line">    <span class="variable">$user</span>-&gt;password = <span class="string">&#x27;Subaru!&#x27;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$user</span>-&gt;save();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（3）save批量修改数据</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接利用save更新数据</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">three</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$user</span> = <span class="keyword">new</span> UseModel();</span><br><span class="line">    <span class="variable">$result</span> = <span class="variable">$user</span>-&gt;save([</span><br><span class="line">        <span class="comment">// 更新的数据</span></span><br><span class="line">        <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;test&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;password&#x27;</span> =&gt; <span class="string">&#x27;1234&#x27;</span></span><br><span class="line"></span><br><span class="line">    ], [</span><br><span class="line">        <span class="comment">// 定位数据条件</span></span><br><span class="line">        <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;test&#x27;</span></span><br><span class="line">    ]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$result</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 利用saveAll()方法批量修改数据</span></span><br><span class="line"><span class="comment">// saveAll方法只能通过主键（放在第一位）进行更新</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">four</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$user</span> = <span class="keyword">new</span> UseModel();</span><br><span class="line">    <span class="variable">$user</span>-&gt;saveAll([</span><br><span class="line"></span><br><span class="line">        [<span class="string">&#x27;id&#x27;</span>=&gt; <span class="number">7</span>, <span class="string">&#x27;username&#x27;</span>=&gt; <span class="string">&#x27;test1&#x27;</span>],</span><br><span class="line">        [<span class="string">&#x27;id&#x27;</span>=&gt; <span class="number">8</span>, <span class="string">&#x27;username&#x27;</span>=&gt; <span class="string">&#x27;test2&#x27;</span>],</span><br><span class="line">        [<span class="string">&#x27;id&#x27;</span>=&gt; <span class="number">9</span>, <span class="string">&#x27;username&#x27;</span>=&gt; <span class="string">&#x27;test3&#x27;</span>],</span><br><span class="line"></span><br><span class="line">    ]);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（4）静态方法更新</p>
+<p>​    </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 利用数据库类库的静态方法进行修改</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$data</span> = [</span><br><span class="line">        <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;李白&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;id&#x27;</span> =&gt; <span class="number">34</span></span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    UseModel::name(<span class="string">&#x27;user&#x27;</span>)-&gt;where(<span class="string">&#x27;id&#x27;</span>,<span class="number">4</span>)-&gt;update(<span class="variable">$data</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-数据查询"><a href="#2-数据查询" class="headerlink" title="2.数据查询"></a>2.数据查询</h3><p>模型：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模型名会自动对应到数据表</span></span><br><span class="line"><span class="comment">// 模型类与表名的差别：1.去除前缀tp_，2.变成大驼峰式命名</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// 从模型内部获取数据（即把在控制器进行的数据库操作移植到模型）</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get_password</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 返回某个字段</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">self</span>::where(<span class="string">&#x27;id&#x27;</span>,<span class="string">&#x27;&gt;&#x27;</span>,<span class="number">10</span>)-&gt;find()-&gt;getAttr(<span class="string">&#x27;password&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>控制器：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据查询</span></span><br><span class="line"><span class="comment">// ----------------------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">five</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// get()方法查询</span></span><br><span class="line">        <span class="variable">$user</span> = UseModel::get(<span class="number">8</span>);</span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$user</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// find()方法查询</span></span><br><span class="line">        <span class="variable">$user</span> = UseModel::where(<span class="string">&#x27;id&#x27;</span>,<span class="number">9</span>)-&gt;find();</span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$user</span>);</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从模型内部获取数据（即把在控制器进行的数据库操作移植到模型）</span></span><br><span class="line">        <span class="comment">// 控制器直接调用模型类的方法</span></span><br><span class="line">        <span class="variable">$user</span> = <span class="keyword">new</span> UseModel();</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$user</span>-&gt;get_password();</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;br/&gt;&lt;br/&gt;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 动态查询</span></span><br><span class="line">        <span class="variable">$user</span> = UseModel::getById(<span class="string">&#x27;40&#x27;</span>);</span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$user</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模型获取器与修改器"><a href="#模型获取器与修改器" class="headerlink" title="模型获取器与修改器"></a>模型获取器与修改器</h2><h3 id="1-获取器"><a href="#1-获取器" class="headerlink" title="1.获取器"></a>1.获取器</h3><p>（1）模型获取器</p>
+<p>在模型中</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取器，修改返回字段的值（针对查询操作）</span></span><br><span class="line"><span class="comment">// -----------------------------------</span></span><br><span class="line">    <span class="comment">// 自动获取指定字段的值，get(字段名)Attr</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getStatusAttr</span>(<span class="params"><span class="variable">$value</span></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 过滤器（必须包含该字段所有可能的内容）</span></span><br><span class="line">        <span class="variable">$myGet</span>=[<span class="number">1</span>=&gt;<span class="string">&#x27;正常&#x27;</span>, <span class="number">0</span>=&gt;<span class="string">&#x27;禁用&#x27;</span>, <span class="number">-1</span>=&gt;<span class="string">&#x27;删除&#x27;</span>];</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$myGet</span>[<span class="variable">$value</span>];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在控制器中</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 经过模型的获取器，返回数据</span></span><br><span class="line"><span class="comment">// -----------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">one</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="variable">$user</span> = UseModel::get(<span class="number">41</span>);</span><br><span class="line">        <span class="comment">// 输出原始值</span></span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$user</span>-&gt;getData());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;br/&gt;&lt;br/&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出经过获取器过滤的值</span></span><br><span class="line">        <span class="keyword">echo</span> json_encode(<span class="variable">$user</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）动态获取器</p>
+<p>​    </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 动态获取器，直接在控制端过滤数据</span></span><br><span class="line"><span class="comment">// --------------------------------------</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">two</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// withAttr方法：指定字段，然后调用方法</span></span><br><span class="line">        <span class="variable">$result</span> = UseModel::withAttr(<span class="string">&#x27;password&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"><span class="variable">$value</span></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> md5(<span class="variable">$value</span>);</span><br><span class="line"></span><br><span class="line">        &#125;)-&gt;select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$result</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（3）获取器优先级比较</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取器优先级比较</span></span><br><span class="line"><span class="comment">// -----------------------------------------------------------</span></span><br><span class="line">    <span class="comment">// 模型获取器比动态获取器优先级高</span></span><br><span class="line">    <span class="comment">// 对同一字段过滤时，动态获取器返回值会覆盖模型获取器的返回值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">three</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// withAttr方法：指定字段，然后调用方法</span></span><br><span class="line">        <span class="variable">$result</span> = UseModel::withAttr(<span class="string">&#x27;status&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"><span class="variable">$value</span></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 在模型里的正常，禁止等值会被这里的获取器a，b等值覆盖</span></span><br><span class="line">            <span class="variable">$myGet</span>=[<span class="number">1</span>=&gt;<span class="string">&#x27;a&#x27;</span>, <span class="number">0</span>=&gt;<span class="string">&#x27;b&#x27;</span>, <span class="number">-1</span>=&gt;<span class="string">&#x27;c&#x27;</span>];</span><br><span class="line">            <span class="keyword">return</span> <span class="variable">$myGet</span>[<span class="variable">$value</span>];</span><br><span class="line"></span><br><span class="line">        &#125;)-&gt;select();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> json(<span class="variable">$result</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-修改器"><a href="#2-修改器" class="headerlink" title="2.修改器"></a>2.修改器</h3><p>在模型中</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改器，修改插入的值（针对插入操作）</span></span><br><span class="line"><span class="comment">// ------------------------------------------</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setPasswordAttr</span>(<span class="params"><span class="variable">$vaule</span></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> md5(<span class="variable">$vaule</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在控制器中</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 经过修改器，插入数据</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">four</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个模型实例</span></span><br><span class="line">        <span class="variable">$user</span> = <span class="keyword">new</span> UseModel();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 插入操作，返回布尔值</span></span><br><span class="line">        <span class="variable">$insert</span> = <span class="variable">$user</span>-&gt;save([</span><br><span class="line">            <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;Emiria&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;password&#x27;</span> =&gt; <span class="string">&#x27;qweee&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;status&#x27;</span> =&gt; <span class="string">&#x27;1&#x27;</span>,</span><br><span class="line">        ]);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模型搜索器和数据集"><a href="#模型搜索器和数据集" class="headerlink" title="模型搜索器和数据集"></a>模型搜索器和数据集</h2><h3 id="1-模型搜索器"><a href="#1-模型搜索器" class="headerlink" title="1.模型搜索器"></a>1.模型搜索器</h3><p>模型搜索器用于封装字段（或搜索标识）的查询表达式</p>
+<h3 id="2-模型数据集"><a href="#2-模型数据集" class="headerlink" title="2.模型数据集"></a>2.模型数据集</h3><p>模型数据集由all()和select()方法返回数据集对象</p>
+<h2 id="模型自动时间戳和只读字段"><a href="#模型自动时间戳和只读字段" class="headerlink" title="模型自动时间戳和只读字段"></a>模型自动时间戳和只读字段</h2><h3 id="1-模型自动时间戳"><a href="#1-模型自动时间戳" class="headerlink" title="1.模型自动时间戳"></a>1.模型自动时间戳</h3><p>系统自动创建和更新时间</p>
+<h3 id="2-模型只读字段"><a href="#2-模型只读字段" class="headerlink" title="2.模型只读字段"></a>2.模型只读字段</h3><p>设置只读字段，该字段无法被修改</p>
+<h2 id="模型类型转换和数据完成"><a href="#模型类型转换和数据完成" class="headerlink" title="模型类型转换和数据完成"></a>模型类型转换和数据完成</h2><h3 id="1-模型类型转换"><a href="#1-模型类型转换" class="headerlink" title="1.模型类型转换"></a>1.模型类型转换</h3><p>通过在模型段设置写入或读取时字段类型进行转换</p>
+<h3 id="2-模型数据完成"><a href="#2-模型数据完成" class="headerlink" title="2.模型数据完成"></a>2.模型数据完成</h3><p>模型中的数据可以通过auto，insert，update三种形式完成，设置自动填入默认值</p>
+<h2 id="模型查询范围和输出"><a href="#模型查询范围和输出" class="headerlink" title="模型查询范围和输出"></a>模型查询范围和输出</h2><h3 id="1-模型查询范围"><a href="#1-模型查询范围" class="headerlink" title="1.模型查询范围"></a>1.模型查询范围</h3><p>在模型段创建一个封装的查询或写入方法，方便控制器端调用（自定义查询）</p>
+<h3 id="2-模型输出方式"><a href="#2-模型输出方式" class="headerlink" title="2.模型输出方式"></a>2.模型输出方式</h3><p>包括：模板输出，数组输出，Json输出</p>
+<h2 id="JSON字段"><a href="#JSON字段" class="headerlink" title="JSON字段"></a>JSON字段</h2><h3 id="1-数据库JSON"><a href="#1-数据库JSON" class="headerlink" title="1.数据库JSON"></a>1.数据库JSON</h3><p>在数据库的字段中，设数据类型为json类型，然后可以通过数组写入</p>
+<h3 id="2-模型JSON"><a href="#2-模型JSON" class="headerlink" title="2.模型JSON"></a>2.模型JSON</h3><p>使用模型的方法新增包含json数据的字段</p>
+<h2 id="软删除"><a href="#软删除" class="headerlink" title="软删除"></a>软删除</h2><p>软删除不是真正删除数据，而是给数据设置一个标记</p>
+<h3 id="1-数据库软删除"><a href="#1-数据库软删除" class="headerlink" title="1.数据库软删除"></a>1.数据库软删除</h3><p>创建一个软删除时间的字段，填入时间标记</p>
+<h3 id="2-模型软删除"><a href="#2-模型软删除" class="headerlink" title="2.模型软删除"></a>2.模型软删除</h3><p>一般推荐使用模型端进行软删除</p>
+<h2 id="模板引擎和视图渲染"><a href="#模板引擎和视图渲染" class="headerlink" title="模板引擎和视图渲染"></a>模板引擎和视图渲染</h2><h3 id="1-模板引擎"><a href="#1-模板引擎" class="headerlink" title="1.模板引擎"></a>1.模板引擎</h3><p>模板引擎渲染视图</p>
+<p>模板引擎分成两种，一种是内置的，一种外置作为插件引入的（我们使用内置即可）</p>
+<h3 id="2-视图渲染"><a href="#2-视图渲染" class="headerlink" title="2.视图渲染"></a>2.视图渲染</h3><p>通过控制器，把模板引擎的模板页面（视图渲染）加载进来</p>
+<h2 id="视图赋值和过滤"><a href="#视图赋值和过滤" class="headerlink" title="视图赋值和过滤"></a>视图赋值和过滤</h2><h3 id="1-视图赋值"><a href="#1-视图赋值" class="headerlink" title="1.视图赋值"></a>1.视图赋值</h3><p>在视图中给模板页面传递值</p>
+<h3 id="2-视图过滤"><a href="#2-视图过滤" class="headerlink" title="2.视图过滤"></a>2.视图过滤</h3><p>对模板输入的变量进行过滤</p>
+<h2 id="模板变量输出"><a href="#模板变量输出" class="headerlink" title="模板变量输出"></a>模板变量输出</h2><h3 id="1-变量输出"><a href="#1-变量输出" class="headerlink" title="1.变量输出"></a>1.变量输出</h3><p>当模板文件位置创建好后，输出控制器为变量赋值，然后通过<code>&#123;$name&#125;</code>这样的方式在模板输出变量值</p>
+<h3 id="2-其他输出"><a href="#2-其他输出" class="headerlink" title="2.其他输出"></a>2.其他输出</h3><h2 id="模板中函数的使用和运算符"><a href="#模板中函数的使用和运算符" class="headerlink" title="模板中函数的使用和运算符"></a>模板中函数的使用和运算符</h2><p>在前端模板页面使用函数和运算符达到灵活地渲染出动态数据</p>
+<h3 id="1-使用函数"><a href="#1-使用函数" class="headerlink" title="1.使用函数"></a>1.使用函数</h3><p>提供一些函数方法对数据进行过滤处理，使用管道符进行调用</p>
+<h3 id="2-运算符"><a href="#2-运算符" class="headerlink" title="2.运算符"></a>2.运算符</h3><p>在模板中可以对数据进行运算处理</p>
+<h2 id="模板的循环标签"><a href="#模板的循环标签" class="headerlink" title="模板的循环标签"></a>模板的循环标签</h2><p>模板循环输出循环块，动态输出数据</p>
+<h3 id="1-foreach循环"><a href="#1-foreach循环" class="headerlink" title="1.foreach循环"></a>1.foreach循环</h3><p>控制器通过模型把数据列表筛选出来，再传递到视图，然后再将其渲染出来</p>
+<h3 id="2-volist循环"><a href="#2-volist循环" class="headerlink" title="2.volist循环"></a>2.volist循环</h3><p>volist也是将查询的到的数据集通过循环的方式进行输出</p>
+<h3 id="3-for循环"><a href="#3-for循环" class="headerlink" title="3.for循环"></a>3.for循环</h3><p>for循环可以通过起始和终止值，结合步长实现循环</p>
+<h2 id="模板的比较和定义"><a href="#模板的比较和定义" class="headerlink" title="模板的比较和定义"></a>模板的比较和定义</h2><h3 id="1-比较标签"><a href="#1-比较标签" class="headerlink" title="1.比较标签"></a>1.比较标签</h3><p>{eq}{/eq}标签，比较两个值是否相同，相同即输出包含内容</p>
+<p>还存在其他不同的标签代替不同的关系运算符对变量进行比较</p>
+<h3 id="2-定义标签"><a href="#2-定义标签" class="headerlink" title="2.定义标签"></a>2.定义标签</h3><p>在模板页面定义一个变量，可以使用{assgin}标签，</p>
+<h2 id="模板的条件判断标签"><a href="#模板的条件判断标签" class="headerlink" title="模板的条件判断标签"></a>模板的条件判断标签</h2><h3 id="1-switch标签"><a href="#1-switch标签" class="headerlink" title="1.switch标签"></a>1.switch标签</h3><p>实现多个条件判断</p>
+<h3 id="2-if标签"><a href="#2-if标签" class="headerlink" title="2.if标签"></a>2.if标签</h3><p>基本条件判断语句</p>
+<h3 id="3-范围标签"><a href="#3-范围标签" class="headerlink" title="3.范围标签"></a>3.范围标签</h3><p>{in}和{notin}，判断值是否存在或不存在指定的数据列表中</p>
+<h3 id="4-是否存在标签"><a href="#4-是否存在标签" class="headerlink" title="4.是否存在标签"></a>4.是否存在标签</h3><p>是否存在：{present}和{notpresent}判断变量是否已经定义赋值</p>
+<p>是否为空：{empty}和{notempty}判断变量是否为空值;</p>
+<h2 id="模板的加载包含输出"><a href="#模板的加载包含输出" class="headerlink" title="模板的加载包含输出"></a>模板的加载包含输出</h2><h3 id="1-包含文件"><a href="#1-包含文件" class="headerlink" title="1.包含文件"></a>1.包含文件</h3><p>使用{include}标签加载公用重复的文件，比如头部，尾部和导航部分</p>
+<h3 id="2-输出替换"><a href="#2-输出替换" class="headerlink" title="2.输出替换"></a>2.输出替换</h3><p>在模板中常常需要调用一些静态文件，比如css/js。直接写完整的路径引入，比较冗长，所以需要把这些路径整理打包</p>
+<h3 id="3-文件加载"><a href="#3-文件加载" class="headerlink" title="3.文件加载"></a>3.文件加载</h3><p>传统方式调用css或js文件时，采用link和script标签实现。tp5提供了{load}标签的方法加载css和js文件</p>
+<h2 id="模板的布局和继承"><a href="#模板的布局和继承" class="headerlink" title="模板的布局和继承"></a>模板的布局和继承</h2><h3 id="1-模板布局"><a href="#1-模板布局" class="headerlink" title="1.模板布局"></a>1.模板布局</h3><p>默认不支持模板布局功能，需要在配置文件中开启</p>
+<h3 id="2-模板继承"><a href="#2-模板继承" class="headerlink" title="2.模板继承"></a>2.模板继承</h3><p>模板继承的布局方法更加灵活，把内容和样式分离</p>
+<h2 id="路由介绍和定义"><a href="#路由介绍和定义" class="headerlink" title="路由介绍和定义"></a>路由介绍和定义</h2><h3 id="1-路由简介"><a href="#1-路由简介" class="headerlink" title="1.路由简介"></a>1.路由简介</h3><p>路由的作用是让url地址更将规范优雅（tp的默认url确实有点过分了）</p>
+<p>设置路由对url的检验，验证等一系列操作提供了极大的便利性</p>
+<h3 id="2-路由定义"><a href="#2-路由定义" class="headerlink" title="2.路由定义"></a>2.路由定义</h3><p>为url自定义路由规则，让url访问更加简洁和优雅( •̀ ω •́ )✧</p>
+<p>在route文件下定制自己专属的路由规则</p>
+<h2 id="路由的变量规则和闭包"><a href="#路由的变量规则和闭包" class="headerlink" title="路由的变量规则和闭包"></a>路由的变量规则和闭包</h2><h3 id="1-变量规则"><a href="#1-变量规则" class="headerlink" title="1.变量规则"></a>1.变量规则</h3><p>用户可以通过自定义的路由进行传值，我们通过设置变量规则对输入的值进行过滤出来</p>
+<h3 id="2-闭包支持"><a href="#2-闭包支持" class="headerlink" title="2.闭包支持"></a>2.闭包支持</h3><p>闭包支持可以让用户通过url直接执行语句，不需要通过控制器和方法</p>
+<h2 id="路由的地址和缓存"><a href="#路由的地址和缓存" class="headerlink" title="路由的地址和缓存"></a>路由的地址和缓存</h2><h3 id="1-路由地址"><a href="#1-路由地址" class="headerlink" title="1.路由地址"></a>1.路由地址</h3><p>路由的地址一般为：控制器/方法，如果是多模块则为：模块/控制器/方法</p>
+<h3 id="2-路由缓存"><a href="#2-路由缓存" class="headerlink" title="2.路由缓存"></a>2.路由缓存</h3><p>开启路由缓存可以极高提高性能，需要在部署环境下才有效果</p>
+<h2 id="路由的参数和快捷路由"><a href="#路由的参数和快捷路由" class="headerlink" title="路由的参数和快捷路由"></a>路由的参数和快捷路由</h2><h3 id="1-路由参数"><a href="#1-路由参数" class="headerlink" title="1.路由参数"></a>1.路由参数</h3><p>设置路由时，可以设置第三个数组参数，主要实施匹配检测和行为执行（比如检测文件类型，绑定到模型）</p>
+<h3 id="2-快捷路由"><a href="#2-快捷路由" class="headerlink" title="2.快捷路由"></a>2.快捷路由</h3><p>快捷路由可以快速给控制器注册路由，还可以更加不同的请求类型设置前缀</p>
+<h2 id="路由分组和注解"><a href="#路由分组和注解" class="headerlink" title="路由分组和注解"></a>路由分组和注解</h2><h3 id="1-路由分组"><a href="#1-路由分组" class="headerlink" title="1.路由分组"></a>1.路由分组</h3><p>将相同前缀的路由合并分组，这样可以简化路由定义，提高匹配效率</p>
+<p>使用group方法进行分组路由注册</p>
+<h3 id="2-注解路由"><a href="#2-注解路由" class="headerlink" title="2.注解路由"></a>2.注解路由</h3><p>tp5提供了一个可以在注解中直接创建路由的方式（默认关闭），在控制器写入路由注解可以达到在router.php写路由同样的效果</p>
+<h2 id="路由MISS和跨域请求"><a href="#路由MISS和跨域请求" class="headerlink" title="路由MISS和跨域请求"></a>路由MISS和跨域请求</h2><h3 id="1-MISS路由"><a href="#1-MISS路由" class="headerlink" title="1.MISS路由"></a>1.MISS路由</h3><p>开启强制路由功能，匹配不到相应规则时自动跳转到MISS（控制器中的miss方法）</p>
+<h3 id="2-跨域请求"><a href="#2-跨域请求" class="headerlink" title="2.跨域请求"></a>2.跨域请求</h3><p>但不同域名进行跨域请求时，由于浏览器的安全限制，会被拦截</p>
+<p>在路由中使用allowCrossDomain()方法可以解除跨域的限制（在restful api 这种前后端分离的架构上，这点尤为重要）</p>
+<p>把域名限制添加到头部中可以限制访问的域名</p>
+<h2 id="路由的绑定和别名"><a href="#路由的绑定和别名" class="headerlink" title="路由的绑定和别名"></a>路由的绑定和别名</h2><h3 id="1-路由绑定"><a href="#1-路由绑定" class="headerlink" title="1.路由绑定"></a>1.路由绑定</h3><p> 路由绑定可以简化URL和路由规则的定义，可以绑定到模块/控制器/操作</p>
+<h3 id="2-路由别名"><a href="#2-路由别名" class="headerlink" title="2.路由别名"></a>2.路由别名</h3><p>给控制器起一个别名，可以通过别名自动生成一系列规则</p>
+<h2 id="资源路由"><a href="#资源路由" class="headerlink" title="资源路由"></a>资源路由</h2><p>采用固定的常用方法来实现简化URL功能</p>
+<p>系统提供一个命令，方便开发者快速生成一个资源控制器（自动生成包括显示，增删改查等多个操作方法）</p>
+<h2 id="域名路由"><a href="#域名路由" class="headerlink" title="域名路由"></a>域名路由</h2><h3 id="1-域名路由"><a href="#1-域名路由" class="headerlink" title="1.域名路由"></a>1.域名路由</h3><p>在电脑host文件中，添加域名映射</p>
+<h3 id="2-域名绑定"><a href="#2-域名绑定" class="headerlink" title="2.域名绑定"></a>2.域名绑定</h3><p>在配置文件app.php中可以设置根域名，如果实际域名不符，会解析失败（默认自动获取）</p>
+<h2 id="路由的URL生成"><a href="#路由的URL生成" class="headerlink" title="路由的URL生成"></a>路由的URL生成</h2><p>之前的URL都是我们手动设置的，tp5提供了一套自动生成的方法（控制器的方法中写入）</p>
+<h2 id="请求对象和信息"><a href="#请求对象和信息" class="headerlink" title="请求对象和信息"></a>请求对象和信息</h2><h3 id="1-请求对象的获取"><a href="#1-请求对象的获取" class="headerlink" title="1.请求对象的获取"></a>1.请求对象的获取</h3><p>（1）继承控制器基类时，会自动被注入Request请求对象的功能</p>
+<p>（2）自行注入Request请求对象（依赖注入）</p>
+<p>（3）facade方式：应用于没有进行依赖注入的场合</p>
+<p>（4）使用助手函数request()方法</p>
+<h2 id="请求变量"><a href="#请求变量" class="headerlink" title="请求变量"></a>请求变量</h2><h3 id="1-请求变量"><a href="#1-请求变量" class="headerlink" title="1.请求变量"></a>1.请求变量</h3><p>Request对象支持全局变量的检测，获取和安全过滤（主要作用对象是url）</p>
+<h3 id="2-助手函数"><a href="#2-助手函数" class="headerlink" title="2.助手函数"></a>2.助手函数</h3><p>使用助手函数对Request对象提供的方法进行简化</p>
+<h3 id="请求类型与请求头"><a href="#请求类型与请求头" class="headerlink" title="请求类型与请求头"></a>请求类型与请求头</h3><h3 id="1-请求类型"><a href="#1-请求类型" class="headerlink" title="1.请求类型"></a>1.请求类型</h3><p>我们用method()方法判断Request的请求类型</p>
+<h3 id="2-Http头信息"><a href="#2-Http头信息" class="headerlink" title="2.Http头信息"></a>2.Http头信息</h3><p>使用header()方法输出http头信息，返回是数组类型</p>
+<h2 id="伪静态-参数绑定-请求缓存"><a href="#伪静态-参数绑定-请求缓存" class="headerlink" title="伪静态-参数绑定-请求缓存"></a>伪静态-参数绑定-请求缓存</h2><h3 id="1-伪静态"><a href="#1-伪静态" class="headerlink" title="1.伪静态"></a>1.伪静态</h3><p>伪静态技术是指展示出来的是以html一类的静态页面形式，但其实是用动态脚本来处理的。</p>
+<h3 id="2-参数绑定"><a href="#2-参数绑定" class="headerlink" title="2.参数绑定"></a>2.参数绑定</h3><p>参数绑定功能：即通过url进行数据传参</p>
+<h3 id="3-请求缓存"><a href="#3-请求缓存" class="headerlink" title="3.请求缓存"></a>3.请求缓存</h3><p>请求缓存仅对GET请求有效，并设置有效期</p>
+<h2 id="响应重定向和文件下载"><a href="#响应重定向和文件下载" class="headerlink" title="响应重定向和文件下载"></a>响应重定向和文件下载</h2><h3 id="1-响应操作"><a href="#1-响应操作" class="headerlink" title="1.响应操作"></a>1.响应操作</h3><p>（1）响应输出：return, json, view</p>
+<p>（2）response方法可以设置第二参数：状态码，也可以调code()方法返回状态码</p>
+<p>（3）通过header()设置头文件</p>
+<h3 id="2-重定向"><a href="#2-重定向" class="headerlink" title="2.重定向"></a>2.重定向</h3><p>使用redirect()方法可以实现页面重定向，需要return执行（即页面跳转）</p>
+<h3 id="3-文件下载"><a href="#3-文件下载" class="headerlink" title="3.文件下载"></a>3.文件下载</h3><p>文件和图片下载都可以使用download()方法即可，路径为实际路径</p>
+<h2 id="容器和依赖注入"><a href="#容器和依赖注入" class="headerlink" title="容器和依赖注入"></a>容器和依赖注入</h2><h3 id="1-依赖注入"><a href="#1-依赖注入" class="headerlink" title="1.依赖注入"></a>1.依赖注入</h3><p>依赖注入本质上是指对类的依赖通过构造器完成自动注入</p>
+<p>依赖注入：即允许通过类的方法传递对象，并约束了对象类型,二传递的对象背后的那个类被自动绑定并且实例化了</p>
+<p>由于控制器的参数都来自于URL请求，普通变量通过参数绑定自动获取，对象变量则是通过依赖注入生成</p>
+<h3 id="2-容器"><a href="#2-容器" class="headerlink" title="2.容器"></a>2.容器</h3><p>依赖注入的类统一由容器管理的，大多数情况下是自动绑定和自动实例化</p>
+<p>在容器中可以通过bind()和app()来实现手动的绑定和实例化</p>
+<h2 id="Facade"><a href="#Facade" class="headerlink" title="Facade"></a>Facade</h2><h3 id="1-创建静态调用"><a href="#1-创建静态调用" class="headerlink" title="1.创建静态调用"></a>1.创建静态调用</h3><p>facade即门面设计模式，为容器的类提供了一种静态调用模式（比如之前使用的Request::，Route::，Db::等等）</p>
+<p>在common文件创建容器，在facade文件创建静态调用方法对应common的方法</p>
+<h3 id="2-facade核心类库"><a href="#2-facade核心类库" class="headerlink" title="2.facade核心类库"></a>2.facade核心类库</h3><p>上面仅仅是展示了facade运行的原理，在实际运用中我们使用系统提供的facade核心类库即可</p>
+<h2 id="钩子和行为"><a href="#钩子和行为" class="headerlink" title="钩子和行为"></a>钩子和行为</h2><h3 id="1-概念理解"><a href="#1-概念理解" class="headerlink" title="1.概念理解"></a>1.概念理解</h3><p>行为：当执行到路由时，对路由的设置进行一系列的检测，这种就叫行为</p>
+<p>钩子（事件）：行为执行的位置点，触发点</p>
+<h3 id="2-实例展示"><a href="#2-实例展示" class="headerlink" title="2.实例展示"></a>2.实例展示</h3><p>在behavior文件夹下，存放行为类，行为类中设置一个入口方法run()，只要钩子被触发就会执行</p>
+<p>钩子需要在配置文件中的tags.php设置，把行为注册到其中</p>
+<p>我们也可以在tags.php自定义自己的钩子</p>
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><h3 id="1-定义中间件"><a href="#1-定义中间件" class="headerlink" title="1.定义中间件"></a>1.定义中间件</h3><p>中间件与钩子类似，主要用于拦截和过滤HTTP请求（如URL重定向，权限验证），并进行相应处理</p>
+<p>通过命令行，在应用目录下生成一个中间件文件</p>
+<p>在配置文件夹下设置中间件配置文件：middleware.php（默认说没有的）</p>
+<h3 id="2-前-后置中间件"><a href="#2-前-后置中间件" class="headerlink" title="2.前/后置中间件"></a>2.前/后置中间件</h3><p>前置中间件就是请求阶段进行拦截验证，比如登录判断，跳转，权限等</p>
+<p>后置中间件就是请求完毕后在进行验证，比如写入日志</p>
+<h3 id="3-路由中间件"><a href="#3-路由中间件" class="headerlink" title="3.路由中间件"></a>3.路由中间件</h3><p>给路由使用的中间件，当检测到路由含指定条件，就触发这个中间件</p>
+<h3 id="4-控制器中间件"><a href="#4-控制器中间件" class="headerlink" title="4.控制器中间件"></a>4.控制器中间件</h3><p>可以在控制器中注册中间件，控制器必须继承Controller基类</p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><h3 id="1-异常处理"><a href="#1-异常处理" class="headerlink" title="1.异常处理"></a>1.异常处理</h3><p>（1）使用Exception手动抛出异常</p>
+<p>（2）try……cacth对异常捕捉并抛出</p>
+<p>（3）用HttpException手动抛出http异常</p>
+<p>（4）系统上线要关闭调试模式，进入部署环境下，可以在配置文件设置http错误页面    </p>
+<h2 id="日志处理"><a href="#日志处理" class="headerlink" title="日志处理"></a>日志处理</h2><p>日志处理由Log类完成，记录所有程序中运行的错误记录</p>
+<p>系统的报错会自动存入日志中，我们也可以手动添加日志</p>
+<h2 id="数据验证"><a href="#数据验证" class="headerlink" title="数据验证"></a>数据验证</h2><h3 id="1-验证器"><a href="#1-验证器" class="headerlink" title="1.验证器"></a>1.验证器</h3><p>系统提供了一条命令直接生成验证器类</p>
+<p>在类中我们可以设置规则，定义错误信息</p>
+<p>默认情况下，一旦数据验证不符合规则，就会立即停止验证进行返回</p>
+<h3 id="2-验证规则"><a href="#2-验证规则" class="headerlink" title="2.验证规则"></a>2.验证规则</h3><p>验证规则有字符串模式和数组模式两种</p>
+<p>独立验证（手动调用验证类），直接在控制器中设置验证规则而无需通过验证器</p>
+<p>独立验证支持闭包模式，部支持属性方式和多规则方式</p>
+<h3 id="3-验证场景"><a href="#3-验证场景" class="headerlink" title="3.验证场景"></a>3.验证场景</h3><p>有时我们并不希望所有的字段都得到验证，这是可以设置一个$scene属性，用来限定场景验证</p>
+<p>比如做插入操作时验证3个字段，而做修改操作时只验证两个字段</p>
+<h3 id="4-路由验证"><a href="#4-路由验证" class="headerlink" title="4.路由验证"></a>4.路由验证</h3><p>在路由的参数来调用验证类进行验证，和字段验证一样</p>
+<p>在路由中绑定验证器</p>
+<p>也可以在路由中写入独立的验证器</p>
+<h2 id="验证静态调用和令牌"><a href="#验证静态调用和令牌" class="headerlink" title="验证静态调用和令牌"></a>验证静态调用和令牌</h2><h3 id="1-静态调用"><a href="#1-静态调用" class="headerlink" title="1.静态调用"></a>1.静态调用</h3><p>使用facade模式进行调用验证，非常适合单个数据验证</p>
+<h3 id="2-表单令牌"><a href="#2-表单令牌" class="headerlink" title="2.表单令牌"></a>2.表单令牌</h3><p>表单令牌就是在表单中增加一个隐藏字段，随机生成一串字符，确认提交的表单不是伪造</p>
+<p>这种随机产生的字符和服务器的seesion进行对比，通过则是合法表单</p>
+<h2 id="独立验证和内置规则"><a href="#独立验证和内置规则" class="headerlink" title="独立验证和内置规则"></a>独立验证和内置规则</h2><h3 id="1-独立验证"><a href="#1-独立验证" class="headerlink" title="1.独立验证"></a>1.独立验证</h3><p>除了之前提过的独立验证，系统还提供了make方法实现独立验证（tp6废弃）</p>
+<h3 id="2-内置规则"><a href="#2-内置规则" class="headerlink" title="2.内置规则"></a>2.内置规则</h3><p>内置规则说系统准备的常用验证规则，而且严格区分大小写</p>
+<h2 id="数据库与模型-1"><a href="#数据库与模型-1" class="headerlink" title="数据库与模型"></a>数据库与模型</h2><h2 id="Seesion"><a href="#Seesion" class="headerlink" title="Seesion"></a>Seesion</h2><p>session第一次调用时，会按照config/seesion.php进行初始化</p>
+<p>也可以在控制器中设置初始化</p>
+<p>使用::set()和::get()方法设置seesion的存取</p>
+<p>助手函数也有对应的替代方法</p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>cookie在配置文件cookie.php中会自行初始化</p>
+<p>::set()创建一个基本cookie</p>
+<h2 id="分页功能"><a href="#分页功能" class="headerlink" title="分页功能"></a>分页功能</h2><p>数据库操作和模型操作，都使用paginate()方法来实现</p>
+<h2 id="上传功能"><a href="#上传功能" class="headerlink" title="上传功能"></a>上传功能</h2><p>Request::file方法文件接收文件，然后调用move方法将文件移动到指定文件夹</p>
+<p>可以设置验证器，用于验证文件大小类型等</p>
+<p>默认情况下，上传文件是按时间生成命名的</p>
+<h2 id="数据库和模型的事件"><a href="#数据库和模型的事件" class="headerlink" title="数据库和模型的事件"></a>数据库和模型的事件</h2><h3 id="1-数据库事件"><a href="#1-数据库事件" class="headerlink" title="1.数据库事件"></a>1.数据库事件</h3><p>当对数据库进行增删改查时，可以触发一些事件进行额外操作，它们可以部署在构造方法中等待激活执行</p>
+<p>在控制器端，事件一般可以写在构造方法中，统一管理</p>
+<h3 id="2-模型事件"><a href="#2-模型事件" class="headerlink" title="2.模型事件"></a>2.模型事件</h3><p>在模型端，创建init()方法，写入模型事件，可以使用event或快捷方式</p>
+<h2 id="关联模型"><a href="#关联模型" class="headerlink" title="关联模型"></a>关联模型</h2><p>关联模型，就是将表与表之间进行关联和对象化，更高效的操作数据</p>
+<h3 id="1-一对一关联"><a href="#1-一对一关联" class="headerlink" title="1.一对一关联"></a>1.一对一关联</h3><p>（1）hasOne模式</p>
+<p>模型端使用hasone方法创建一对一关联关系，参数1为附表名，参数2为外键，参数3为主键</p>
+<p>hasOmne模型适合主表关联附表</p>
+<p>在关联表中，-&gt;profile属性方式可以修改数据，删除数据，-&gt;profile()方法方式可以新增数据</p>
+<h3 id="2-一对多关联"><a href="#2-一对多关联" class="headerlink" title="2.一对多关联"></a>2.一对多关联</h3><p>hansMany适合主表关联附表，实现一对多查询，可以查多个重复外键的数据</p>
+<p>使用-&gt;profile()方法模式加上where可以进一步筛选数据</p>
+<p>也可以通过has()和haswhere()通过关联附表查询主表</p>
+<h3 id="3-关联预载入"><a href="#3-关联预载入" class="headerlink" title="3.关联预载入"></a>3.关联预载入</h3><p>在关联查询中，当查询次数过大时，我们可以使用关联预载入进行封装，使多次查询变成一次查询</p>
+<p>使用with方式进行关联</p>
+<p>关联预载入减少查询次数提高了性能，但不支持多次调用</p>
+<h3 id="4-关联统计和输出"><a href="#4-关联统计和输出" class="headerlink" title="4.关联统计和输出"></a>4.关联统计和输出</h3><p>关联统计：</p>
+<ul>
+<li>使用withCount()方法可以统计主表关联附表的个数</li>
+<li>使用withMax()等统计主表关于附表的字段统计</li>
+</ul>
+<p>关联输出：</p>
+<p>隐藏，显示，添加主表字段或附属表字段，然后输出</p>
+<h3 id="5-多对多关联查询"><a href="#5-多对多关联查询" class="headerlink" title="5.多对多关联查询"></a>5.多对多关联查询</h3><p>一对一场景：一个用户对应一个档案资料（至少两张表）</p>
+<p>一对多场景：一个用户可以有多条评论（至少两张表）</p>
+<p>多对多场景：一个用户对应多个角色，而一个角色对应多个用户（至少三张表）</p>
+<p>多对多关联使用belongsToMany方法，填入其他两个附表模型信息作为参数</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2021/03/28/PHP/PHP-thinkphp5/" title="PHP|Thinkphp学习">https://autovy.github.io/2021/03/28/PHP/PHP-thinkphp5/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> 开发实战</a>
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 后端</a>
+              <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 框架学习</a>
+              <a href="/tags/thinkphp/" rel="tag"><i class="fa fa-tag"></i> thinkphp</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/10/C%20language/C%E8%AF%AD%E8%A8%80-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" rel="prev" title="C语言|数据结构入门指南">
+      <i class="fa fa-chevron-left"></i> C语言|数据结构入门指南
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/11/Java/Java-%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6/" rel="next" title="Java|知识框架">
+      Java|知识框架 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+
+
+
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#URL%E8%A7%A3%E6%9E%90%E6%A8%A1%E5%BC%8F"><span class="nav-text">URL解析模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-URL%E8%A7%A3%E6%9E%90"><span class="nav-text">1.URL解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E8%AE%BE%E8%AE%A1"><span class="nav-text">模块设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-text">1.目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%A9%BA%E6%A8%A1%E5%9D%97"><span class="nav-text">2.空模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-text">3.环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8%E5%AE%9A%E4%B9%89"><span class="nav-text">控制器定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%8E%A7%E5%88%B6%E5%99%A8%E8%A6%81%E7%82%B9"><span class="nav-text">1.控制器要点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%B8%B2%E6%9F%93%E6%96%B9%E5%BC%8F"><span class="nav-text">2.渲染方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8%E6%93%8D%E4%BD%9C"><span class="nav-text">控制器操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%89%8D%E7%BD%AE%E6%93%8D%E4%BD%9C"><span class="nav-text">1.前置操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B7%B3%E8%BD%AC%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-text">2.跳转和重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E7%A9%BA%E6%96%B9%E6%B3%95%E5%92%8C%E7%A9%BA%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-text">3.空方法和空控制器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E6%A8%A1%E5%9E%8B"><span class="nav-text">数据库与模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">1.连接数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%8E%A7%E5%88%B6%E5%99%A8%E8%AE%BF%E9%97%AE"><span class="nav-text">2.控制器访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%A8%A1%E5%9E%8B%E8%AE%BF%E9%97%AE"><span class="nav-text">3.模型访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-text">查询数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9F%A5%E8%AF%A2%E4%B8%80%E6%9D%A1%E6%95%B0%E6%8D%AE"><span class="nav-text">1.查询一条数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-text">2.数据查询异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%9F%A5%E8%AF%A2%E5%A4%9A%E4%BE%8B%E6%95%B0%E6%8D%AE"><span class="nav-text">3.查询多例数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%BF%94%E5%9B%9E%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE"><span class="nav-text">4.返回指定数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E5%BC%8F%E6%9F%A5%E8%AF%A2"><span class="nav-text">链式查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9F%A5%E8%AF%A2%E8%A7%84%E5%88%99"><span class="nav-text">1.查询规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%93%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">2.链式的应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%88%A0%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">增删改数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8D%95%E6%9D%A1%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-text">1.单条插入操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-text">2.批量插入操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E4%BF%AE%E6%94%B9"><span class="nav-text">3.数据修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%87%BD%E6%95%B0%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE%E4%BF%AE%E6%94%B9"><span class="nav-text">4.函数处理数据修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-text">5.删除数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-text">查询表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%AF%94%E8%BE%83%E6%9F%A5%E8%AF%A2"><span class="nav-text">1.比较查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2"><span class="nav-text">2.模糊查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8C%BA%E9%97%B4%E6%9F%A5%E8%AF%A2"><span class="nav-text">3.区间查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%A4%9A%E6%9D%A1%E6%9F%A5%E8%AF%A2"><span class="nav-text">4.多条查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9F%A5%E8%AF%A2"><span class="nav-text">5.自定义查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="nav-text">聚合查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E6%9F%A5%E8%AF%A2"><span class="nav-text">1.数值计算查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%97%AD%E5%8C%85%E6%9F%A5%E8%AF%A2"><span class="nav-text">2.闭包查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E9%93%BE%E5%BC%8F%E6%96%B9%E6%B3%95"><span class="nav-text">常用链式方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-where-%EF%BC%9A%E6%9D%A1%E4%BB%B6%E8%BE%93%E5%87%BA"><span class="nav-text">1.where()：条件输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-field-%EF%BC%9A%E6%8C%87%E5%AE%9A%E5%AD%97%E6%AE%B5%E8%BE%93%E5%87%BA"><span class="nav-text">2.field() ：指定字段输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-limit-%EF%BC%9A%E9%99%90%E5%88%B6%E8%BE%93%E5%87%BA%E6%9D%A1%E6%95%B0"><span class="nav-text">3.limit()：限制输出条数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-page-%EF%BC%9A%E8%BE%93%E5%87%BA%E5%88%86%E9%A1%B5"><span class="nav-text">4.page()：输出分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-group-%EF%BC%9A%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84"><span class="nav-text">5.group()：数据分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-having-%EF%BC%9A%E5%88%86%E7%BB%84%E6%9D%A1%E4%BB%B6%E8%BE%93%E5%87%BA"><span class="nav-text">6.having()：分组条件输出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89"><span class="nav-text">模型定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A8%A1%E5%9E%8B%E8%AE%BE%E7%BD%AE"><span class="nav-text">1.模型设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A8%A1%E5%9E%8B%E6%93%8D%E4%BD%9C"><span class="nav-text">2.模型操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%B7%BB%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4"><span class="nav-text">模型添加与删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%8F%92%E5%85%A5%E4%B8%80%E6%9D%A1%E6%95%B0%E6%8D%AE"><span class="nav-text">1.插入一条数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-text">2.批量插入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-delete-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-text">3.delete()删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-destroy-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-text">4.destroy()删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%9D%A1%E4%BB%B6%E5%88%A0%E9%99%A4"><span class="nav-text">5.条件删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%9B%B4%E6%96%B0%E4%B8%8E%E6%9F%A5%E8%AF%A2"><span class="nav-text">模型更新与查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E4%BF%AE%E6%94%B9"><span class="nav-text">1.数据修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2"><span class="nav-text">2.数据查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E8%8E%B7%E5%8F%96%E5%99%A8%E4%B8%8E%E4%BF%AE%E6%94%B9%E5%99%A8"><span class="nav-text">模型获取器与修改器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%8E%B7%E5%8F%96%E5%99%A8"><span class="nav-text">1.获取器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B9%E5%99%A8"><span class="nav-text">2.修改器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%90%9C%E7%B4%A2%E5%99%A8%E5%92%8C%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-text">模型搜索器和数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A8%A1%E5%9E%8B%E6%90%9C%E7%B4%A2%E5%99%A8"><span class="nav-text">1.模型搜索器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-text">2.模型数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E8%87%AA%E5%8A%A8%E6%97%B6%E9%97%B4%E6%88%B3%E5%92%8C%E5%8F%AA%E8%AF%BB%E5%AD%97%E6%AE%B5"><span class="nav-text">模型自动时间戳和只读字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A8%A1%E5%9E%8B%E8%87%AA%E5%8A%A8%E6%97%B6%E9%97%B4%E6%88%B3"><span class="nav-text">1.模型自动时间戳</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A8%A1%E5%9E%8B%E5%8F%AA%E8%AF%BB%E5%AD%97%E6%AE%B5"><span class="nav-text">2.模型只读字段</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%92%8C%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%88%90"><span class="nav-text">模型类型转换和数据完成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A8%A1%E5%9E%8B%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-text">1.模型类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%88%90"><span class="nav-text">2.模型数据完成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%9F%A5%E8%AF%A2%E8%8C%83%E5%9B%B4%E5%92%8C%E8%BE%93%E5%87%BA"><span class="nav-text">模型查询范围和输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A8%A1%E5%9E%8B%E6%9F%A5%E8%AF%A2%E8%8C%83%E5%9B%B4"><span class="nav-text">1.模型查询范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA%E6%96%B9%E5%BC%8F"><span class="nav-text">2.模型输出方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON%E5%AD%97%E6%AE%B5"><span class="nav-text">JSON字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93JSON"><span class="nav-text">1.数据库JSON</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A8%A1%E5%9E%8BJSON"><span class="nav-text">2.模型JSON</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E5%88%A0%E9%99%A4"><span class="nav-text">软删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BD%AF%E5%88%A0%E9%99%A4"><span class="nav-text">1.数据库软删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A8%A1%E5%9E%8B%E8%BD%AF%E5%88%A0%E9%99%A4"><span class="nav-text">2.模型软删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E5%92%8C%E8%A7%86%E5%9B%BE%E6%B8%B2%E6%9F%93"><span class="nav-text">模板引擎和视图渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E"><span class="nav-text">1.模板引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%A7%86%E5%9B%BE%E6%B8%B2%E6%9F%93"><span class="nav-text">2.视图渲染</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E8%B5%8B%E5%80%BC%E5%92%8C%E8%BF%87%E6%BB%A4"><span class="nav-text">视图赋值和过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%A7%86%E5%9B%BE%E8%B5%8B%E5%80%BC"><span class="nav-text">1.视图赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%A7%86%E5%9B%BE%E8%BF%87%E6%BB%A4"><span class="nav-text">2.视图过滤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%8F%98%E9%87%8F%E8%BE%93%E5%87%BA"><span class="nav-text">模板变量输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8F%98%E9%87%8F%E8%BE%93%E5%87%BA"><span class="nav-text">1.变量输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%B6%E4%BB%96%E8%BE%93%E5%87%BA"><span class="nav-text">2.其他输出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E4%B8%AD%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">模板中函数的使用和运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BD%BF%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-text">1.使用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">2.运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%BE%AA%E7%8E%AF%E6%A0%87%E7%AD%BE"><span class="nav-text">模板的循环标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-foreach%E5%BE%AA%E7%8E%AF"><span class="nav-text">1.foreach循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-volist%E5%BE%AA%E7%8E%AF"><span class="nav-text">2.volist循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-for%E5%BE%AA%E7%8E%AF"><span class="nav-text">3.for循环</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%AF%94%E8%BE%83%E5%92%8C%E5%AE%9A%E4%B9%89"><span class="nav-text">模板的比较和定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%AF%94%E8%BE%83%E6%A0%87%E7%AD%BE"><span class="nav-text">1.比较标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9A%E4%B9%89%E6%A0%87%E7%AD%BE"><span class="nav-text">2.定义标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E6%A0%87%E7%AD%BE"><span class="nav-text">模板的条件判断标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-switch%E6%A0%87%E7%AD%BE"><span class="nav-text">1.switch标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-if%E6%A0%87%E7%AD%BE"><span class="nav-text">2.if标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%8C%83%E5%9B%B4%E6%A0%87%E7%AD%BE"><span class="nav-text">3.范围标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E6%A0%87%E7%AD%BE"><span class="nav-text">4.是否存在标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%8C%85%E5%90%AB%E8%BE%93%E5%87%BA"><span class="nav-text">模板的加载包含输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8C%85%E5%90%AB%E6%96%87%E4%BB%B6"><span class="nav-text">1.包含文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%BE%93%E5%87%BA%E6%9B%BF%E6%8D%A2"><span class="nav-text">2.输出替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD"><span class="nav-text">3.文件加载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%B8%83%E5%B1%80%E5%92%8C%E7%BB%A7%E6%89%BF"><span class="nav-text">模板的布局和继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A8%A1%E6%9D%BF%E5%B8%83%E5%B1%80"><span class="nav-text">1.模板布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A8%A1%E6%9D%BF%E7%BB%A7%E6%89%BF"><span class="nav-text">2.模板继承</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%AE%9A%E4%B9%89"><span class="nav-text">路由介绍和定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%B7%AF%E7%94%B1%E7%AE%80%E4%BB%8B"><span class="nav-text">1.路由简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B7%AF%E7%94%B1%E5%AE%9A%E4%B9%89"><span class="nav-text">2.路由定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84%E5%8F%98%E9%87%8F%E8%A7%84%E5%88%99%E5%92%8C%E9%97%AD%E5%8C%85"><span class="nav-text">路由的变量规则和闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8F%98%E9%87%8F%E8%A7%84%E5%88%99"><span class="nav-text">1.变量规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%97%AD%E5%8C%85%E6%94%AF%E6%8C%81"><span class="nav-text">2.闭包支持</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84%E5%9C%B0%E5%9D%80%E5%92%8C%E7%BC%93%E5%AD%98"><span class="nav-text">路由的地址和缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%B7%AF%E7%94%B1%E5%9C%B0%E5%9D%80"><span class="nav-text">1.路由地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B7%AF%E7%94%B1%E7%BC%93%E5%AD%98"><span class="nav-text">2.路由缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84%E5%8F%82%E6%95%B0%E5%92%8C%E5%BF%AB%E6%8D%B7%E8%B7%AF%E7%94%B1"><span class="nav-text">路由的参数和快捷路由</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%B7%AF%E7%94%B1%E5%8F%82%E6%95%B0"><span class="nav-text">1.路由参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%BF%AB%E6%8D%B7%E8%B7%AF%E7%94%B1"><span class="nav-text">2.快捷路由</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%88%86%E7%BB%84%E5%92%8C%E6%B3%A8%E8%A7%A3"><span class="nav-text">路由分组和注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%B7%AF%E7%94%B1%E5%88%86%E7%BB%84"><span class="nav-text">1.路由分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%B3%A8%E8%A7%A3%E8%B7%AF%E7%94%B1"><span class="nav-text">2.注解路由</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1MISS%E5%92%8C%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82"><span class="nav-text">路由MISS和跨域请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-MISS%E8%B7%AF%E7%94%B1"><span class="nav-text">1.MISS路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82"><span class="nav-text">2.跨域请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84%E7%BB%91%E5%AE%9A%E5%92%8C%E5%88%AB%E5%90%8D"><span class="nav-text">路由的绑定和别名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%B7%AF%E7%94%B1%E7%BB%91%E5%AE%9A"><span class="nav-text">1.路由绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B7%AF%E7%94%B1%E5%88%AB%E5%90%8D"><span class="nav-text">2.路由别名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E8%B7%AF%E7%94%B1"><span class="nav-text">资源路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D%E8%B7%AF%E7%94%B1"><span class="nav-text">域名路由</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%9F%E5%90%8D%E8%B7%AF%E7%94%B1"><span class="nav-text">1.域名路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9F%9F%E5%90%8D%E7%BB%91%E5%AE%9A"><span class="nav-text">2.域名绑定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84URL%E7%94%9F%E6%88%90"><span class="nav-text">路由的URL生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%AF%B9%E8%B1%A1%E5%92%8C%E4%BF%A1%E6%81%AF"><span class="nav-text">请求对象和信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%AF%B7%E6%B1%82%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%8E%B7%E5%8F%96"><span class="nav-text">1.请求对象的获取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%98%E9%87%8F"><span class="nav-text">请求变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%AF%B7%E6%B1%82%E5%8F%98%E9%87%8F"><span class="nav-text">1.请求变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8A%A9%E6%89%8B%E5%87%BD%E6%95%B0"><span class="nav-text">2.助手函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E7%B1%BB%E5%9E%8B%E4%B8%8E%E8%AF%B7%E6%B1%82%E5%A4%B4"><span class="nav-text">请求类型与请求头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%AF%B7%E6%B1%82%E7%B1%BB%E5%9E%8B"><span class="nav-text">1.请求类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Http%E5%A4%B4%E4%BF%A1%E6%81%AF"><span class="nav-text">2.Http头信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%AA%E9%9D%99%E6%80%81-%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A-%E8%AF%B7%E6%B1%82%E7%BC%93%E5%AD%98"><span class="nav-text">伪静态-参数绑定-请求缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BC%AA%E9%9D%99%E6%80%81"><span class="nav-text">1.伪静态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A"><span class="nav-text">2.参数绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AF%B7%E6%B1%82%E7%BC%93%E5%AD%98"><span class="nav-text">3.请求缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="nav-text">响应重定向和文件下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%93%8D%E5%BA%94%E6%93%8D%E4%BD%9C"><span class="nav-text">1.响应操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-text">2.重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="nav-text">3.文件下载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="nav-text">容器和依赖注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="nav-text">1.依赖注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%B9%E5%99%A8"><span class="nav-text">2.容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Facade"><span class="nav-text">Facade</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E9%9D%99%E6%80%81%E8%B0%83%E7%94%A8"><span class="nav-text">1.创建静态调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-facade%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%BA%93"><span class="nav-text">2.facade核心类库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%92%A9%E5%AD%90%E5%92%8C%E8%A1%8C%E4%B8%BA"><span class="nav-text">钩子和行为</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A6%82%E5%BF%B5%E7%90%86%E8%A7%A3"><span class="nav-text">1.概念理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E4%BE%8B%E5%B1%95%E7%A4%BA"><span class="nav-text">2.实例展示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-text">中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9A%E4%B9%89%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-text">1.定义中间件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%89%8D-%E5%90%8E%E7%BD%AE%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-text">2.前&#x2F;后置中间件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%B7%AF%E7%94%B1%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-text">3.路由中间件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%8E%A7%E5%88%B6%E5%99%A8%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-text">4.控制器中间件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-text">异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-text">1.异常处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86"><span class="nav-text">日志处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81"><span class="nav-text">数据验证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%AA%8C%E8%AF%81%E5%99%A8"><span class="nav-text">1.验证器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%AA%8C%E8%AF%81%E8%A7%84%E5%88%99"><span class="nav-text">2.验证规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%AA%8C%E8%AF%81%E5%9C%BA%E6%99%AF"><span class="nav-text">3.验证场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%B7%AF%E7%94%B1%E9%AA%8C%E8%AF%81"><span class="nav-text">4.路由验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E9%9D%99%E6%80%81%E8%B0%83%E7%94%A8%E5%92%8C%E4%BB%A4%E7%89%8C"><span class="nav-text">验证静态调用和令牌</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%9D%99%E6%80%81%E8%B0%83%E7%94%A8"><span class="nav-text">1.静态调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%A1%A8%E5%8D%95%E4%BB%A4%E7%89%8C"><span class="nav-text">2.表单令牌</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E9%AA%8C%E8%AF%81%E5%92%8C%E5%86%85%E7%BD%AE%E8%A7%84%E5%88%99"><span class="nav-text">独立验证和内置规则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%8B%AC%E7%AB%8B%E9%AA%8C%E8%AF%81"><span class="nav-text">1.独立验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%86%85%E7%BD%AE%E8%A7%84%E5%88%99"><span class="nav-text">2.内置规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E6%A8%A1%E5%9E%8B-1"><span class="nav-text">数据库与模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Seesion"><span class="nav-text">Seesion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie"><span class="nav-text">Cookie</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD"><span class="nav-text">分页功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E5%8A%9F%E8%83%BD"><span class="nav-text">上传功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BA%8B%E4%BB%B6"><span class="nav-text">数据库和模型的事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E4%BB%B6"><span class="nav-text">1.数据库事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A8%A1%E5%9E%8B%E4%BA%8B%E4%BB%B6"><span class="nav-text">2.模型事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E6%A8%A1%E5%9E%8B"><span class="nav-text">关联模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%80%E5%AF%B9%E4%B8%80%E5%85%B3%E8%81%94"><span class="nav-text">1.一对一关联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%85%B3%E8%81%94"><span class="nav-text">2.一对多关联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%85%B3%E8%81%94%E9%A2%84%E8%BD%BD%E5%85%A5"><span class="nav-text">3.关联预载入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%85%B3%E8%81%94%E7%BB%9F%E8%AE%A1%E5%92%8C%E8%BE%93%E5%87%BA"><span class="nav-text">4.关联统计和输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%A4%9A%E5%AF%B9%E5%A4%9A%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2"><span class="nav-text">5.多对多关联查询</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<a href="/">  <img class="site-author-image" itemprop="image" alt="Autovy"
+      src="/images/2.png">  </a>
+  <p class="site-author-name" itemprop="name">Autovy</p>
+  <div class="site-description" itemprop="description">新时代农民工的数字农田</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Autovy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Autovy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/JohnSmith232" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;JohnSmith232" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-code"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Autovy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">286k</span>
+</div>
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/01/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'RVJRabsBhxWXvhMcG8CH5wbc-gzGzoHsz',
+      appKey     : 'JSGLk7guOagDPMFN9wbASkEh',
+      placeholder: "说点什么吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+  <script src="/js/bloom.js" type="text/javascript"></script>
