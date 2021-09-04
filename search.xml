@@ -200,7 +200,7 @@
 <h3 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h3><h4 id="1-df命令"><a href="#1-df命令" class="headerlink" title="1.df命令"></a>1.df命令</h4><p>列出文件系统整体的磁盘使用量</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 普通查看</span></span><br><span class="line">df</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 内存转换为M</span></span><br><span class="line">df -h</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://img-blog.csdn.net/20170212221928958" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041103972.png" alt="img"></p>
 <h4 id="2-du命令"><a href="#2-du命令" class="headerlink" title="2.du命令"></a>2.du命令</h4><p>检查磁盘空间使用量</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看当前目录内存占用</span></span><br><span class="line">du </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 检查根目录每个目录所占用的容量</span></span><br><span class="line">du -sm /*</span><br></pre></td></tr></table></figure>
 
@@ -274,7 +274,7 @@
       </tags>
   </entry>
   <entry>
-    <title>开发工具|matlab查询文档</title>
+    <title>硬件开发|stm32使用案例</title>
     <url>/2021/06/18/%E7%A1%AC%E4%BB%B6%E5%AD%A6%E4%B9%A0-stm32%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041048103.png" alt="image-20210904104854742"></p>
 <span id="more"></span>
@@ -5825,6 +5825,7 @@
       </categories>
       <tags>
         <tag>开发实战</tag>
+        <tag>管理系统</tag>
         <tag>python</tag>
       </tags>
   </entry>
