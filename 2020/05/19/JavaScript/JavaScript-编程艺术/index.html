@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/gear48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/gear32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="true"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript|编程艺术">
+<meta property="og:url" content="https://autovy.github.io/2020/05/19/JavaScript/JavaScript-%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF/index.html">
+<meta property="og:site_name" content="Autovy&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042333467.png">
+<meta property="article:published_time" content="2020-05-19T06:30:00.000Z">
+<meta property="article:modified_time" content="2021-09-04T15:33:24.423Z">
+<meta property="article:author" content="Autovy">
+<meta property="article:tag" content="入门教程">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042333467.png">
+
+<link rel="canonical" href="https://autovy.github.io/2020/05/19/JavaScript/JavaScript-%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>JavaScript|编程艺术 | Autovy's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Autovy's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Autovy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Just For Interest</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">32</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2020/05/19/JavaScript/JavaScript-%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="新时代农民工的数字农田">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript|编程艺术
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020/05/19 14:30:00" itemprop="dateCreated datePublished" datetime="2020-05-19T14:30:00+08:00">2020/05/19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/19/JavaScript/JavaScript-%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/19/JavaScript/JavaScript-%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.4k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042333467.png" alt="image-20210904233318993"></p>
+<span id="more"></span>
+
+<p>早期的JavaScript在各个浏览器环境的兼容性很差，编程人员必须编写大量<strong>浏览器嗅探</strong>代码来探测浏览器，几个关键新技术给JavaScript带来了春天。</p>
+<p>W3C (万维网联盟)推出的标准化DOM (Document Object Model,<strong>文档对象模型</strong>)，它支持市场上所有常见的浏览器。其次，兴起的Ajax技术，(以DOM和JavaScript语言(以及CSS和XHTML)为基本要素，基于Ajax技术的网站离不开JavaScript和DOM脚本。</p>
+<p> 只要运用得当，再注意避开那些经典的JavaScript 陷阱，DOM编程技术就可以成为Web开发工具箱里又一件功能强大甚至是不可或缺的好东西。</p>
+<h3 id="JavaScript简史"><a href="#JavaScript简史" class="headerlink" title="JavaScript简史"></a>JavaScript简史</h3><p>Web标准三大件：XHTML (可扩展的超文本标记语言)和CSS (层叠样式表)，DOM（文档对象模型）</p>
+<h4 id="JavaScript与DOM"><a href="#JavaScript与DOM" class="headerlink" title="JavaScript与DOM"></a>JavaScript与DOM</h4><p>在JavaScript出现之前，Web浏览器局限于枯燥的文本，在JavaScript出现之后，网页的交互性显著提高。</p>
+<h5 id="1-关于JavaScript"><a href="#1-关于JavaScript" class="headerlink" title="1.关于JavaScript"></a>1.关于JavaScript</h5><p>JavaScript是一种脚本语言,JavaScript脚本通常只能通过Web浏览器去完成某种操作而不是如普通意义上的程序那样可以独立运行。</p>
+<h5 id="2-关于DOM"><a href="#2-关于DOM" class="headerlink" title="2.关于DOM"></a>2.关于DOM</h5><p>DOM是对文档内容对象化的方法，有面对对象编程的思想。所谓对象就是人们约定俗成的客观事物和描述性的抽象概念，万物皆可对象</p>
+<h4 id="Web开发标准"><a href="#Web开发标准" class="headerlink" title="Web开发标准"></a>Web开发标准</h4><h5 id="1-DHTML"><a href="#1-DHTML" class="headerlink" title="1.DHTML"></a>1.DHTML</h5><p>DHTML即动态HTML，DHTML = HTML + CSS + JavaScript</p>
+<ul>
+<li><p>HTML负责标记网页各部分元素</p>
+</li>
+<li><p>CSS负责设置各个元素的排布</p>
+</li>
+<li><p>JavaScript负责实时操控和改变各有关样式</p>
+</li>
+</ul>
+<h5 id="2-相关标准"><a href="#2-相关标准" class="headerlink" title="2.相关标准"></a>2.相关标准</h5><p>DOM的实际用处相当于一种API（应用编程接口），即一组各方共同认可的标准，而不是一种编程语言。</p>
+<p>相关语法会应所使用的编程语言而改变，而标准是保持不变的。你可以通过JavaScript来使用DOM，今后也可以通过PHP和Python来使用它</p>
+<p>W3C对DOM的定义是:“一个与系统平台和编程语言无关的接口，程序和脚本可以通过这个接口动态地对文档的内容、结构和样式进行访问和修改。”</p>
+<h3 id="JavaScript语法"><a href="#JavaScript语法" class="headerlink" title="JavaScript语法"></a>JavaScript语法</h3><h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><h5 id="1-js的添加方法"><a href="#1-js的添加方法" class="headerlink" title="1.js的添加方法"></a>1.js的添加方法</h5><p>（1）第一种方法是把js代码直接放在html文档中，一般放在最后</p>
+<p>（2）最佳的方案是将js代码单独放在一个文件中，用<script>标签的src属性指向该文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;file.js&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-语言类型"><a href="#2-语言类型" class="headerlink" title="2.语言类型"></a>2.语言类型</h5><p>程序设计语言有解释型和编译型两大类。</p>
+<p>Java和c++等语言需要编译器才能转化为二进制的可执行文件</p>
+<p>解释型语言如js，则不需要编译器，它们仅仅需要解释器</p>
+<p>编译型语言再编译阶段就会报错，而解释型语言要到执行阶段才能查到错误</p>
+<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><h5 id="1-基本内容"><a href="#1-基本内容" class="headerlink" title="1.基本内容"></a>1.基本内容</h5><p>变量即会发生变化的值，把值存入变量的操作称为赋值。</p>
+<p>值得注意的是js与python一样是无类型语言，它们都允许直接对变量进行赋值而无需声明，其他语言如c语言，java等都要求——先声明，再使用</p>
+<p>但是为了编程的规范型，js也往往有对变量做出声明的习惯</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mood;</span><br><span class="line"><span class="keyword">var</span> age;</span><br><span class="line"><span class="keyword">var</span> mood, age;</span><br></pre></td></tr></table></figure>
+
+<p>在js中，变量和其他语法元素名字是区分大小写的</p>
+<h5 id="2-命名规则"><a href="#2-命名规则" class="headerlink" title="2.命名规则"></a>2.命名规则</h5><ul>
+<li>JavaScript语法不允许变量的名字中包含空格或标点符号(但美元符号“$”例外)</li>
+<li>JavaScript变量名允许包含字母、数字、美元符号和下划线字符。为了让比较长的变量名有更好的可读性,可以在变量名中的适当位置插入一个下划线字符</li>
+</ul>
+<h5 id="3-数据类型"><a href="#3-数据类型" class="headerlink" title="3.数据类型"></a>3.数据类型</h5><p>js中无需进行类型声明，字符串型和数值型的赋值语法是一样的。</p>
+<p>依据语言是否要对数据类型进行声明把语言分为<strong>强类型</strong>和<strong>弱类型</strong></p>
+<p>例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="string">&quot;三&quot;</span>;</span><br><span class="line">age = <span class="number">33</span>;</span><br></pre></td></tr></table></figure>
+
+<p>其在强类型语言中是非法的，但在js语言中完全ok（好像并不是什么好事）</p>
+<h5 id="4-数组"><a href="#4-数组" class="headerlink" title="4.数组"></a>4.数组</h5><p>字符串，数值和布尔值都属于离散值，它们任意时刻就只能有一个值。而数组则可以用一个变量同时存储一组值</p>
+<p>（1）数组需要用关键字Array来<strong>声明</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> beatles = <span class="built_in">Array</span>(<span class="number">4</span>); <span class="comment">//确定数组长度</span></span><br><span class="line"><span class="keyword">var</span> bratles = <span class="built_in">Array</span>(); <span class="comment">//不确定长度</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）向数组添加元素的操作称为<strong>填充</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">beatles[<span class="number">0</span>] = <span class="string">&quot;Jhon&quot;</span>; <span class="comment">//通过下标确定存放位置</span></span><br><span class="line"><span class="keyword">var</span> beatles = <span class="built_in">Array</span>(<span class="string">&quot;j&quot;</span>,<span class="string">&quot;p&quot;</span>,<span class="string">&quot;r&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> beatles = [<span class="string">&quot;j&quot;</span>,<span class="string">&quot;p&quot;</span>,<span class="string">&quot;r&quot;</span>];</span><br></pre></td></tr></table></figure>
+
+<p>事实上，只需要一对方括号就可以创建我们想要的数组，但是在声明或填充数组时写出Array关键字是一个良好的编程习惯</p>
+<p>（3）关联数组</p>
+<p>数组的下标可以是字符串，通过各元素的名字来引用它们，提高了脚本的可读性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lennon = <span class="built_in">Array</span>();</span><br><span class="line">lennon[ <span class="string">&quot;name&quot;</span>] = <span class="string">&quot;John&quot;</span>;</span><br><span class="line">lennon[<span class="string">&quot;year&quot;</span>] = <span class="number">1940</span>;</span><br><span class="line">lennon[<span class="string">&quot;living&quot;</span>] = <span class="literal">false</span>;</span><br></pre></td></tr></table></figure>
+
+<p>再用新的数组来存储数组（二维数组的概念）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> beatles = <span class="built_in">Array</span>();</span><br><span class="line">beatles[<span class="number">0</span>] = lennon;</span><br><span class="line"><span class="comment">//则有beatles[0][&quot;year&quot;]值为1940</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="5-操作"><a href="#5-操作" class="headerlink" title="5.操作"></a>5.操作</h5><p>只说一点——js的操作符是真的骚，有很多奇奇怪怪的骚操作。</p>
+<h4 id="条件与循环语句"><a href="#条件与循环语句" class="headerlink" title="条件与循环语句"></a>条件与循环语句</h4><p>条件语句与其他语言是一样一样的，都涉及到比较操作符和逻辑操作符</p>
+<p>循环语句中for循环最常用于对数组的全体元素进行遍历处理，常常会用到array.length属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> beatles = <span class="built_in">Array</span>(<span class="string">&quot;John&quot;</span> ,<span class="string">&quot;Paul&quot;</span> ,<span class="string">&quot;George&quot;</span> ,<span class="string">&quot;Ringo&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> count = <span class="number">0</span> ; count &lt; beatles.length; count++)&#123;</span><br><span class="line">alert(beatles[ count]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>重复使用的一组语句，可以打包成为一个函数，供我们随时调用。作为种良好的编程习惯，你们应该先对函数做出定义再调用它们。</p>
+<h5 id="1-基本内容-1"><a href="#1-基本内容-1" class="headerlink" title="1.基本内容"></a>1.基本内容</h5><p>（1）函数的声明</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shout</span>(<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）函数的调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shout();</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-参数"><a href="#2-参数" class="headerlink" title="2.参数"></a>2.参数</h5><p>（1）函数接收参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiply</span>(<span class="params">num1,num2</span>) </span>&#123;</span><br><span class="line"><span class="keyword">var</span> total = num1 * num2;</span><br><span class="line">alert(total);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以在任意位置调用这个函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">multiply(<span class="number">10</span>,<span class="number">2</span>); </span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）函数返回参数</p>
+<p>函数不仅仅可以接收数据，还可以返回数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convertToCelsius</span>(<span class="params">temp</span>) </span>&#123;</span><br><span class="line"><span class="keyword">var</span> result = temp - <span class="number">32</span>;</span><br><span class="line">result = result / <span class="number">1.8</span>;</span><br><span class="line"><span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> temp_fahrenheit = <span class="number">95</span>;</span><br><span class="line"><span class="keyword">var</span> temp_celsius = convertToCelsius(temp_ fahrenheit);</span><br><span class="line">alert(temp_celsius);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>函数真正的价值体现在，我们可以把它们当作数据类型来使用——把一个函数的调用结果赋值给一个变量</p>
+<h5 id="3-作用域"><a href="#3-作用域" class="headerlink" title="3.作用域"></a>3.作用域</h5><p>在函数内定义的变量是局部变量，在函数外的变量是全局变量。一定要有用var声明变量的习惯，否则会有二义性的隐患</p>
+<h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h4><p>对象是一种非常重要的数据类型，对象里的数据可以通过：属性和方法两种方式访问</p>
+<ul>
+<li>属性即隶属于特定对象的<strong>变量</strong></li>
+<li>方法是只有特定对象才能调用的<strong>函数</strong></li>
+</ul>
+<p>总而言之，对象是单个实物的抽象，对象是一个容器，封装了属性（property）和方法（method）</p>
+<h5 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1.构造函数"></a>1.构造函数</h5><p>所谓构造函数，就是专门用来生成实例对象的函数。它就是对象的模板，描述实例对象的基本结构。一个构造函数，可以生成多个实例对象，这些实例对象都有相同的结构。</p>
+<p>js的对象体系是基于构造函数，而其他面向对象语言（c++和java）是基于类（class）的，对象就是类的实例</p>
+<p>构造函数就是一个普通的函数，但是有自己的特征和用法。</p>
+<p>实例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Vehicle = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.price = <span class="number">1000</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>Vehicle</code>就是构造函数。为了与普通函数区别，构造函数名字的第一个字母通常大写，构造函数有两大特点：</p>
+<ul>
+<li>函数体内部使用了<code>this</code>关键字，代表了所要生成的对象实例</li>
+<li>生成对象的时候，必须使用<code>new</code>命令。</li>
+</ul>
+<h5 id="2-new命令"><a href="#2-new命令" class="headerlink" title="2.new命令"></a>2.new命令</h5><p>（1）基本用法</p>
+<p><code>new</code>命令的作用，就是执行构造函数，返回一个实例对象</p>
+<p>调用对象中的属性和方法都用“点”语法来访问</p>
+<p>例子1：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Vehicle = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.price = <span class="number">1000</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v = <span class="keyword">new</span> Vehicle(); <span class="comment">//new可以执行构造函数</span></span><br><span class="line">v.price <span class="comment">// 1000</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>代码通过<code>new</code>命令，让构造函数<code>Vehicle</code>生成一个实例对象，保存在变量<code>v</code>中</li>
+<li>这个新生成的实例对象，从构造函数<code>Vehicle</code>得到了<code>price</code>属性（继承）</li>
+<li><code>new</code>命令执行时，构造函数内部的<code>this</code>，就代表了新生成的实例对象，<code>this.price</code>表示实例对象有一个<code>price</code>属性，值是1000（this指向生成的实例对象）</li>
+</ul>
+<p>例子2带参数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Vehicle = <span class="function"><span class="keyword">function</span> (<span class="params">p</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.price = p;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> v = <span class="keyword">new</span> Vehicle(<span class="number">500</span>);</span><br></pre></td></tr></table></figure>
+
+<p>构造函数本身就是一个普通函数，但是new命令让它焕然一新，没有new命令，this就代表了全局对象</p>
+<p>（2）new命令原理</p>
+<ul>
+<li>创建一个空对象，作为将要返回的对象实例。</li>
+<li>将这个空对象的原型，指向构造函数的<code>prototype</code>属性。</li>
+<li>将这个空对象赋值给函数内部的<code>this</code>关键字。</li>
+<li>开始执行构造函数内部的代码。</li>
+</ul>
+<p>构造函数内部，<code>this</code>指的是一个新生成的空对象，所有针对<code>this</code>的操作，都会发生在这个空对象上。构造函数之所以叫“构造函数”，就是说这个函数的目的，就是操作一个空对象（即<code>this</code>对象），将其“构造”为需要的样子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Vehicle = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.price = <span class="number">1000</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1000</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">(<span class="keyword">new</span> Vehicle()) === <span class="number">1000</span></span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>如果构造函数内部有<code>return</code>语句，而且<code>return</code>后面跟着一个对象，<code>new</code>命令会返回<code>return</code>语句指定的对象；否则，就会不管<code>return</code>语句，返回<code>this</code>对象。</p>
+<p>但是，如果<code>return</code>语句返回的是一个跟<code>this</code>无关的新对象，<code>new</code>命令会返回这个新对象，而不是<code>this</code>对象。这一点需要特别引起注意。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Vehicle = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.price = <span class="number">1000</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">price</span>: <span class="number">2000</span> &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">(<span class="keyword">new</span> Vehicle()).price</span><br><span class="line"><span class="comment">// 2000</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-内建对象"><a href="#3-内建对象" class="headerlink" title="3.内建对象"></a>3.内建对象</h5><p>即js本身为用户写好的对象，比如我们所熟悉的数组对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> beatles = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">beatles.length;</span><br></pre></td></tr></table></figure>
+
+<p>length就是Array对象的一个写好的属性</p>
+<p>除此之外，js常用的内建对象还有Math对象和Date对象</p>
+<p>Math对象：主要用于数值得运算</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">7.561</span>;</span><br><span class="line"><span class="keyword">var</span> num = <span class="built_in">Math</span>.round(num);</span><br><span class="line">alert(num);</span><br></pre></td></tr></table></figure>
+
+<p>上述例子，利用了Math对象得round方法，把十进制数舍入为一个整数</p>
+<p>Date对象：用来存储和检索一个特定的日期和时间相关的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var current_date &#x3D; new Date();</span><br><span class="line">var today &#x3D; current_date.getDay();</span><br></pre></td></tr></table></figure>
+
+<p>上述例子可以快速判断给定日期是星期几。</p>
+<h5 id="4-宿主对象"><a href="#4-宿主对象" class="headerlink" title="4.宿主对象"></a>4.宿主对象</h5><p>宿主对象，不是js语言本身的，而是由它的运行环境提供的（一般来说都是web浏览器提供的），包括Form，Image，Element等，我们可以通过这些对象获取到给定网页上的对象元素信息。</p>
+<p>宿主对象的功能其实于DOM中的document的功能是一样的，所有我们常用DOM而少用宿主对象。</p>
+<h5 id="5-prototype-对象"><a href="#5-prototype-对象" class="headerlink" title="5.prototype 对象"></a>5.prototype 对象</h5><p>（1）构造函数的缺点</p>
+<p>js是通过构造函数生成新对象，实例对象的属性和方法，可以定义在构造函数内部。每new一次，属性和方法都要重新创造一次</p>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name, color</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.color = color;</span><br><span class="line">  <span class="built_in">this</span>.meow = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;喵喵&#x27;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cat1 = <span class="keyword">new</span> Cat(<span class="string">&#x27;大毛&#x27;</span>, <span class="string">&#x27;白色&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> cat2 = <span class="keyword">new</span> Cat(<span class="string">&#x27;二毛&#x27;</span>, <span class="string">&#x27;黑色&#x27;</span>);</span><br><span class="line"></span><br><span class="line">cat1.meow === cat2.meow <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，两个对象都具有相同的meow方法，但是每新建一个实例，就会新建一个<code>meow</code>方法，这无疑浪费了资源。</p>
+<p>（2）prototype 属性</p>
+<p>为了解决构造函数的缺点，让所有实例对象共享“资源”，节省内存，我们就要用到prototype 属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line">Animal.prototype.color = <span class="string">&#x27;white&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cat1 = <span class="keyword">new</span> Animal(<span class="string">&#x27;大毛&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> cat2 = <span class="keyword">new</span> Animal(<span class="string">&#x27;二毛&#x27;</span>);</span><br><span class="line"></span><br><span class="line">cat1.color <span class="comment">// &#x27;white&#x27;</span></span><br><span class="line">cat2.color <span class="comment">// &#x27;white&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>对象cat1和cat2共享color属性，只要修改该属性内容，变动就立刻会体现在所有实例对象上</p>
+<p><strong>注意</strong>：</p>
+<p>实例对象<code>cat1</code>的<code>color</code>属性改为<code>black</code>，就使得它不再去原型对象读取<code>color</code>属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat1.color = <span class="string">&#x27;black&#x27;</span>;</span><br><span class="line">cat1.color <span class="comment">// &#x27;black&#x27;</span></span><br><span class="line">cat2.color <span class="comment">// &#x27;yellow&#x27;</span></span><br><span class="line">Animal.prototype.color <span class="comment">// &#x27;yellow&#x27;;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="6-Object对象"><a href="#6-Object对象" class="headerlink" title="6.Object对象"></a>6.Object对象</h5><p>js在<code>Object</code>对象上提供了很多方法用于处理面向对象编程的相关操作</p>
+<p>（1）Object的读写操作</p>
+<p>读取原型对象：getPrototypeOf</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获得构造函数原型</span></span><br><span class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> F();</span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(f) === F.prototype <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数的原型是 Function.prototype</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(f) === <span class="built_in">Function</span>.prototype <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>属性共享setPrototypeOf</p>
+<p><code>Object.setPrototypeOf</code>方法为参数对象设置原型，返回该参数对象。它接受两个参数，第一个是现有对象，第二个是原型对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> b = &#123;<span class="attr">x</span>: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(a, b);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(a) === b <span class="comment">// true</span></span><br><span class="line">a.x <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，<code>Object.setPrototypeOf</code>方法将对象<code>a</code>的原型，设置为对象<code>b</code>，因此<code>a</code>可以共享<code>b</code>的属性。</p>
+<p>（2）Object.create() 继承创建实例对象</p>
+<p>构造函数作为模板，可以生成实例对象。但是，有时拿不到构造函数，只能拿到一个现有的对象。我们希望以这个现有的对象作为模板，生成新的实例对象，这时就可以使用<code>Object.create()</code>方法。</p>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">  name: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">  age: <span class="number">38</span>,</span><br><span class="line">  greeting: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Hi! I\&#x27;m &#x27;</span> + <span class="built_in">this</span>.name + <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person2 = <span class="built_in">Object</span>.create(person1);</span><br><span class="line"></span><br><span class="line">person2.name <span class="comment">// 张三</span></span><br><span class="line">person2.greeting() <span class="comment">// Hi! I&#x27;m 张三.</span></span><br></pre></td></tr></table></figure>
+
+<p>对象person2继承了person1的属性和方法</p>
+<p>（3）获取对象所有属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getOwnPropertyNames(<span class="built_in">Date</span>)</span><br><span class="line"><span class="comment">// [&quot;parse&quot;, &quot;arguments&quot;, &quot;UTC&quot;, &quot;caller&quot;, &quot;name&quot;, &quot;prototype&quot;, &quot;now&quot;, &quot;length&quot;]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.keys(<span class="built_in">Date</span>) <span class="comment">// []</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>Object.getOwnPropertyNames</code>方法返回<code>Date</code>所有自身的属性名</li>
+<li>Object.keys只获取那些可以遍历的属性</li>
+</ul>
+<p>（4）遍历属性</p>
+<p>获得对象的所有可遍历属性（不管是自身的还是继承的），可以使用<code>for...in</code>循环</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o1 = &#123; <span class="attr">p1</span>: <span class="number">123</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o2 = <span class="built_in">Object</span>.create(o1, &#123;</span><br><span class="line">  p2: &#123; <span class="attr">value</span>: <span class="string">&quot;abc&quot;</span>, <span class="attr">enumerable</span>: <span class="literal">true</span> &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (p <span class="keyword">in</span> o2) &#123;</span><br><span class="line">  <span class="built_in">console</span>.info(p);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// p2</span></span><br><span class="line"><span class="comment">// p1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="7-this关键字"><a href="#7-this关键字" class="headerlink" title="7.this关键字"></a>7.this关键字</h5><p>（1）一般含义</p>
+<p>在上述例子中，this可以用在构造函数中，表示实例对象。this总能返回一个对象，简单说，<code>this</code>就是属性或方法“当前”所在的对象。</p>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">  describe: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;姓名：&#x27;</span>+ <span class="built_in">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">person.describe()</span><br><span class="line"><span class="comment">// &quot;姓名：张三&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>this.name表示name属性所在的那个对象。由于<code>this.name</code>是在<code>describe</code>方法中调用，而<code>describe</code>方法所在的当前对象是<code>person</code>，因此<code>this</code>指向<code>person</code>，<code>this.name</code>就是person.name。</p>
+<p>（2）this的动态指向</p>
+<p>实例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;姓名：&#x27;</span>+ <span class="built_in">this</span>.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> A = &#123;</span><br><span class="line">  name: <span class="string">&#x27;张三&#x27;</span>,</span><br><span class="line">  describe: f</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> B = &#123;</span><br><span class="line">  name: <span class="string">&#x27;李四&#x27;</span>,</span><br><span class="line">  describe: f</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">A.describe() <span class="comment">// &quot;姓名：张三&quot;</span></span><br><span class="line">B.describe() <span class="comment">// &quot;姓名：李四&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>函数<code>f</code>内部使用了<code>this</code>关键字，随着<code>f</code>所在的对象不同，<code>this</code>的指向也不同。只要函数被赋给另一个变量，<code>this</code>的指向就会变</p>
+<p>网页实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">size</span>=<span class="string">3</span> <span class="attr">onChange</span>=<span class="string">&quot;validate(this, 18, 99);&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">validate</span>(<span class="params">obj, lowval, hival</span>)</span>&#123;</span></span><br><span class="line">  if ((obj.value &lt; lowval) || (obj.value &gt; hival))</span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">&#x27;Invalid Value!&#x27;</span>);</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面代码是一个文本输入框，每当用户输入一个值，就会调用<code>onChange</code>回调函数，验证这个值是否在指定范围。this不断指向用户输入的值。</p>
+</script></p>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2020/05/19/JavaScript/JavaScript-%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF/" title="JavaScript|编程艺术">https://autovy.github.io/2020/05/19/JavaScript/JavaScript-编程艺术/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 入门教程</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/03/Mobile/%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E6%96%B0%E7%95%AA%E6%9F%A5%E8%AF%A2%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%9E%E6%88%98/" rel="prev" title="小程序|新番查询小程序">
+      <i class="fa fa-chevron-left"></i> 小程序|新番查询小程序
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/24/JavaScript/JavaScript-DOM%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF/" rel="next" title="JavaScript|DOM编程艺术">
+      JavaScript|DOM编程艺术 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+
+
+
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript%E7%AE%80%E5%8F%B2"><span class="nav-text">JavaScript简史</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript%E4%B8%8EDOM"><span class="nav-text">JavaScript与DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%85%B3%E4%BA%8EJavaScript"><span class="nav-text">1.关于JavaScript</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%85%B3%E4%BA%8EDOM"><span class="nav-text">2.关于DOM</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web%E5%BC%80%E5%8F%91%E6%A0%87%E5%87%86"><span class="nav-text">Web开发标准</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-DHTML"><span class="nav-text">1.DHTML</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E7%9B%B8%E5%85%B3%E6%A0%87%E5%87%86"><span class="nav-text">2.相关标准</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript%E8%AF%AD%E6%B3%95"><span class="nav-text">JavaScript语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-js%E7%9A%84%E6%B7%BB%E5%8A%A0%E6%96%B9%E6%B3%95"><span class="nav-text">1.js的添加方法</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<a href="/">  <img class="site-author-image" itemprop="image" alt="Autovy"
+      src="/images/2.png">  </a>
+  <p class="site-author-name" itemprop="name">Autovy</p>
+  <div class="site-description" itemprop="description">新时代农民工的数字农田</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Autovy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Autovy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/JohnSmith232" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;JohnSmith232" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-code"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Autovy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">355k</span>
+</div>
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/01/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'RVJRabsBhxWXvhMcG8CH5wbc-gzGzoHsz',
+      appKey     : 'JSGLk7guOagDPMFN9wbASkEh',
+      placeholder: "说点什么吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+  <script src="/js/bloom.js" type="text/javascript"></script>
