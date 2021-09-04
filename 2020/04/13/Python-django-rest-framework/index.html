@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/gear48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/gear32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="true"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="官方快速入门教程有坑，一直找不到关于django rest framework好的书籍和好的博文，本文都是基于网上收集整理的资料">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python|django-rest-framework入门">
+<meta property="og:url" content="https://autovy.github.io/2020/04/13/Python-django-rest-framework/index.html">
+<meta property="og:site_name" content="Autovy&#39;s blog">
+<meta property="og:description" content="官方快速入门教程有坑，一直找不到关于django rest framework好的书籍和好的博文，本文都是基于网上收集整理的资料">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041025355.png">
+<meta property="og:image" content="https://autovy.github.io/2020/AppData/Roaming/Typora/typora-user-images/image-20200413103713150.png">
+<meta property="article:published_time" content="2020-04-13T06:30:00.000Z">
+<meta property="article:modified_time" content="2021-09-04T02:31:42.756Z">
+<meta property="article:author" content="Autovy">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="框架学习">
+<meta property="article:tag" content="django">
+<meta property="article:tag" content="rest framework">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041025355.png">
+
+<link rel="canonical" href="https://autovy.github.io/2020/04/13/Python-django-rest-framework/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Python|django-rest-framework入门 | Autovy's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Autovy's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Autovy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Just For Interest</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">21</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">21</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2020/04/13/Python-django-rest-framework/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="某编外人员的个人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python|django-rest-framework入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020/04/13 14:30:00" itemprop="dateCreated datePublished" datetime="2020-04-13T14:30:00+08:00">2020/04/13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/04/13/Python-django-rest-framework/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/04/13/Python-django-rest-framework/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>官方快速入门教程有坑，一直找不到关于django rest framework好的书籍和好的博文，本文都是基于网上收集整理的资料</p>
+<span id="more"></span>
+
+<h4 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h4><p>Django REST framework（以下简称 DRF）是一个开源的 Django 扩展，提供了便捷的 REST API 开发框架，是实现前后端分离的典型案例。所谓前后端分类，即前端负责页面展示和与用户的交互，后端则负责API接口</p>
+<h5 id="1-功能介绍"><a href="#1-功能介绍" class="headerlink" title="1.功能介绍"></a>1.功能介绍</h5><ul>
+<li>支持 OAuth 认证</li>
+<li>支持对 ORM 和非 ORM 数据源的序列化</li>
+<li>丰富的定制层级：函数视图、类视图、视图集合</li>
+<li>内置Mixins，可以用于快速组装</li>
+</ul>
+<h5 id="2-特性"><a href="#2-特性" class="headerlink" title="2.特性"></a>2.特性</h5><ul>
+<li>直观的 API web 界面。</li>
+<li>多种身份认证和权限认证方式的支持。</li>
+<li>内置了 OAuth1 和 OAuth2 的支持。</li>
+<li>内置了限流系统。</li>
+<li>根据 Django ORM 或者其它库自动序列化。</li>
+<li>丰富的定制层级：函数视图、类视图、视图集合到自动生成 API，满足各种需要。</li>
+<li>可扩展性，插件丰富。</li>
+<li>广泛使用，文档丰富。</li>
+</ul>
+<h4 id="RESTful-架构"><a href="#RESTful-架构" class="headerlink" title="RESTful 架构"></a>RESTful 架构</h4><p>RESTful架构，就是目前最流行的一种互联网软件架构。它结构清晰、符合标准、易于理解、扩展方便，所以正得到越来越多网站的采用</p>
+<p>那什么是RESTful架构呢？</p>
+<p>　　（1）<strong>每一个URI代表一种资源；</strong>简单理解就是url指向网络上的一个信息如文本，图片，音频等，要获取这个资源只需访问这个url即可</p>
+<p>　　（2）<strong>客户端和服务器之间，传递这种资源的某种表现层；</strong>所谓表现层即指把“资源”呈现出来的的形式，如文本（资源）可以用txt格式，html格式，json格式（表现层）来呈现。访问一个网站，客户端和服务端会传递这种表现层，以实现下一个步骤：状态转化</p>
+<p>　　（3）<strong>客户端通过四个HTTP动词，对服务器端资源进行操作，实现”表现层状态转化”。</strong>因为http协议是无状态协议，所有状态都保存在服务端，客户端想要操作服务器，必须通过某种手段，让服务器端发生”状态转化”（State Transfer）。而这种转化是建立在表现层之上的，所以就是”表现层状态转化”。</p>
+<p>参考文章：<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2011/09/restful.html">http://www.ruanyifeng.com/blog/2011/09/restful.html</a></p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><h5 id="1-Serializer序列化"><a href="#1-Serializer序列化" class="headerlink" title="1.Serializer序列化"></a>1.Serializer序列化</h5><p>序列化器用于处理前端发来的json数据,因为前端发送给后端的是json数据,但是后端要向数据库存储数据,json数据是不被允许的.反序列化则反过来理解。</p>
+<p>简单来说就是通过映射，把数据结构转换符合前端/后端的数据，就是充当一个翻译官的作用</p>
+<p>（1）序列化</p>
+<p>模板：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.core <span class="keyword">import</span> serializers</span><br><span class="line">data = serializers.serialize(<span class="string">&quot;xml&quot;</span>, SomeModel.objects.<span class="built_in">all</span>())</span><br></pre></td></tr></table></figure>
+
+<p>从djang.core导入它，然后调用它的serialize方法。</p>
+<p>这个方法至少接收两个参数，第一个是你要序列化成为的数据格式，这里是‘xml’，第二个是要序列化的数据对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YourSerializer</span>(<span class="params">Serializer</span>):</span></span><br><span class="line">    field1 = Field()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">save</span>(<span class="params">self, validated_data</span>):</span></span><br><span class="line">        <span class="comment"># save your data here</span></span><br><span class="line">        <span class="keyword">return</span> saved_data</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update</span>(<span class="params">self, instance, validated_data</span>):</span></span><br><span class="line">        <span class="comment"># update your instance</span></span><br><span class="line">        <span class="keyword">return</span> instance</span><br></pre></td></tr></table></figure>
+
+<p>序列化之后的数据保存在 <code>serializer.data</code> 中的，可以使用 <code>SomeRenderer().render(serializer.data)</code> 将其序列化为字符串对象作为 Response body 返回。</p>
+<p>（2）反序列化</p>
+<p>模板：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data = SomeParser().parse(incoming_stream)</span><br><span class="line">serializer = YourSerializer(data=data)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> serializer.is_valid():     <span class="comment"># 这里会根据 Serialzier 的 Field 和自定义验证工具进行数据校验</span></span><br><span class="line">    logging.info(serializer. validated_data)</span><br><span class="line">    serializer.update()        <span class="comment"># 或者 serializer.create()</span></span><br></pre></td></tr></table></figure>
+
+<p>对于自定义 Serializer，你需要自己实现 <code>create</code> 和 <code>update</code> 方法。</p>
+<p>你也可以使用 <code>serializer.save(**data)</code>，<code>save</code> 方法的行为取决于初始化的方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .save() 会创建一个新实例</span></span><br><span class="line">serializer = CommentSerializer(data=data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># .save() 会更新 `comment` 实例</span></span><br><span class="line">serializer = CommentSerializer(comment, data=data)</span><br></pre></td></tr></table></figure>
+
+<p>反序列化时应该先运行 <code>serializer.is_valid()</code> 判断数据是否合法，<code>serializer.is_valid(raise_exception=True)</code> 会直接返回 400 信息。</p>
+<h5 id="2-ViewSet视图"><a href="#2-ViewSet视图" class="headerlink" title="2.ViewSet视图"></a>2.ViewSet视图</h5><p>DRF 通过 View 提供 API 接口，一个 View 可以对应多个 Renderer，针对不同的渲染条件提供不同的输出格式（HTML／XML／JSON）</p>
+<p>ViewSet 则是 View 的一个封装，一个 ViewSet 可以为同一个 URL 根据请求方法提供不同的接口。尤其是 ModelViewSet 会自动根据 Model 的定义生成 REST 接口和 URL，能够快速生成网站的一整套 API。</p>
+<p>定义一个 ViewSet 需要为其声明 <code>queryset</code> 和 <code>serializer</code> 属性</p>
+<p>模板：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserViewSet</span>(<span class="params">viewsets.ModelViewSet</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    API endpoint that allows users to be viewed or edited.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    queryset = User.objects.<span class="built_in">all</span>().order_by(<span class="string">&#x27;-date_joined&#x27;</span>)</span><br><span class="line">    serializer_class = UserSerializer</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Meta 继承：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AccountSerializer</span>(<span class="params">MyBaseSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>(<span class="params">MyBaseSerializer.Meta</span>):</span></span><br><span class="line">        model = Account</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-Request对象"><a href="#3-Request对象" class="headerlink" title="3.Request对象"></a>3.Request对象</h5><p>DRF使用Requests对象扩展了原生的HttpRequest，并提供了更灵活的请求处理。Requests对象的核心属性就是request.data，可以处理任意数据，接受POST、PUT和PATCH方法。</p>
+<h4 id="DRF处理流程"><a href="#DRF处理流程" class="headerlink" title="DRF处理流程"></a>DRF处理流程</h4><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041025355.png" alt="img"></p>
+<h4 id="实战应用"><a href="#实战应用" class="headerlink" title="实战应用"></a>实战应用</h4><p>DRF的使用主要分为三步：定义资源 - 实现HTTP方法 - 配置URL</p>
+<h5 id="1-安装配置"><a href="#1-安装配置" class="headerlink" title="1.安装配置"></a>1.安装配置</h5><p>确保自己的虚拟环境安装好了djangorestframework</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install djangorestframework</span><br></pre></td></tr></table></figure>
+
+<p>在项目的setting中编写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">&#x27;django.contrib.admin&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.auth&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.contenttypes&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.sessions&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.messages&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.contrib.staticfiles&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;demo&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;rest_framework&#x27;</span>, <span class="comment">#添加djangorestframework框架</span></span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-序列化"><a href="#2-序列化" class="headerlink" title="2.序列化"></a>2.序列化</h5><p>（1）定义模型资源</p>
+<p>在app中的models.py，定义模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fruit</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    name = models.CharField(<span class="string">u&#x27;名称&#x27;</span>, default=<span class="string">&quot;&quot;</span>, max_length=<span class="number">255</span>)</span><br><span class="line">    price = models.FloatField(<span class="string">u&quot;单价&quot;</span>, default=<span class="number">0</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）实现序列化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> serializers  <span class="comment">#在框架中导入</span></span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Fruit</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FruitSerializer</span>(<span class="params">serializers.HyperlinkedModelSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span>             <span class="comment">#模型的元数据</span></span><br><span class="line">        model = Fruit       <span class="comment">#选中模型</span></span><br><span class="line">        fields = (<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;price&#x27;</span>)  <span class="comment">#选择转换的字段</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>模型的元数据，指的是“除了字段外的所有内容”，例如排序方式、数据库表名、人类可读的单数或者复数名，<strong>每个模型都可以有自己的元数据类，每个元数据类也只对自己所在模型起作用。</strong></li>
+<li>fields属性设置成’<strong>all</strong>‘来表明使用模型中的所有字段。</li>
+<li><code>HyperlinkedModelSerializer</code>类类似于<code>ModelSerializer</code>类，不同之处在于它使用超链接来表示关联关系而不是主键。</li>
+</ul>
+<p>（3）ModelSerializer，HyperlinkedModelSerializer与Serializer</p>
+<p>`</p>
+<p>ModelSerializer<code>类能够让你自动创建一个具有模型中相应字段的</code>Serializer`类。</p>
+<p><strong>这个<code>ModelSerializer</code>类和常规的<code>Serializer</code>类一样，不同的是</strong>：</p>
+<ul>
+<li>它根据模型自动生成一组字段。</li>
+<li>它自动生成序列化器的验证器，比如unique_together验证器。</li>
+<li>它默认简单实现了<code>.create()</code>方法和<code>.update()</code>方法。</li>
+</ul>
+<p><code>HyperlinkedModelSerializer</code>基本与<code>ModelSerializer</code>一样，不同之处：</p>
+<ul>
+<li>ModelSerializer，所有的模型的字段都将映射到序列化器上相应的字段即主键</li>
+<li>HyperlinkedModelSerializer，序列化器将包含一个url字段而不是主键字段。</li>
+</ul>
+<h5 id="3-写ViewSet视图"><a href="#3-写ViewSet视图" class="headerlink" title="3.写ViewSet视图"></a>3.写ViewSet视图</h5><p>在views.py中编写，用提供默认行为的现有基类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.viewsets <span class="keyword">import</span> ModelViewSet  <span class="comment">#引入默认视图集</span></span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Fruit</span><br><span class="line"><span class="keyword">from</span> .serializers <span class="keyword">import</span> FruitSerializer           <span class="comment">#引入序列化文件</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">用于查看和编辑用户实例的视图集。</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FruitViewSet</span>(<span class="params">ModelViewSet</span>):</span></span><br><span class="line">    queryset = Fruit.objects.<span class="built_in">all</span>()</span><br><span class="line">    serializer_class = FruitSerializer</span><br></pre></td></tr></table></figure>
+
+<p>FruitViewSet直接继承ModelViewSet，ModelViewSet继承了一系列Mixins类的HTTP方法。如果需要自定义HTTP方法，可以继承APIView类，或者Mixins类，还可以完全自定义</p>
+<h5 id="4-配置URL"><a href="#4-配置URL" class="headerlink" title="4.配置URL"></a>4.配置URL</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> include, path</span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> routers   <span class="comment">#引入自动URL路由模板</span></span><br><span class="line"><span class="keyword">from</span> demo.views <span class="keyword">import</span> FruitViewSet</span><br><span class="line"></span><br><span class="line">router = routers.DefaultRouter()  <span class="comment">#API 向导</span></span><br><span class="line">router.register(<span class="string">r&#x27;fruit&#x27;</span>, FruitViewSet)  <span class="comment">#指定路由，处理请求的类</span></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;api/v1/&#x27;</span>, include(router.urls)),  <span class="comment">#确定url</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li></li>
+<li>register()方法有两个强制参数：（1）<code>prefix</code> - 用于此组路由的URL前缀 （2）<code>viewset</code> - 处理请求的viewset类</li>
+<li>DefaultRouter路由器包括标准集合<code>list</code>, <code>create</code>, <code>retrieve</code>, <code>update</code>, <code>partial_update</code> 和 <code>destroy</code>动作的路由，还包括一个默认返回所有列表视图的超链接的API根视图</li>
+<li>django的url有path和url两种方法</li>
+</ul>
+<p>至此一个简单的API便实现了</p>
+<p><img src="../../../AppData/Roaming/Typora/typora-user-images/image-20200413103713150.png" alt="image-20200413103713150"></p>
+<h4 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h4><h5 id="1-权限"><a href="#1-权限" class="headerlink" title="1.权限"></a>1.权限</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK &#x3D; &#123;</span><br><span class="line">    &#39;DEFAULT_PERMISSION_CLASSES&#39;: [</span><br><span class="line">        &#39;rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly&#39;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>默认权限策略可以使用<code>DEFAULT_PERMISSION_CLASSES</code>设置进行全局设置</p>
+<h5 id="2-分页控制"><a href="#2-分页控制" class="headerlink" title="2.分页控制"></a>2.分页控制</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YourView</span>(<span class="params">BaseView</span>):</span></span><br><span class="line">    paginate_by = <span class="number">10</span>                 <span class="comment"># 覆盖 settings 中的默认分页</span></span><br><span class="line">    max_paginate_by = <span class="number">100</span>             <span class="comment"># 限制最大分页大小</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以动态地去判断最大分页大小：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">YouView</span>(<span class="params">BaseView</span>):</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">paginate_queryset</span>(<span class="params">self, queryset</span>):</span></span><br><span class="line">        self.paginator.max_page_size = YOUR_PAGE_SIZE_LIMIT</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>(YouView, self).paginate_queryset(queryset)</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-外键处理"><a href="#3-外键处理" class="headerlink" title="3.外键处理"></a>3.外键处理</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> serializers</span><br><span class="line"></span><br><span class="line"><span class="comment">#对应主键</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HospitalSerializer</span>(<span class="params">serializers.HyperlinkedModelSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Hospital </span><br><span class="line">        fields = <span class="string">&#x27;__all__&#x27;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">#对应外键        </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HospitalPicSerializer</span>(<span class="params">serializers.HyperlinkedModelSerializer</span>):</span></span><br><span class="line">    hospital = HospitalSerializer()</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = HospitalPic</span><br><span class="line">        fields = <span class="string">&#x27;__all__&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="4-流量限制"><a href="#4-流量限制" class="headerlink" title="4.流量限制"></a>4.流量限制</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">&#x27;DEFAULT_THROTTLE_CLASSES&#x27;</span>: (</span><br><span class="line">        <span class="string">&#x27;rest_framework.throttling.AnonRateThrottle&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;rest_framework.throttling.UserRateThrottle&#x27;</span></span><br><span class="line">    ),</span><br><span class="line">    <span class="string">&#x27;DEFAULT_THROTTLE_RATES&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;anon&#x27;</span>: <span class="string">&#x27;100/day&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;user&#x27;</span>: <span class="string">&#x27;1000/day&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleView</span>(<span class="params">APIView</span>):</span></span><br><span class="line">    throttle_classes = (UserRateThrottle,)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, request, <span class="built_in">format</span>=<span class="literal">None</span></span>):</span></span><br><span class="line">        content = &#123;</span><br><span class="line">            <span class="string">&#x27;status&#x27;</span>: <span class="string">&#x27;request was permitted&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Response(content)</span><br></pre></td></tr></table></figure>
+
+<p>限制API查询的频率，可以根据用户不同，精确到每天、每小时、每分钟</p>
+<h4 id="接口组合"><a href="#接口组合" class="headerlink" title="接口组合"></a>接口组合</h4><p>Django-rest-framework为我们提供了许多现成的mixins，可以用于快速组合接口</p>
+<ul>
+<li>GenericAPIView提供了view核心的功能</li>
+<li>ListModelMixin提供了.list()方法</li>
+<li>CreateModelMixin提供了.create()方法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Fruit</span><br><span class="line"><span class="keyword">from</span> .serializers <span class="keyword">import</span> FruitSerializer</span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> mixins</span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> generics</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FruitList</span>(<span class="params">mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView</span>):</span></span><br><span class="line">    queryset = Fruit.objects.<span class="built_in">all</span>()</span><br><span class="line">    serializer_class = FruitSerializer</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, request, *args, **kwargs</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.<span class="built_in">list</span>(request, *args, **kwargs)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span>(<span class="params">self, request, *args, **kwargs</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.create(request, *args, **kwargs)</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2020/04/13/Python-django-rest-framework/" title="Python|django-rest-framework入门">https://autovy.github.io/2020/04/13/Python-django-rest-framework/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+              <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 框架学习</a>
+              <a href="/tags/django/" rel="tag"><i class="fa fa-tag"></i> django</a>
+              <a href="/tags/rest-framework/" rel="tag"><i class="fa fa-tag"></i> rest framework</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/06/Python-django%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A84/" rel="prev" title="Python|django框架入门4">
+      <i class="fa fa-chevron-left"></i> Python|django框架入门4
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/28/Python-%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" rel="next" title="Python|基于python开发学生管理系统">
+      Python|基于python开发学生管理系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+
+
+
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7"><span class="nav-text">功能特性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D"><span class="nav-text">1.功能介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E7%89%B9%E6%80%A7"><span class="nav-text">2.特性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RESTful-%E6%9E%B6%E6%9E%84"><span class="nav-text">RESTful 架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-Serializer%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-text">1.Serializer序列化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-ViewSet%E8%A7%86%E5%9B%BE"><span class="nav-text">2.ViewSet视图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-Request%E5%AF%B9%E8%B1%A1"><span class="nav-text">3.Request对象</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DRF%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-text">DRF处理流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E5%BA%94%E7%94%A8"><span class="nav-text">实战应用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="nav-text">1.安装配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-text">2.序列化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E5%86%99ViewSet%E8%A7%86%E5%9B%BE"><span class="nav-text">3.写ViewSet视图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E9%85%8D%E7%BD%AEURL"><span class="nav-text">4.配置URL</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD"><span class="nav-text">其他功能</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E6%9D%83%E9%99%90"><span class="nav-text">1.权限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%88%86%E9%A1%B5%E6%8E%A7%E5%88%B6"><span class="nav-text">2.分页控制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E5%A4%96%E9%94%AE%E5%A4%84%E7%90%86"><span class="nav-text">3.外键处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E6%B5%81%E9%87%8F%E9%99%90%E5%88%B6"><span class="nav-text">4.流量限制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%BB%84%E5%90%88"><span class="nav-text">接口组合</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<a href="/">  <img class="site-author-image" itemprop="image" alt="Autovy"
+      src="/images/2.png">  </a>
+  <p class="site-author-name" itemprop="name">Autovy</p>
+  <div class="site-description" itemprop="description">某编外人员的个人小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Autovy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Autovy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/JohnSmith232" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;JohnSmith232" rel="noopener" target="_blank"><i class="fa fa-fw fa-CSDN"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-code"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Autovy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">229k</span>
+</div>
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/01/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'RVJRabsBhxWXvhMcG8CH5wbc-gzGzoHsz',
+      appKey     : 'JSGLk7guOagDPMFN9wbASkEh',
+      placeholder: "说点什么吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+  <script src="/js/bloom.js" type="text/javascript"></script>
