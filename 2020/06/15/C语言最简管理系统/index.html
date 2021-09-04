@@ -22,29 +22,36 @@
     var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="某编外人员的个人小站">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Autovy&#39;s blog">
-<meta property="og:url" content="https://autovy.github.io/index.html">
+  <meta name="description" content="C语言结课作业：编写一个小型工资管理系统，用来管理职工的个人基本信息及工资薪酬等数据。在技术要求方面仅仅是要求了使用结构体数据类型，但基于我们的学习进度，考察的应该是用数组来储存。     作业要求 每个职工的数据应包括：工号、姓名、性别、部门、基本工资、绩效工资、奖金、应发工资（应发工资&#x3D;基本工资+绩效工资+奖金）。职工数据要求采用结构体数据类型。  菜单显示：显示系统的一级功能菜单（数据输入、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言|最简管理系统">
+<meta property="og:url" content="https://autovy.github.io/2020/06/15/C%E8%AF%AD%E8%A8%80%E6%9C%80%E7%AE%80%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="Autovy&#39;s blog">
-<meta property="og:description" content="某编外人员的个人小站">
+<meta property="og:description" content="C语言结课作业：编写一个小型工资管理系统，用来管理职工的个人基本信息及工资薪酬等数据。在技术要求方面仅仅是要求了使用结构体数据类型，但基于我们的学习进度，考察的应该是用数组来储存。     作业要求 每个职工的数据应包括：工号、姓名、性别、部门、基本工资、绩效工资、奖金、应发工资（应发工资&#x3D;基本工资+绩效工资+奖金）。职工数据要求采用结构体数据类型。  菜单显示：显示系统的一级功能菜单（数据输入、">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://autovy.github.io/2020/AppData/Roaming/Typora/typora-user-images/image-20200615101249209.png">
+<meta property="article:published_time" content="2020-06-15T06:30:00.000Z">
+<meta property="article:modified_time" content="2021-09-04T01:00:38.758Z">
 <meta property="article:author" content="Autovy">
+<meta property="article:tag" content="开发实战">
+<meta property="article:tag" content="C语言">
+<meta property="article:tag" content="管理系统">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://autovy.github.io/2020/AppData/Roaming/Typora/typora-user-images/image-20200615101249209.png">
 
-<link rel="canonical" href="https://autovy.github.io/">
+<link rel="canonical" href="https://autovy.github.io/2020/06/15/C%E8%AF%AD%E8%A8%80%E6%9C%80%E7%AE%80%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false
+    isHome : false,
+    isPost : true
   };
 </script>
 
-  <title>Autovy's blog</title>
+  <title>C语言|最简管理系统 | Autovy's blog</title>
   
 
 
@@ -192,320 +199,10 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/2.png">
-      <meta itemprop="name" content="Autovy">
-      <meta itemprop="description" content="某编外人员的个人小站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Autovy's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">开发工具|学点docker</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021/05/28 14:30:00" itemprop="dateCreated datePublished" datetime="2021-05-28T14:30:00+08:00">2021/05/28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/docker/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-          <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040845042.jpeg" alt="git"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-
-
   
   
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/2.png">
-      <meta itemprop="name" content="Autovy">
-      <meta itemprop="description" content="某编外人员的个人小站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Autovy's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/" class="post-title-link" itemprop="url">开发笔记：自动化脚本实战手册</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021/03/28 14:30:00" itemprop="dateCreated datePublished" datetime="2021-03-28T14:30:00+08:00">2021/03/28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">开发笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>8.4k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040841155.jpg" alt="python"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-
-
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/02/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/2.png">
-      <meta itemprop="name" content="Autovy">
-      <meta itemprop="description" content="某编外人员的个人小站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Autovy's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">C语言|算法入门指南</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021/02/03 14:30:00" itemprop="dateCreated datePublished" datetime="2021-02-03T14:30:00+08:00">2021/02/03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">算法学习</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/02/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/02/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>11k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904904.png" alt="image-20210210110218935"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-
-
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2020/06/15/C%E8%AF%AD%E8%A8%80%E6%9C%80%E7%AE%80%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -519,8 +216,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/15/C%E8%AF%AD%E8%A8%80%E6%9C%80%E7%AE%80%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">C语言|最简管理系统</a>
+          C语言|最简管理系统
         </h1>
 
         <div class="post-meta">
@@ -578,7 +274,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>C语言结课作业：编写一个小型工资管理系统，用来管理职工的个人基本信息及工资薪酬等数据。在技术要求方面仅仅是要求了使用结构体数据类型，但基于我们的学习进度，考察的应该是用数组来储存。</p>
+        <p>C语言结课作业：编写一个小型工资管理系统，用来管理职工的个人基本信息及工资薪酬等数据。在技术要求方面仅仅是要求了使用结构体数据类型，但基于我们的学习进度，考察的应该是用数组来储存。</p>
 <!--more  -->
 
 
@@ -673,117 +369,52 @@
 <p>但事实上无论用哪门语言，增删改查的实现永远是入门重要的第一课，本项目和之前的python学生管理系统，都仅仅是在内部实现的数据增删改查，一旦退出程序，缓存就被清除了，无法保留。所以我们还应考虑——如何把这样的操作在文本中实现，如何连接mysql数据库实现同样增删改查的操作。</p>
 <p>所以呀，流水的编程语言，铁打的管理系统，入门从管理系统开始！</p>
 
-      
     </div>
 
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2020/06/15/C%E8%AF%AD%E8%A8%80%E6%9C%80%E7%AE%80%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" title="C语言|最简管理系统">https://autovy.github.io/2020/06/15/C语言最简管理系统/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-
-
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" rel="tag"><i class="fa fa-tag"></i> 开发实战</a>
+              <a href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag"><i class="fa fa-tag"></i> C语言</a>
+              <a href="/tags/%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" rel="tag"><i class="fa fa-tag"></i> 管理系统</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/2.png">
-      <meta itemprop="name" content="Autovy">
-      <meta itemprop="description" content="某编外人员的个人小站">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Autovy's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">开发笔记：基于python开发学生管理系统</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020/05/28 14:30:00" itemprop="dateCreated datePublished" datetime="2020-05-28T14:30:00+08:00">2020/05/28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">实战笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <img src="https://developer-tech.com/wp-content/uploads/sites/3/2020/12/python-right-business-programming-language-software-development-enterprise-2048x1318.jpg" height="300" alt="git" align="center">
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" rel="prev" title="开发笔记：基于python开发学生管理系统">
+      <i class="fa fa-chevron-left"></i> 开发笔记：基于python开发学生管理系统
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" rel="next" title="C语言|算法入门指南">
+      C语言|算法入门指南 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
 
 
@@ -794,15 +425,10 @@
 
   </div>
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -849,6 +475,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E4%B8%9A%E8%A6%81%E6%B1%82"><span class="nav-text">作业要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%A1%86%E6%9E%B6"><span class="nav-text">整体框架</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="nav-text">1.数据存储</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E5%87%BD%E6%95%B0%E5%8A%9F%E8%83%BD%E7%BB%93%E6%9E%84"><span class="nav-text">2.函数功能结构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8F%9C%E5%8D%95%E7%B3%BB%E7%BB%9F"><span class="nav-text">菜单系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E6%B7%BB%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF"><span class="nav-text">增添员工信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF"><span class="nav-text">删除员工信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF"><span class="nav-text">修改员工信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E4%BF%A1%E6%81%AF"><span class="nav-text">处理信息</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E4%BF%A1%E6%81%AF%E6%8E%92%E5%BA%8F"><span class="nav-text">1.信息排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E6%9F%A5%E8%AF%A2%E5%91%98%E5%B7%A5%E4%BF%A1%E6%81%AF"><span class="nav-text">2.查询员工信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%85%A8%E9%83%A8%E6%95%B0%E6%8D%AE"><span class="nav-text">查询全部数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
