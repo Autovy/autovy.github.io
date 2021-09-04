@@ -268,8 +268,8 @@
         <category>开发工具</category>
       </categories>
       <tags>
-        <tag>开发工具</tag>
         <tag>入门教程</tag>
+        <tag>开发工具</tag>
         <tag>Linux</tag>
       </tags>
   </entry>
@@ -507,9 +507,9 @@
         <category>开发工具</category>
       </categories>
       <tags>
+        <tag>入门教程</tag>
         <tag>开发工具</tag>
         <tag>docker</tag>
-        <tag>入门教程</tag>
       </tags>
   </entry>
   <entry>
@@ -746,9 +746,9 @@
         <category>开发工具</category>
       </categories>
       <tags>
+        <tag>入门教程</tag>
         <tag>开发工具</tag>
         <tag>docker</tag>
-        <tag>入门教程</tag>
       </tags>
   </entry>
   <entry>
@@ -2974,8 +2974,8 @@
       <tags>
         <tag>入门教程</tag>
         <tag>Java</tag>
-        <tag>框架学习</tag>
         <tag>后端</tag>
+        <tag>框架学习</tag>
         <tag>Spring</tag>
       </tags>
   </entry>
@@ -5385,8 +5385,8 @@
       </categories>
       <tags>
         <tag>开发实战</tag>
-        <tag>框架学习</tag>
         <tag>后端</tag>
+        <tag>框架学习</tag>
         <tag>thinkphp</tag>
       </tags>
   </entry>
@@ -5483,9 +5483,9 @@
       </categories>
       <tags>
         <tag>C语言</tag>
-        <tag>入门教程</tag>
         <tag>算法</tag>
         <tag>数据结构</tag>
+        <tag>入门教程</tag>
       </tags>
   </entry>
   <entry>
@@ -5681,8 +5681,8 @@
       </categories>
       <tags>
         <tag>C语言</tag>
-        <tag>入门教程</tag>
         <tag>算法</tag>
+        <tag>入门教程</tag>
       </tags>
   </entry>
   <entry>
@@ -5823,8 +5823,8 @@
       <tags>
         <tag>入门教程</tag>
         <tag>Java</tag>
-        <tag>面向对象</tag>
         <tag>后端</tag>
+        <tag>面向对象</tag>
       </tags>
   </entry>
   <entry>
@@ -5977,8 +5977,8 @@
         <category>开发工具</category>
       </categories>
       <tags>
-        <tag>开发工具</tag>
         <tag>入门教程</tag>
+        <tag>开发工具</tag>
         <tag>matlab</tag>
       </tags>
   </entry>
@@ -6409,8 +6409,8 @@
       </categories>
       <tags>
         <tag>开发实战</tag>
-        <tag>框架学习</tag>
         <tag>后端</tag>
+        <tag>框架学习</tag>
         <tag>wordpress</tag>
       </tags>
   </entry>
@@ -7346,8 +7346,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>框架学习</tag>
         <tag>django</tag>
+        <tag>框架学习</tag>
         <tag>rest framework</tag>
       </tags>
   </entry>
@@ -7425,8 +7425,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>框架学习</tag>
         <tag>django</tag>
+        <tag>框架学习</tag>
       </tags>
   </entry>
   <entry>
@@ -7806,8 +7806,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>框架学习</tag>
         <tag>django</tag>
+        <tag>框架学习</tag>
       </tags>
   </entry>
   <entry>
@@ -8059,8 +8059,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>框架学习</tag>
         <tag>django</tag>
+        <tag>框架学习</tag>
       </tags>
   </entry>
   <entry>
@@ -8308,8 +8308,8 @@
       </categories>
       <tags>
         <tag>python</tag>
-        <tag>框架学习</tag>
         <tag>django</tag>
+        <tag>框架学习</tag>
       </tags>
   </entry>
 </search>
