@@ -3,7 +3,7 @@
   <entry>
     <title>学习笔记：学点docker</title>
     <url>/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p><img src="https://blog.adacore.com/uploads/_2400x1200_crop_center-center_none/iStock-1144628524.jpg" alt="git"></p>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040845042.jpeg" alt="git"></p>
 <span id="more"></span>
 
 <h3 id="Docker概述"><a href="#Docker概述" class="headerlink" title="Docker概述"></a>Docker概述</h3><h4 id="Docker应用"><a href="#Docker应用" class="headerlink" title="Docker应用"></a>Docker应用</h4><ul>
@@ -36,14 +36,14 @@
 <li><p>容器：容器可以独立运行一个或者多组应用（启动，停止，删除）</p>
 </li>
 </ul>
-<h4 id="2-run工作流程"><a href="#2-run工作流程" class="headerlink" title="2.run工作流程"></a>2.run工作流程</h4><p><img src="https://img-blog.csdnimg.cn/20200707143715125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hhcHB5X1N1bnNoaW5lX0JveQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h4 id="3-Docker工作原理"><a href="#3-Docker工作原理" class="headerlink" title="3.Docker工作原理"></a>3.Docker工作原理</h4><p><img src="https://i.loli.net/2019/06/15/5d04a77399fcc37849.png" alt="Docker 工作原理"></p>
-<h4 id="4-Docker与VM的区别"><a href="#4-Docker与VM的区别" class="headerlink" title="4.Docker与VM的区别"></a>4.Docker与VM的区别</h4><p><img src="https://images.contentstack.io/v3/assets/blt300387d93dabf50e/bltb6200bc085503718/5e1f209a63d1b6503160c6d5/containers-vs-virtual-machines.jpg" alt="containers-vs-virtual-machines.jpg"></p>
+<h4 id="2-run工作流程"><a href="#2-run工作流程" class="headerlink" title="2.run工作流程"></a>2.run工作流程</h4><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040846845.png" alt="在这里插入图片描述"></p>
+<h4 id="3-Docker工作原理"><a href="#3-Docker工作原理" class="headerlink" title="3.Docker工作原理"></a>3.Docker工作原理</h4><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040846904.png" alt="Docker 工作原理"></p>
+<h4 id="4-Docker与VM的区别"><a href="#4-Docker与VM的区别" class="headerlink" title="4.Docker与VM的区别"></a>4.Docker与VM的区别</h4><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040846873.jpeg" alt="containers-vs-virtual-machines.jpg"></p>
 <ul>
 <li>Docker的抽象层比虚拟机少</li>
 <li>docker利用的是宿主机的内核，vm需要的是Guest OS（vm每次都要加载操作系统的内核）</li>
 </ul>
-<h3 id="Docker命令"><a href="#Docker命令" class="headerlink" title="Docker命令"></a>Docker命令</h3><p><img src="https://maichong.io/help/images/docker-induction.jpg" alt="img"></p>
+<h3 id="Docker命令"><a href="#Docker命令" class="headerlink" title="Docker命令"></a>Docker命令</h3><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040846335.jpeg" alt="img"></p>
 <h4 id="1-帮助命令"><a href="#1-帮助命令" class="headerlink" title="1.帮助命令"></a>1.帮助命令</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker info</span><br><span class="line">docker --help</span><br></pre></td></tr></table></figure>
 
 
@@ -150,12 +150,12 @@
 </ul>
 <h4 id="3-镜像加载原理"><a href="#3-镜像加载原理" class="headerlink" title="3.镜像加载原理"></a>3.镜像加载原理</h4><p>（1）联合文件系统（UnionFS）</p>
 <p>镜像和容器不同，容器是彼此独立的，而容器是分层叠加的，可以共享相同的底层文件和目录</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/3548638-6967b650574b7f0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/353/format/webp" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040846837.webp" alt="img"></p>
 <p>（2）镜像加载原理</p>
 <p>共享底层资源</p>
-<p><img src="https://img2020.cnblogs.com/blog/1740019/202105/1740019-20210507114140385-1486581159.png" alt="docker文件系统分层存储原理"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040846524.png" alt="docker文件系统分层存储原理"></p>
 <h4 id="4-分层理解"><a href="#4-分层理解" class="headerlink" title="4.分层理解"></a>4.分层理解</h4><p>基于Ubuntu Linux 16.04创建一个新的镜像，这就是新镜像的第一层；如果在该镜像中添加Python包，就会在基础镜像层之上创建第二个镜像层；如果继续添加一个安全补丁，就会创建第三个镜像层。该镜像当前已经包含3个镜像层</p>
-<p><img src="https://pic-1258215793.cos.ap-shanghai.myqcloud.com/content/20191001/201910010121.png" alt="基于Ubuntu Linux 16.04创建镜像"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040846403.png" alt="基于Ubuntu Linux 16.04创建镜像"></p>
 <p>docker镜像默认只读，当容器启动时，一个新的可写层被加载到镜像顶部</p>
 <p>这一层即为容器层，容器之下称为镜像层</p>
 <h4 id="5-commit镜像"><a href="#5-commit镜像" class="headerlink" title="5.commit镜像"></a>5.commit镜像</h4><p>提交一个新的镜像</p>
@@ -165,7 +165,7 @@
 
 <h3 id="容器数据卷"><a href="#容器数据卷" class="headerlink" title="容器数据卷"></a>容器数据卷</h3><h4 id="1-数据卷原理"><a href="#1-数据卷原理" class="headerlink" title="1.数据卷原理"></a>1.数据卷原理</h4><p>容器之间有一个数据共享技术，Docker容器中产生的数据，同步到本地（从而实现数据可持久化，数据同步操作，数据存储在本地不会随着容器删除而丢失）</p>
 <p>其本质是将容器内的目录挂载到主机上</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2Jicy5pdGhlaW1hLmNvbS9kYXRhL2F0dGFjaG1lbnQvZm9ydW0vMjAxOTA2LzA1LzE5NDgzMG1nbXp1anY2ZXV5YWVqbGIucG5nLnRodW1iLmpwZw?x-oss-process=image/format,png" alt="数据卷容器实践_heima201907的博客-CSDN博客"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040846330.png" alt="数据卷容器实践_heima201907的博客-CSDN博客"></p>
 <h4 id="2-数据卷使用"><a href="#2-数据卷使用" class="headerlink" title="2.数据卷使用"></a>2.数据卷使用</h4><p>（1）使用命令挂载 -v</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -it -v 主机目录地址:容器目录地址</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试：将容器的目录挂载到主机目录</span></span><br><span class="line">docker run -it -v /home/test:/home centos /bin/bash</span><br></pre></td></tr></table></figure>
 
@@ -189,7 +189,7 @@
 
 
 
-<h4 id="3-数据卷容器"><a href="#3-数据卷容器" class="headerlink" title="3.数据卷容器"></a>3.数据卷容器</h4><p><img src="https://img-blog.csdnimg.cn/20190113103219766.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dlbmdsaTIwMTc=,size_16,color_FFFFFF,t_70" alt="Docker学习过程（5-数据卷）_gengli2017的博客-CSDN博客"></p>
+<h4 id="3-数据卷容器"><a href="#3-数据卷容器" class="headerlink" title="3.数据卷容器"></a>3.数据卷容器</h4><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040846812.png" alt="Docker学习过程（5-数据卷）_gengli2017的博客-CSDN博客"></p>
 <p>容器间也可以进行挂载从而实现数据同步，多个子容器的数据可以挂载到一个父容器中，这个父容器就是数据卷容器</p>
 <p>–volumes-from即可以让docker3挂载到docker1上</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">docker run -it --name docker3 --volumes-from docker1 5ce91af318b3 /bin/bash</span><br></pre></td></tr></table></figure>
@@ -197,7 +197,7 @@
 <p>容器之间的配置信息的传递，数据卷容器的生命周期一直持续到没有容器使用为止</p>
 <h3 id="DockerFile"><a href="#DockerFile" class="headerlink" title="DockerFile"></a>DockerFile</h3><p>参考文章：<a href="https://blog.52itstyle.vip/archives/2839/">DokcerFile命令详解</a></p>
 <h4 id="1-DockerFile简介"><a href="#1-DockerFile简介" class="headerlink" title="1.DockerFile简介"></a>1.DockerFile简介</h4><p>DockerFile是构建docker镜像的构建文件，即命令脚本。通过这个脚本我们可以生成一个镜像。</p>
-<p><img src="https://img-blog.csdnimg.cn/2021032416514251.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl81MTU3Mzc3MQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040846366.png" alt="在这里插入图片描述"></p>
 <h4 id="2-DockerFile构建流程"><a href="#2-DockerFile构建流程" class="headerlink" title="2.DockerFile构建流程"></a>2.DockerFile构建流程</h4><p>（1）DockerFile内容示例</p>
 <figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> centos</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在构建镜像形成两个数据卷，因为没有指定的挂载卷会自动进行匿名挂载</span></span><br><span class="line"><span class="keyword">VOLUME</span><span class="bash"> [<span class="string">&quot;volume01&quot;</span>,<span class="string">&quot;volume02&quot;</span>]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&quot;-----end------&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> /bin/bash</span></span><br></pre></td></tr></table></figure>
 
@@ -213,7 +213,7 @@
 
 
 <p>（4）docker push 发布镜像（开源进行）</p>
-<h4 id="3-DockerFile指令详解"><a href="#3-DockerFile指令详解" class="headerlink" title="3.DockerFile指令详解"></a>3.DockerFile指令详解</h4><p><img src="https://img2018.cnblogs.com/i-beta/631711/201912/631711-20191220153130957-348455400.png" alt="img"></p>
+<h4 id="3-DockerFile指令详解"><a href="#3-DockerFile指令详解" class="headerlink" title="3.DockerFile指令详解"></a>3.DockerFile指令详解</h4><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040846106.png" alt="img"></p>
 <p>（图中最后一项应为CMD指令此处更正）</p>
 <p>补充项：</p>
 <ul>
@@ -242,9 +242,60 @@
       </tags>
   </entry>
   <entry>
+    <title>开发笔记：基于python开发学生管理系统</title>
+    <url>/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<img src="https://developer-tech.com/wp-content/uploads/sites/3/2020/12/python-right-business-programming-language-software-development-enterprise-2048x1318.jpg" height="300" alt="git" align="center">
+
+
+
+<span id="more"></span>
+
+<h3 id="模拟数据库"><a href="#模拟数据库" class="headerlink" title="模拟数据库"></a>模拟数据库</h3><p>用列表为主体储存全部学生信息，方便读取。用字典这种数据类型放置一个学生信息。方便对列表操作时整块操作</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = [   <span class="comment">#列表</span></span><br><span class="line">		   <span class="comment">#字典	</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Tom&quot;</span>,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;男&quot;</span>,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>:<span class="string">&quot;佛山&quot;</span>,</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Mary&quot;</span>,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;女&quot;</span>,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>: <span class="string">&quot;广州&quot;</span>,</span><br><span class="line"></span><br><span class="line">    &#125;,  </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Jhon&quot;</span>,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;男&quot;</span>,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>: <span class="string">&quot;厦门&quot;</span>,</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="操作框架"><a href="#操作框架" class="headerlink" title="操作框架"></a>操作框架</h3><p>写代码优先规划好主框架，然后再补充功能函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    print(</span><br><span class="line">            <span class="string">&quot;&quot;&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            欢迎使用【学生管理系统】</span></span><br><span class="line"><span class="string">            0.退出系统</span></span><br><span class="line"><span class="string">            1.显示所有学生信息</span></span><br><span class="line"><span class="string">            2.新建学生信息</span></span><br><span class="line"><span class="string">            3.查询学生信息</span></span><br><span class="line"><span class="string">            4.修改学生信息</span></span><br><span class="line"><span class="string">            5.删除学生信息                            </span></span><br><span class="line"><span class="string">            &quot;&quot;&quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">          )</span><br><span class="line"></span><br><span class="line">    op = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入你的操作：&quot;</span>)) <span class="comment">#转化输入的值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> op==<span class="number">1</span> :</span><br><span class="line">        print(<span class="string">&quot;显示所有学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">2</span> :</span><br><span class="line">        print(<span class="string">&quot;新建学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">3</span> :</span><br><span class="line">        print(<span class="string">&quot;查询学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">4</span> :</span><br><span class="line">        print(<span class="string">&quot;修改学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">5</span> :</span><br><span class="line">        print(<span class="string">&quot;删除学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">0</span> :</span><br><span class="line">        <span class="keyword">break</span>  						<span class="comment">#退出循环</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="显示信息"><a href="#显示信息" class="headerlink" title="显示信息"></a>显示信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">showall</span>() :</span></span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> datas :</span><br><span class="line">        <span class="built_in">print</span> (<span class="string">&quot;学生信息：&quot;</span>, data)</span><br></pre></td></tr></table></figure>
+
+<p>1.Python for循环可以遍历任何序列的项目，如一个列表或者一个字符串，相当于用data逐个存储列表datas的信息</p>
+<p>2.值得注意的是，python的函数必须写在调用函数之前（毕竟没有声明嘛）</p>
+<h3 id="新增学生"><a href="#新增学生" class="headerlink" title="新增学生"></a>新增学生</h3><p>用字典存储学生信息，用赋值的方法修改（添加）信息</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">creat</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;新增学生名字：&quot;</span>)</span><br><span class="line">    sex = <span class="built_in">input</span>(<span class="string">&quot;新增学生性别：&quot;</span>)</span><br><span class="line">    adress = <span class="built_in">input</span>(<span class="string">&quot;新增学生地址：&quot;</span>) <span class="comment">#变量储存</span></span><br><span class="line">    student = &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: name,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: sex,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>: adress</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    datas.append(student) <span class="comment">#新增列表的项</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="查询学生"><a href="#查询学生" class="headerlink" title="查询学生"></a>查询学生</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">req</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;查询学生姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            print(data)</span><br></pre></td></tr></table></figure>
+
+<p>列表+字典的信息储存形式用循环遍历字典内容，data就是字典名</p>
+<h3 id="修改学生信息"><a href="#修改学生信息" class="headerlink" title="修改学生信息"></a>修改学生信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;修改学生的姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            print(<span class="string">&quot;修改前学生信息：&quot;</span>,data)</span><br><span class="line">            data[<span class="string">&quot;name&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改的名字：&quot;</span>)</span><br><span class="line">            data[<span class="string">&quot;sex&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改性别：&quot;</span>)</span><br><span class="line">            data[<span class="string">&quot;adress&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改地址：&quot;</span>)</span><br><span class="line">            print(<span class="string">&quot;修改后学生信息：&quot;</span>,data)</span><br></pre></td></tr></table></figure>
+
+<p>循环遍历字典内容，赋值修改信息</p>
+<h3 id="删除学生信息"><a href="#删除学生信息" class="headerlink" title="删除学生信息"></a>删除学生信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;删除学生的姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            datas.remove(data)</span><br></pre></td></tr></table></figure>
+
+<p>data中相当于存储了整个字典，把他一整个删去即可</p>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>学习笔记</category>
+        <category>入门级</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+        <tag>python</tag>
+        <tag>开发实战</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>开发笔记：自动化脚本实战手册</title>
     <url>/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<p><img src="https:cdn.jsdelivr.net/gh/Autovy/Image/img/202109040841155.jpg" alt="python"></p>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040841155.jpg" alt="python"></p>
 <span id="more"></span>
 
 <h2 id="Python-自动化实战手册"><a href="#Python-自动化实战手册" class="headerlink" title="Python 自动化实战手册"></a>Python 自动化实战手册</h2><h4 id="调用系统终端（cmd）"><a href="#调用系统终端（cmd）" class="headerlink" title="调用系统终端（cmd）"></a>调用系统终端（cmd）</h4><h5 id="1-运用场景"><a href="#1-运用场景" class="headerlink" title="1.运用场景"></a>1.运用场景</h5><p>有一些工具是使用命令行来执行的，这时可以调用系统终端来实现自动化</p>
@@ -422,57 +473,6 @@
         <tag>python</tag>
         <tag>开发实战</tag>
         <tag>脚本学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>开发笔记：基于python开发学生管理系统</title>
-    <url>/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<img src="https://developer-tech.com/wp-content/uploads/sites/3/2020/12/python-right-business-programming-language-software-development-enterprise-2048x1318.jpg" height="300" alt="git" align="center">
-
-
-
-<span id="more"></span>
-
-<h3 id="模拟数据库"><a href="#模拟数据库" class="headerlink" title="模拟数据库"></a>模拟数据库</h3><p>用列表为主体储存全部学生信息，方便读取。用字典这种数据类型放置一个学生信息。方便对列表操作时整块操作</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">data = [   <span class="comment">#列表</span></span><br><span class="line">		   <span class="comment">#字典	</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Tom&quot;</span>,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;男&quot;</span>,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>:<span class="string">&quot;佛山&quot;</span>,</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Mary&quot;</span>,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;女&quot;</span>,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>: <span class="string">&quot;广州&quot;</span>,</span><br><span class="line"></span><br><span class="line">    &#125;,  </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Jhon&quot;</span>,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;男&quot;</span>,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>: <span class="string">&quot;厦门&quot;</span>,</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="操作框架"><a href="#操作框架" class="headerlink" title="操作框架"></a>操作框架</h3><p>写代码优先规划好主框架，然后再补充功能函数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    print(</span><br><span class="line">            <span class="string">&quot;&quot;&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            欢迎使用【学生管理系统】</span></span><br><span class="line"><span class="string">            0.退出系统</span></span><br><span class="line"><span class="string">            1.显示所有学生信息</span></span><br><span class="line"><span class="string">            2.新建学生信息</span></span><br><span class="line"><span class="string">            3.查询学生信息</span></span><br><span class="line"><span class="string">            4.修改学生信息</span></span><br><span class="line"><span class="string">            5.删除学生信息                            </span></span><br><span class="line"><span class="string">            &quot;&quot;&quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">          )</span><br><span class="line"></span><br><span class="line">    op = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入你的操作：&quot;</span>)) <span class="comment">#转化输入的值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> op==<span class="number">1</span> :</span><br><span class="line">        print(<span class="string">&quot;显示所有学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">2</span> :</span><br><span class="line">        print(<span class="string">&quot;新建学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">3</span> :</span><br><span class="line">        print(<span class="string">&quot;查询学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">4</span> :</span><br><span class="line">        print(<span class="string">&quot;修改学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">5</span> :</span><br><span class="line">        print(<span class="string">&quot;删除学生信息&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> op==<span class="number">0</span> :</span><br><span class="line">        <span class="keyword">break</span>  						<span class="comment">#退出循环</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="显示信息"><a href="#显示信息" class="headerlink" title="显示信息"></a>显示信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">showall</span>() :</span></span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> datas :</span><br><span class="line">        <span class="built_in">print</span> (<span class="string">&quot;学生信息：&quot;</span>, data)</span><br></pre></td></tr></table></figure>
-
-<p>1.Python for循环可以遍历任何序列的项目，如一个列表或者一个字符串，相当于用data逐个存储列表datas的信息</p>
-<p>2.值得注意的是，python的函数必须写在调用函数之前（毕竟没有声明嘛）</p>
-<h3 id="新增学生"><a href="#新增学生" class="headerlink" title="新增学生"></a>新增学生</h3><p>用字典存储学生信息，用赋值的方法修改（添加）信息</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">creat</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;新增学生名字：&quot;</span>)</span><br><span class="line">    sex = <span class="built_in">input</span>(<span class="string">&quot;新增学生性别：&quot;</span>)</span><br><span class="line">    adress = <span class="built_in">input</span>(<span class="string">&quot;新增学生地址：&quot;</span>) <span class="comment">#变量储存</span></span><br><span class="line">    student = &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: name,</span><br><span class="line">        <span class="string">&quot;sex&quot;</span>: sex,</span><br><span class="line">        <span class="string">&quot;adress&quot;</span>: adress</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    datas.append(student) <span class="comment">#新增列表的项</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="查询学生"><a href="#查询学生" class="headerlink" title="查询学生"></a>查询学生</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">req</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;查询学生姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            print(data)</span><br></pre></td></tr></table></figure>
-
-<p>列表+字典的信息储存形式用循环遍历字典内容，data就是字典名</p>
-<h3 id="修改学生信息"><a href="#修改学生信息" class="headerlink" title="修改学生信息"></a>修改学生信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;修改学生的姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            print(<span class="string">&quot;修改前学生信息：&quot;</span>,data)</span><br><span class="line">            data[<span class="string">&quot;name&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改的名字：&quot;</span>)</span><br><span class="line">            data[<span class="string">&quot;sex&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改性别：&quot;</span>)</span><br><span class="line">            data[<span class="string">&quot;adress&quot;</span>] = <span class="built_in">input</span>(<span class="string">&quot;修改地址：&quot;</span>)</span><br><span class="line">            print(<span class="string">&quot;修改后学生信息：&quot;</span>,data)</span><br></pre></td></tr></table></figure>
-
-<p>循环遍历字典内容，赋值修改信息</p>
-<h3 id="删除学生信息"><a href="#删除学生信息" class="headerlink" title="删除学生信息"></a>删除学生信息</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>() :</span></span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&quot;删除学生的姓名：&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span>  datas:</span><br><span class="line">        <span class="keyword">if</span>  data[<span class="string">&quot;name&quot;</span>] == name:</span><br><span class="line">            datas.remove(data)</span><br></pre></td></tr></table></figure>
-
-<p>data中相当于存储了整个字典，把他一整个删去即可</p>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>学习笔记</category>
-        <category>入门级</category>
-      </categories>
-      <tags>
-        <tag>学习笔记</tag>
-        <tag>python</tag>
-        <tag>开发实战</tag>
       </tags>
   </entry>
 </search>
