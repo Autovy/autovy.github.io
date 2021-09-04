@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/gear48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/gear32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="true"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="C语言|算法入门指南">
+<meta property="og:url" content="https://autovy.github.io/2021/02/03/C%E8%AF%AD%E8%A8%80-%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="Autovy&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904904.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040903611.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904904.png">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/b/b9/Sieve_of_Eratosthenes_animation.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904338.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904399.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904633.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904951.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904177.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040905289.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040905182.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040905313.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040905850.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906618.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906635.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906057.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906001.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906542.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906224.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906428.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906440.png">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/4/13/17171276e5f8bb49?imageslim">
+<meta property="article:published_time" content="2021-02-03T06:30:00.000Z">
+<meta property="article:modified_time" content="2021-09-04T01:20:04.235Z">
+<meta property="article:author" content="Autovy">
+<meta property="article:tag" content="C语言">
+<meta property="article:tag" content="入门教程">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904904.png">
+
+<link rel="canonical" href="https://autovy.github.io/2021/02/03/C%E8%AF%AD%E8%A8%80-%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>C语言|算法入门指南 | Autovy's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Autovy's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Autovy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Just For Interest</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">11</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/02/03/C%E8%AF%AD%E8%A8%80-%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="某编外人员的个人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C语言|算法入门指南
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021/02/03 14:30:00" itemprop="dateCreated datePublished" datetime="2021-02-03T14:30:00+08:00">2021/02/03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/02/03/C%E8%AF%AD%E8%A8%80-%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/02/03/C%E8%AF%AD%E8%A8%80-%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904904.png" alt="image-20210210110218935"></p>
+<span id="more"></span>
+
+
+
+<h2 id="时间复杂度（Time-complexity）"><a href="#时间复杂度（Time-complexity）" class="headerlink" title="时间复杂度（Time complexity）"></a>时间复杂度（Time complexity）</h2><h3 id="1-一个例子"><a href="#1-一个例子" class="headerlink" title="1.一个例子"></a>1.一个例子</h3><p>情景：在一个有100个学生的教室里，仅有一名学生没过英语四级，我们要找到这名学生</p>
+<ul>
+<li>方法一：问每一个学生是否有过四级，时间复杂度为<strong>O(n)</strong></li>
+<li>方法二：问每一个学生两个问题：1.是否有过四级 2.其他99个人过四级的情况，时间复杂度为<strong>O(n2)</strong></li>
+<li>方法三：将100人分成两组，然后问没过四级的是在第一组还是在第二组，然后将该小组又分成两部分，再次询问，以此类推，直到最后找到没过四级的那个学生，时间复杂度为<strong>O(log n)</strong></li>
+</ul>
+<p>如果只有一个学生知道笔隐藏在哪个学生上，我可能需要进行O（n2）搜索。如果一个学生拿着笔，只有他们自己知道，我会使用O（n）。如果所有学生都知道，我会使用O（log n）搜索，但是只会告诉我是否猜对了。</p>
+<h3 id="2-时间复杂度的含义"><a href="#2-时间复杂度的含义" class="headerlink" title="2.时间复杂度的含义"></a>2.时间复杂度的含义</h3><p>时间复杂度并不等于程序执行时间，我们没有考虑执行代码中每个语句所需的实际时间，而是考虑每个语句执行多少次</p>
+<h3 id="3-时间复杂度图示"><a href="#3-时间复杂度图示" class="headerlink" title="3.时间复杂度图示"></a>3.时间复杂度图示</h3><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040903611.png" alt="image-20210210104634026"></p>
+<h3 id="4-时间复杂度计算方法"><a href="#4-时间复杂度计算方法" class="headerlink" title="4.时间复杂度计算方法"></a>4.时间复杂度计算方法</h3><ul>
+<li>将算法/功能分解为单独的操作</li>
+<li>计算每个操作的复杂度</li>
+<li>将每个操作的复杂度加起来</li>
+<li>删除常量</li>
+<li>找到最高阶项-这就是我们认为算法/函数的复杂度</li>
+</ul>
+<h2 id="经典算法一览"><a href="#经典算法一览" class="headerlink" title="经典算法一览"></a>经典算法一览</h2><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904904.png" alt="image-20210210110218935"></p>
+<h2 id="辗转相除法（Euclidean-algorithm）"><a href="#辗转相除法（Euclidean-algorithm）" class="headerlink" title="辗转相除法（Euclidean algorithm）"></a>辗转相除法（Euclidean algorithm）</h2><h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h3><ul>
+<li>辗转相除法又称为欧几里得算法，常用于求解最大公约数</li>
+<li>算法原理：若a除以b的余数为r , 则有 gcd(a , b) = gcd( b ,r )</li>
+<li>算法思路：大数除于小数得余数，该余数再与小数重复上面步骤，直到最后得小数为0，这时大数即为最大公约数</li>
+</ul>
+<h3 id="2-基本案例"><a href="#2-基本案例" class="headerlink" title="2.基本案例"></a>2.基本案例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用递归函数辗转相除返回最大公约数 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(a == <span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> b;		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> gcd(b%a, a);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果展示 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">10</span>; </span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">15</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;GCD(%d, %d)=%d\n&quot;</span>, a, b, gcd(a,b));</span><br><span class="line">	</span><br><span class="line">	a = <span class="number">35</span>; </span><br><span class="line">	b = <span class="number">10</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;GCD(%d, %d)=%d\n&quot;</span>, a, b, gcd(a,b));</span><br><span class="line">	</span><br><span class="line">	a = <span class="number">31</span>; </span><br><span class="line">	b = <span class="number">2</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;GCD(%d, %d)=%d\n&quot;</span>, a, b, gcd(a,b));	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>语法解析：</p>
+<ul>
+<li><code>b%a</code>即b除以a后的余数，当b&lt;a时，返回b，所以在以上程序中，我们不需要比较a，b大小，比如gcd(35,10) ,经过<code>b%a</code>会变成gcd(10,35)</li>
+<li>递归是一种特殊的循环，其停止的信号是<code>return</code>语句</li>
+<li>以上程序的时间复杂度是：O(Log min(a, b))  </li>
+</ul>
+<h3 id="3-扩展案例"><a href="#3-扩展案例" class="headerlink" title="3.扩展案例"></a>3.扩展案例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">// gcd扩展版，不仅可以得到最大公约数，还可以找到整数系数x和y</span></span><br><span class="line"><span class="comment">// ax + by = gcd(a, b) </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcdExtended</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> *x, <span class="keyword">int</span> *y)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(a==<span class="number">0</span>)&#123;</span><br><span class="line">		*x = <span class="number">0</span>;</span><br><span class="line">		*y = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> b;</span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line">	<span class="comment">// x1,y1存储递归调用的结果</span></span><br><span class="line">	<span class="keyword">int</span> x1,y1;</span><br><span class="line">	<span class="keyword">int</span> gcd = gcdExtended(b%a, a, &amp;x1, &amp;y1);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 更新x,y值 </span></span><br><span class="line">	*x = y1 - (b/a) * x1;</span><br><span class="line">	*y = x1;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> gcd; </span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 展示结果</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> x, y;</span><br><span class="line">	<span class="keyword">int</span> a = <span class="number">35</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">15</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> g = gcdExtended(a, b, &amp;x, &amp;y);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;a*%d + b*%d = %d &quot;</span>, x, y, g);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>语法解析：</p>
+<ul>
+<li>以上程序目的是为了计算：  <code>ax + by = gcd(a, b)</code> 中的x，y</li>
+<li>本程序使用了指针，可以在另一个函数中修改主函数的值，避免变量作用域的问题。在主函数内，可以通过<code>&amp;x,&amp;y</code>将x，y的地址传给其他函数，其他函数定义指针<code>int *x, int *y</code>存储地址，然后再用<code>*x,*y</code>读取地址中存的值即可修改主函数中的变量</li>
+<li><code>int gcd = gcdExtended(b%a, a, &amp;x1, &amp;y1);</code>使程序反复执行其上面的语句，直至a==0,这时可以得到gcd,和x1=0，y1=1的初始值。然后再开始与以上执行方向相反执行其下面的语句。最后<code>return gcd</code>实际上在第二部分的循环中，值不变</li>
+<li>主函数执行时，<code>gcdExtended</code>中的地址是主函数<code>x，y</code>的地址，而递归函数中的地址是<code>x1，y1</code>的地址;<code>x1,y1</code>存储的是上一个循环中的<code>*x，*y</code></li>
+</ul>
+<h2 id="埃拉托斯特尼筛法（sieve-of-Eratosthenes）"><a href="#埃拉托斯特尼筛法（sieve-of-Eratosthenes）" class="headerlink" title="埃拉托斯特尼筛法（sieve of Eratosthenes）"></a>埃拉托斯特尼筛法（sieve of Eratosthenes）</h2><h3 id="1-基本概念-1"><a href="#1-基本概念-1" class="headerlink" title="1.基本概念"></a>1.基本概念</h3><p>埃拉托斯特尼筛法是一种常用的素数筛法，可以筛选一定范围自然数内的质数（Prime numbers），时间复杂度：O(<em>n</em> log log <em>n</em>)</p>
+<p>埃拉托斯特尼筛法演示动画（摘自维基百科）</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Sieve_of_Eratosthenes_animation.gif" alt="img"></p>
+<h3 id="2-实现步骤"><a href="#2-实现步骤" class="headerlink" title="2.实现步骤"></a>2.实现步骤</h3><p>该筛法的基本步骤案例，筛选2-50范围内的素数</p>
+<p>（1）创建2-50所有数字的列表</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904338.png" alt="image-20210214200912413"></p>
+<p>（2）标记所有<strong>2的倍数</strong>且<strong>大于或等于其平方（即4）</strong>的数字</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904399.png" alt="image-20210214200920690"></p>
+<p>（3）标记所有<strong>3的倍数</strong>且<strong>大于或等于其平方（即9）</strong>的数字</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904633.png" alt="image-20210214202117142"></p>
+<p>（4）标记所有<strong>5的倍数</strong>且<strong>大于或等于其平方（即25）</strong>的数字</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904951.png" alt="image-20210214202159136"></p>
+<p>（5）标记所有<strong>7的倍数</strong>且<strong>大于或等于其平方（即49）</strong>的数字</p>
+<p>​    查无数字，则跳过这一步</p>
+<p>（6）去掉列表中标记的数字，剩下的未被标记数字即为素数：2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47.</p>
+<h3 id="3-基本案例"><a href="#3-基本案例" class="headerlink" title="3.基本案例"></a>3.基本案例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 筛选素数函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span>  <span class="title">SieveOfEratosthenes</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 创建标识数组</span></span><br><span class="line">	<span class="keyword">bool</span> primes[n+<span class="number">1</span>]; </span><br><span class="line">	<span class="comment">// 标识数组默认填入true,用索引当作自然数 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i&lt;=n; i++) &#123;</span><br><span class="line">		</span><br><span class="line">		primes[i] = <span class="literal">true</span>;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 开始标记非质数（即标记p的倍数且大于或等于其平方的数字） </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> p=<span class="number">2</span>; p*p&lt;=n; p++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(primes[p] == <span class="literal">true</span>)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=p*p; i&lt;=n; i+=p)&#123;</span><br><span class="line">				primes[i] = <span class="literal">false</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 打印出所有素数</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> p=<span class="number">2</span>; p&lt;=n; p++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(primes[p])&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,p);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;输入筛选范围:&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">	SieveOfEratosthenes(n); </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">	</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="线性查找（Linear-search）"><a href="#线性查找（Linear-search）" class="headerlink" title="线性查找（Linear search）"></a>线性查找（Linear search）</h2><h3 id="1-基本概念-2"><a href="#1-基本概念-2" class="headerlink" title="1.基本概念"></a>1.基本概念</h3><p>线性查找时间复杂度为：O(n)</p>
+<p>线性查找的步骤如下：</p>
+<ul>
+<li>从arr []的最左边元素开始，然后将x与arr []的每个元素一一比较</li>
+<li>如果x与元素匹配，则返回索引。</li>
+<li>如果x与任何元素都不匹配，则返回-1。</li>
+</ul>
+<p>线性查找示意图如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904177.gif" alt="img"></p>
+<h3 id="2-基本案例-1"><a href="#2-基本案例-1" class="headerlink" title="2.基本案例"></a>2.基本案例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 线性查找函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> n, <span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 逐个遍历查找，n为数组长度 ，x为查找对象 </span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(arr[i]==x)&#123;</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行实例</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="comment">// 目标数组 </span></span><br><span class="line">	<span class="keyword">int</span> arr[] = &#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">40</span>&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 查找目标</span></span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">10</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 测量数组大小</span></span><br><span class="line">	<span class="keyword">int</span> n = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>]);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 查找过程</span></span><br><span class="line">	<span class="keyword">int</span> result = search(arr, n, x);</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	(result==<span class="number">-1</span>)? <span class="built_in">printf</span>(<span class="string">&quot;目标不存在&quot;</span>):<span class="built_in">printf</span>(<span class="string">&quot;目标所在索引为%d&quot;</span>, result);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="二分查找（Binary-Search）"><a href="#二分查找（Binary-Search）" class="headerlink" title="二分查找（Binary Search）"></a>二分查找（Binary Search）</h2><h3 id="1-基本概念-3"><a href="#1-基本概念-3" class="headerlink" title="1.基本概念"></a>1.基本概念</h3><p>二分查找的对象是从小到大的数组，其时间复杂度可以写作：O(Log n)</p>
+<p>二分查找步骤：</p>
+<ul>
+<li>将x与中间元素比较</li>
+<li>如果x与中间元素匹配，则返回中间索引</li>
+<li>否则如果x大于中间元素则取中间元素后右半边数组重复操作</li>
+<li>否则如果x小于中间元素则取中间元素后左半边数组重复操作</li>
+</ul>
+<p>二分查找示意图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040905289.gif" alt="“Binary Search”"></p>
+<h3 id="2-基本案例-2"><a href="#2-基本案例-2" class="headerlink" title="2.基本案例"></a>2.基本案例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="comment">// 递归法二分查找</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(r &gt;= l)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 求中间元素</span></span><br><span class="line">		<span class="keyword">int</span> mid = l + (r - l) / <span class="number">2</span>; </span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 情况1：如果目标与中间元素匹配 </span></span><br><span class="line">		<span class="keyword">if</span>(arr[mid] == x)&#123;</span><br><span class="line">			<span class="keyword">return</span> mid;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 情况2:如果目标小于中间元素</span></span><br><span class="line">		<span class="keyword">if</span>(arr[mid] &gt; x)&#123;</span><br><span class="line">			<span class="comment">// 返回以中间-1为右的递归 </span></span><br><span class="line">			<span class="keyword">return</span> binarySearch(arr, l, mid<span class="number">-1</span>, x);</span><br><span class="line">		&#125; </span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 情况3：如果目标大于中间元素</span></span><br><span class="line">		<span class="comment">// 返回以中间+1为左的递归 </span></span><br><span class="line">		<span class="keyword">return</span> binarySearch(arr, mid + <span class="number">1</span>, r, x);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 查无结果</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行实例</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">	<span class="comment">// 目标数组 </span></span><br><span class="line">	<span class="keyword">int</span> arr[] = &#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">40</span>&#125;;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 查找目标</span></span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">10</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 测量数组大小</span></span><br><span class="line">	<span class="keyword">int</span> n = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>]);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 查找过程,定左右 </span></span><br><span class="line">	<span class="keyword">int</span> result =  binarySearch(arr, <span class="number">0</span>, n - <span class="number">1</span>, x);</span><br><span class="line">	</span><br><span class="line">	(result==<span class="number">-1</span>) ? <span class="built_in">printf</span>(<span class="string">&quot;目标不存在&quot;</span>) : <span class="built_in">printf</span>(<span class="string">&quot;目标所在索引为%d&quot;</span>, result);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">		</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="哈希表（Hash-table）"><a href="#哈希表（Hash-table）" class="headerlink" title="哈希表（Hash table）"></a>哈希表（Hash table）</h2><h3 id="1-基本概念-4"><a href="#1-基本概念-4" class="headerlink" title="1.基本概念"></a>1.基本概念</h3><p>哈希表是一种<strong>数据结构</strong>，其以键值对的形式表示数据。每一个键都映射哈希表中的一个值（与关联数组类似）</p>
+<p>在哈希表中，对键进行处理以生成映射到所需元素的新索引。此过程称为hashing。</p>
+<p>哈希表是存储和检索元素的有效方法，所以其也是一种有效的<strong>查找算法</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040905182.png" alt="“hashing”示意图"></p>
+<h3 id="2-实现步骤-1"><a href="#2-实现步骤-1" class="headerlink" title="2.实现步骤"></a>2.实现步骤</h3><p>（1）哈希表初始化</p>
+<p>​    在将元素插入数组前，将数组默认值设为-1（-1表示元素不存    在或特定的索引可以插入）</p>
+<p>​    <img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040905313.png" alt="image-20210215110519122"></p>
+<p>（2）插入元素</p>
+<p>​    哈希表插入元素的经典算法是：<code>key =  element % size</code> （key即数据插入位置，element即元素，size即数组大小）</p>
+<p>​    如插入数字24</p>
+<p>​    <img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040905850.png" alt="image-20210215111157606"></p>
+<p>（3）搜索元素</p>
+<p>搜索元素和插入元素使用同一算法获得索引（key），再按索引查找对应元素</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906618.png" alt="image-20210215111443960"></p>
+<p>（4）删除元素</p>
+<p>在哈希表中删除元素并不是指将数组中的元素移除，而是将元素的值初始化为-1</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906635.png" alt="image-20210215111738024"></p>
+<h3 id="3-基本案例-1"><a href="#3-基本案例-1" class="headerlink" title="3.基本案例"></a>3.基本案例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> size 7 </span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// 创建数组作为基本结构</span></span><br><span class="line"><span class="keyword">int</span> arr[size]; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 哈希表初始化，将所有元素赋值为-1 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;size; i++)&#123;</span><br><span class="line">		arr[i] = <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入数据</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> key = value % size;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(arr[key] == <span class="number">-1</span>)&#123;	</span><br><span class="line">		arr[key] = value;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d 插入到 arr[%d]\n&quot;</span>, value, key);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;该位置存在冲突&quot;</span>); </span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除数据 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> key = value % size;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(arr[key] == value)&#123;</span><br><span class="line">		arr[key] = <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;该值不存在&quot;</span>); </span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询数据</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">search</span> <span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> key = value % size;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(arr[key] == value)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;查有此项&quot;</span>); </span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;查无此项&quot;</span>); </span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印出所有数据</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;size; i++)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;arr[%d] = %d\n&quot;</span>, i, arr[i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行实例</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">// 初始化哈希表 </span></span><br><span class="line">	init();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 填充哈希表  </span></span><br><span class="line">	insert(<span class="number">10</span>);</span><br><span class="line">	insert(<span class="number">4</span>);</span><br><span class="line">	insert(<span class="number">2</span>);</span><br><span class="line">	insert(<span class="number">5</span>); </span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 打印哈希表</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	print(); </span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 删除测试</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	del(<span class="number">5</span>); </span><br><span class="line">	print();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 查询测试</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	search(<span class="number">4</span>); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4-哈希冲突（collision）"><a href="#4-哈希冲突（collision）" class="headerlink" title="4.哈希冲突（collision）"></a>4.哈希冲突（collision）</h3><p>如果存在插入元素算法得到得索引相同，会出现哈希冲突的情况</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906057.png" alt="image-20210215151206845"></p>
+<p>以下介绍几种避免哈希冲突的方法</p>
+<h3 id="5-线性探测-Linear-Probing"><a href="#5-线性探测-Linear-Probing" class="headerlink" title="5.线性探测(Linear Probing)"></a>5.线性探测(Linear Probing)</h3><p>（1）方法简介：通过<code>key = element % size</code>计算索引，如果该索引为空则直接填入，如果产生了冲突就检查下一个索引即<code>key = (key+1) % size</code>，重复执行该过程直到找到空间</p>
+<p>（2）方法示意图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906001.png" alt="image-20210215153740661"></p>
+<p>空间不足的情况：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906542.png" alt="image-20210215154203024"></p>
+<h3 id="6-单独链表法（separate-chaining）"><a href="#6-单独链表法（separate-chaining）" class="headerlink" title="6.单独链表法（separate chaining）"></a>6.单独链表法（separate chaining）</h3><p>（1）方法简介</p>
+<p>单独链表法又被称为开放式哈希表（Open hashing），它采用数据结构中的链表（linked list）来解决哈希冲突的问题，这样的哈希表永远也不会被填满</p>
+<p>这种方法使哈希表的每个单元指向具有相同索引值的链表</p>
+<p>（2）方法示意图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906224.png" alt="image-20210215160449318"></p>
+<p>（3）使用案例</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> size 7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建链表节点</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	<span class="comment">// 存储该节点内容 </span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//  存储下一个节点的地址 </span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建单独链表（每一个哈希表的索引一条链表）</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>* <span class="title">chain</span>[<span class="title">size</span>];</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 哈希表初始化，每一列填入NULL </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;size; i++)&#123;</span><br><span class="line">		chain[i] = <span class="literal">NULL</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 哈希表中插入元素 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">	<span class="comment">// 创造新节点存储数据</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">newNode</span> =</span> (struct node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(struct node));</span><br><span class="line">	newNode-&gt;data = value;</span><br><span class="line">	newNode-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 计算索引（hash key）</span></span><br><span class="line">	<span class="keyword">int</span> key = value % size;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 检查单独链表是否为空</span></span><br><span class="line">	<span class="comment">// 为空则填入新节点 </span></span><br><span class="line">	<span class="keyword">if</span>(chain[key] == <span class="literal">NULL</span>)&#123;</span><br><span class="line">		chain[key] = newNode;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="comment">// 不为空即产生了哈希冲突 </span></span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="comment">// 需要在已有的末端节点后添加新节点</span></span><br><span class="line">		<span class="comment">// 获得指定索引的链表 </span></span><br><span class="line">		struct node *temp = chain[key];</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 遍历链表得到末端节点 </span></span><br><span class="line">		<span class="keyword">while</span>(temp-&gt;next)&#123;</span><br><span class="line">			temp = temp-&gt;next; </span><br><span class="line">		&#125; </span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 在末尾连接上新节点 </span></span><br><span class="line">		temp-&gt;next = newNode; </span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 哈希表中搜索元素</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> key = value % size;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">temp</span> =</span> chain[key];</span><br><span class="line">	<span class="comment">// 遍历链表寻找元素 </span></span><br><span class="line">	<span class="keyword">while</span>(temp)&#123;</span><br><span class="line">		<span class="keyword">if</span>(temp-&gt;data == value)&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;		</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 哈希表中删除元素</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> key = value % size;</span><br><span class="line">	<span class="comment">// 存储头部节点 </span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">temp</span> =</span> chain[key],*dealloc;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(temp != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="comment">// 如果需要删除的元素在头部 </span></span><br><span class="line">		<span class="keyword">if</span>(temp-&gt;data == value)&#123;</span><br><span class="line">			dealloc = temp;</span><br><span class="line">			temp = temp-&gt;next;</span><br><span class="line">			<span class="built_in">free</span>(dealloc);</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="comment">// 遍历链表寻找需要删除的元素 </span></span><br><span class="line">			<span class="keyword">while</span>(temp-&gt;next)&#123;</span><br><span class="line">				<span class="keyword">if</span>(temp-&gt;next-&gt;data == value)&#123;</span><br><span class="line">					dealloc = temp-&gt;next;</span><br><span class="line">					temp-&gt;next = temp-&gt;next-&gt;next;</span><br><span class="line">					<span class="built_in">free</span>(dealloc);</span><br><span class="line">					<span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">				&#125;</span><br><span class="line">				temp = temp-&gt;next;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印哈希表</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;size; i++)&#123;</span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">temp</span> =</span> chain[i];</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;chain[%d]--&gt;&quot;</span>,i);</span><br><span class="line">			</span><br><span class="line">		<span class="comment">// 打印链表	</span></span><br><span class="line">		<span class="keyword">while</span>(temp)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%d--&gt;&quot;</span>, temp-&gt;data);</span><br><span class="line">			temp = temp-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;NULL\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行实例</span></span><br><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> 	<span class="comment">// 初始化哈希表</span></span><br><span class="line">	init();</span><br><span class="line">	 </span><br><span class="line">	<span class="comment">// 填充数据</span></span><br><span class="line">    insert(<span class="number">7</span>);</span><br><span class="line">    insert(<span class="number">0</span>);</span><br><span class="line">    insert(<span class="number">3</span>);</span><br><span class="line">    insert(<span class="number">10</span>);</span><br><span class="line">    insert(<span class="number">4</span>);</span><br><span class="line">    insert(<span class="number">5</span>);  </span><br><span class="line"> 	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line"> 	print(); </span><br><span class="line"> 	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	<span class="comment">// 删除测试</span></span><br><span class="line">	<span class="keyword">if</span>(del(<span class="number">10</span>))&#123;</span><br><span class="line">		print(); </span><br><span class="line">	&#125;  </span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;删除项不存在&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line"> 	</span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="冒泡排序（Bubble-Sort）"><a href="#冒泡排序（Bubble-Sort）" class="headerlink" title="冒泡排序（Bubble Sort）"></a>冒泡排序（Bubble Sort）</h2><h3 id="1-基本概念-5"><a href="#1-基本概念-5" class="headerlink" title="1.基本概念"></a>1.基本概念</h3><p>（1）冒泡排序通过重复交换错误顺序的两个数来工作</p>
+<p>（2）冒泡排序步骤：</p>
+<ul>
+<li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
+<li>对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</li>
+<li>针对所有的元素重复以上的步骤，除了最后一个。</li>
+<li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</li>
+</ul>
+<p>（3）冒泡排序示意图:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906428.gif" alt="“Bubble Sort gif”的图片搜索结果"></p>
+<h3 id="2-基本案例-3"><a href="#2-基本案例-3" class="headerlink" title="2.基本案例"></a>2.基本案例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 交换数字函数(此处的参数为地址，可以直接修改主函数中的值)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *xp, <span class="keyword">int</span> *yp)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> temp = *xp;</span><br><span class="line">	*xp = *yp;</span><br><span class="line">	*yp = temp;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 冒泡函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, j;</span><br><span class="line">	<span class="comment">// 从头开始的次数 </span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;n<span class="number">-1</span>; i++)&#123; </span><br><span class="line">	    <span class="comment">// 移动读取数组相邻两个数 </span></span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;n-i<span class="number">-1</span>; j++)&#123;</span><br><span class="line">			<span class="comment">// 符合条件，交换数值 </span></span><br><span class="line">			<span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">				swap(&amp;arr[j], &amp;arr[j+<span class="number">1</span>]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印数组函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printAarry</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;size; i++)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, arr[i]);	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行实例</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr[] = &#123;<span class="number">64</span>, <span class="number">34</span>, <span class="number">25</span>, <span class="number">12</span>, <span class="number">22</span>, <span class="number">11</span>, <span class="number">90</span>&#125;; </span><br><span class="line">	<span class="comment">// 计算数组大小 </span></span><br><span class="line">	<span class="keyword">int</span> n = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>]);</span><br><span class="line">	<span class="comment">// 冒泡处理 </span></span><br><span class="line">	bubbleSort(arr, n);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;排序后的数组：\n&quot;</span>);</span><br><span class="line">	printAarry(arr, n);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="快速排序（Quick-sort）"><a href="#快速排序（Quick-sort）" class="headerlink" title="快速排序（Quick sort）"></a>快速排序（Quick sort）</h2><p>参考文章：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904122538278920">https://juejin.cn/post/6844904122538278920</a></p>
+<h3 id="1-基本概念-6"><a href="#1-基本概念-6" class="headerlink" title="1.基本概念"></a>1.基本概念</h3><p>（1）快速排序是一种分而治之的算法，它会一个元素为枢纽键对数组进行分区，枢纽有以下几种选择，本文以最简单的最后一个元素为枢纽为例</p>
+<ul>
+<li>始终选择第一个元素作为枢轴</li>
+<li>始终选择最后一个元素作为枢轴</li>
+<li>选择一个随机元素作为枢轴。</li>
+<li>选择中位数作为枢轴</li>
+</ul>
+<p>（2）实现步骤</p>
+<ul>
+<li>在给定数组中确定一个元素x作为枢纽</li>
+<li>将x放在排序数组中的正确位置</li>
+<li>将小于x的元素放在x之前</li>
+<li>将大于x的元素放在x之后</li>
+<li>去掉枢纽分成两组后重复以上操作</li>
+</ul>
+<p>以末尾元素为枢纽排序示意图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040906440.png" alt="image-20210226194704522"></p>
+<p>​    （3）将小于x的元素放在x之前，将大于x的元素放在x之后这一步是将一个数组分成两个数组，其运用到了分而治之的思想</p>
+<ul>
+<li><p>将一个数组分成两个数组的方法为：<br>先从数组右边找到一个比枢轴元素小的元素，将数组的第一个位置赋值为该元素；</p>
+</li>
+<li><p>再从数组的左边找到一个比枢轴元素大的元素，将从上面取元素的位置赋值为该值；</p>
+</li>
+<li><p>依次进行，直到左右相遇，把枢轴元素赋值到相遇位置。</p>
+<p>示意图如下：</p>
+</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2020/4/13/17171276e5f8bb49?imageslim" alt="第一轮排序动态过程"></p>
+<h3 id="2-基本案例-4"><a href="#2-基本案例-4" class="headerlink" title="2.基本案例"></a>2.基本案例</h3><p>基本案例中也运用了分而治之的方法，当操作步骤与上面步骤相异但是效果相同</p>
+<ul>
+<li>选择最后一个元素作为枢纽</li>
+<li>从数组左端开始遍历一个数组，先设最左端元素为待交换元素。当遇到比枢纽值小的元素，就将其与待交换元素值相交换，并把下个元素设为待交换元素</li>
+<li>完成遍历后，最后交换末尾元素与待交换元素，并返回待交换元素的索引</li>
+<li>依据返回的索引将数组分成了两组：左边比枢纽元素小，右边比枢纽元素大</li>
+<li>最后再递归分开处理左边数组和右边数组</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>[], <span class="keyword">int</span>, <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[], <span class="keyword">int</span>, <span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>*, <span class="keyword">int</span>*)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,i;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;数组大小\n&quot;</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> arr[n];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;填入数组数据\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;arr[i]);</span><br><span class="line"></span><br><span class="line">    quickSort(arr,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;快速排序后的数组\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,arr[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(start &lt; end)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> pIndex = partition(arr, start, end);</span><br><span class="line">        quickSort(arr, start, pIndex<span class="number">-1</span>);</span><br><span class="line">        quickSort(arr, pIndex+<span class="number">1</span>, end);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pIndex = start;</span><br><span class="line">    <span class="keyword">int</span> pivot = arr[end];</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i = start; i &lt; end; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i] &lt; pivot)</span><br><span class="line">        &#123;</span><br><span class="line">            swap(&amp;arr[i], &amp;arr[pIndex]);</span><br><span class="line">            pIndex++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    swap(&amp;arr[end], &amp;arr[pIndex]);</span><br><span class="line">    <span class="keyword">return</span> pIndex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *x, <span class="keyword">int</span> *y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t = *x;</span><br><span class="line">    *x = *y;</span><br><span class="line">    *y = t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2021/02/03/C%E8%AF%AD%E8%A8%80-%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" title="C语言|算法入门指南">https://autovy.github.io/2021/02/03/C语言-算法入门指南/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C%E8%AF%AD%E8%A8%80/" rel="tag"><i class="fa fa-tag"></i> C语言</a>
+              <a href="/tags/%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 入门教程</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/31/Java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="prev" title="Java|面向对象学习">
+      <i class="fa fa-chevron-left"></i> Java|面向对象学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/11/Java-%E7%9F%A5%E8%AF%86%E6%A1%86%E6%9E%B6/" rel="next" title="Java|知识框架">
+      Java|知识框架 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+
+
+
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%88Time-complexity%EF%BC%89"><span class="nav-text">时间复杂度（Time complexity）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="nav-text">1.一个例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%90%AB%E4%B9%89"><span class="nav-text">2.时间复杂度的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%9B%BE%E7%A4%BA"><span class="nav-text">3.时间复杂度图示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95"><span class="nav-text">4.时间复杂度计算方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95%E4%B8%80%E8%A7%88"><span class="nav-text">经典算法一览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%97%E8%BD%AC%E7%9B%B8%E9%99%A4%E6%B3%95%EF%BC%88Euclidean-algorithm%EF%BC%89"><span class="nav-text">辗转相除法（Euclidean algorithm）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">1.基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E6%A1%88%E4%BE%8B"><span class="nav-text">2.基本案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%89%A9%E5%B1%95%E6%A1%88%E4%BE%8B"><span class="nav-text">3.扩展案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95%EF%BC%88sieve-of-Eratosthenes%EF%BC%89"><span class="nav-text">埃拉托斯特尼筛法（sieve of Eratosthenes）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-1"><span class="nav-text">1.基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="nav-text">2.实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%9F%BA%E6%9C%AC%E6%A1%88%E4%BE%8B"><span class="nav-text">3.基本案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%9F%A5%E6%89%BE%EF%BC%88Linear-search%EF%BC%89"><span class="nav-text">线性查找（Linear search）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-2"><span class="nav-text">1.基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E6%A1%88%E4%BE%8B-1"><span class="nav-text">2.基本案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%EF%BC%88Binary-Search%EF%BC%89"><span class="nav-text">二分查找（Binary Search）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-3"><span class="nav-text">1.基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E6%A1%88%E4%BE%8B-2"><span class="nav-text">2.基本案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%88Hash-table%EF%BC%89"><span class="nav-text">哈希表（Hash table）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-4"><span class="nav-text">1.基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4-1"><span class="nav-text">2.实现步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%9F%BA%E6%9C%AC%E6%A1%88%E4%BE%8B-1"><span class="nav-text">3.基本案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81%EF%BC%88collision%EF%BC%89"><span class="nav-text">4.哈希冲突（collision）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%BA%BF%E6%80%A7%E6%8E%A2%E6%B5%8B-Linear-Probing"><span class="nav-text">5.线性探测(Linear Probing)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%8D%95%E7%8B%AC%E9%93%BE%E8%A1%A8%E6%B3%95%EF%BC%88separate-chaining%EF%BC%89"><span class="nav-text">6.单独链表法（separate chaining）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%EF%BC%88Bubble-Sort%EF%BC%89"><span class="nav-text">冒泡排序（Bubble Sort）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-5"><span class="nav-text">1.基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E6%A1%88%E4%BE%8B-3"><span class="nav-text">2.基本案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%EF%BC%88Quick-sort%EF%BC%89"><span class="nav-text">快速排序（Quick sort）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-6"><span class="nav-text">1.基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E6%A1%88%E4%BE%8B-4"><span class="nav-text">2.基本案例</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<a href="/">  <img class="site-author-image" itemprop="image" alt="Autovy"
+      src="/images/2.png">  </a>
+  <p class="site-author-name" itemprop="name">Autovy</p>
+  <div class="site-description" itemprop="description">某编外人员的个人小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Autovy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Autovy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/JohnSmith232" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;JohnSmith232" rel="noopener" target="_blank"><i class="fa fa-fw fa-CSDN"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-code"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Autovy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">119k</span>
+</div>
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/01/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'RVJRabsBhxWXvhMcG8CH5wbc-gzGzoHsz',
+      appKey     : 'JSGLk7guOagDPMFN9wbASkEh',
+      placeholder: "说点什么吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+  <script src="/js/bloom.js" type="text/javascript"></script>

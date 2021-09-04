@@ -127,17 +127,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">10</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">13</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">6</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">11</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -196,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/06/06/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Docker%E6%90%AD%E5%BB%BALNMP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2.png">
@@ -210,7 +210,199 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">开发工具|学点docker</a>
+            <a href="/2021/06/06/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Docker%E6%90%AD%E5%BB%BALNMP/" class="post-title-link" itemprop="url">开发工具|Docker搭建LNMP</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021/06/06 14:30:00" itemprop="dateCreated datePublished" datetime="2021-06-06T14:30:00+08:00">2021/06/06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/06/06/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Docker%E6%90%AD%E5%BB%BALNMP/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/06/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Docker%E6%90%AD%E5%BB%BALNMP/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040845042.jpeg" alt="git"></p>
+<h2 id="命令行搭建"><a href="#命令行搭建" class="headerlink" title="命令行搭建"></a>命令行搭建</h2><h3 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h3><h4 id="1-mysql镜像拉取"><a href="#1-mysql镜像拉取" class="headerlink" title="1.mysql镜像拉取"></a>1.mysql镜像拉取</h4><p>从仓库中拉取对应的mysql镜像，注意如果不标注tag（版本号等），会默认使用lastest（最新版）这个版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docekr pull mysql:5.6</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-创建mysql容器"><a href="#2-创建mysql容器" class="headerlink" title="2.创建mysql容器"></a>2.创建mysql容器</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 3307:3306 -e MYSQL_ROOT_PASSWORD=xy123456 --name xy_mysql mysql:5.6</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>-d 让容器在后台运行，如果没有这个条件，会在终端展示mysql加载过程，而且无法进行操作（在另一个终端查看，会发现mysql的容器正在运行中，关闭原来的终端，该容器并不会随之关闭）</li>
+<li>-p 添加主机到容器的端口映射，3306是容器内mysql默认使用的端口号</li>
+<li>-e 设置环境变量，这里是设置mysql的root用户的初始密码，这个必须设置，如果没有设置容器会被自动关停</li>
+<li>–name 容器的名字，容器名必须唯一</li>
+</ul>
+<h4 id="3-进入mysql容器"><a href="#3-进入mysql容器" class="headerlink" title="3.进入mysql容器"></a>3.进入mysql容器</h4><p>容器启动后，我们可以进入运行中的容器查看mysql的相关文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -ti xy_mysql /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>-t 在容器里生产一个伪终端</li>
+<li>-i 对容器内的标准输入 (STDIN) 进行交互</li>
+<li>exit命令是离开并关闭容器，但是由于容器还有任务所以不会关停</li>
+</ul>
+<h3 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h3><h4 id="1-PHP镜像拉取"><a href="#1-PHP镜像拉取" class="headerlink" title="1.PHP镜像拉取"></a>1.PHP镜像拉取</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull php:7.0-fpm</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-创建PHP容器"><a href="#2-创建PHP容器" class="headerlink" title="2.创建PHP容器"></a>2.创建PHP容器</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -v /var/nginx/www/html:/var/www/html -p 9000:9000 --link xy_mysql:mysql --name xy_phpfpm php:fpm </span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>-p 添加主机到容器的端口映射，设定php使用9000端口</li>
+<li>-v 添加目录映射，即主机上的/var/nginx/www/html和容器中/var/www/html目录是同步的，主机上的路径如果不存在，也会自动生成</li>
+<li>–link 与另外一个容器建立起联系，这样我们就可以在当前容器中去使用另一个容器里的服务</li>
+</ul>
+<h4 id="3-创建文件"><a href="#3-创建文件" class="headerlink" title="3.创建文件"></a>3.创建文件</h4><p>这时我们可以不进入容器内增加文件，而是可以在主机的挂载目录下添加文件</p>
+<p>在/var/nginx/www/html目录下新建index.php文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim index.php</span><br></pre></td></tr></table></figure>
+
+
+
+<p>写入内容作为测试</p>
+<p>因为docker需要在最高权限下运行，所有在主机上创建的目录需要最高权限访问</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> phpinfo() <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="安装nignx"><a href="#安装nignx" class="headerlink" title="安装nignx"></a>安装nignx</h3><h4 id="1-nginx镜像拉取"><a href="#1-nginx镜像拉取" class="headerlink" title="1.nginx镜像拉取"></a>1.nginx镜像拉取</h4><p>这里拉取的就是最新版</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-创建nginx工具人容器"><a href="#2-创建nginx工具人容器" class="headerlink" title="2.创建nginx工具人容器"></a>2.创建nginx工具人容器</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 80:80 \</span><br><span class="line">--link xy_phpfpm:phpfpm --name xy_nginx nginx</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<p>创建一个无挂载的容器，方便下一步提取出配置文件（如果挂载了，会导致复制配置文件时，一直与容器同步）</p>
+<h4 id="3-复制配置文件"><a href="#3-复制配置文件" class="headerlink" title="3.复制配置文件"></a>3.复制配置文件</h4><p>容器的挂载只限于目录，如果直接挂载文件，其仍作为目录被处理</p>
+<p>要实现文件同步，我们必须要先从容器中复制出一份配置文件（如果是直接新建一个，挂载时主机上的空白文件会同步到容器中）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker cp xy_nginx:/etc/nginx/nginx.conf /var/nginx/nginx.conf</span><br><span class="line">docker cp xy_nginx:/etc/nginx/conf.d/default.conf /var/nginx/conf.d/</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>docker cp  原路径:转移路径</li>
+<li>容器的路径用： <code>容器名:容器内文件路径</code>表示</li>
+<li>cp时路径上的目录必须存在（而挂载时，主机会自动创建不存在的目录）</li>
+</ul>
+<h4 id="4-创建nginx挂载容器"><a href="#4-创建nginx挂载容器" class="headerlink" title="4.创建nginx挂载容器"></a>4.创建nginx挂载容器</h4><p>先把充当工具人的nginx容器删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm -f xy_nginx</span><br></pre></td></tr></table></figure>
+
+<p>重新创建一个带挂载的nginx容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 80:80 \</span><br><span class="line">-v /var/nginx/nginx.conf:/ect/nginx/nginx.conf\</span><br><span class="line">-v /var/nginx/conf.d/default.conf:/ect/nginx/conf.d/default.conf\</span><br><span class="line">-v /var/nginx/www/html:/var/www/html\</span><br><span class="line">--link xy_phpfpm:phpfpm --name xy_nginx nginx</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>-p 添加主机到容器的端口映射，nginx默认使用80端口，也是网页范围默认使用的端口</li>
+<li>-v 挂载了三个文件到本地，其中<code>/var/nginx/nginx.conf</code>和<code>/var/nginx/conf.d/default.conf</code>在本地同步了nginx两个重要的配置文件，<code>/var/www/html</code>则同步了nginx网页展示文件</li>
+<li>挂载时应该要保持最后一个文件相同</li>
+</ul>
+<h4 id="5-修改配置文件"><a href="#5-修改配置文件" class="headerlink" title="5.修改配置文件"></a>5.修改配置文件</h4><p>修改nginx的配置文件让其监听php，这里可以直接在主机修改配置文件</p>
+<p>主机：<code>/var/nginx/conf.d/default.conf</code>    容器：<code>/ect/nginx/conf.d/default.conf</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span></span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">    root           /<span class="keyword">var</span>/www/html;</span><br><span class="line">    fastcgi_pass   <span class="number">172.17</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">9000</span>;</span><br><span class="line">    fastcgi_index  index.php;</span><br><span class="line">    fastcgi_param  SCRIPT_FILENAME  <span class="variable">$document</span>_root<span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">    <span class="keyword">include</span>        fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>内容解析：</p>
+<ul>
+<li>root为文件php根目录，所以修改为 <code>/var/www/html</code></li>
+<li>fastcgi_pass 修改为<code>本地ip地址:php端口</code>，注意使用回环地址也是不允许的</li>
+<li>fastcgi_index为默认访问的页面</li>
+<li>fastcgi_param应该改为 $document_root$fastcgi_script_name才能准确找到位置</li>
+</ul>
+<h4 id="6-配置出错处理方法"><a href="#6-配置出错处理方法" class="headerlink" title="6.配置出错处理方法"></a>6.配置出错处理方法</h4><p>当配置文件出错时，容器将无法运行</p>
+<ul>
+<li>先查看日志，查找出错的地方</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs xy_nginx</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>由于容器没有启动，我们无法直接进入容器修改，所以需要用docker cp下载出问题的文件，然后再通过cp覆盖问题文件</li>
+<li>如果该出错文件有挂载，在本地修改即可</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+
+
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/05/28/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Docker%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="某编外人员的个人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/28/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Docker%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">开发工具|学点docker</a>
         </h1>
 
         <div class="post-meta">
@@ -230,14 +422,6 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
                 </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/docker/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
-                </span>
             </span>
 
           
@@ -249,8 +433,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/05/28/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Docker%E5%AD%A6%E4%B9%A0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/28/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Docker%E5%AD%A6%E4%B9%A0/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -275,7 +459,7 @@
           <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040845042.jpeg" alt="git"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/05/28/Docker%E5%AD%A6%E4%B9%A0/#more" rel="contents">
+              <a class="btn" href="/2021/05/28/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Docker%E5%AD%A6%E4%B9%A0/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -302,7 +486,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/05/28/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Linux%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2.png">
@@ -316,7 +500,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/" class="post-title-link" itemprop="url">开发笔记：自动化脚本实战手册</a>
+            <a href="/2021/05/28/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Linux%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C/" class="post-title-link" itemprop="url">开发工具|Linux学习手册</a>
         </h1>
 
         <div class="post-meta">
@@ -326,7 +510,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021/03/28 14:30:00" itemprop="dateCreated datePublished" datetime="2021-03-28T14:30:00+08:00">2021/03/28</time>
+              <time title="创建时间：2021/05/28 14:30:00" itemprop="dateCreated datePublished" datetime="2021-05-28T14:30:00+08:00">2021/05/28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -334,11 +518,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">开发笔记</span></a>
+                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
                 </span>
             </span>
 
@@ -351,8 +531,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/05/28/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Linux%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/28/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Linux%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -362,7 +542,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8.4k</span>
+              <span>3.6k</span>
             </span>
 
         </div>
@@ -374,10 +554,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040841155.jpg" alt="python"></p>
+          <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040952867.png" alt="image-20210904095248687"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/03/28/python%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/#more" rel="contents">
+              <a class="btn" href="/2021/05/28/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-Linux%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -404,7 +584,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/02/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/05/08/Java-ssm%E6%A1%86%E6%9E%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2.png">
@@ -418,7 +598,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/02/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">C语言|算法入门指南</a>
+            <a href="/2021/05/08/Java-ssm%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">Java|SSM框架学习</a>
         </h1>
 
         <div class="post-meta">
@@ -428,7 +608,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021/02/03 14:30:00" itemprop="dateCreated datePublished" datetime="2021-02-03T14:30:00+08:00">2021/02/03</time>
+              <time title="创建时间：2021/05/08 14:30:00" itemprop="dateCreated datePublished" datetime="2021-05-08T14:30:00+08:00">2021/05/08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -436,11 +616,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">算法学习</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
 
@@ -453,8 +629,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2021/02/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/02/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/05/08/Java-ssm%E6%A1%86%E6%9E%B6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/08/Java-ssm%E6%A1%86%E6%9E%B6/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -464,7 +640,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>11k</span>
+              <span>33k</span>
             </span>
 
         </div>
@@ -476,10 +652,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040904904.png" alt="image-20210210110218935"></p>
+          <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040933389.png" alt="image-20210604151457606"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/02/03/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/#more" rel="contents">
+              <a class="btn" href="/2021/05/08/Java-ssm%E6%A1%86%E6%9E%B6/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -506,7 +682,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2020/06/15/C%E8%AF%AD%E8%A8%80%E6%9C%80%E7%AE%80%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/04/26/Java-%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/2.png">
@@ -520,7 +696,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/15/C%E8%AF%AD%E8%A8%80%E6%9C%80%E7%AE%80%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">C语言|最简管理系统</a>
+            <a href="/2021/04/26/Java-%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/" class="post-title-link" itemprop="url">Java|网络爬虫项目</a>
         </h1>
 
         <div class="post-meta">
@@ -530,7 +706,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020/06/15 14:30:00" itemprop="dateCreated datePublished" datetime="2020-06-15T14:30:00+08:00">2020/06/15</time>
+              <time title="创建时间：2021/04/26 14:30:00" itemprop="dateCreated datePublished" datetime="2021-04-26T14:30:00+08:00">2021/04/26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -538,11 +714,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C%E8%AF%AD%E8%A8%80/%E5%BC%80%E5%8F%91%E5%AE%9E%E6%88%98/" itemprop="url" rel="index"><span itemprop="name">开发实战</span></a>
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
 
@@ -555,8 +727,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/06/15/C%E8%AF%AD%E8%A8%80%E6%9C%80%E7%AE%80%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/06/15/C%E8%AF%AD%E8%A8%80%E6%9C%80%E7%AE%80%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/04/26/Java-%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/04/26/Java-%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -566,7 +738,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>11k</span>
+              <span>6.7k</span>
             </span>
 
         </div>
@@ -578,198 +750,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>C语言结课作业：编写一个小型工资管理系统，用来管理职工的个人基本信息及工资薪酬等数据。在技术要求方面仅仅是要求了使用结构体数据类型，但基于我们的学习进度，考察的应该是用数组来储存。</p>
-<!--more  -->
-
-
-
-<h3 id="作业要求"><a href="#作业要求" class="headerlink" title="作业要求"></a>作业要求</h3><ol>
-<li><p>每个职工的数据应包括：<strong>工号、姓名、性别、部门、基本工资、绩效工资、奖金、应发工资</strong>（应发工资=基本工资+绩效工资+奖金）。职工数据要求采用结构体数据类型。</p>
-</li>
-<li><p><strong>菜单显示：</strong>显示系统的一级功能菜单（数据输入、数据修改、数据处理、数据输出、退出）。</p>
-</li>
-<li><p><strong>数据输入</strong>：至少输入10个职工的各项数据（应发工资由系统自动计算，不需要输入）。<strong>录入的第一条记录用自已的真实姓名，部门为自己的真实班级。</strong>并将有自己真实姓名、班级的输出结果截屏保存到大作业总结报告中。</p>
-</li>
-<li><p><strong>数据修改</strong>：输入工号,修改指定工号的各项数据。输出修改完成后的全部职工数据。</p>
-</li>
-<li><p><strong>数据处理</strong>：处理方式包括：排序、查询。可提供子菜单让用户选择。其中：</p>
-<p>1)<strong>排序</strong>：按工号排序，显示所有职工的全部数据。</p>
-<p>2)<strong>查询</strong>：按工号查询，显示指定工号的全部数据。</p>
-</li>
-<li><p><strong>数据输出</strong>：输出全部职工的各项数据。</p>
-</li>
-<li><p><strong>退出</strong>：退出整个工资管理系统。</p>
-</li>
-</ol>
-<h3 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h3><h5 id="1-数据存储"><a href="#1-数据存储" class="headerlink" title="1.数据存储"></a>1.数据存储</h5><p>我使用的是结构体数组来自建一个数据库，放在全局环境下，将数据库设为一个全局变量</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自建数据库</span></span><br><span class="line"> <span class="class"><span class="keyword">struct</span> <span class="title">staff</span> &#123;</span></span><br><span class="line"> 	</span><br><span class="line">	<span class="keyword">int</span>  id;</span><br><span class="line"> 	<span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line"> 	<span class="keyword">char</span> sex[<span class="number">20</span>];</span><br><span class="line"> 	<span class="keyword">char</span> belong[<span class="number">20</span>];</span><br><span class="line"> 	<span class="keyword">int</span>  basic_pay;</span><br><span class="line">	<span class="keyword">int</span>  add_pay;</span><br><span class="line">	<span class="keyword">int</span>  reward_pay;</span><br><span class="line">	<span class="keyword">int</span>  all_pay;</span><br><span class="line"></span><br><span class="line"> &#125;data[<span class="number">999</span>] = &#123;</span><br><span class="line"> 	</span><br><span class="line">	&#123;<span class="number">44</span>, <span class="string">&quot;张三&quot;</span>, <span class="string">&quot;男&quot;</span>, <span class="string">&quot;技术部&quot;</span>, <span class="number">5000</span>, <span class="number">1000</span>, <span class="number">200</span>, <span class="number">6200</span> &#125;,</span><br><span class="line">	</span><br><span class="line">	&#123;<span class="number">14</span>, <span class="string">&quot;李四&quot;</span>, <span class="string">&quot;男&quot;</span>, <span class="string">&quot;运维部&quot;</span>, <span class="number">4000</span>, <span class="number">1000</span>, <span class="number">200</span>, <span class="number">5200</span> &#125;,</span><br><span class="line">	</span><br><span class="line">	&#123;<span class="number">56</span>, <span class="string">&quot;小红&quot;</span>, <span class="string">&quot;女&quot;</span>, <span class="string">&quot;网安部&quot;</span>, <span class="number">3000</span>, <span class="number">1000</span>, <span class="number">200</span>, <span class="number">4200</span> &#125;,</span><br><span class="line"> 		</span><br><span class="line"> &#125;; </span><br></pre></td></tr></table></figure>
-
-
-
-<p>另外还需要定义一个全局的数据库长度</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int lenth &#x3D; 3;</span><br></pre></td></tr></table></figure>
-
-<p>之所以直接定义为一个常量，而不是用sizeof这种方式来计算数组长度，因为我发现结构体数组用这种方式来计算数组长度会是一个大坑！所以还不如手动添加常量</p>
-<h5 id="2-函数功能结构"><a href="#2-函数功能结构" class="headerlink" title="2.函数功能结构"></a>2.函数功能结构</h5><p>（1）函数声明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;函数声明</span><br><span class="line">int create();    &#x2F;&#x2F;增</span><br><span class="line">int del();  	&#x2F;&#x2F;删</span><br><span class="line">int edit();    &#x2F;&#x2F;改</span><br><span class="line"></span><br><span class="line">int process();     &#x2F;&#x2F;处理 </span><br><span class="line">int req();     &#x2F;&#x2F;查</span><br><span class="line">int line();     &#x2F;&#x2F;排 </span><br><span class="line"></span><br><span class="line">int showall(); &#x2F;&#x2F;查询全部</span><br></pre></td></tr></table></figure>
-
-
-
-<p>（2）函数定义</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//菜单系统 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> order;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        </span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;****************************\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;主菜单：\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;1.输入员工信息\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;2.删除员工信息\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;3.修改员工信息\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;4.处理员工信息\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;5.显示所有员工信息\n&quot;</span>); </span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;6.退出\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;****************************\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;---请输入菜单项：---\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">		</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;order); </span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(order==<span class="number">6</span>)&#123;		</span><br><span class="line">			</span><br><span class="line">			system(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;		</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">switch</span>(order)&#123;</span><br><span class="line">				</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>: 	create();<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>: 	del();<span class="keyword">break</span>;	</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>: 	edit();<span class="keyword">break</span>;	</span><br><span class="line">			<span class="keyword">case</span> <span class="number">4</span>: 	process();<span class="keyword">break</span>;	</span><br><span class="line">			<span class="keyword">case</span> <span class="number">5</span>: 	showall(); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:    <span class="built_in">printf</span>(<span class="string">&quot;\n404 NOT FOUND!&quot;</span>); getchar(); getchar(); system(<span class="string">&quot;cls&quot;</span>);	</span><br><span class="line">			</span><br><span class="line">			&#125;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//增添信息</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">create</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除信息 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">del</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//修改信息</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">edit</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//处理信息</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">process</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//员工信息排序输出 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">line</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//查询员工信息 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">req</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//查询全部数据 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">showall</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>函数结构如下</p>
-<p><img src="../../../AppData/Roaming/Typora/typora-user-images/image-20200615101249209.png" alt="image-20200615101249209"> </p>
-<p>这些函数都会对全局中的数据库进行操作。</p>
-<h3 id="菜单系统"><a href="#菜单系统" class="headerlink" title="菜单系统"></a>菜单系统</h3><p>main函数这里，就构建整体的函数调用框架，即本管理系统的菜单系统</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//菜单系统 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">   	</span><br><span class="line">   <span class="keyword">int</span> order;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line"></span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;****************************\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;主菜单：\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;1.输入员工信息\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;2.删除员工信息\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;3.修改员工信息\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;4.处理员工信息\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;5.显示所有员工信息\n&quot;</span>); </span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;6.退出\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;****************************\n&quot;</span>);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;---请输入菜单项：---\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">		</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;order); </span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(order==<span class="number">6</span>)&#123;		</span><br><span class="line">			</span><br><span class="line">			system(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;		</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">switch</span>(order)&#123;</span><br><span class="line">				</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>: 	create();<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>: 	del();<span class="keyword">break</span>;	</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>: 	edit();<span class="keyword">break</span>;	</span><br><span class="line">			<span class="keyword">case</span> <span class="number">4</span>: 	process();<span class="keyword">break</span>;	</span><br><span class="line">			<span class="keyword">case</span> <span class="number">5</span>: 	showall(); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:    <span class="built_in">printf</span>(<span class="string">&quot;\n404 NOT FOUND!&quot;</span>); getchar(); getchar(); system(<span class="string">&quot;cls&quot;</span>);	</span><br><span class="line">			</span><br><span class="line">			&#125;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>菜单系统常用switch语句来调用各个函数，另外为了整个管理系统的输出整洁一点，我还用了</p>
-<p>“stdlib.h”库中的清屏函数system(“cls”)</p>
-<h3 id="增添员工信息"><a href="#增添员工信息" class="headerlink" title="增添员工信息"></a>增添员工信息</h3><p> 增添员工信息的基本设计思路：将新的信息填入到下一个数组空的位置。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">create</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	i = lenth;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;新增员工工号：&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;data[i].id); </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;新增员工姓名：&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, &amp;data[i].name); </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;新增员工性别：&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, &amp;data[i].sex); </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);	</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;新增员工所属部门：&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, &amp;data[i].belong);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);	 </span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;新增员工基本工资：&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;data[i].basic_pay); </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);	</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;新增员工绩效工资：&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;data[i].add_pay); </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);		</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;新增员工奖金：&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;data[i].reward_pay); </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	data[i].all_pay = data[i].basic_pay + data[i].add_pay + data[i].reward_pay;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;创建成功！\n&quot;</span>);	</span><br><span class="line">	lenth++;</span><br><span class="line">	getchar();</span><br><span class="line">	getchar();</span><br><span class="line">	system(<span class="string">&quot;cls&quot;</span>);	</span><br><span class="line">		</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-<p> 用在全局定义的lenth（突然发现自己记错了长度的英语单词2333）来确定新数据的填写地址，创建成功后要注意用<code>lenth++</code>，拓展数据的长度。</p>
-<h3 id="删除员工信息"><a href="#删除员工信息" class="headerlink" title="删除员工信息"></a>删除员工信息</h3><p>删除员工信息的基本设计思路是：通过遍历所有的数据查询到指定的员工工号，然后将后面的数据依次向上填补被“删除”的空白</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除信息 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">del</span><span class="params">()</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> i = lenth;</span><br><span class="line">	<span class="keyword">int</span> num;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n请输入删除员工工号：&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);  </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=i+<span class="number">1</span>; j++)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(num==data[j].id)&#123;</span><br><span class="line">			<span class="keyword">for</span>( ;j&lt;=i-j; j++)&#123;</span><br><span class="line">				</span><br><span class="line">				data[j] = data[j+<span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			lenth--;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n删除成功!\n&quot;</span>); </span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(j==i+<span class="number">1</span>)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n查无此人!\n&quot;</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	getchar();</span><br><span class="line">	getchar();</span><br><span class="line">	system(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 在遍历中用到了两个if语句，if(num==data[j].id)来寻找符合条件的员工号，而<code>if(j==i+1)</code>则是遍历所有的数据后未找到匹配条件。</p>
-<p>说是删除实践上只是删除的数组元素的地位（下标）和财产（数据）被下一个数组元素给继承了，而下一个的数据元素的下标和数据又被下下个数据元素继承，以此类推。这里同样要注意用<code>lenth--</code>缩短数据长度。</p>
-<h3 id="修改员工信息"><a href="#修改员工信息" class="headerlink" title="修改员工信息"></a>修改员工信息</h3><p>修改员工信息的思路和删除员工信息的思路相差无几：都需要查询定位对应的员工信息，不同的是定位后，这个还要修改员工的信息</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改信息</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">edit</span><span class="params">()</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> i = lenth;</span><br><span class="line">	<span class="keyword">int</span> num;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n请输入需要修改的员工工号：&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);  </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=i+<span class="number">1</span>; j++)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(num==data[j].id)&#123;</span><br><span class="line">					</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;修改姓名：&quot;</span>);</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, &amp;data[j].name); </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;修改性别：&quot;</span>);</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, &amp;data[j].sex); </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);	</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;修改所属部门：&quot;</span>);</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, &amp;data[j].belong);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);	 </span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;修改基本工资：&quot;</span>);</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;data[j].basic_pay); </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);	</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;修改绩效工资：&quot;</span>);</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;data[j].add_pay); </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);		</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;修改奖金：&quot;</span>);</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;data[j].reward_pay); </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">			</span><br><span class="line">			data[j].all_pay = data[j].basic_pay + data[j].add_pay + data[j].reward_pay;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;修改成功！\n&quot;</span>);				</span><br><span class="line">			showall(); </span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(j==i+<span class="number">1</span>)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n查无此人!\n&quot;</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">				</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	getchar();</span><br><span class="line">	getchar();</span><br><span class="line">	system(<span class="string">&quot;cls&quot;</span>);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>所谓修改，无非是重新赋值罢了。</p>
-<h3 id="处理信息"><a href="#处理信息" class="headerlink" title="处理信息"></a>处理信息</h3><p>处理信息分成了排序信息和查询信息两部分，所有采用菜单系统同样的方式来设计</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//处理信息</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">process</span><span class="params">()</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> order;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;---------------------------------------------\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;1.员工信息排序     2.员工信息查询\n&quot;</span>); </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;---------------------------------------------\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;请选择处理方式:&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;order); </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">switch</span>(order)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>: line(); <span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>: req();  <span class="keyword">break</span>;</span><br><span class="line">		</span><br><span class="line">	&#125;	</span><br><span class="line">	</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="1-信息排序"><a href="#1-信息排序" class="headerlink" title="1.信息排序"></a>1.信息排序</h5><p>说实话这个函数的设计是该项目唯一卡到我的地方，因为我一直把它理解成了“排序处理”，但我了解实际上的需求应该是“排序输出”，那问题就简单很多了，我的设计思路如下</p>
-<p>将每个数组元素的地址看作是它们的住址，而员工工号信息就是它们的门牌号，把它们的门牌号记录下来，然后排列大小顺序，按顺序去拜访它们，期间它们的住处时是没有发生改变的。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//员工信息排序输出 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">line</span><span class="params">()</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> id_data[<span class="number">100</span>];</span><br><span class="line">	i = lenth;</span><br><span class="line">	<span class="keyword">char</span>* str[<span class="number">8</span>] = &#123;<span class="string">&quot;工号&quot;</span>, <span class="string">&quot;姓名&quot;</span>, <span class="string">&quot;性别&quot;</span>, <span class="string">&quot;部门&quot;</span>, <span class="string">&quot;基本工资&quot;</span>, <span class="string">&quot;绩效工资&quot;</span>, <span class="string">&quot;奖金&quot;</span>, <span class="string">&quot;应发工资&quot;</span>&#125;; </span><br><span class="line">	</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j&lt;i; j++)&#123;</span><br><span class="line">		</span><br><span class="line">		id_data[j] = data[j].id;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	qsort(id_data, i, <span class="keyword">sizeof</span>(id_data[<span class="number">0</span>]) , cmp);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n排序成功！\n\n&quot;</span>) ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//数据表的字段输出	</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>; n&lt;<span class="number">8</span>; n++)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%-12s&quot;</span> , str[n]);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//数据排序输出	</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> n1 = <span class="number">0</span>; n1&lt;i; n1++)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> n2 = <span class="number">0</span>; n2&lt;i; n2++ )&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span>(id_data[n1] == data[n2].id)&#123;</span><br><span class="line">				</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot; %-10d&quot;</span>,    data[n2].id); </span><br><span class="line">		</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot; %-10s&quot;</span>,    data[n2].name); </span><br><span class="line">			</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;   %-10s&quot;</span>,  data[n2].sex); </span><br><span class="line">				</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;%-10s&quot;</span>,     data[n2].belong); </span><br><span class="line">				</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;    %-10d&quot;</span>, data[n2].basic_pay); </span><br><span class="line">				</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;  %-10d&quot;</span>,   data[n2].add_pay); 	</span><br><span class="line">				</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;  %-10d&quot;</span>,   data[n2].reward_pay); </span><br><span class="line">				</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;  %-10d&quot;</span>,   data[n2].all_pay ); </span><br><span class="line">				</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line">				</span><br><span class="line">			&#125;</span><br><span class="line">						</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line"> 	getchar();</span><br><span class="line"> 	getchar();</span><br><span class="line">	system(<span class="string">&quot;cls&quot;</span>);	</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 依据代码，我的思路对应关系如下</p>
-<ul>
-<li>住址 ==&gt; 数组元素下标，即<code>data</code>数组的下标</li>
-<li>门牌号 ==&gt;  <code>data[j].id</code></li>
-<li>记录门牌号 ==&gt; 用了另一个数组：<code>id_data[j]</code> 来储存</li>
-<li>排列门牌号大小 ==&gt; 将<code>id_data[j]</code> 存储的门牌号排序，这里使用了C语言内置的排序函数：qsort()</li>
-<li>依次拜访 ==&gt; 两层循环，外层循环：<code>for(int n1 = 0; n1&lt;i; n1++)</code>循环名单上排列好的门牌号，内层循环：<code>for(int n2 = 0; n2&lt;i; n2++ )</code>，一个个去找符合名单上第一位的门牌号，然后输出</li>
-</ul>
-<p>另外注意，作为一个大学生的作业，使用内置的qsort()排序函数应该是非法的（狗头），应该使用冒泡排序或选择排序！</p>
-<p>好，我摊牌啦，我就是想偷一下懒……</p>
-<h5 id="2-查询员工信息"><a href="#2-查询员工信息" class="headerlink" title="2.查询员工信息"></a>2.查询员工信息</h5><p>查询的思路和删除信息，修改信息相似，没什么特别的地方</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询员工信息 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">req</span><span class="params">()</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> i = lenth;</span><br><span class="line">	<span class="keyword">int</span> num;</span><br><span class="line">	<span class="keyword">char</span>* str[<span class="number">8</span>] = &#123;<span class="string">&quot;工号&quot;</span>, <span class="string">&quot;姓名&quot;</span>, <span class="string">&quot;性别&quot;</span>, <span class="string">&quot;部门&quot;</span>, <span class="string">&quot;基本工资&quot;</span>, <span class="string">&quot;绩效工资&quot;</span>, <span class="string">&quot;奖金&quot;</span>, <span class="string">&quot;应发工资&quot;</span>&#125;; </span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n请输入需要查询员工工号：&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;num);  </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>; n&lt;<span class="number">8</span>; n++)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%-12s&quot;</span> , str[n]);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=i+<span class="number">1</span>; j++)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(num==data[j].id)&#123;</span><br><span class="line">	</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot; %-10d&quot;</span>,    data[j].id); </span><br><span class="line">		</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot; %-10s&quot;</span>,    data[j].name); </span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;   %-10s&quot;</span>,  data[j].sex); </span><br><span class="line">				</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;%-10s&quot;</span>,     data[j].belong); </span><br><span class="line">				</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;    %-10d&quot;</span>, data[j].basic_pay); </span><br><span class="line">				</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;  %-10d&quot;</span>,   data[j].add_pay); 	</span><br><span class="line">				</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;  %-10d&quot;</span>,   data[j].reward_pay); </span><br><span class="line">				</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;  %-10d&quot;</span>,   data[j].all_pay ); </span><br><span class="line">				</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n查询成功！\n\n&quot;</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(j==i+<span class="number">1</span>)&#123;</span><br><span class="line">			</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot; 无\n&quot;</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n查无此人!\n&quot;</span>);</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	getchar();</span><br><span class="line">	getchar();</span><br><span class="line">	system(<span class="string">&quot;cls&quot;</span>);	</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 这里输出数据表的表头，用了数组来存储字符串，要注意加<em>号：    `char</em> str[8]`</p>
-<h3 id="查询全部数据"><a href="#查询全部数据" class="headerlink" title="查询全部数据"></a>查询全部数据</h3><p>无脑遍历输出即可，就是输出格式上要有调整，一般可以用<code>printf(&quot;%-9d&quot;)</code>占9个空格，左对齐的方式来调整输出格式，输出那里我也是为了美观才一个个去加空格调整格式，就不要吐槽我代码格式不整洁了。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询全部数据 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">showall</span><span class="params">()</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">char</span>* str[<span class="number">8</span>] = &#123;<span class="string">&quot;工号&quot;</span>, <span class="string">&quot;姓名&quot;</span>, <span class="string">&quot;性别&quot;</span>, <span class="string">&quot;部门&quot;</span>, <span class="string">&quot;基本工资&quot;</span>, <span class="string">&quot;绩效工资&quot;</span>, <span class="string">&quot;奖金&quot;</span>, <span class="string">&quot;应发工资&quot;</span>&#125;; </span><br><span class="line">	i = lenth - <span class="number">1</span>;</span><br><span class="line">	 </span><br><span class="line">	data[i].all_pay = 	data[i].basic_pay + data[i].add_pay + data[i].reward_pay;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;查询成功！\n\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>; n&lt;<span class="number">8</span>; n++)&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%-12s&quot;</span> , str[n]);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;=i; j++)&#123;</span><br><span class="line">			</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot; %-10d&quot;</span>,    data[j].id); </span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot; %-10s&quot;</span>,    data[j].name); </span><br><span class="line">	</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;   %-10s&quot;</span>,  data[j].sex); </span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%-10s&quot;</span>,     data[j].belong); </span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;    %-10d&quot;</span>, data[j].basic_pay); </span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;  %-10d&quot;</span>,   data[j].add_pay); 	</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;  %-10d&quot;</span>,   data[j].reward_pay); </span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;  %-10d&quot;</span>,   data[j].all_pay ); </span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"> 	getchar();</span><br><span class="line"> 	getchar();</span><br><span class="line">	system(<span class="string">&quot;cls&quot;</span>);	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>整体来说，这个结课作业并不难，只用用课堂上的知识完全是可以完成了（我一个下午不到就写好）。</p>
-<p>但事实上无论用哪门语言，增删改查的实现永远是入门重要的第一课，本项目和之前的python学生管理系统，都仅仅是在内部实现的数据增删改查，一旦退出程序，缓存就被清除了，无法保留。所以我们还应考虑——如何把这样的操作在文本中实现，如何连接mysql数据库实现同样增删改查的操作。</p>
-<p>所以呀，流水的编程语言，铁打的管理系统，入门从管理系统开始！</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-
-
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/2.png">
-      <meta itemprop="name" content="Autovy">
-      <meta itemprop="description" content="某编外人员的个人小站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Autovy's blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">开发笔记：基于python开发学生管理系统</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020/05/28 14:30:00" itemprop="dateCreated datePublished" datetime="2020-05-28T14:30:00+08:00">2020/05/28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/%E5%AE%9E%E6%88%98%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">实战笔记</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <img src="https://developer-tech.com/wp-content/uploads/sites/3/2020/12/python-right-business-programming-language-software-development-enterprise-2048x1318.jpg" height="300" alt="git" align="center">
+          <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040942707.jpeg" alt="logo"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/05/28/python%E5%AE%9E%E6%88%98%EF%BC%9A%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/#more" rel="contents">
+              <a class="btn" href="/2021/04/26/Java-%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -796,7 +780,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -864,20 +848,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -920,7 +904,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">44k</span>
+    <span title="站点总字数">119k</span>
 </div>
 
 <!-- 在网页底部添加网站运行时间 -->
