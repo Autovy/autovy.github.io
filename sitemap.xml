@@ -340,20 +340,6 @@
   </url>
   
   <url>
-    <loc>https://autovy.github.io/tags/JavaScript/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://autovy.github.io/tags/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://autovy.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/</loc>
     <lastmod>2021-09-06</lastmod>
     <changefreq>daily</changefreq>
@@ -389,28 +375,14 @@
   </url>
   
   <url>
-    <loc>https://autovy.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
+    <loc>https://autovy.github.io/tags/%E5%89%8D%E7%AB%AF/</loc>
     <lastmod>2021-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://autovy.github.io/tags/docker/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://autovy.github.io/tags/Linux/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://autovy.github.io/tags/matlab/</loc>
+    <loc>https://autovy.github.io/tags/JavaScript/</loc>
     <lastmod>2021-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -439,6 +411,34 @@
   
   <url>
     <loc>https://autovy.github.io/tags/%E8%84%9A%E6%9C%AC%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2021-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://autovy.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2021-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://autovy.github.io/tags/docker/</loc>
+    <lastmod>2021-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://autovy.github.io/tags/Linux/</loc>
+    <lastmod>2021-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://autovy.github.io/tags/matlab/</loc>
     <lastmod>2021-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -531,13 +531,6 @@
   </url>
   
   <url>
-    <loc>https://autovy.github.io/categories/JavaScript/</loc>
-    <lastmod>2021-09-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://autovy.github.io/categories/%E5%B0%8F%E7%A8%8B%E5%BA%8F/</loc>
     <lastmod>2021-09-06</lastmod>
     <changefreq>daily</changefreq>
@@ -552,7 +545,7 @@
   </url>
   
   <url>
-    <loc>https://autovy.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
+    <loc>https://autovy.github.io/categories/JavaScript/</loc>
     <lastmod>2021-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -560,6 +553,13 @@
   
   <url>
     <loc>https://autovy.github.io/categories/python/</loc>
+    <lastmod>2021-09-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://autovy.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2021-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
