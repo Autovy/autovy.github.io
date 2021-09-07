@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://autovy.github.io/2021/01/31/Java/Java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
+    
+    <lastmod>2021-09-07</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://autovy.github.io/2021/03/28/Python/Python-%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AE%9E%E6%88%98%E6%89%8B%E5%86%8C/</loc>
     
     <lastmod>2021-09-05</lastmod>
@@ -108,13 +115,6 @@
   
   <url>
     <loc>https://autovy.github.io/2021/05/07/Java/Java-Spring%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2021-09-04</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://autovy.github.io/2021/01/31/Java/Java-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
     
     <lastmod>2021-09-04</lastmod>
     
@@ -305,6 +305,20 @@
   </url>
   
   <url>
+    <loc>https://autovy.github.io/tags/JavaScript/</loc>
+    <lastmod>2021-09-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://autovy.github.io/tags/%E5%89%8D%E7%AB%AF/</loc>
+    <lastmod>2021-09-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://autovy.github.io/tags/Java/</loc>
     <lastmod>2021-09-07</lastmod>
     <changefreq>daily</changefreq>
@@ -369,20 +383,6 @@
   
   <url>
     <loc>https://autovy.github.io/tags/Vue/</loc>
-    <lastmod>2021-09-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://autovy.github.io/tags/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2021-09-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://autovy.github.io/tags/JavaScript/</loc>
     <lastmod>2021-09-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -459,14 +459,14 @@
   </url>
   
   <url>
-    <loc>https://autovy.github.io/tags/MyBatis/</loc>
+    <loc>https://autovy.github.io/tags/SpringMCV/</loc>
     <lastmod>2021-09-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://autovy.github.io/tags/SpringMCV/</loc>
+    <loc>https://autovy.github.io/tags/MyBatis/</loc>
     <lastmod>2021-09-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -524,6 +524,13 @@
   </url>
   
   <url>
+    <loc>https://autovy.github.io/categories/JavaScript/</loc>
+    <lastmod>2021-09-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://autovy.github.io/categories/Java/</loc>
     <lastmod>2021-09-07</lastmod>
     <changefreq>daily</changefreq>
@@ -539,13 +546,6 @@
   
   <url>
     <loc>https://autovy.github.io/categories/php/</loc>
-    <lastmod>2021-09-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://autovy.github.io/categories/JavaScript/</loc>
     <lastmod>2021-09-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
