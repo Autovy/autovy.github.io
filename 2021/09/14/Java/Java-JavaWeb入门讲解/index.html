@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/gear48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/gear32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="true"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Java|JavaWeb入门讲解">
+<meta property="og:url" content="https://autovy.github.io/2021/09/14/Java/Java-JavaWeb%E5%85%A5%E9%97%A8%E8%AE%B2%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Autovy&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109140841902.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110902451.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110852517.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110848712.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110847529.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110854847.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110937736.jpeg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110954913.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110955224.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111020941.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111044774.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111420500.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111444220.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109132024561.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111454488.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111532343.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111539001.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111541291.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111556434.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111653998.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109132026779.jpeg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111751277.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109120728738.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109120729641.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109120939057.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109121039116.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041811913.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041811687.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109120951753.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109140739880.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111934807.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111939355.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111940650.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109112001559.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109112009212.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109112026994.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109112044412.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041657535.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109140808602.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109121103990.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109140903316.jpeg">
+<meta property="article:published_time" content="2021-09-14T06:30:00.000Z">
+<meta property="article:modified_time" content="2021-09-14T01:25:22.803Z">
+<meta property="article:author" content="Autovy">
+<meta property="article:tag" content="入门教程">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="框架学习">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="SpringBoot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109140841902.png">
+
+<link rel="canonical" href="https://autovy.github.io/2021/09/14/Java/Java-JavaWeb%E5%85%A5%E9%97%A8%E8%AE%B2%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>Java|JavaWeb入门讲解 | Autovy's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Autovy's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Autovy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Just For Interest</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">40</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">35</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/09/14/Java/Java-JavaWeb%E5%85%A5%E9%97%A8%E8%AE%B2%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="新时代农民工的数字农田">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java|JavaWeb入门讲解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021/09/14 14:30:00" itemprop="dateCreated datePublished" datetime="2021-09-14T14:30:00+08:00">2021/09/14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv_test" style="display: inline;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/09/14/Java/Java-JavaWeb%E5%85%A5%E9%97%A8%E8%AE%B2%E8%A7%A3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/09/14/Java/Java-JavaWeb%E5%85%A5%E9%97%A8%E8%AE%B2%E8%A7%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109140841902.png" alt="pngkey.com-java-logo-png-2232144"></p>
+<span id="more"></span>
+
+
+
+<h3 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h3><ul>
+<li>学会本地搭建环境，运行springboot项目</li>
+<li>了解javaweb开发基本技术与工具使用</li>
+<li>了解spring重要概念</li>
+<li>清楚基本的开发架构</li>
+<li>学会开发Springboot入门实例</li>
+<li>学会开发SpringBoot JPA 持久层支持实例</li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://autovy.github.io/JavaWebDemo.zip">Demo下载</a></p>
+<p><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/index.html">MyBatis中文文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://lfvepclr.gitbooks.io/spring-framework-5-doc-cn/content/">Spring Framework 5 中文文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.docs4dev.com/docs/zh/spring-boot/2.1.1.RELEASE/reference/boot-documentation.html">SpringBoot中文文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1252599548343744">廖雪峰Java教程博客</a></p>
+<p><a href="https://autovy.github.io/2021/06/30/Java/Java-%E5%9F%BA%E4%BA%8ESSM%E8%AF%84%E8%AE%BA%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91/">autovy博客：基于SSM评论管理系统开发</a></p>
+<h3 id="基本工具的使用"><a href="#基本工具的使用" class="headerlink" title="基本工具的使用"></a>基本工具的使用</h3><h4 id="IDE推荐"><a href="#IDE推荐" class="headerlink" title="IDE推荐"></a>IDE推荐</h4><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110902451.png" alt="image-20210911090207325"></p>
+<p>推荐JetBrains公司的IDE全家桶，保持风格一致，减少对IDE的学习成本</p>
+<p>使用<a target="_blank" rel="noopener" href="https://www.jetbrains.com/toolbox-app/">toolbox</a>下载更方便</p>
+<h4 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h4><p>使用构建工具管理java项目的依赖项并实现自动化构建</p>
+<h5 id="（1）基本介绍"><a href="#（1）基本介绍" class="headerlink" title="（1）基本介绍"></a>（1）基本介绍</h5><p>Maven </p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110852517.png" alt="Apache_Maven_logo.svg"></p>
+<p>Ant</p>
+<img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110848712.png" alt="1024px-Apache-Ant-logo.svg" style="zoom: 50%;">
+
+
+
+
+
+
+
+<p>Gradle</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110847529.png" alt="Gradle_logo"></p>
+<h5 id="（2）比较"><a href="#（2）比较" class="headerlink" title="（2）比较"></a>（2）比较</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110854847.png" alt="image-20210911085448524"></p>
+<ul>
+<li>Ant：纯java编写，需要自定义构建过程</li>
+<li>Maven：实现了自动化构建，并内置了依赖管理</li>
+<li>Gradle：Gradle结合了前两者的优点，是Android Studio指定构建工具</li>
+</ul>
+<h5 id="（3）Maven结构"><a href="#（3）Maven结构" class="headerlink" title="（3）Maven结构"></a>（3）Maven结构</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110937736.jpeg" alt="img"></p>
+<h5 id="（4）Maven基本使用操作"><a href="#（4）Maven基本使用操作" class="headerlink" title="（4）Maven基本使用操作"></a>（4）Maven基本使用操作</h5><p>IDEA创建Maven项目：</p>
+<ul>
+<li>左边选择Maven</li>
+<li>创建空Maven项目</li>
+</ul>
+<p>查看配置文件pom.xml：</p>
+<p>配置jar包的仓库地址</p>
+<p>maven的仓库默认在国外，这里可以更换为阿里云的仓库</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>public<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun nexus<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> # 仓库地址       <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;<span class="name">releases</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">releases</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>添加依赖项：</p>
+<p>在mvnrepository查找依赖项：<a target="_blank" rel="noopener" href="https://mvnrepository.com/">https://mvnrepository.com/</a></p>
+<p>查找并复制junit 4.12的依赖配置信息</p>
+<p>增加依赖标签<code>&lt;dependencies&gt;</code>后</p>
+<p>在idea中导入依赖项</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110954913.png" alt="image-20210911095458093"></p>
+<p>查看外部库：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109110955224.png" alt="image-20210911095520948"></p>
+<h4 id="Web服务器"><a href="#Web服务器" class="headerlink" title="Web服务器"></a>Web服务器</h4><p>Web服务器一般指网站服务器，是指驻留于[因特网]上某种类型计算机的程序，可以处理浏览器等Web客户端的请求并返回相应响应</p>
+<h5 id="（1）Tomcat介绍"><a href="#（1）Tomcat介绍" class="headerlink" title="（1）Tomcat介绍"></a>（1）Tomcat介绍</h5><p>Java学习中常常使用<strong>Tomcat</strong>，这个个小型、轻量级的支持JSP和Servlet 技术的Web服务器</p>
+<img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111020941.png" alt="img" style="zoom: 25%;">
+
+
+
+<h5 id="（2）Tomcat下载"><a href="#（2）Tomcat下载" class="headerlink" title="（2）Tomcat下载"></a>（2）Tomcat下载</h5><p>新版的springboot已内嵌tomcat，不需要再下载，所以这块做简单的介绍，了解一下运行的原理就好</p>
+<p>官网下载：<a target="_blank" rel="noopener" href="http://tomcat.apache.org/">http://tomcat.apache.org/</a></p>
+<h5 id="（3）Tomcat运行"><a href="#（3）Tomcat运行" class="headerlink" title="（3）Tomcat运行"></a>（3）Tomcat运行</h5><ul>
+<li><p>新建文件html文件在webapps\www文件夹</p>
+</li>
+<li><p>启动bin/startup.bat</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111044774.png" alt="image-20210911104424694"></p>
+</li>
+<li><p>访问<code>http://127.0.0.1:8080/www/test.html</code></p>
+</li>
+</ul>
+<h5 id="（4）Tomcat修改端口"><a href="#（4）Tomcat修改端口" class="headerlink" title="（4）Tomcat修改端口"></a>（4）Tomcat修改端口</h5><ul>
+<li>查看文件<code>conf\server.xml</code></li>
+<li>修改端口为80端口</li>
+<li>重新启动bin/startup.bat</li>
+<li>80端口占用问题</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 参看端口号含80的条目</span><br><span class="line">netstat -ano|findstr &quot;80&quot;</span><br><span class="line"></span><br><span class="line">// 根据pid查询对应的应用程序</span><br><span class="line">tasklist|findstr &quot;1828&quot;</span><br><span class="line"></span><br><span class="line">// 杀死进程</span><br><span class="line">taskkill /f /pid 1828</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果是被系统占用，可以进入服务中心<code>services.msc</code>，停止或禁用SQL Server Reporting Services (MSSQLSERVER) （日志服务，一般用不上）</li>
+</ul>
+<ul>
+<li>访问<code>http://127.0.0.1/www/test.html</code></li>
+</ul>
+<h4 id="本地数据库环境搭建"><a href="#本地数据库环境搭建" class="headerlink" title="本地数据库环境搭建"></a>本地数据库环境搭建</h4><h5 id="（1）PHPstudy介绍"><a href="#（1）PHPstudy介绍" class="headerlink" title="（1）PHPstudy介绍"></a>（1）PHPstudy介绍</h5><p>phpstudy集成了web服务（apache和nginx）,数据库服务（mysql），还有数据库缓存工具redis等。</p>
+<p>能比较方便得搭建本地环境（如果没有docker进行容器化的话，确实是最佳选择）</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://www.xp.cn/">https://www.xp.cn/</a></p>
+<h5 id="（2）创建数据库"><a href="#（2）创建数据库" class="headerlink" title="（2）创建数据库"></a>（2）创建数据库</h5><p>这里使用mysql8.0.12版本</p>
+<p>无代码创建好数据库</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111420500.png" alt="image-20210911142052336"></p>
+<h5 id="（3）数据库连接"><a href="#（3）数据库连接" class="headerlink" title="（3）数据库连接"></a>（3）数据库连接</h5><p>在idea中连接数据库，测试连接后出现时区问题则填写<code>GMT</code>等时区</p>
+<p>创建数据表student，可在类型处填入长度例如<code>char(20)</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111444220.png" alt="image-20210911144428199"></p>
+<h3 id="J2EE"><a href="#J2EE" class="headerlink" title="J2EE"></a>J2EE</h3><p>Java EE是一系列技术标准所组成的平台，它定义了动态Web页面功能（Servlet和Jsp）、商业组件（EJB）、异步消息传输机制（JMS）、名称和目录定位服务（JNDI）、数据库访问（JDBC）、与子系统的连接器（JCA）和安全服务等</p>
+<p>这里主要介绍Servlet（服务端程序，可处理请求生成动态web内容），JDBC（数据库访问连接），java的web开发框架都是在此基础上的延拓</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109132024561.png" alt="image-20210913202431607"></p>
+<h4 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h4><h5 id="（1）浏览器访问Servlet流程"><a href="#（1）浏览器访问Servlet流程" class="headerlink" title="（1）浏览器访问Servlet流程"></a>（1）浏览器访问Servlet流程</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111454488.png" alt="image-20210911145431318"></p>
+<h5 id="（2）Servlet-demo-开发"><a href="#（2）Servlet-demo-开发" class="headerlink" title="（2）Servlet demo 开发"></a>（2）Servlet demo 开发</h5><p>1.新建一个空maven的项目</p>
+<p>2.maven导入Servlet依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.servlet-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>3.编写Servlet类</p>
+<p>编写Servlet类接收请求，返回内容</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 继承Servlet提供的http处理类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重写doGet方法，处理get请求</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 捕捉http请求异常</span></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="comment">// 返回响应输出到页面</span></span><br><span class="line">            response.getWriter().println(<span class="string">&quot;&lt;h1&gt;Hello Servlet&lt;h1&gt;&quot;</span>);</span><br><span class="line">            response.getWriter().println(<span class="keyword">new</span> Date().toString());</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">catch</span> (IOException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>4.编写web.xml配置文件</p>
+<p>编写web.xml配置Servlet</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111532343.png" alt="image-20210911153159249"></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--    配置servlet信息--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>HelloServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>HelloServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--    配置http处理类与url映射--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>HelloServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/hello<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>5.将Servlet部署到tomcat上</p>
+<p>打开模块设置(F4) &gt;  工件  &gt;  创建web工件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111539001.png" alt="image-20210911153909470"></p>
+<p>添加配置 &gt; tomcat本地服务器 &gt; 添加刚刚创建的工件 &gt; 注意修改应用程序上下文（影响访问的url）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111541291.png" alt="image-20210911154152177"></p>
+<p>开启服务进行测试</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111556434.png" alt="image-20210911155646449"></p>
+<h4 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h4><p><strong>JDBC</strong> (<strong>J</strong>ava <strong>D</strong>ata<strong>B</strong>ase <strong>C</strong>onnection) 是通过JAVA访问数据库</p>
+<h5 id="（1）Java连接数据库流程"><a href="#（1）Java连接数据库流程" class="headerlink" title="（1）Java连接数据库流程"></a>（1）Java连接数据库流程</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111653998.png" alt="undefined"></p>
+<h5 id="（2）JDBC查询数据库开发"><a href="#（2）JDBC查询数据库开发" class="headerlink" title="（2）JDBC查询数据库开发"></a>（2）JDBC查询数据库开发</h5><p>1.新建一个空maven的项目</p>
+<p>2.添加mysql-connector-java依</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.23<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>3.注意开启phpstudy的mysql服务，并在idea中连接，记录jdbc链接</p>
+<p>4.编写JDBC查询demo</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestJDBC</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="comment">// 导入数据库驱动包</span></span><br><span class="line">            Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 建立与数据库的连接</span></span><br><span class="line">            <span class="comment">// 数据库名称， 账号，密码</span></span><br><span class="line">            Connection c = DriverManager.getConnection(<span class="string">&quot;jdbc:mysql://localhost:3306/test&quot;</span>, <span class="string">&quot;test&quot;</span>, <span class="string">&quot;123456&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 创建Statement，用于执行sql语句</span></span><br><span class="line">            Statement s = c.createStatement();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 编写sql语句</span></span><br><span class="line">            String sql  = <span class="string">&quot;select * from student&quot;</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 执行sql语句，并返回结果</span></span><br><span class="line">            ResultSet res = s.executeQuery(sql);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 处理返回结果</span></span><br><span class="line">            <span class="keyword">while</span>(res.next())&#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> id = res.getInt(<span class="string">&quot;id&quot;</span>);</span><br><span class="line">                String name = res.getString(<span class="string">&quot;name&quot;</span>);</span><br><span class="line"></span><br><span class="line">                System.out.printf(<span class="string">&quot;%d.%s\n&quot;</span>, id, name);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 捕捉数据库加载异常</span></span><br><span class="line">        <span class="keyword">catch</span> (ClassNotFoundException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 捕捉数据库连接异常</span></span><br><span class="line">        <span class="keyword">catch</span> (SQLException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="（3）JDBC-ORM-持久化存储"><a href="#（3）JDBC-ORM-持久化存储" class="headerlink" title="（3）JDBC ORM 持久化存储"></a>（3）JDBC ORM 持久化存储</h5><p>ORM=Object Relationship Database Mapping</p>
+<p>对象和关系数据库的映射 简单说，<strong>一个对象</strong>，对应数据库里的<strong>一条记录</strong>，使用Java对象来将数据库内的数据持久化</p>
+<p>java目前流行的数据库访问框架都是ORM框架</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109132026779.jpeg" alt="img"></p>
+<p>1.创建Student类</p>
+<p>一般工程中类中的属性是私有的，方法是公有的，这里为了方便就将属性公开吧</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一般将一个数据表抽象为一个类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将表中的字段作为类的属性</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2.修改demo</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestJDBC</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="comment">// 导入数据库驱动包</span></span><br><span class="line">            Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 建立与数据库的连接</span></span><br><span class="line">            <span class="comment">// 数据库名称， 账号，密码</span></span><br><span class="line">            Connection c = DriverManager.getConnection(<span class="string">&quot;jdbc:mysql://localhost:3306/test&quot;</span>, <span class="string">&quot;test&quot;</span>, <span class="string">&quot;123456&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 创建Statement，用于执行sql语句</span></span><br><span class="line">            Statement s = c.createStatement();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="comment">// &gt;&gt;&gt;&gt;&gt;&gt; 修改sql语句</span></span><br><span class="line">            String sql  = <span class="string">&quot;select * from student where id = 1&quot;</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 执行sql语句，并返回结果</span></span><br><span class="line">            ResultSet res = s.executeQuery(sql);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//  &gt;&gt;&gt;&gt;去掉while处理返回结果</span></span><br><span class="line">            <span class="keyword">if</span>(res.next())&#123;</span><br><span class="line">                <span class="comment">//&gt;&gt;&gt;&gt;&gt;&gt; 实例化一个对象，用于存储一条数据</span></span><br><span class="line">                Student student = <span class="keyword">new</span> Student();</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 将数据库中的值存储在对象中</span></span><br><span class="line">                student.id = res.getInt(<span class="string">&quot;id&quot;</span>);</span><br><span class="line">                student.name = res.getString(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">                System.out.println(student);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 捕捉数据库加载异常</span></span><br><span class="line">        <span class="keyword">catch</span> (ClassNotFoundException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 捕捉数据库连接异常</span></span><br><span class="line">        <span class="keyword">catch</span> (SQLException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>3.打断点参看student对象</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111751277.png" alt="image-20210911175137132"></p>
+<h3 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h3><h4 id="Spring重要概念"><a href="#Spring重要概念" class="headerlink" title="Spring重要概念"></a>Spring重要概念</h4><p>参考资料：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40587575/article/details/79901550">https://blog.csdn.net/qq_40587575/article/details/79901550</a></p>
+<h5 id="（1）IoC与DI概念"><a href="#（1）IoC与DI概念" class="headerlink" title="（1）IoC与DI概念"></a>（1）IoC与DI概念</h5><p>IoC：</p>
+<ul>
+<li>Ioc—Inversion of Control，即“控制反转”</li>
+<li>在Java开发中，Ioc意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制</li>
+<li>IoC很好的体现了面向对象设计法则之一—— 好莱坞法则：“别找我们，我们找你”；即由<strong>IoC容器帮对象找相应的依赖对象并注入，而不是由对象主动去找</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Ioc特点</th>
+<th>传统java程序</th>
+<th>Ioc设计</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>控制</td>
+<td>在对象内部通过new进行创建对象，是程序主动去创建依赖对象</td>
+<td>IoC是有专门一个容器来创建这些对象，即由Ioc容器来控制对象的创建</td>
+</tr>
+<tr>
+<td>反转</td>
+<td>由我们自己在对象中主动控制去直接获取依赖对象，也就是正转</td>
+<td>反转则是由容器来帮忙创建及注入依赖对象，对象只是被动的接受依赖对象</td>
+</tr>
+</tbody></table>
+<p>DI：</p>
+<ul>
+<li>DI—Dependency Injection，即“依赖注入”</li>
+<li>组件之间依赖关系由容器在运行期决定，由容器动态的将某个依赖关系注入到组件之中</li>
+<li>通过依赖注入机制，我们只需要通过简单的配置，而无需任何代码就可指定目标需要的资源，完成自身的业务逻辑，而不需要关心具体的资源来自何处，由谁实现</li>
+<li>“依赖注入”明确描述了“被注入对象依赖IoC容器配置依赖对象”</li>
+</ul>
+<h5 id="（2）IoC与DI概念图例"><a href="#（2）IoC与DI概念图例" class="headerlink" title="（2）IoC与DI概念图例"></a>（2）IoC与DI概念图例</h5><p>传统的java程序</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109120728738.png" alt="image-20210912072844684"></p>
+<p>使用了loC/DI的程序</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109120729641.png" alt="image-20210912072938515"></p>
+<h5 id="（3）Spring的应用"><a href="#（3）Spring的应用" class="headerlink" title="（3）Spring的应用"></a>（3）Spring的应用</h5><p>只需要理解一点：Spring帮我们完成了类的创建，多个类的合作的工作，即将IoC容器与其在其中注册的类看作黑盒</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109120939057.png" alt="image-20210912093936648"></p>
+<h5 id="（4）Spring模块"><a href="#（4）Spring模块" class="headerlink" title="（4）Spring模块"></a>（4）Spring模块</h5><p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010648555/article/details/76299467">Spring常用注解</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44543508/article/details/103718958">Spring的@bean注解</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109121039116.png" alt="spring-overview"></p>
+<p>Spring怎么知道应该把哪些Java类当成bean注册到容器中呢？<br>使用配置文件或者注解的方式进行标识需要处理的java类!</p>
+<p>放在具体的实例中可以这样理解：将数据库的配置信息注册在容器中，在需要访问数据库的对象中用户通过注解（java程序中的特殊标记）让该对象依赖注入了数据库配置信息，从而可以访问到数据库；</p>
+<h4 id="开发架构"><a href="#开发架构" class="headerlink" title="开发架构"></a>开发架构</h4><h5 id="（1）业务逻辑"><a href="#（1）业务逻辑" class="headerlink" title="（1）业务逻辑"></a>（1）业务逻辑</h5><p><strong>Controller–&gt;service接口–&gt;serviceImpl–&gt;dao接口–&gt;daoImpl–&gt;mapper–&gt;db</strong></p>
+<h5 id="（2）执行流程"><a href="#（2）执行流程" class="headerlink" title="（2）执行流程"></a>（2）执行流程</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041811913.png" alt="img"></p>
+<p>而<code>pojo</code>则是实体类作为各层次处理传递的对象：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041811687.png" alt="image-20210629104056016"></p>
+<h5 id="（3）各层职能"><a href="#（3）各层职能" class="headerlink" title="（3）各层职能"></a>（3）各层职能</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109120951753.png" alt="image-20210912095119480"></p>
+<ul>
+<li>dao/mapper层即数据持久层，dao层的作用为访问数据库，向数据库发送sql语句，完成数据的增删改查任务</li>
+<li>service层调用dao层的接口进行业务逻辑应用的处理，封装Service层的业务逻辑有利于业务逻辑的独立性和重复利用性</li>
+<li>controller层即控制层，控制请求和响应，负责前后端交互 controller层主要调用Service层里面的接口控制具体的业务流程</li>
+<li>view层即视图层，用户可以看到并操作，可以理解为前端</li>
+</ul>
+<h4 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h4><p>SpringBoot让Spring应用更加轻量化，并简化了了配置，实现自动化配置</p>
+<p>Spring Boot是一个基于Spring的套件，它帮我们预组装了Spring的一系列组件，以便以尽可能少的代码和配置来开发基于Spring的Java应用程序</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109140739880.gif" alt="img"></p>
+<h5 id="（1）SpringBoot启动原理"><a href="#（1）SpringBoot启动原理" class="headerlink" title="（1）SpringBoot启动原理"></a>（1）SpringBoot启动原理</h5><p>参考资料：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/theRhyme/p/11057233.html">https://www.cnblogs.com/theRhyme/p/11057233.html</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111934807.png" alt="img"></p>
+<h5 id="（2）SpringBoot开发无数据库demo"><a href="#（2）SpringBoot开发无数据库demo" class="headerlink" title="（2）SpringBoot开发无数据库demo"></a>（2）SpringBoot开发无数据库demo</h5><p>1.新建Spring Initializr项目</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111939355.png" alt="image-20210911193904203"></p>
+<p>2.勾选web模块</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109111940650.png" alt="image-20210911194039612"></p>
+<p>3.查看pom.xml</p>
+<p>查看pom.xml等待依赖下载完毕（springboot内置的依赖项过多，下载时间较长，start-web简化了Maven的依赖加载）</p>
+<p>4.查看SpringbootApplication.java文件</p>
+<p>项目创建好之后，就自带一个SpringbootApplication, 其被@SpringBootApplication 所标记，表示这个是一个Springboot 应用，其为Springboot 应用的入口</p>
+<p>5.新建web文件存放控制器</p>
+<p>新建HelloController.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注解为控制器</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注解为映射url</span></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/hello&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello SpringBoot!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里就相当于实现了Servlet的功能：处理http请求，返回响应内容</p>
+<p>而这里的注解就相当于实现了Servlet的web.xml配置文件的功能</p>
+<p>注解是java一个强大的特性，简单来说可以理解为代码中的特殊标记，开发人员可以在不改变原有代码情况下，在源代码中嵌入补充信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109112001559.png" alt="image-20210911200155436"></p>
+<p>6.运行测试</p>
+<p>访问链接：<code>http://localhost:8080/hello</code></p>
+<p>感觉少了什么……我的tomcat呢？好像没有配web服务器😰</p>
+<p>原来tomcat已经内嵌在SpringbootApplication中一起启动了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109112009212.png" alt="image-20210911200952174"></p>
+<p>也可以看到依赖项中也加载了tomcat，Tomcat的属性都在<code>org.springframework.boot.autoconfigure.web.ServerProperties</code>配置类中做了定义</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109112026994.png" alt="image-20210911202642854"></p>
+<p>7.修改端口和上下文</p>
+<p>在<code>resources/application.properties</code>文件修改配置（可以修改端口和上下文以及视图定位）</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">server.port</span>=<span class="string">80</span></span><br><span class="line"><span class="meta">server.servlet.context-path</span>=<span class="string">/test</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>测试访问<code>http://localhost/test/hello</code>，如果出现了端口占用情况，可以参考tomcat的处理方法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109112044412.png" alt="image-20210911204412242"></p>
+<h5 id="（3）SpringBoot-操作数据库demo"><a href="#（3）SpringBoot-操作数据库demo" class="headerlink" title="（3）SpringBoot 操作数据库demo"></a>（3）SpringBoot 操作数据库demo</h5><p>JPA(Java Persistence API)是Sun官方提出的Java持久化规范，用来方便大家操作数据库</p>
+<p>JDBC 是面向 SQL 的，使用起来比较繁琐。所以就有了 ORM 框架，建立了 Java 对象与数据库表之间的映射关系，可以通过直接操作对象来实现持久化，简化了操作的繁杂度</p>
+<p>1.准备数据库，参考本地服务器环境搭建章节</p>
+<p>2.在前一个demo中进行修改（或新建一个spring项目）</p>
+<p>3.增加对mysql和jpa的支持</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mysql--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.21<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- jpa--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+
+
+<p>4.修改springboot配置文件，连接数据库</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据库配置信息（注意配置数据库的编码和时区）</span></span><br><span class="line"><span class="meta">spring.datasource.url</span>=<span class="string">jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8&amp;serverTimezone=GMT</span></span><br><span class="line"><span class="meta">spring.datasource.username</span>=<span class="string">test</span></span><br><span class="line"><span class="meta">spring.datasource.password</span>=<span class="string">123456</span></span><br><span class="line"><span class="comment"># 数据库连接驱动</span></span><br><span class="line"><span class="meta">spring.datasource.driver-class-name</span>=<span class="string">com.mysql.jdbc.Driver</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>5.根据orm创建实体类Entity</p>
+<p>实体层是各层次用于输入输出处理的数据对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span> <span class="comment">// 标记为实体类</span></span><br><span class="line"><span class="meta">@Table(name = &quot;student&quot;)</span> <span class="comment">// 表明类对应的表名</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 类的私有属性</span></span><br><span class="line">  <span class="meta">@Id</span> <span class="comment">// 标记为主键</span></span><br><span class="line">  <span class="meta">@GeneratedValue(strategy = GenerationType.IDENTITY)</span> <span class="comment">// 表明为自增长方式</span></span><br><span class="line">  <span class="meta">@Column(name = &quot;id&quot;)</span> <span class="comment">// 表明对应的数据库字段名</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">long</span> id;</span><br><span class="line">  <span class="meta">@Column(name = &quot;name&quot;)</span></span><br><span class="line">  <span class="keyword">private</span> String name;</span><br><span class="line">  <span class="meta">@Column(name = &quot;age&quot;)</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">long</span> age;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 提供外界操作属性的方法</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">long</span> id)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> age;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(<span class="keyword">long</span> age)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用数据库工具创建实体类</p>
+<p>或者使用Lombok工具自动生成getter和setter方法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041657535.png" alt="image-20210904165746685"></p>
+<p>6.编写DAO层</p>
+<p>DAO层提供与数据库交互的接口，继承JpaRepository父接口,提供了一系列操作数据库方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 继承JpaRepository父接口,提供了一系列操作数据库方法</span></span><br><span class="line"><span class="comment">// 并且提供了泛型&lt;类 , 主键类型&gt;</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">StudentDAO</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">Student</span>, <span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>7.编写控制器</p>
+<p>负责调用服务层的方法，并映射路径提供给客户端使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span> <span class="comment">// 注解为控制器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentController</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 自动装配studentdao层</span></span><br><span class="line">    <span class="meta">@Autowired</span> StudentDAO studentdao;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;list&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">list</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// 存储数据库返回的列表</span></span><br><span class="line">        List&lt;Student&gt; list = studentdao.findAll();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出的字符串</span></span><br><span class="line">        String str = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历列表,获得对象属性的值</span></span><br><span class="line">        <span class="keyword">for</span> (Student item: list) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 拼接为字符串输出</span></span><br><span class="line">            str += item.getId() + <span class="string">&quot;.&quot;</span> + item.getName() + <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="（4）持久层支持"><a href="#（4）持久层支持" class="headerlink" title="（4）持久层支持"></a>（4）持久层支持</h5><p><strong>Hibernate</strong></p>
+<p>Hibernate是jpa的具体实现，springboot默认使用的就是Hibernate，可以让我们不写一句sql，同时也缺乏灵活性</p>
+<img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109140808602.png" alt="image-20210912105841614" style="zoom:50%;">
+
+
+
+<p><strong>MyBatis</strong></p>
+<p>MyBatis也是一个持久化框架，不完全是一个ORM框架，不是依照的JPA规范，可以进行更细致的SQL优化，比较灵活，推荐学习</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109121103990.png" alt="@mybatis"></p>
+<h4 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h4><p>前方施工中……</p>
+<img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109140903316.jpeg" alt="img" style="zoom:50%;">
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2021/09/14/Java/Java-JavaWeb%E5%85%A5%E9%97%A8%E8%AE%B2%E8%A7%A3/" title="Java|JavaWeb入门讲解">https://autovy.github.io/2021/09/14/Java/Java-JavaWeb入门讲解/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 入门教程</a>
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+              <a href="/tags/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 框架学习</a>
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 后端</a>
+              <a href="/tags/SpringBoot/" rel="tag"><i class="fa fa-tag"></i> SpringBoot</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/08/Go/Go%E8%AF%AD%E8%A8%80%E4%BF%AE%E7%82%BC%E6%89%8B%E5%86%8C/" rel="prev" title="Go|Go语言修炼手册">
+      <i class="fa fa-chevron-left"></i> Go|Go语言修炼手册
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+
+
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87"><span class="nav-text">学习目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">基本工具的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IDE%E6%8E%A8%E8%8D%90"><span class="nav-text">IDE推荐</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7"><span class="nav-text">构建工具</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D"><span class="nav-text">（1）基本介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%AF%94%E8%BE%83"><span class="nav-text">（2）比较</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89Maven%E7%BB%93%E6%9E%84"><span class="nav-text">（3）Maven结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89Maven%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="nav-text">（4）Maven基本使用操作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">Web服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89Tomcat%E4%BB%8B%E7%BB%8D"><span class="nav-text">（1）Tomcat介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89Tomcat%E4%B8%8B%E8%BD%BD"><span class="nav-text">（2）Tomcat下载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89Tomcat%E8%BF%90%E8%A1%8C"><span class="nav-text">（3）Tomcat运行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89Tomcat%E4%BF%AE%E6%94%B9%E7%AB%AF%E5%8F%A3"><span class="nav-text">（4）Tomcat修改端口</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-text">本地数据库环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89PHPstudy%E4%BB%8B%E7%BB%8D"><span class="nav-text">（1）PHPstudy介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">（2）创建数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="nav-text">（3）数据库连接</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#J2EE"><span class="nav-text">J2EE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Servlet"><span class="nav-text">Servlet</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AEServlet%E6%B5%81%E7%A8%8B"><span class="nav-text">（1）浏览器访问Servlet流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89Servlet-demo-%E5%BC%80%E5%8F%91"><span class="nav-text">（2）Servlet demo 开发</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JDBC"><span class="nav-text">JDBC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89Java%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B5%81%E7%A8%8B"><span class="nav-text">（1）Java连接数据库流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89JDBC%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E5%BA%93%E5%BC%80%E5%8F%91"><span class="nav-text">（2）JDBC查询数据库开发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89JDBC-ORM-%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8"><span class="nav-text">（3）JDBC ORM 持久化存储</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring"><span class="nav-text">Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5"><span class="nav-text">Spring重要概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89IoC%E4%B8%8EDI%E6%A6%82%E5%BF%B5"><span class="nav-text">（1）IoC与DI概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89IoC%E4%B8%8EDI%E6%A6%82%E5%BF%B5%E5%9B%BE%E4%BE%8B"><span class="nav-text">（2）IoC与DI概念图例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89Spring%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-text">（3）Spring的应用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89Spring%E6%A8%A1%E5%9D%97"><span class="nav-text">（4）Spring模块</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E6%9E%B6%E6%9E%84"><span class="nav-text">开发架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%B8%9A%E5%8A%A1%E9%80%BB%E8%BE%91"><span class="nav-text">（1）业务逻辑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-text">（2）执行流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%90%84%E5%B1%82%E8%81%8C%E8%83%BD"><span class="nav-text">（3）各层职能</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringBoot"><span class="nav-text">SpringBoot</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89SpringBoot%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86"><span class="nav-text">（1）SpringBoot启动原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89SpringBoot%E5%BC%80%E5%8F%91%E6%97%A0%E6%95%B0%E6%8D%AE%E5%BA%93demo"><span class="nav-text">（2）SpringBoot开发无数据库demo</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89SpringBoot-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93demo"><span class="nav-text">（3）SpringBoot 操作数据库demo</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E6%8C%81%E4%B9%85%E5%B1%82%E6%94%AF%E6%8C%81"><span class="nav-text">（4）持久层支持</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringCloud"><span class="nav-text">SpringCloud</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<a href="/">  <img class="site-author-image" itemprop="image" alt="Autovy"
+      src="/images/2.png">  </a>
+  <p class="site-author-name" itemprop="name">Autovy</p>
+  <div class="site-description" itemprop="description">新时代农民工的数字农田</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Autovy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Autovy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/JohnSmith232" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;JohnSmith232" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-code"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Autovy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">403k</span>
+</div>
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/01/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+    本站已有
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    位访客
+    <i class="fa fa-user"></i>
+    </span>
+  
+<span> | </span>
+
+  
+    <span class="site-pv" title="总访问量">
+   
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    次阅读
+    <i class="fa fa-eye"></i>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'RVJRabsBhxWXvhMcG8CH5wbc-gzGzoHsz',
+      appKey     : 'JSGLk7guOagDPMFN9wbASkEh',
+      placeholder: "说点什么吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+  <script src="/js/bloom.js" type="text/javascript"></script>
