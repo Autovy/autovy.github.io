@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191358031.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191426987.png">
 <meta property="article:published_time" content="2021-09-14T06:30:00.000Z">
-<meta property="article:modified_time" content="2021-09-20T08:38:33.111Z">
+<meta property="article:modified_time" content="2021-09-20T09:01:54.117Z">
 <meta property="article:author" content="Autovy">
 <meta property="article:tag" content="入门教程">
 <meta property="article:tag" content="Java">
@@ -734,12 +734,12 @@
 <li>网关Zuul：Zuul 是在云平台上提供动态路由,监控,弹性,安全等边缘服务的框架，通过网关简化了对各个服务的访问：不再需要记录各个微服务的地址和端口，而是通过网关去访问他们</li>
 </ul>
 <h4 id="Springcloud-启动测试"><a href="#Springcloud-启动测试" class="headerlink" title="Springcloud 启动测试"></a>Springcloud 启动测试</h4><h5 id="（1）项目启动"><a href="#（1）项目启动" class="headerlink" title="（1）项目启动"></a>（1）项目启动</h5><ul>
-<li><p>启动RabbitMQ（访问<a target="_blank" rel="noopener" href="http://127.0.0.1:15672/#即已开启）">http://127.0.0.1:15672/#即已开启）</a></p>
+<li><p>启动RabbitMQ（访问<a target="_blank" rel="noopener" href="http://127.0.0.1:15672/#">http://127.0.0.1:15672/#</a> 即已开启）</p>
 </li>
 <li><p>启动链路追踪服务器（这里开启的端口要与微服务中的配置一致）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar zipkin-server-2.10.1-exec.jar  --server.port=8050 --zipkin.collector.rabbitmq.addresses=localhost</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>访问配置仓库<a target="_blank" rel="noopener" href="https://github.com/Autovy/SpringCloudConfig/（也可以在config-server模块的配置文件修改成自己的仓库）">https://github.com/Autovy/SpringCloudConfig/（也可以在config-server模块的配置文件修改成自己的仓库）</a></p>
+<li><p>访问配置仓库<a target="_blank" rel="noopener" href="https://github.com/Autovy/SpringCloudConfig/">https://github.com/Autovy/SpringCloudConfig/</a> （也可以在config-server模块的配置文件修改成自己的仓库）</p>
 </li>
 <li><p>运行EurekaServerApplication，启动注册中心服务（端口为8761）</p>
 </li>
@@ -758,30 +758,30 @@
 <li><p>运行ProductServiceZuulApplication，开启网关服务（端口为8060）</p>
 </li>
 </ul>
-<h5 id="（2）测试服务注册中心"><a href="#（2）测试服务注册中心" class="headerlink" title="（2）测试服务注册中心"></a>（2）测试服务注册中心</h5><p>打开链接<a target="_blank" rel="noopener" href="http://127.0.0.1:8761/，即可查看到注册服务中心Eureka">http://127.0.0.1:8761/，即可查看到注册服务中心Eureka</a></p>
+<h5 id="（2）测试服务注册中心"><a href="#（2）测试服务注册中心" class="headerlink" title="（2）测试服务注册中心"></a>（2）测试服务注册中心</h5><p>打开链接<a target="_blank" rel="noopener" href="http://127.0.0.1:8761/">http://127.0.0.1:8761/</a>   ，即可查看到注册服务中心Eureka</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191356386.png" alt="image-20210919135602819"></p>
 <h5 id="（3）测试数据微服务"><a href="#（3）测试数据微服务" class="headerlink" title="（3）测试数据微服务"></a>（3）测试数据微服务</h5><p>打开链接<a target="_blank" rel="noopener" href="http://127.0.0.1:8001/products">http://127.0.0.1:8001/products</a> 和 <a target="_blank" rel="noopener" href="http://127.0.0.1:8002/products">http://127.0.0.1:8002/products</a> 都可以访问到返回的数据</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191358031.png" alt="image-20210919135818137"></p>
 <h5 id="（4）测试视图微服务"><a href="#（4）测试视图微服务" class="headerlink" title="（4）测试视图微服务"></a>（4）测试视图微服务</h5><p>打开链接<a target="_blank" rel="noopener" href="http://127.0.0.1:8012/products">http://127.0.0.1:8012/products</a> 和 <a target="_blank" rel="noopener" href="http://127.0.0.1:8013/products">http://127.0.0.1:8013/products</a> 可以访问到视图页面，并且可以发现视图微服务会随机选择端口访问数据微服务实现负载均衡</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191401332.png" alt="image-20210919140106927"></p>
-<h5 id="（5）测试服务链路追踪"><a href="#（5）测试服务链路追踪" class="headerlink" title="（5）测试服务链路追踪"></a>（5）测试服务链路追踪</h5><p>打开链接<a target="_blank" rel="noopener" href="http://127.0.0.1:8050/zipkin/dependency/">http://127.0.0.1:8050/zipkin/dependency/</a> 即可访问到</p>
+<h5 id="（5）测试服务链路追踪"><a href="#（5）测试服务链路追踪" class="headerlink" title="（5）测试服务链路追踪"></a>（5）测试服务链路追踪</h5><p>打开链接<a target="_blank" rel="noopener" href="http://127.0.0.1:8050/zipkin/dependency/">http://127.0.0.1:8050/zipkin/dependency/</a>  即可访问到</p>
 <p>Zipkin链路跟踪服务页面，即可看到微服务间的访问关系</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191404204.png" alt="image-20210919140414948"></p>
-<h5 id="（6）测试Bus消息总线"><a href="#（6）测试Bus消息总线" class="headerlink" title="（6）测试Bus消息总线"></a>（6）测试Bus消息总线</h5><p>可访问<a target="_blank" rel="noopener" href="http://127.0.0.1:8030/version/dev查看到配置服务器的信息">http://127.0.0.1:8030/version/dev查看到配置服务器的信息</a></p>
+<h5 id="（6）测试Bus消息总线"><a href="#（6）测试Bus消息总线" class="headerlink" title="（6）测试Bus消息总线"></a>（6）测试Bus消息总线</h5><p>可访问<a target="_blank" rel="noopener" href="http://127.0.0.1:8030/version/dev">http://127.0.0.1:8030/version/dev</a> 查看到配置服务器的信息</p>
 <p>访问视图查看当前版本号</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191407817.png" alt="image-20210919140727703"></p>
 <p>修改配置服务器git上的版本号，这里我的仓库地址为<a target="_blank" rel="noopener" href="https://github.com/Autovy/SpringCloudConfig/">https://github.com/Autovy/SpringCloudConfig/</a></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191411510.png" alt="image-20210919141137143"></p>
-<p>启动视图微服务中的FreshConfigUtil使用 post 的方式访问 <a target="_blank" rel="noopener" href="http://localhost:8012/actuator/bus-refresh">http://localhost:8012/actuator/bus-refresh</a> 地址，更新配置信息</p>
+<p>启动视图微服务中的FreshConfigUtil使用 post 的方式访问 <a target="_blank" rel="noopener" href="http://localhost:8012/actuator/bus-refresh">http://localhost:8012/actuator/bus-refresh</a>  地址，更新配置信息</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191414604.png" alt="image-20210919141416336"></p>
 <p>最后再查看视图上的更新</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191415873.png" alt="image-20210919141503558"></p>
-<p>可以访问RabbitMQ页面：<a target="_blank" rel="noopener" href="http://127.0.0.1:15672/，查看队列，连接，还有交换机">http://127.0.0.1:15672/，查看队列，连接，还有交换机</a></p>
-<h5 id="（7）测试Hystrix断路器及其监控"><a href="#（7）测试Hystrix断路器及其监控" class="headerlink" title="（7）测试Hystrix断路器及其监控"></a>（7）测试Hystrix断路器及其监控</h5><p>打开链接<a target="_blank" rel="noopener" href="http://localhost:8020/hystrix即可进入Hystrix断路器的监控入口">http://localhost:8020/hystrix即可进入Hystrix断路器的监控入口</a></p>
+<p>可以访问RabbitMQ页面：<a target="_blank" rel="noopener" href="http://127.0.0.1:15672/">http://127.0.0.1:15672/</a> ，查看队列，连接，还有交换机</p>
+<h5 id="（7）测试Hystrix断路器及其监控"><a href="#（7）测试Hystrix断路器及其监控" class="headerlink" title="（7）测试Hystrix断路器及其监控"></a>（7）测试Hystrix断路器及其监控</h5><p>打开链接<a target="_blank" rel="noopener" href="http://localhost:8020/hystrix">http://localhost:8020/hystrix</a> 即可进入Hystrix断路器的监控入口</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191417418.png" alt="image-20210919141754328"></p>
-<p>框内输入<a target="_blank" rel="noopener" href="http://localhost:8012/actuator/hystrix.stream即可对8012端口的视图微服务进行监控">http://localhost:8012/actuator/hystrix.stream即可对8012端口的视图微服务进行监控</a></p>
+<p>框内输入<a target="_blank" rel="noopener" href="http://localhost:8012/actuator/hystrix.stream">http://localhost:8012/actuator/hystrix.stream</a> 即可对8012端口的视图微服务进行监控</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191419460.png" alt="image-20210919141940229"></p>
-<p>框内输入<a target="_blank" rel="noopener" href="http://localhost:8021/turbine.stream即可实现对整个集群的视图微服务进行监控">http://localhost:8021/turbine.stream即可实现对整个集群的视图微服务进行监控</a></p>
+<p>框内输入<a target="_blank" rel="noopener" href="http://localhost:8021/turbine.stream">http://localhost:8021/turbine.stream</a> 即可实现对整个集群的视图微服务进行监控</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191421059.png" alt="image-20210919142137829"></p>
 <p><strong>停止数据微服务</strong>ProductDataServiceApplication集群，触发断路器：</p>
 <p>访问视图可得</p>
@@ -791,9 +791,9 @@
 <p>访问聚合集群微服务监控页面可得</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191431299.png" alt="image-20210919143120242"></p>
 <h5 id="（8）网关测试"><a href="#（8）网关测试" class="headerlink" title="（8）网关测试"></a>（8）网关测试</h5><p>可以在zuul的配置文件中修改微服务的访问路由，我绑定的路由如下：</p>
-<p><a target="_blank" rel="noopener" href="http://localhost:8060/api-data/products">http://localhost:8060/api-data/products</a> ：访问数据微服务集群</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8060/api-data/products">http://localhost:8060/api-data/products</a>  ：访问数据微服务集群</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191358031.png" alt="image-20210919135818137"></p>
-<p><a target="_blank" rel="noopener" href="http://localhost:8060/api-view/products">http://localhost:8060/api-view/products</a> ：访问视图微服务集群</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8060/api-view/products">http://localhost:8060/api-view/products</a>  ：访问视图微服务集群</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109191426987.png" alt="image-20210919142625877"></p>
 <p>可以发现其访问集群的端口也是负载均衡的</p>
 
