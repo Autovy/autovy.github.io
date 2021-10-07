@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/gear48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/gear32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="true"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="浏览器笑话90%都和IE有关，没了IE的浏览器世界终归是少很多乐趣😭（感觉edge也快了）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发原理|深入理解浏览器工作原理">
+<meta property="og:url" content="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/index.html">
+<meta property="og:site_name" content="Autovy&#39;s blog">
+<meta property="og:description" content="浏览器笑话90%都和IE有关，没了IE的浏览器世界终归是少很多乐趣😭（感觉edge也快了）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110072033316.jpeg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061003492.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061103852.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061104938.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061035469.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061104938.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070837877.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061321788.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061321242.png">
+<meta property="og:image" content="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users/linghao/AppData/Roaming/Typora/typora-user-images/image-20211006133826626.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061958151.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062013638.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070838171.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062110095.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062124865.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062125412.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062125756.png">
+<meta property="og:image" content="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users/linghao/AppData/Roaming/Typora/typora-user-images/image-20211007091607012.png">
+<meta property="og:image" content="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users/linghao/AppData/Roaming/Typora/typora-user-images/image-20211007091651791.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070943457.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062110095.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071019064.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071102089.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071129764.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071138363.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071149864.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071149521.png">
+<meta property="article:published_time" content="2021-10-07T15:45:00.000Z">
+<meta property="article:modified_time" content="2021-10-07T12:40:47.789Z">
+<meta property="article:author" content="Autovy">
+<meta property="article:tag" content="深度系列">
+<meta property="article:tag" content="开发原理">
+<meta property="article:tag" content="计算机系统">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110072033316.jpeg">
+
+<link rel="canonical" href="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>开发原理|深入理解浏览器工作原理 | Autovy's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Autovy's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Autovy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Just For Interest</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">46</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">38</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="新时代农民工的数字农田">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          开发原理|深入理解浏览器工作原理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021/10/07 23:45:00" itemprop="dateCreated datePublished" datetime="2021-10-07T23:45:00+08:00">2021/10/07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">开发原理</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv_test" style="display: inline;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.3k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110072033316.jpeg" alt="img"></p>
+<p>浏览器笑话90%都和IE有关，没了IE的浏览器世界终归是少很多乐趣😭（感觉edge也快了）</p>
+<span id="more"></span>
+
+
+
+<h3 id="浏览器架构"><a href="#浏览器架构" class="headerlink" title="浏览器架构"></a>浏览器架构</h3><p>参考资料：<a target="_blank" rel="noopener" href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/#disqus_thread">现代网络浏览器幕后揭秘</a></p>
+<h4 id="1-浏览器分层结构"><a href="#1-浏览器分层结构" class="headerlink" title="1.浏览器分层结构"></a>1.浏览器分层结构</h4><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061003492.png" alt="image-20211006094545491"></p>
+<ul>
+<li>User Interface（用户界面）：包括工具栏，地址栏，前进后退按钮，书签等（用户界面还可以与桌面环境集成，以提供浏览器会话管理或与其他桌面应用程序的通信）</li>
+<li>Brower Engine（浏览器引擎）：在用户界面和渲染引擎之间传送指令</li>
+<li>Rendering Engine（渲染引擎）：负责显示请求的内容（解析HTML和CSS渲染在页面上）</li>
+<li>Networking（网络）：用于网络调用如HTTP请求（其接口与平台无关，并为所有平台提供底层实现）</li>
+<li>JavaScript Interpreter（JavaScript解释器）：用于接解释和执行JavaScript代码</li>
+<li>XML Parser（XML 解析器）：将XML文档解析成文档对象模型树（DOM）</li>
+<li>Display Backend（用户界面后端）：用于绘制基本的窗口小部件，比如组合框和窗口（其接口与平台无关，底层使用了操作系统的用户界面方法）</li>
+<li>Data Persistence（数据持久化）：浏览器内数据库，将各种数据保存在硬盘上（如书签，工具栏，Cookie，缓存等）</li>
+</ul>
+<h4 id="2-浏览器进程架构"><a href="#2-浏览器进程架构" class="headerlink" title="2.浏览器进程架构"></a>2.浏览器进程架构</h4><p>参考资料：<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022633988">浏览器工作原理</a></p>
+<h5 id="（1）浏览器多进程"><a href="#（1）浏览器多进程" class="headerlink" title="（1）浏览器多进程"></a>（1）浏览器多进程</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061103852.png" alt="image-20211006110300456"></p>
+<p>单进程的浏览器需要处理的事情过多，极度不稳定和安全——如果多个页面共享一个进程，单某个tab页崩溃，将导致同进程中的其他页面也会崩溃，影响用户体验</p>
+<img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061104938.png" alt="image-20211006110439788" style="zoom:67%;">
+
+<p>现代浏览器更多采用多进程架构，进程之间不会共享资源和地址空间，所以不会存在太多安全问题，当然，多进程相对于单进程而言，内存等资源的消耗更大</p>
+<h5 id="（2）浏览器主要进程"><a href="#（2）浏览器主要进程" class="headerlink" title="（2）浏览器主要进程"></a>（2）浏览器主要进程</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061035469.png" alt="img"></p>
+<ul>
+<li>浏览器进程 (Browser Process)：浏览器主进程（无论打开几个tab，几个弹窗浏览器进程只有一个），负责浏览器的TAB的前进、后退、地址栏、书签栏的工作和处理浏览器的一些不可见的底层操作，比如网络请求和文件访问</li>
+<li>渲染进程 (Renderer Process)：浏览器渲染进程（Render 进程），即通常说的浏览器内核，负责一个Tab内的显示相关的工作（页面渲染、脚本执行、事件处理），每个 tab 页的打开都会创建一个 Render 进程，并且互不影响</li>
+<li>插件进程 (Plugin Process)：负责控制网页使用到的插件（每种类型的插件对应一个进程，仅当使用该插件时才创建）</li>
+<li>GPU进程 (GPU Process)：负责处理整个应用程序的GPU任务（网页、Chrome 的 UI 界面都选择采用 GPU 来绘制）</li>
+<li>网络进程（Network Process）：主要负责页面的网络资源加载（在以前的架构中是整合进浏览器进程中作为一个线程，本文的后续内容会将网络这一部分视作线程）</li>
+</ul>
+<h5 id="（3）进程模式"><a href="#（3）进程模式" class="headerlink" title="（3）进程模式"></a>（3）进程模式</h5><p>浏览器不同的进程模式会对tab进程做不同的处理：</p>
+<ul>
+<li><strong>Process-per-site *<em>：同一个 *</em>site</strong> 使用一个进程（site即相同注册域名，比如a.baidu.com和b.baidu.com就可以理解为同一个 site）</li>
+<li><strong>Process-per-site-instance</strong> (default) ：同一个 <strong>site-instance</strong> 使用一个进程（site-instance即来自同一站点的连接页面，满足<strong>site</strong>的连接且通过a标签或js代码打开的新页面）</li>
+<li>*<em>Process-per-tab *</em>： 每个 tab 使用一个进程</li>
+<li>*<em>Single process *</em> ：所有 tab 共用一个进程</li>
+</ul>
+<h5 id="（4）进程间关系"><a href="#（4）进程间关系" class="headerlink" title="（4）进程间关系"></a>（4）进程间关系</h5><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061104938.png" alt="image-20211006110439788" style="zoom:67%;">
+
+<ul>
+<li>用户在浏览器地址栏输入url，并按下Enter</li>
+<li><strong>浏览器进程</strong>向URL发送请求，获取这个URL的HTML内容并交给<strong>渲染进程</strong></li>
+<li><strong>渲染进程</strong>解析HTML内容，解析遇到网络资源再返回来交给<strong>浏览器进程</strong>进行加载；</li>
+<li><strong>渲染进程</strong>同时还通知<strong>浏览器进程</strong>去启动<strong>插件进程</strong>，执行插件代码</li>
+<li>解析完成后，<strong>渲染进程</strong>将计算得到的数据帧交给<strong>GPU进程</strong>，<strong>GPU进程</strong>将其转换为图像显示到屏幕上</li>
+</ul>
+<h3 id="浏览器工作流程"><a href="#浏览器工作流程" class="headerlink" title="浏览器工作流程"></a>浏览器工作流程</h3><p>从我们再浏览器键入一个URL地址，到最后网页呈现在浏览器上，经过了那些过程？</p>
+<h4 id="1-浏览器页面加载"><a href="#1-浏览器页面加载" class="headerlink" title="1.浏览器页面加载"></a>1.浏览器页面加载</h4><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070837877.png" alt="image-20211007083755446"></p>
+<p>浏览器进程针对工作的不同有以下的工作线程：</p>
+<ul>
+<li>UI线程：控制浏览器的按钮与输入框</li>
+<li>网络线程：处理网络请求</li>
+<li>存储线程：控制文件访问</li>
+</ul>
+<h5 id="（1）输入处理"><a href="#（1）输入处理" class="headerlink" title="（1）输入处理"></a>（1）输入处理</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061321788.png" alt="处理输入"></p>
+<p>当我们在浏览器的地址栏输入内容按下回车时，<strong>UI 线程</strong>会根据输入内容判断输入内容是<strong>搜索关键字</strong>还是<strong>URL</strong></p>
+<p>如果判定为搜索关键字，则跳转到默认搜索引擎的搜索URL</p>
+<p>如果判定为URL，则开始请求URL</p>
+<h5 id="（2）开始导航"><a href="#（2）开始导航" class="headerlink" title="（2）开始导航"></a>（2）开始导航</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061321242.png" alt="开始导航"></p>
+<p><strong>UI线程将</strong>URL交给网络线程，<strong>网络线程</strong>则负责联系目标主机获取信息（其中发生了DNS域名解析，TLS连接等操作都是计算机网络相关内容）</p>
+<h5 id="（3）读取响应"><a href="#（3）读取响应" class="headerlink" title="（3）读取响应"></a>（3）读取响应</h5><img src="/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users\linghao\AppData\Roaming\Typora\typora-user-images\image-20211006133826626.png" alt="image-20211006133826626" style="zoom:80%;">
+
+<p><strong>网络线程</strong>接收到目标主机的响应后，解析HTTP响应报文，响应分为header（响应相关信息）和payload（真实数据内容）两部分</p>
+<p>如果状态码为301或302，则需要取得响应头中Location地址，<strong>重新发起请求</strong></p>
+<p>如果状态码为200，则可以进行下面的步骤：</p>
+<p>浏览器根据响应头中的<code>Content-Type</code>来确定相应主体的媒体类型（MIME Type）：如果是text/html时则将相应数据交给<strong>渲染进程</strong>来进行下一步工作（解析HTML内容等），<code>image/png</code>则调用图片渲染器</p>
+<p>读取响应的过程中会有以下的安全机制：</p>
+<ul>
+<li>浏览器并不完全信任<code>Content-Type</code>，所以当收到响应主体（payload）时，网络线程会在必要时检查数据的前几个字节，以确保数据内容与 header 里标识的数据类型（Content-Type）一致。如果不一致，那么就需要进行 MIME 类型嗅探来猜测该数据的类型</li>
+<li>浏览器会进行 <code>Safe Browsing</code>安全检查，如果域名或者请求内容匹配到已知的恶意站点，network thread 会展示一个警告页</li>
+<li>网络线程还会做 <code>CORB（Cross Origin Read Blocking）</code>检查来确定那些敏感的跨站数据不会被发送至渲染进程</li>
+</ul>
+<h5 id="（4）查找渲染进程"><a href="#（4）查找渲染进程" class="headerlink" title="（4）查找渲染进程"></a>（4）查找渲染进程</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061958151.png" alt="查找渲染进程"></p>
+<p><strong>网络线程</strong>确认浏览器可以导航到请求网页后，会通知<strong>UI线程</strong>去查找<strong>渲染进程</strong>进行网页的渲染</p>
+<p>考虑到网络请求获取响应需要时间，<strong>UI线程</strong>可以<strong>并行</strong>查找和启动一个<strong>渲染进程</strong>，当<strong>网络线程</strong>接收到数据时，<strong>渲染进程</strong>就已经准备好了</p>
+<h5 id="（5）确认导航"><a href="#（5）确认导航" class="headerlink" title="（5）确认导航"></a>（5）确认导航</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062013638.png" alt="提交导航"></p>
+<ul>
+<li>数据和渲染进程都准备了，<strong>浏览器进程</strong>会向<strong>渲染进程</strong>发送IPC消息（进程间通信）来确认导航</li>
+<li><strong>浏览器进程</strong>将数据发送给<strong>渲染进程</strong></li>
+<li><strong>渲染进程</strong>接收到数据后，又发送IPC消息给<strong>浏览器进程</strong>，表明导航已提交，页面开始加载</li>
+<li>地址栏会更新，安全指示符更新（地址前面的小锁），访问历史列表（history tab）更新，即可以通过前进后退来切换该页面</li>
+</ul>
+<h5 id="（6）初始化加载完成"><a href="#（6）初始化加载完成" class="headerlink" title="（6）初始化加载完成"></a>（6）初始化加载完成</h5><p>导航提交后，渲染进程开始加载资源及渲染页面（具体<strong>页面渲染原理</strong>见下文），页面渲染完成后，会向浏览器进程发送IPC消息，这时UI线程停止展示tab加载中图标</p>
+<h4 id="2-浏览器页面渲染"><a href="#2-浏览器页面渲染" class="headerlink" title="2.浏览器页面渲染"></a>2.浏览器页面渲染</h4><p>参考资料：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43816287/article/details/115767313">页面渲染流程</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904020193067015">浏览器页面的渲染流程</a></p>
+<p>浏览器页面渲染步骤：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070838171.png" alt="image-20211007083830907"></p>
+<p><strong>浏览器进程</strong>把数据交给了<strong>渲染进程</strong>，<strong>渲染进程</strong>将HTML/CSS/JS代码，转化为用户可进行交互的web页面</p>
+<p><strong>渲染进程</strong>包含以下线程：</p>
+<ul>
+<li>一个主线程（main thread）</li>
+<li>多个工作线程（work thread）</li>
+<li>一个合成器线程（compositor thread）</li>
+<li>多个光栅化线程（raster thread）</li>
+</ul>
+<p>浏览器页面渲染进程：</p>
+<img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062110095.png" style="zoom:67%;">
+
+<ul>
+<li>渲染进程将HTML内容转换为能够读懂的<code>DOM树</code>结构</li>
+<li>渲染引擎将CSS样式表转化为浏览器可以理解的<code>styleSheets</code>，计算出DOM节点的样式。</li>
+<li>创建<code>布局树</code>，并计算元素的布局信息</li>
+<li>对布局树进行分层，并生成<code>分层树</code></li>
+<li>为每个图层生成<code>绘制列表</code>，并将其提交到合成线程</li>
+<li>合成线程将图层分成<code>图块</code>，并在<code>光栅化线程池</code>中将图块转换成位图</li>
+<li>合成线程发送绘制图块命令<code>DrawQuad</code>给浏览器进程</li>
+<li>浏览器进程根据DrawQuad消息生成页面，并<code>显示</code>到显示器上</li>
+</ul>
+<h5 id="（1）构建DOM"><a href="#（1）构建DOM" class="headerlink" title="（1）构建DOM"></a>（1）构建DOM</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062124865.png" alt="在这里插入图片描述"></p>
+<p><strong>渲染进程</strong>接受到导航确认信息后，开始接受来自<strong>浏览器进程</strong>数据（请求响应），渲染进程的<strong>主线程</strong>解析数据化为DOM对象，</p>
+<p>构建DOM过程中：</p>
+<ul>
+<li>子资源加载：解析到图片，CSS，JS脚本等资源，<strong>主线程</strong>逐一交给<strong>浏览器进程</strong>发起请求去获取。为了提升效率，浏览器往往会运行<strong>预加载扫描程序</strong>，如果html中存在<strong>img，link</strong>等标签，预加载扫描程序会把这些请求传递给<strong>浏览器进程</strong>的<strong>网络线程</strong>去下载</li>
+<li>Javascript的下载与执行：解析遇到<code>&lt;script&gt;</code>标签，主线程停止对HTML的解析，而去加载执行JS代码（在<code>&lt;script&gt;</code>标签添加上<strong>async</strong>或<strong>defer</strong>等属性，浏览器会异步加载和执行JS代码，而不会阻塞渲染）</li>
+</ul>
+<h5 id="（2）样式计算"><a href="#（2）样式计算" class="headerlink" title="（2）样式计算"></a>（2）样式计算</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062125412.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><strong>主线程</strong>在解析页面时，遇到<code>&lt;style&gt;</code>标签或者<code>&lt;link&gt;</code>标签的CSS资源，会加载CSS代码</li>
+<li>根据CSS代码构建styleSheets树</li>
+<li>样式计算规则：继承规则（当前标签的样式继承了其所有父标签的样式），层叠规则（多个样式同时作用于该标签时，进行样式层叠）</li>
+</ul>
+<h5 id="（3）布局"><a href="#（3）布局" class="headerlink" title="（3）布局"></a>（3）布局</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062125756.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>对DOM树和styleSheets树进行合并，生成render树（布局树），生成<strong>布局树</strong>时浏览器会遍历<strong>DOM树</strong>所有可见的节点添加到布局树中，而不可见的节点会被忽略掉</li>
+<li>渲染进程还需要计算出每个标签对应的<strong>物理位置</strong>并存储在render树中</li>
+</ul>
+<h5 id="（4）分层"><a href="#（4）分层" class="headerlink" title="（4）分层"></a>（4）分层</h5><img src="/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users\linghao\AppData\Roaming\Typora\typora-user-images\image-20211007091607012.png" alt="image-20211007091607012">
+
+<p>页面上还涉及许多复杂的样式：transform， animation 动画、scroll，z-indexing改变层级等等，浏览器则为这些特殊的节点建立一个对应图层，生成<strong>图层树（LayerTree）</strong>，将这些图层合并在一起，就是一整个页面的样式</p>
+<p>分层规则：</p>
+<ul>
+<li>拥有层叠上下文属性的元素即使用了z-index的元素</li>
+<li>需要剪裁的地方也会被创建为图层（当父容器的宽高不足以撑起子容器的宽高，出现滚动条或者设置父容器为overflow :hode 等等，子容器页面就会被裁剪）</li>
+</ul>
+<h5 id="（5）绘制"><a href="#（5）绘制" class="headerlink" title="（5）绘制"></a>（5）绘制</h5><img src="/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users\linghao\AppData\Roaming\Typora\typora-user-images\image-20211007091651791.png" alt="image-20211007091651791" style="zoom:80%;">
+
+<p>将图层拆分成一条条指令，逐条执行绘制图形</p>
+<h5 id="（6）分块"><a href="#（6）分块" class="headerlink" title="（6）分块"></a>（6）分块</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070943457.png" alt="image-20211007094342822"></p>
+<p>当页面内容很长时，页面就会出现滚动条。这时的视口大小有限（在当前屏幕区域能看到的模块就叫视口），在这种情况下要绘制所有图层内容开销太大，所以需要将<strong>图层分成很多图块</strong></p>
+<h5 id="（7）光栅化"><a href="#（7）光栅化" class="headerlink" title="（7）光栅化"></a>（7）光栅化</h5><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062110095.png" style="zoom:67%;">
+
+<ul>
+<li>渲染进程将这些图层分成很多图块后，然后按照<strong>视口附近</strong>的<strong>图块</strong>来通过<strong>光栅化</strong>优先生成位图（即屏幕上的像素），所以图块是<strong>光栅化</strong>执行的最小单位</li>
+<li>当用户滚动页面时，由于页面各个层都已经被光栅化了，浏览器需要做的只是合成一个新的帧来展示滚动后的效果</li>
+<li>之前的生成DOM树、styleSheets树、render树（Layout）、分层(Layer)、绘制（Paint）都是在渲染引起的主线程中运行的， 绘制列表记录好绘制顺序和绘制指令的列表后，将其<strong>提交</strong>给渲染引擎中的<strong>合成线程</strong></li>
+<li>合成线程再交给光栅化线程池对图块进行处理</li>
+<li>光栅化过程往往使用GPU来加速生成即快速光栅化，生成的位图保存在GPU内存中</li>
+</ul>
+<h5 id="（8）合成与显示"><a href="#（8）合成与显示" class="headerlink" title="（8）合成与显示"></a>（8）合成与显示</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071019064.gif" alt="合成的光栅化过程"></p>
+<ul>
+<li>一旦所有图块都被光栅化，<strong>合成线程</strong>就会生成一个绘制图块的命令——“DrawQuad”，然后将该命令提交给浏览器进程</li>
+<li><strong>浏览器进程</strong>里面有一个叫 viz 的组件，用来接收<strong>合成线程</strong>发过来的 DrawQuad 命令，然后根据 DrawQuad 命令，将其页面内容绘制到内存中，最后再将内存显示在屏幕上</li>
+</ul>
+<h4 id="3-浏览器页面交互"><a href="#3-浏览器页面交互" class="headerlink" title="3.浏览器页面交互"></a>3.浏览器页面交互</h4><h5 id="（1）浏览器对事件处理"><a href="#（1）浏览器对事件处理" class="headerlink" title="（1）浏览器对事件处理"></a>（1）浏览器对事件处理</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071102089.png" alt="点击事件从浏览器进程路由到渲染进程"></p>
+<p><strong>浏览器进程</strong>首先接收到事件信息和事件发生的坐标，随后便把信息传递给<strong>渲染进程</strong>，<strong>渲染进程</strong>根据事件发生的坐标找到<strong>目标对象（target）</strong>，然后运行这个<strong>目标对象</strong>的绑定事件对应的<strong>监听函数（listener）</strong></p>
+<h5 id="（2）合成线程接收事件"><a href="#（2）合成线程接收事件" class="headerlink" title="（2）合成线程接收事件"></a>（2）合成线程接收事件</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071129764.png" alt="非快速滚动区域有用户事件发生"></p>
+<p>合成线程接收事件的情况主要针对<strong>页面滚动</strong>相关的事件，合成线程可以独立于主线程之外通过已光栅化的层创建组合帧</p>
+<p>当渲染进程中的<strong>合成线程</strong>接收到事件信息，要进行以下判定：</p>
+<ul>
+<li>页面合成时，合成器线程会标记页面中绑定有<strong>页面滚动</strong>事件处理器的区域为<strong>非快速滚动区域</strong>（non-fast scrollable region)</li>
+<li>如果事件发生在这些存在标注的区域，合成线程会把事件信息发送给主线程，等待主线程进行事件处理</li>
+<li>如果事件不是发生在这些区域，合成线程则会直接合成新的帧而不用等到主线程的响应</li>
+</ul>
+<h5 id="（3）查找事件的目标对象"><a href="#（3）查找事件的目标对象" class="headerlink" title="（3）查找事件的目标对象"></a>（3）查找事件的目标对象</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071138363.png" alt="当整个页面都是非快速滚动区域时页面的事件处理示意图"></p>
+<p>当<strong>合成线程</strong>接收到事件信息，判定到事件发生不在非快速滚动区域后，合成器线程会向<strong>主线程</strong>发送这个时间信息，<strong>主线程</strong>获取到事件信息的第一件事就是通过<strong>命中测试（hit test）</strong>去找到事件的目标对象</p>
+<p>具体的命中测试流程是遍历在绘制阶段生成的<strong>绘画记录（paint records）</strong>来找到包含了事件发生坐标上的元素对象</p>
+<h5 id="（4）事件处理优化"><a href="#（4）事件处理优化" class="headerlink" title="（4）事件处理优化"></a>（4）事件处理优化</h5><p>为了浏览流畅，浏览器需要保证渲染进程的渲染速度与屏幕刷新率一致（大概每秒 60 帧），但是存在某些事件触发频率超过了这个数值（比如wheel，mousewheel，mousemove，pointermove，touchmove，这些连续性的事件一般每秒会触发60~120次）</p>
+<p>事件淹没了屏幕刷新的时间轴，导致页面很卡顿：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071149864.png" alt="事件淹没了屏幕刷新的时间轴，导致页面很卡顿"></p>
+<p>假如每一次触发事件都将事件发送到主线程处理，由于屏幕的刷新速率相对来说较低，这样使得主线程会<strong>触发过量</strong>的命中测试以及JS代码，使得性能有了没必要是<strong>损耗</strong></p>
+<p>和之前相同的事件轴，可是这次事件被合并并延迟调度了：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071149521.png" alt="和之前相同的事件轴，可是这次事件被合并并延迟调度了"></p>
+<p>浏览器会<strong>合并</strong>这些连续的事件，延迟到下一帧渲染再执行，达到事件处理优化的目的</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/" title="开发原理|深入理解浏览器工作原理">https://autovy.github.io/2021/10/07/DevPrinciple/深入理解浏览器/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E7%B3%BB%E5%88%97/" rel="tag"><i class="fa fa-tag"></i> 深度系列</a>
+              <a href="/tags/%E5%BC%80%E5%8F%91%E5%8E%9F%E7%90%86/" rel="tag"><i class="fa fa-tag"></i> 开发原理</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" rel="tag"><i class="fa fa-tag"></i> 计算机系统</a>
+              <a href="/tags/web/" rel="tag"><i class="fa fa-tag"></i> web</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/30/DevPrinciple/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev" title="开发原理|后端架构基础知识">
+      <i class="fa fa-chevron-left"></i> 开发原理|后端架构基础知识
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+
+
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9E%B6%E6%9E%84"><span class="nav-text">浏览器架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%B5%8F%E8%A7%88%E5%99%A8%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84"><span class="nav-text">1.浏览器分层结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B%E6%9E%B6%E6%9E%84"><span class="nav-text">2.浏览器进程架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E8%BF%9B%E7%A8%8B"><span class="nav-text">（1）浏览器多进程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BB%E8%A6%81%E8%BF%9B%E7%A8%8B"><span class="nav-text">（2）浏览器主要进程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F"><span class="nav-text">（3）进程模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E8%BF%9B%E7%A8%8B%E9%97%B4%E5%85%B3%E7%B3%BB"><span class="nav-text">（4）进程间关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-text">浏览器工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%B5%8F%E8%A7%88%E5%99%A8%E9%A1%B5%E9%9D%A2%E5%8A%A0%E8%BD%BD"><span class="nav-text">1.浏览器页面加载</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E8%BE%93%E5%85%A5%E5%A4%84%E7%90%86"><span class="nav-text">（1）输入处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%BC%80%E5%A7%8B%E5%AF%BC%E8%88%AA"><span class="nav-text">（2）开始导航</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E8%AF%BB%E5%8F%96%E5%93%8D%E5%BA%94"><span class="nav-text">（3）读取响应</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E6%9F%A5%E6%89%BE%E6%B8%B2%E6%9F%93%E8%BF%9B%E7%A8%8B"><span class="nav-text">（4）查找渲染进程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%885%EF%BC%89%E7%A1%AE%E8%AE%A4%E5%AF%BC%E8%88%AA"><span class="nav-text">（5）确认导航</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%886%EF%BC%89%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8A%A0%E8%BD%BD%E5%AE%8C%E6%88%90"><span class="nav-text">（6）初始化加载完成</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B5%8F%E8%A7%88%E5%99%A8%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93"><span class="nav-text">2.浏览器页面渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%9E%84%E5%BB%BADOM"><span class="nav-text">（1）构建DOM</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%A0%B7%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="nav-text">（2）样式计算</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%B8%83%E5%B1%80"><span class="nav-text">（3）布局</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E5%88%86%E5%B1%82"><span class="nav-text">（4）分层</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%885%EF%BC%89%E7%BB%98%E5%88%B6"><span class="nav-text">（5）绘制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%886%EF%BC%89%E5%88%86%E5%9D%97"><span class="nav-text">（6）分块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%887%EF%BC%89%E5%85%89%E6%A0%85%E5%8C%96"><span class="nav-text">（7）光栅化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%888%EF%BC%89%E5%90%88%E6%88%90%E4%B8%8E%E6%98%BE%E7%A4%BA"><span class="nav-text">（8）合成与显示</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%B5%8F%E8%A7%88%E5%99%A8%E9%A1%B5%E9%9D%A2%E4%BA%A4%E4%BA%92"><span class="nav-text">3.浏览器页面交互</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%B9%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-text">（1）浏览器对事件处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%90%88%E6%88%90%E7%BA%BF%E7%A8%8B%E6%8E%A5%E6%94%B6%E4%BA%8B%E4%BB%B6"><span class="nav-text">（2）合成线程接收事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%9F%A5%E6%89%BE%E4%BA%8B%E4%BB%B6%E7%9A%84%E7%9B%AE%E6%A0%87%E5%AF%B9%E8%B1%A1"><span class="nav-text">（3）查找事件的目标对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E4%BC%98%E5%8C%96"><span class="nav-text">（4）事件处理优化</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<a href="/">  <img class="site-author-image" itemprop="image" alt="Autovy"
+      src="/images/2.png">  </a>
+  <p class="site-author-name" itemprop="name">Autovy</p>
+  <div class="site-description" itemprop="description">新时代农民工的数字农田</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Autovy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Autovy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/JohnSmith232" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;JohnSmith232" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-code"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Autovy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">451k</span>
+</div>
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/01/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+    本站已有
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    位访客
+    <i class="fa fa-user"></i>
+    </span>
+  
+<span> | </span>
+
+  
+    <span class="site-pv" title="总访问量">
+   
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    次阅读
+    <i class="fa fa-eye"></i>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'RVJRabsBhxWXvhMcG8CH5wbc-gzGzoHsz',
+      appKey     : 'JSGLk7guOagDPMFN9wbASkEh',
+      placeholder: "说点什么吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+  <script src="/js/bloom.js" type="text/javascript"></script>
