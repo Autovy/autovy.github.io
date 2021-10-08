@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070837877.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061321788.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061321242.png">
-<meta property="og:image" content="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users/linghao/AppData/Roaming/Typora/typora-user-images/image-20211006133826626.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080826326.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061958151.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062013638.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070838171.png">
@@ -46,8 +46,8 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062124865.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062125412.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062125756.png">
-<meta property="og:image" content="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users/linghao/AppData/Roaming/Typora/typora-user-images/image-20211007091607012.png">
-<meta property="og:image" content="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users/linghao/AppData/Roaming/Typora/typora-user-images/image-20211007091651791.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080826188.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080826551.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070943457.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062110095.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071019064.gif">
@@ -57,7 +57,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071149864.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071149521.png">
 <meta property="article:published_time" content="2021-10-07T15:45:00.000Z">
-<meta property="article:modified_time" content="2021-10-07T12:40:47.789Z">
+<meta property="article:modified_time" content="2021-10-08T00:26:36.503Z">
 <meta property="article:author" content="Autovy">
 <meta property="article:tag" content="开发原理">
 <meta property="article:tag" content="深度系列">
@@ -366,7 +366,7 @@
 <p>如果判定为URL，则开始请求URL</p>
 <h5 id="（2）开始导航"><a href="#（2）开始导航" class="headerlink" title="（2）开始导航"></a>（2）开始导航</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061321242.png" alt="开始导航"></p>
 <p><strong>UI线程将</strong>URL交给网络线程，<strong>网络线程</strong>则负责联系目标主机获取信息（其中发生了DNS域名解析，TLS连接等操作都是计算机网络相关内容）</p>
-<h5 id="（3）读取响应"><a href="#（3）读取响应" class="headerlink" title="（3）读取响应"></a>（3）读取响应</h5><img src="/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users\linghao\AppData\Roaming\Typora\typora-user-images\image-20211006133826626.png" alt="image-20211006133826626" style="zoom:80%;">
+<h5 id="（3）读取响应"><a href="#（3）读取响应" class="headerlink" title="（3）读取响应"></a>（3）读取响应</h5><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080826326.png" alt="image-20211006133826626" style="zoom:80%;">
 
 <p><strong>网络线程</strong>接收到目标主机的响应后，解析HTTP响应报文，响应分为header（响应相关信息）和payload（真实数据内容）两部分</p>
 <p>如果状态码为301或302，则需要取得响应头中Location地址，<strong>重新发起请求</strong></p>
@@ -433,7 +433,7 @@
 <li>对DOM树和styleSheets树进行合并，生成render树（布局树），生成<strong>布局树</strong>时浏览器会遍历<strong>DOM树</strong>所有可见的节点添加到布局树中，而不可见的节点会被忽略掉</li>
 <li>渲染进程还需要计算出每个标签对应的<strong>物理位置</strong>并存储在render树中</li>
 </ul>
-<h5 id="（4）分层"><a href="#（4）分层" class="headerlink" title="（4）分层"></a>（4）分层</h5><img src="/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users\linghao\AppData\Roaming\Typora\typora-user-images\image-20211007091607012.png" alt="image-20211007091607012">
+<h5 id="（4）分层"><a href="#（4）分层" class="headerlink" title="（4）分层"></a>（4）分层</h5><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080826188.png" alt="image-20211007091607012">
 
 <p>页面上还涉及许多复杂的样式：transform， animation 动画、scroll，z-indexing改变层级等等，浏览器则为这些特殊的节点建立一个对应图层，生成<strong>图层树（LayerTree）</strong>，将这些图层合并在一起，就是一整个页面的样式</p>
 <p>分层规则：</p>
@@ -441,7 +441,7 @@
 <li>拥有层叠上下文属性的元素即使用了z-index的元素</li>
 <li>需要剪裁的地方也会被创建为图层（当父容器的宽高不足以撑起子容器的宽高，出现滚动条或者设置父容器为overflow :hode 等等，子容器页面就会被裁剪）</li>
 </ul>
-<h5 id="（5）绘制"><a href="#（5）绘制" class="headerlink" title="（5）绘制"></a>（5）绘制</h5><img src="/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users\linghao\AppData\Roaming\Typora\typora-user-images\image-20211007091651791.png" alt="image-20211007091651791" style="zoom:80%;">
+<h5 id="（5）绘制"><a href="#（5）绘制" class="headerlink" title="（5）绘制"></a>（5）绘制</h5><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080826551.png" alt="image-20211007091651791" style="zoom:80%;">
 
 <p>将图层拆分成一条条指令，逐条执行绘制图形</p>
 <h5 id="（6）分块"><a href="#（6）分块" class="headerlink" title="（6）分块"></a>（6）分块</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070943457.png" alt="image-20211007094342822"></p>

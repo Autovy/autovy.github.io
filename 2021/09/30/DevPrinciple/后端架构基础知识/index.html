@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109301728597.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109301732875.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109302252992.png">
-<meta property="og:image" content="https://autovy.github.io/2021/09/30/DevPrinciple/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/C:%5CUsers%5Clinghao%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210930225658950.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080825835.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109301755744.jpeg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109302309030.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109302313905.png">
@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://www.hadoopdoc.com/media/editor/file_1571152729000_20191015231852727918.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109302330786.png">
 <meta property="article:published_time" content="2021-09-30T15:45:00.000Z">
-<meta property="article:modified_time" content="2021-10-07T12:15:14.146Z">
+<meta property="article:modified_time" content="2021-10-08T00:25:50.538Z">
 <meta property="article:author" content="Autovy">
 <meta property="article:tag" content="后端">
 <meta property="article:tag" content="开发原理">
@@ -774,7 +774,7 @@
 <li><strong>Namenode</strong>：该进程运行在master节点上，Namenode节点存储元数据，比如文件名，块数量，块副本数量，块的存储位置，以及块ID等</li>
 <li><strong>Datanode</strong>：该进程运行在Slave节点，这些节点是真正对数据进行处理和存储的节点</li>
 </ul>
-<h5 id="（4）HDFS数据存储"><a href="#（4）HDFS数据存储" class="headerlink" title="（4）HDFS数据存储"></a>（4）HDFS数据存储</h5><p><img src="/2021/09/30/DevPrinciple/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/C:%5CUsers%5Clinghao%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210930225658950.png" alt="image-20210930225658950"></p>
+<h5 id="（4）HDFS数据存储"><a href="#（4）HDFS数据存储" class="headerlink" title="（4）HDFS数据存储"></a>（4）HDFS数据存储</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080825835.png" alt="image-20210930225658950"></p>
 <p>把文件写入到HDFS的时候，HDFS会把文件分割成很多分片，也就是块（block），文件分割成块之后，HDFS会把他们以分布式方式存储在集群的不多节点上</p>
 <h5 id="（5）HDFS机架感知"><a href="#（5）HDFS机架感知" class="headerlink" title="（5）HDFS机架感知"></a>（5）HDFS机架感知</h5><p>为了数据容错，NameNode把块的副本放在多个机架上，NameNode尽量会在每个机架都存储至少一个块副本，这样如果其中一个机架发生故障，系统还是可用的</p>
 <p>机架感知策略的目的是提升数据可用性、可靠性和网络带宽利用率</p>
