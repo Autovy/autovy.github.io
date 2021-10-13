@@ -22,14 +22,14 @@
     var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="浏览器笑话90%都和IE有关，没了IE的浏览器世界终归是少很多乐趣😭（感觉edge也快了）">
+  <meta name="description" content="浏览器笑话90%都和IE有关，没了IE的浏览器世界总归是少很多乐趣😭">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开发原理|深入理解浏览器工作原理">
 <meta property="og:url" content="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/index.html">
 <meta property="og:site_name" content="Autovy&#39;s blog">
-<meta property="og:description" content="浏览器笑话90%都和IE有关，没了IE的浏览器世界终归是少很多乐趣😭（感觉edge也快了）">
+<meta property="og:description" content="浏览器笑话90%都和IE有关，没了IE的浏览器世界总归是少很多乐趣😭">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110072033316.jpeg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110131222149.webp">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061003492.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061103852.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061104938.png">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070837877.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061321788.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061321242.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080826326.png">
+<meta property="og:image" content="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users/linghao/AppData/Roaming/Typora/typora-user-images/image-20211006133826626.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061958151.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062013638.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070838171.png">
@@ -46,8 +46,8 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062124865.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062125412.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062125756.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080826188.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080826551.png">
+<meta property="og:image" content="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users/linghao/AppData/Roaming/Typora/typora-user-images/image-20211007091607012.png">
+<meta property="og:image" content="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users/linghao/AppData/Roaming/Typora/typora-user-images/image-20211007091651791.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070943457.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110062110095.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071019064.gif">
@@ -57,14 +57,14 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071149864.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110071149521.png">
 <meta property="article:published_time" content="2021-10-07T15:45:00.000Z">
-<meta property="article:modified_time" content="2021-10-08T00:26:36.503Z">
+<meta property="article:modified_time" content="2021-10-13T04:22:27.725Z">
 <meta property="article:author" content="Autovy">
 <meta property="article:tag" content="开发原理">
 <meta property="article:tag" content="深度系列">
 <meta property="article:tag" content="计算机系统">
 <meta property="article:tag" content="web">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110072033316.jpeg">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110131222149.webp">
 
 <link rel="canonical" href="https://autovy.github.io/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/">
 
@@ -161,7 +161,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">46</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">47</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -171,7 +171,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">38</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">39</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -304,8 +304,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110072033316.jpeg" alt="img"></p>
-<p>浏览器笑话90%都和IE有关，没了IE的浏览器世界终归是少很多乐趣😭（感觉edge也快了）</p>
+        <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110131222149.webp" alt="Internet Explorer"></p>
+<p>浏览器笑话90%都和IE有关，没了IE的浏览器世界总归是少很多乐趣😭</p>
 <span id="more"></span>
 
 
@@ -366,7 +366,7 @@
 <p>如果判定为URL，则开始请求URL</p>
 <h5 id="（2）开始导航"><a href="#（2）开始导航" class="headerlink" title="（2）开始导航"></a>（2）开始导航</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110061321242.png" alt="开始导航"></p>
 <p><strong>UI线程将</strong>URL交给网络线程，<strong>网络线程</strong>则负责联系目标主机获取信息（其中发生了DNS域名解析，TLS连接等操作都是计算机网络相关内容）</p>
-<h5 id="（3）读取响应"><a href="#（3）读取响应" class="headerlink" title="（3）读取响应"></a>（3）读取响应</h5><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080826326.png" alt="image-20211006133826626" style="zoom:80%;">
+<h5 id="（3）读取响应"><a href="#（3）读取响应" class="headerlink" title="（3）读取响应"></a>（3）读取响应</h5><img src="/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users\linghao\AppData\Roaming\Typora\typora-user-images\image-20211006133826626.png" alt="image-20211006133826626" style="zoom:80%;">
 
 <p><strong>网络线程</strong>接收到目标主机的响应后，解析HTTP响应报文，响应分为header（响应相关信息）和payload（真实数据内容）两部分</p>
 <p>如果状态码为301或302，则需要取得响应头中Location地址，<strong>重新发起请求</strong></p>
@@ -433,7 +433,7 @@
 <li>对DOM树和styleSheets树进行合并，生成render树（布局树），生成<strong>布局树</strong>时浏览器会遍历<strong>DOM树</strong>所有可见的节点添加到布局树中，而不可见的节点会被忽略掉</li>
 <li>渲染进程还需要计算出每个标签对应的<strong>物理位置</strong>并存储在render树中</li>
 </ul>
-<h5 id="（4）分层"><a href="#（4）分层" class="headerlink" title="（4）分层"></a>（4）分层</h5><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080826188.png" alt="image-20211007091607012">
+<h5 id="（4）分层"><a href="#（4）分层" class="headerlink" title="（4）分层"></a>（4）分层</h5><img src="/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users\linghao\AppData\Roaming\Typora\typora-user-images\image-20211007091607012.png" alt="image-20211007091607012">
 
 <p>页面上还涉及许多复杂的样式：transform， animation 动画、scroll，z-indexing改变层级等等，浏览器则为这些特殊的节点建立一个对应图层，生成<strong>图层树（LayerTree）</strong>，将这些图层合并在一起，就是一整个页面的样式</p>
 <p>分层规则：</p>
@@ -441,7 +441,7 @@
 <li>拥有层叠上下文属性的元素即使用了z-index的元素</li>
 <li>需要剪裁的地方也会被创建为图层（当父容器的宽高不足以撑起子容器的宽高，出现滚动条或者设置父容器为overflow :hode 等等，子容器页面就会被裁剪）</li>
 </ul>
-<h5 id="（5）绘制"><a href="#（5）绘制" class="headerlink" title="（5）绘制"></a>（5）绘制</h5><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110080826551.png" alt="image-20211007091651791" style="zoom:80%;">
+<h5 id="（5）绘制"><a href="#（5）绘制" class="headerlink" title="（5）绘制"></a>（5）绘制</h5><img src="/2021/10/07/DevPrinciple/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8/Users\linghao\AppData\Roaming\Typora\typora-user-images\image-20211007091651791.png" alt="image-20211007091651791" style="zoom:80%;">
 
 <p>将图层拆分成一条条指令，逐条执行绘制图形</p>
 <h5 id="（6）分块"><a href="#（6）分块" class="headerlink" title="（6）分块"></a>（6）分块</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202110070943457.png" alt="image-20211007094342822"></p>
@@ -521,7 +521,10 @@
     <a href="/2021/09/30/DevPrinciple/%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="prev" title="开发原理|后端架构基础知识">
       <i class="fa fa-chevron-left"></i> 开发原理|后端架构基础知识
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/13/DevPrinciple/%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%8C%85%E7%9A%84%E7%BD%91%E7%BB%9C%E4%B9%8B%E6%97%85/" rel="next" title="开发原理|一个数据包的网络之旅">
+      开发原理|一个数据包的网络之旅 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -601,7 +604,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -614,7 +617,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">46</span>
+        <span class="site-state-item-count">47</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -657,7 +660,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">451k</span>
+    <span title="站点总字数">460k</span>
 </div>
 
 <!-- 在网页底部添加网站运行时间 -->
