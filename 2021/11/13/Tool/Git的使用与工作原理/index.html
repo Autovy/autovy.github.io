@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/gear48.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/gear32.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="true"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"autovy.github.io","root":"/","scheme":"Gemini","version":"7.7.2","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="部分内容仍在施工中🤧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发工具|Git的使用与工作原理">
+<meta property="og:url" content="https://autovy.github.io/2021/11/13/Tool/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="Autovy&#39;s blog">
+<meta property="og:description" content="部分内容仍在施工中🤧">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122115839.jpeg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122058851.webp">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132301835.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132301368.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122135738.png">
+<meta property="og:image" content="https://assets.codehub.cn/resources/logo2-png.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122216111.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217579.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217315.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217952.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217176.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217277.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217903.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217019.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217284.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122334723.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122342467.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122349256.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122355195.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122358086.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130004964.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130008061.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130012170.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130016365.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130019611.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130044923.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130047475.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130048748.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130053370.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130055517.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130117765.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131044670.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130109179.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130111345.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130112029.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130113789.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130120323.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130856940.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130858725.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130908924.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131239773.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131243158.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131245744.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131239773.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131253728.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131257426.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130918240.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130921002.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131027386.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131029910.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131034955.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131035167.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131037463.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130958874.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130958447.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131003562.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131006709.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131008429.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131017882.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131020252.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131304234.webp">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131648459.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131704793.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131704428.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131923880.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131739936.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131741071.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131743765.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131744195.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131747443.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131907625.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131917856.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131928808.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131936127.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131933331.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131937333.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131948656.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131950140.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131954980.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131959633.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132004299.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132151963.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132153673.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132157453.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132201201.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132204477.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132210496.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132214127.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132216488.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132236484.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132238492.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132242133.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132245482.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132246382.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132248140.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131334967.webp">
+<meta property="article:published_time" content="2021-11-13T14:57:00.000Z">
+<meta property="article:modified_time" content="2021-11-13T15:01:21.786Z">
+<meta property="article:author" content="Autovy">
+<meta property="article:tag" content="开发工具">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="Coding">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122115839.jpeg">
+
+<link rel="canonical" href="https://autovy.github.io/2021/11/13/Tool/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>开发工具|Git的使用与工作原理 | Autovy's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Autovy's blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Autovy's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Just For Interest</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">51</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">42</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="search-pop-overlay">
+  <div class="popup search-popup">
+      <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://autovy.github.io/2021/11/13/Tool/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/2.png">
+      <meta itemprop="name" content="Autovy">
+      <meta itemprop="description" content="新时代农民工的数字农田">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Autovy's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          开发工具|Git的使用与工作原理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021/11/13 22:57:00" itemprop="dateCreated datePublished" datetime="2021-11-13T22:57:00+08:00">2021/11/13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="热度" id="busuanzi_container_page_pv_test" style="display: inline;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">热度：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/11/13/Tool/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/11/13/Tool/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122115839.jpeg" alt="img"></p>
+<p>部分内容仍在施工中🤧</p>
+<span id="more"></span>
+
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45510461">深入理解Git实现原理 </a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/42929114">Git 误操作救命良方</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tonyq/p/7596006.html">Git 分支模型与开发规范 </a></p>
+<p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600">Git教程</a></p>
+<h3 id="Git基本知识"><a href="#Git基本知识" class="headerlink" title="Git基本知识"></a>Git基本知识</h3><h4 id="1-Git定义"><a href="#1-Git定义" class="headerlink" title="1.Git定义"></a>1.Git定义</h4><p>git的本质就是要实现<strong>对文件变更过程的存储</strong></p>
+<p>Git是一种分布式版本控制系统：</p>
+<ul>
+<li>版本控制：git可以对文件<strong>变更过程</strong>进行管理，随时可以拿出所需要的版本</li>
+<li>分布式：Git的数据不仅存在<strong>远程仓库</strong>（即Git平台的服务器），也存在<strong>本地仓库</strong>（即项目开发者的本地计算机），所以称为<strong>分布式</strong></li>
+</ul>
+<h4 id="2-Git功能列表"><a href="#2-Git功能列表" class="headerlink" title="2.Git功能列表"></a>2.Git功能列表</h4><ul>
+<li>我们可以为每一次变更提交版本更新并且备注更新的内容</li>
+<li>我们可以在项目的各个历史版本之间自如切换</li>
+<li>我们可以一目了然的比较出两个版本之间的差异</li>
+<li>我们可以从当前的修改中撤销一些操作</li>
+<li>我们可以自如的创建分支、合并分支</li>
+<li>我们可以和多人协作开发</li>
+<li>我们可以采取自由多样的开发模式</li>
+</ul>
+<h4 id="3-Git基本术语"><a href="#3-Git基本术语" class="headerlink" title="3.Git基本术语"></a>3.Git基本术语</h4><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122058851.webp" alt="img"></p>
+<ul>
+<li><p>工作区：在编辑器内可增加或修改文件等位置</p>
+</li>
+<li><p>缓存区：提交代码，解决冲突的<strong>中转站</strong></p>
+</li>
+<li><p>版本库：本地<code>.git/</code>目录，内含<strong>缓存区</strong></p>
+</li>
+<li><p>本地仓库：连接本地代码和远程代码的<strong>枢纽</strong>，在没有联网状态下，本地代码可先提交至该处</p>
+</li>
+<li><p>远程仓库：托管远程代码的<strong>中央服务器</strong></p>
+</li>
+</ul>
+<h4 id="4-Git托管平台"><a href="#4-Git托管平台" class="headerlink" title="4.Git托管平台"></a>4.Git托管平台</h4><h5 id="（1）Github"><a href="#（1）Github" class="headerlink" title="（1）Github"></a>（1）Github</h5><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132301835.png" alt="img" style="zoom:50%;">
+
+<p>网址：<a target="_blank" rel="noopener" href="https://github.com/">https://github.com/</a></p>
+<p>Gihub是全球最流行的代码托管平台，拥有大量非常知名的开源项目。github的服务器部署在国外，国内访问不友好，适合用于学习和开发开源项目</p>
+<h5 id="（2）Gitlab"><a href="#（2）Gitlab" class="headerlink" title="（2）Gitlab"></a>（2）Gitlab</h5><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132301368.png" alt="img" style="zoom:67%;">
+
+
+
+<p>网址：<a target="_blank" rel="noopener" href="https://about.gitlab.com/">https://about.gitlab.com/</a></p>
+<p>Gitlab支持免费搭建私有库，功能强大，对企业级的内部开发友好，较为笨重不适合用于简单项目的搭建</p>
+<h5 id="（3）Gitee"><a href="#（3）Gitee" class="headerlink" title="（3）Gitee"></a>（3）Gitee</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122135738.png" alt="logo_gitee_light (1)"></p>
+<p>网址：<a target="_blank" rel="noopener" href="https://gitee.com/">https://gitee.com/</a></p>
+<p>俗称码云，国内知名的在线代码托管平台，基于gitlab</p>
+<h5 id="（4）Coding"><a href="#（4）Coding" class="headerlink" title="（4）Coding"></a>（4）Coding</h5><img src="https://assets.codehub.cn/resources/logo2-png.png" alt="img" style="zoom: 150%;">
+
+<p>网址：<a target="_blank" rel="noopener" href="https://coding.net/">https://coding.net/</a></p>
+<p>Coding 是一个面向开发者的云端开发平台，提供git/svn 代码托管,并且面向个人提供私有库。</p>
+<p>对国内小团队开发较为友好，个人比较推荐，下面的一些操作都会基于Coding平台</p>
+<h3 id="Git快速入门"><a href="#Git快速入门" class="headerlink" title="Git快速入门"></a>Git快速入门</h3><h4 id="1-Git安装"><a href="#1-Git安装" class="headerlink" title="1.Git安装"></a>1.Git安装</h4><p>git官网地址：<a target="_blank" rel="noopener" href="https://git-scm.com/">https://git-scm.com/</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122216111.png" alt="image-20200629224316821"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217579.png" alt="image-20200629224329147"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217315.png" alt="image-20200629224339198"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217952.png" alt="image-20200629224349811"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217176.png" alt="image-20200629224400914"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217277.png" alt="image-20200629224411947"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217903.png" alt="image-20200629224425378"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217019.png" alt="image-20200629224436646"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122217284.png" alt="image-20200629224446392"></p>
+<h4 id="2-Git密钥"><a href="#2-Git密钥" class="headerlink" title="2.Git密钥"></a>2.Git密钥</h4><p>本地仓库与远程仓库通过SSH公私钥进行身份确认，</p>
+<h5 id="（1）生成公钥"><a href="#（1）生成公钥" class="headerlink" title="（1）生成公钥"></a>（1）生成公钥</h5><p>终端输入命令生成公钥</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -o</span><br></pre></td></tr></table></figure>
+
+<p>连续三次回车使用默认设置</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122334723.png" alt="image-20211112233436546"></p>
+<h5 id="（2）查看公钥"><a href="#（2）查看公钥" class="headerlink" title="（2）查看公钥"></a>（2）查看公钥</h5><p>旁边的id_rsa存的就是私钥</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat 【公钥保存位置】/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122342467.png" alt="image-20211112234254250"></p>
+<h5 id="（3）上传公钥"><a href="#（3）上传公钥" class="headerlink" title="（3）上传公钥"></a>（3）上传公钥</h5><p>打开coding的个人设置页面即可上传公钥</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122349256.png" alt="image-20211112234911836"></p>
+<h5 id="（4）Git连接测试"><a href="#（4）Git连接测试" class="headerlink" title="（4）Git连接测试"></a>（4）Git连接测试</h5><p>通过以下命令即可测试ssh连接是否成功（第一次连接需要一个输入yes的步骤）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@e.coding.net</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122355195.png" alt="image-20211112235520804"></p>
+<h4 id="3-Git项目创建实战"><a href="#3-Git项目创建实战" class="headerlink" title="3.Git项目创建实战"></a>3.Git项目创建实战</h4><h5 id="（1）Coding上创建项目"><a href="#（1）Coding上创建项目" class="headerlink" title="（1）Coding上创建项目"></a>（1）Coding上创建项目</h5><p>点击创建项目</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111122358086.png" alt="image-20211112235849036"></p>
+<p>选择模板2中的代码托管即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130004964.png" alt="image-20211113000450682"></p>
+<p>填写项目基本信息，即可完成创建</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130008061.png" alt="image-20211113000842644"></p>
+<h5 id="（2）创建代码仓库"><a href="#（2）创建代码仓库" class="headerlink" title="（2）创建代码仓库"></a>（2）创建代码仓库</h5><p>在项目下创建代码仓库</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130012170.png" alt="image-20211113001242845"></p>
+<p>基本设置如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130016365.png" alt="image-20211113001619059"></p>
+<h5 id="（3）将项目克隆到本地"><a href="#（3）将项目克隆到本地" class="headerlink" title="（3）将项目克隆到本地"></a>（3）将项目克隆到本地</h5><p>复制仓库的ssh链接，将一个仓库内的代码使用ssh下载到本地</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130019611.png" alt="image-20211113001922314"></p>
+<p>电脑上执行git clone命令，将远程仓库克隆为本地仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone 【SSH链接】</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130044923.png" alt="image-20211113004407422"></p>
+<p>有时会出现下载时权限不足的情况，但是ssh的连接测试又能成功，这时候可以尝试一下重新提交公钥</p>
+<p>进入项目文件夹</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130047475.png" alt="image-20211113004735237"></p>
+<p>在git bash下可以看到Test文件有master的符号</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130048748.png" alt="image-20211113004836580"></p>
+<h5 id="（4）设置签名"><a href="#（4）设置签名" class="headerlink" title="（4）设置签名"></a>（4）设置签名</h5><p>设置签名以区分不同开发者的身份（与代码托管中心的账号，密码无关）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name &quot;Autovy&quot;</span><br><span class="line">git config user.email &quot;autovys@gmail.com&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130053370.png" alt="image-20211113005344281"></p>
+<p>设置完成后，即可在配置文件看到相关信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ./.git/config</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130055517.png" alt="image-20211113005519211"></p>
+<h5 id="（5）代码提交流程"><a href="#（5）代码提交流程" class="headerlink" title="（5）代码提交流程"></a>（5）代码提交流程</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130117765.png" alt="img"></p>
+<p>修改项目文件</p>
+<p>创建一个html文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;test&quot; &gt; index.html</span><br></pre></td></tr></table></figure>
+
+
+
+<p>修改md文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131044670.png" alt="image-20211113104443895"></p>
+<p>将工作区改动内容提交到缓存区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add ./</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查看工作区和缓存区状态</p>
+<p>可以看到文件改动情况</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130109179.png" alt="image-20211113010859895"></p>
+<p>将缓存区的内容提交到本地仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;v1.1：添加index文件&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130111345.png" alt="image-20211113011106112"></p>
+<p>查看历史记录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130112029.png" alt="image-20211113011224760"></p>
+<p>将本地仓库的内容推送到远程仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130113789.png" alt="image-20211113011323568"></p>
+<p>最后可以看到Coding仓库变化</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130120323.png" alt="image-20211113012003368"></p>
+<h3 id="Git高级使用"><a href="#Git高级使用" class="headerlink" title="Git高级使用"></a>Git高级使用</h3><h4 id="1-Git版本管理"><a href="#1-Git版本管理" class="headerlink" title="1.Git版本管理"></a>1.Git版本管理</h4><h5 id="（1）更新1-2为最新版"><a href="#（1）更新1-2为最新版" class="headerlink" title="（1）更新1.2为最新版"></a>（1）更新1.2为最新版</h5><p>重复上面步骤，修改并更新index.html文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim index.html</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130856940.png" alt="image-20211113085631627"></p>
+<p>修改md中的版本信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim README.md</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130858725.png" alt="image-20211113085813333"></p>
+<p>将1.2版本的代码按步骤提交到本地仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add ./</span><br><span class="line">git commit -m &quot;v1.2：增加index文件标题&quot;</span><br></pre></td></tr></table></figure>
+
+<p>这里先不推送远端仓库，方便后续切换版本</p>
+<h5 id="（2）查看日志"><a href="#（2）查看日志" class="headerlink" title="（2）查看日志"></a>（2）查看日志</h5><p>git log 查看提交日志</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130908924.png" alt="image-20211113090846535"></p>
+<p>commit后面一大段的字符串是commit id（版本号），这里<code>HEAD</code>是Git指向当前版本的指针，所以要切换版本就要移动<code>HEAD</code>到指定版本</p>
+<h5 id="（3）修改未添加缓冲区"><a href="#（3）修改未添加缓冲区" class="headerlink" title="（3）修改未添加缓冲区"></a>（3）修改未添加缓冲区</h5><p>修改index.html文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim index.html</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131239773.png" alt="image-20211113123920560"></p>
+<p>在对文件使用<code>add ./</code>将项目添加缓存区之前，我反悔了，决定丢弃工作区的修改</p>
+<p>查看当前状态,可以看到提示使用<code>git restore</code>丢弃修改</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131243158.png" alt="image-20211113124311037"></p>
+<p>丢弃修改工作区的修改，文件恢复到最近一次<code>git commit</code>或<code>git add</code>时的状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git restore ./</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131245744.png" alt="image-20211113124505502"></p>
+<h5 id="（4）修改添加到缓存区"><a href="#（4）修改添加到缓存区" class="headerlink" title="（4）修改添加到缓存区"></a>（4）修改添加到缓存区</h5><p>修改index.html文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim index.html</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131239773.png" alt="image-20211113123920560"></p>
+<p>添加修改到缓冲区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add ./</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查看当前状态,可以看到提示使用<code>git restore --staged</code>丢弃缓存内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131253728.png" alt="image-20211113125325665"></p>
+<p>丢弃缓存内容后，再按上一种情况的流程恢复工作区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git restore --staged ./</span><br><span class="line">git status</span><br><span class="line">git restore ./</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131257426.png" alt="image-20211113125708241"></p>
+<h5 id="（5）修改提交到本地仓库"><a href="#（5）修改提交到本地仓库" class="headerlink" title="（5）修改提交到本地仓库"></a>（5）修改提交到本地仓库</h5><p>将版本回退到上一个版本即1.1</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130918240.png" alt="image-20211113091804033"></p>
+<p>这时本地仓库就回退到了1.1版本</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130921002.png" alt="image-20211113092137541"></p>
+<p>这时候查看git log，可以发现1.2的提交记录就移除</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131027386.png" alt="image-20211113102703410"></p>
+<p>如果又需要回到1.2版本</p>
+<p>先通过<code>git reflog</code>查看历史命令，可以找到1.2版本的id</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131029910.png" alt="image-20211113102934666"></p>
+<p>同样可以使用git reset切换版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard 【commit id】</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131034955.png" alt="image-20211113103418305"></p>
+<p>这里的commit id不用填完整，填到后面的字母部分</p>
+<p>这时本地仓库又切回了1.2</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131035167.png" alt="image-20211113103512977"></p>
+<p>【注意】</p>
+<p>如果已经将最新的代码推送过远端仓库（即远端仓库有最新的版本，要保持本地和远端的资源一致），会报以下错误、</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131037463.png" alt="image-20211113103733311"></p>
+<h5 id="（6）修改推送到远端服务器"><a href="#（6）修改推送到远端服务器" class="headerlink" title="（6）修改推送到远端服务器"></a>（6）修改推送到远端服务器</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert HEAD --edit //并修改提交信息</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130958874.png" alt="image-20211113095811776"></p>
+<p>这时后查看记录git log，可以看到撤销的操作也被记录其中</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111130958447.png" alt="image-20211113095828085"></p>
+<p>这时本地仓库就是回退到了版本1.1</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131003562.png" alt="image-20211113100356269"></p>
+<p>直接推送到远程仓库，远程仓库也回退到1.1版本</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131006709.png" alt="image-20211113100641582"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131008429.png" alt="image-20211113100811889"></p>
+<p>如果提交了1.1版本后，又需要回到1.2版本，这时候只要撤销掉对1.2的撤销即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131017882.png" alt="image-20211113101733694"></p>
+<p>再git push推送到远程仓库即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131020252.png" alt="image-20211113102000137"></p>
+<h5 id="（7）总结"><a href="#（7）总结" class="headerlink" title="（7）总结"></a>（7）总结</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131304234.webp" alt="img"></p>
+<ul>
+<li>工作区修改后：<code>git restore ./</code>恢复工作区</li>
+<li><code>git add ./</code>添加到缓冲区后：<code>git restore --staged ./</code> 恢复缓存区</li>
+<li><code>git commit</code>提交到本地仓库后：<code>git reset --hard HEAD^</code>恢复上个版本到缓存区</li>
+<li><code>git push</code>推送到远程仓库后：<code>git revert HEAD --edit</code>撤销上一个推送操作，并恢复到缓存区</li>
+</ul>
+<h4 id="2-Git分支管理"><a href="#2-Git分支管理" class="headerlink" title="2.Git分支管理"></a>2.Git分支管理</h4><h5 id="（1）分支解决的问题"><a href="#（1）分支解决的问题" class="headerlink" title="（1）分支解决的问题"></a>（1）分支解决的问题</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131648459.png" alt="image-20200728190230431"></p>
+<p>同时并行推进多个功能开发，提高开发效率</p>
+<p>各个分支在开发过程中，如果某一个分支开发失败，不会对其他分支有任何影响。失败的分支删除重新开始即可</p>
+<p>最后再将分支合并到master上</p>
+<p>分支：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131704793.png" alt="git-br-dev-fd"></p>
+<p>分支的合并（默认快速模式）：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131704428.png" alt="git-br-ff-merge"></p>
+<p>分支的合并（普通模式）：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131923880.png" alt="git-no-ff-mode"></p>
+<h5 id="（2）分支基本操作"><a href="#（2）分支基本操作" class="headerlink" title="（2）分支基本操作"></a>（2）分支基本操作</h5><p>创建dev分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch dev</span><br></pre></td></tr></table></figure>
+
+<p><code>git checkout -b dev</code>可以创建并切换到dev分支</p>
+<p>查看当前分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131739936.png" alt="image-20211113173909862"></p>
+<p>可以看到dev分支已经创建成功了，而当前位于master分支</p>
+<p>切换到dev分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch dev</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131741071.png" alt="image-20211113174105689"></p>
+<p>修改文件内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim README.md</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131743765.png" alt="image-20211113174328787"></p>
+<p>将最新修改的内容提交到dev分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add ./</span><br><span class="line">git commit -m &quot;dev new test&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131744195.png" alt="image-20211113174453991"></p>
+<p>切换回master分支，并查看文件内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch master</span><br><span class="line">cat README.md</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131747443.png" alt="image-20211113174734151"></p>
+<p>可以看到主分支上没有dev的内容</p>
+<p>合并分支</p>
+<p>在master分支上合并dev</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge dev</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131907625.png" alt="image-20211113190746514"></p>
+<p>可以看到在dev上的修改在master上生效了</p>
+<h5 id="（3）分支合并冲突问题"><a href="#（3）分支合并冲突问题" class="headerlink" title="（3）分支合并冲突问题"></a>（3）分支合并冲突问题</h5><p>前面的情况中，dev是在master基础上的，合并前master并没有修改，如果master再合并前与dev修改了同一行的内容就会出现冲突</p>
+<p>先撤销一下合并</p>
+<p>查看命令记录，可以看到合并记录中合并的方式是快速模式（即直接把<code>master</code>指向<code>dev</code>的当前提交，所以合并速度非常快）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131917856.png" alt="image-20211113191710611"></p>
+<p>撤销合并（未推送）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131928808.png" alt="image-20211113192813592"></p>
+<p>修改master内容，并提交到本地仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim README.md</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131936127.png" alt="image-20211113193624097"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add ./</span><br><span class="line">git commit -m &quot;master new test&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131933331.png" alt="image-20211113193330217"></p>
+<p>再次合并dev分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge dev</span><br></pre></td></tr></table></figure>
+
+<p>这时就会出现合并冲突的问题</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131937333.png" alt="image-20211113193742100"></p>
+<p>解决冲突</p>
+<p>编辑README.md文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim README.md</span><br></pre></td></tr></table></figure>
+
+<p>删除特殊符号，修改内容</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131948656.png" alt="image-20211113194812446"></p>
+<p>然后正常提交到master分支即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add ./</span><br><span class="line">git commit -m &quot;master+dev&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131950140.png" alt="image-20211113195019152"></p>
+<p>一般来说不会再本地仓库库对分支进行合并，而是在远程的代码平台进行分支的合并</p>
+<p>推送内容到master</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131954980.png" alt="image-20211113195444076"></p>
+<p>由于远程仓库还没有创建dev分支，所以推送时要创建分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --set-upstream origin dev</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这时即可在Coding上看到两个分支了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131959633.png" alt="image-20211113195934598"></p>
+<p>代码平台上也可以合并分支，当如果有冲突就无法合并</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132004299.png" alt="image-20211113200419162"></p>
+<h5 id="（3）分支中的多人协作"><a href="#（3）分支中的多人协作" class="headerlink" title="（3）分支中的多人协作"></a>（3）分支中的多人协作</h5><p>准备wsl模拟另一台电脑，一个新的coding账号，新的coding账号提交wsl中的ssh，然后使用两个浏览器登录分别登录两个账号</p>
+<p>将第二个账号（二号机）邀请到主账号的团队中</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132151963.png" alt="image-20211113215154747"></p>
+<p>将二号机拉入项目中</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132153673.png" alt="image-20211113215314621"></p>
+<p>二号机wsl看到项目后克隆项目到本地</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@e.coding.net:autovys/demo/Test.git</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132157453.png" alt="image-20211113215727175"></p>
+<p>进入目录后查看分支，可以发现只能看到master分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132201201.png" alt="image-20211113220115181"></p>
+<p>二号机要在dev基础上进行开发，就要创建远程<code>origin</code>的<code>dev</code>分支到本地</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev origin/dev</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132204477.png" alt="image-20211113220445123"></p>
+<p>二号机在dev基础上修改了文件内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim README.md</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132210496.png" alt="image-20211113221049407"></p>
+<p>并且二号机还推送到了远程仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add ./</span><br><span class="line">git commit -m&quot;edit something&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132214127.png" alt="image-20211113221447824"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132216488.png" alt="image-20211113221631576"></p>
+<p>这时一号机也要对同样的文件修改一些内容，并尝试推送到dev分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git switch dev</span><br><span class="line">vim README.md</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132236484.png" alt="image-20211113223622153"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add ./</span><br><span class="line">git commit -m &quot;add someting&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132238492.png" alt="image-20211113223826310"></p>
+<p>可以发现远程推送失败了，因为二号机的最新提交和我推送的提交有冲突</p>
+<p>这时就需要先<code>git pull</code>把最新的提交从<code>origin/dev</code>抓下来，然后，在本地合并，解决冲突，再推送</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132242133.png" alt="image-20211113224245383"></p>
+<p>这时候解决的方法和分支管理中的解决冲突完全一样</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132245482.png" alt="image-20211113224352026"></p>
+<p>编辑README.md文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim README.md</span><br></pre></td></tr></table></figure>
+
+<p>删除特殊符号，修改内容</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132246382.png" alt></p>
+<p>然后正常提交到dev分支即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add ./</span><br><span class="line">git commit -m &quot;dev lastest&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111132248140.png" alt="image-20211113224806916"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111131334967.webp" alt="img"></p>
+<p><strong>前方施工中……</strong></p>
+<h3 id="Git可视化工具"><a href="#Git可视化工具" class="headerlink" title="Git可视化工具"></a>Git可视化工具</h3><h4 id="1-IDEA中的Git"><a href="#1-IDEA中的Git" class="headerlink" title="1.IDEA中的Git"></a>1.IDEA中的Git</h4><h4 id="2-SourcetTree工具"><a href="#2-SourcetTree工具" class="headerlink" title="2.SourcetTree工具"></a>2.SourcetTree工具</h4><h3 id="Git原理"><a href="#Git原理" class="headerlink" title="Git原理"></a>Git原理</h3><p>Git的核心是它的对象数据库，其中保存着git的对象：</p>
+<ul>
+<li><strong>blob对象</strong>：实现了对文件内容的记录</li>
+<li><strong>tree对象</strong>：实现了对文件名、文件目录结构的记录</li>
+<li><strong>commit对象</strong>：实现了对版本提交时间、版本作者、版本序列、版本说明等附加信息的记录</li>
+</ul>
+<p><strong>Git引用</strong>是指向git对象hash键值的类似指针的文件，通过Git引用，我们可以更加方便的定位到某一版本的提交（Git分支、tags等功能都是基于Git引用实现的）</p>
+<h4 id="1-Git数据库"><a href="#1-Git数据库" class="headerlink" title="1.Git数据库"></a>1.Git数据库</h4><h4 id="2-Git数据库写入操作"><a href="#2-Git数据库写入操作" class="headerlink" title="2.Git数据库写入操作"></a>2.Git数据库写入操作</h4><h4 id="3-Git数据库查询操作"><a href="#3-Git数据库查询操作" class="headerlink" title="3.Git数据库查询操作"></a>3.Git数据库查询操作</h4><h4 id="4-使用Git跟踪文件变更"><a href="#4-使用Git跟踪文件变更" class="headerlink" title="4.使用Git跟踪文件变更"></a>4.使用Git跟踪文件变更</h4><h4 id="5-Git的树对象"><a href="#5-Git的树对象" class="headerlink" title="5.Git的树对象"></a>5.Git的树对象</h4><h4 id="6-Git的提交对象"><a href="#6-Git的提交对象" class="headerlink" title="6.Git的提交对象"></a>6.Git的提交对象</h4><h4 id="7-Git的引用"><a href="#7-Git的引用" class="headerlink" title="7.Git的引用"></a>7.Git的引用</h4><h3 id="Git开发规范"><a href="#Git开发规范" class="headerlink" title="Git开发规范"></a>Git开发规范</h3>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Autovy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://autovy.github.io/2021/11/13/Tool/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" title="开发工具|Git的使用与工作原理">https://autovy.github.io/2021/11/13/Tool/Git的使用与工作原理/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag"><i class="fa fa-tag"></i> 开发工具</a>
+              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
+              <a href="/tags/Coding/" rel="tag"><i class="fa fa-tag"></i> Coding</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 深度学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/27/DevPrinciple/TCP%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AE%9E%E9%AA%8C/" rel="prev" title="开发原理|TCP可视化实验">
+      <i class="fa fa-chevron-left"></i> 开发原理|TCP可视化实验
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+
+
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="nav-text">Git基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Git%E5%AE%9A%E4%B9%89"><span class="nav-text">1.Git定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Git%E5%8A%9F%E8%83%BD%E5%88%97%E8%A1%A8"><span class="nav-text">2.Git功能列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Git%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD"><span class="nav-text">3.Git基本术语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Git%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0"><span class="nav-text">4.Git托管平台</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89Github"><span class="nav-text">（1）Github</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89Gitlab"><span class="nav-text">（2）Gitlab</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89Gitee"><span class="nav-text">（3）Gitee</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89Coding"><span class="nav-text">（4）Coding</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-text">Git快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Git%E5%AE%89%E8%A3%85"><span class="nav-text">1.Git安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Git%E5%AF%86%E9%92%A5"><span class="nav-text">2.Git密钥</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E7%94%9F%E6%88%90%E5%85%AC%E9%92%A5"><span class="nav-text">（1）生成公钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%9F%A5%E7%9C%8B%E5%85%AC%E9%92%A5"><span class="nav-text">（2）查看公钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E4%B8%8A%E4%BC%A0%E5%85%AC%E9%92%A5"><span class="nav-text">（3）上传公钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89Git%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95"><span class="nav-text">（4）Git连接测试</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Git%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA%E5%AE%9E%E6%88%98"><span class="nav-text">3.Git项目创建实战</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89Coding%E4%B8%8A%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-text">（1）Coding上创建项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%88%9B%E5%BB%BA%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93"><span class="nav-text">（2）创建代码仓库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%B0%86%E9%A1%B9%E7%9B%AE%E5%85%8B%E9%9A%86%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="nav-text">（3）将项目克隆到本地</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E8%AE%BE%E7%BD%AE%E7%AD%BE%E5%90%8D"><span class="nav-text">（4）设置签名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%885%EF%BC%89%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E6%B5%81%E7%A8%8B"><span class="nav-text">（5）代码提交流程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E9%AB%98%E7%BA%A7%E4%BD%BF%E7%94%A8"><span class="nav-text">Git高级使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Git%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="nav-text">1.Git版本管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E6%9B%B4%E6%96%B01-2%E4%B8%BA%E6%9C%80%E6%96%B0%E7%89%88"><span class="nav-text">（1）更新1.2为最新版</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97"><span class="nav-text">（2）查看日志</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E4%BF%AE%E6%94%B9%E6%9C%AA%E6%B7%BB%E5%8A%A0%E7%BC%93%E5%86%B2%E5%8C%BA"><span class="nav-text">（3）修改未添加缓冲区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%884%EF%BC%89%E4%BF%AE%E6%94%B9%E6%B7%BB%E5%8A%A0%E5%88%B0%E7%BC%93%E5%AD%98%E5%8C%BA"><span class="nav-text">（4）修改添加到缓存区</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%885%EF%BC%89%E4%BF%AE%E6%94%B9%E6%8F%90%E4%BA%A4%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="nav-text">（5）修改提交到本地仓库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%886%EF%BC%89%E4%BF%AE%E6%94%B9%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">（6）修改推送到远端服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%887%EF%BC%89%E6%80%BB%E7%BB%93"><span class="nav-text">（7）总结</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="nav-text">2.Git分支管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%88%86%E6%94%AF%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-text">（1）分支解决的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%88%86%E6%94%AF%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-text">（2）分支基本操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98"><span class="nav-text">（3）分支合并冲突问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E5%88%86%E6%94%AF%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C"><span class="nav-text">（3）分支中的多人协作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B7%A5%E5%85%B7"><span class="nav-text">Git可视化工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-IDEA%E4%B8%AD%E7%9A%84Git"><span class="nav-text">1.IDEA中的Git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-SourcetTree%E5%B7%A5%E5%85%B7"><span class="nav-text">2.SourcetTree工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%8E%9F%E7%90%86"><span class="nav-text">Git原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Git%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">1.Git数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Git%E6%95%B0%E6%8D%AE%E5%BA%93%E5%86%99%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-text">2.Git数据库写入操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Git%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C"><span class="nav-text">3.Git数据库查询操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E4%BD%BF%E7%94%A8Git%E8%B7%9F%E8%B8%AA%E6%96%87%E4%BB%B6%E5%8F%98%E6%9B%B4"><span class="nav-text">4.使用Git跟踪文件变更</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Git%E7%9A%84%E6%A0%91%E5%AF%B9%E8%B1%A1"><span class="nav-text">5.Git的树对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Git%E7%9A%84%E6%8F%90%E4%BA%A4%E5%AF%B9%E8%B1%A1"><span class="nav-text">6.Git的提交对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-Git%E7%9A%84%E5%BC%95%E7%94%A8"><span class="nav-text">7.Git的引用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83"><span class="nav-text">Git开发规范</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<a href="/">  <img class="site-author-image" itemprop="image" alt="Autovy"
+      src="/images/2.png">  </a>
+  <p class="site-author-name" itemprop="name">Autovy</p>
+  <div class="site-description" itemprop="description">新时代农民工的数字农田</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Autovy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Autovy" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/JohnSmith232" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;JohnSmith232" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>CSDN</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-code"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Autovy</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">487k</span>
+</div>
+
+<!-- 在网页底部添加网站运行时间 -->
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("01/01/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "Run for "+dnum+" Days ";
+        document.getElementById("times").innerHTML = hnum + " Hours " + mnum + " m " + snum + " s";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+    本站已有
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    位访客
+    <i class="fa fa-user"></i>
+    </span>
+  
+<span> | </span>
+
+  
+    <span class="site-pv" title="总访问量">
+   
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    次阅读
+    <i class="fa fa-eye"></i>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'RVJRabsBhxWXvhMcG8CH5wbc-gzGzoHsz',
+      appKey     : 'JSGLk7guOagDPMFN9wbASkEh',
+      placeholder: "说点什么吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
+  <script src="/js/bloom.js" type="text/javascript"></script>
