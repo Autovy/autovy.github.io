@@ -2,9 +2,8 @@
 <search>
   <entry>
     <title>开发原理|深入理解TCP/IP</title>
-    <url>/2021/11/22/DevPrinciple/%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3TCP/</url>
+    <url>/2021/12/22/DevPrinciple/%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3TCP/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202111222123110.png" alt="Packets incoming "></p>
-<p>TCP设计的各种机制是真的复杂🥶，考试月夹缝中生存</p>
 <span id="more"></span>
 
 <h3 id="深入TCP连接"><a href="#深入TCP连接" class="headerlink" title="深入TCP连接"></a>深入TCP连接</h3><p>参考资料：<a href="https://mp.weixin.qq.com/s/rX3A_FA19n4pI9HicIEsXg">https://mp.weixin.qq.com/s/rX3A_FA19n4pI9HicIEsXg</a></p>
