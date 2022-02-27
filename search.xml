@@ -5258,9 +5258,12 @@
 <li><code>u</code>：重复上一个操作</li>
 </ul>
 <h4 id="4-输入模式"><a href="#4-输入模式" class="headerlink" title="4.输入模式"></a>4.输入模式</h4><p>输入模式常用按键：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040949252.svg+xml" alt="[公式]"></p>
+<img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202202271721696.png" alt="image-20220227172148042" style="zoom: 67%;">
+
+
+
 <h4 id="5-命令行模式"><a href="#5-命令行模式" class="headerlink" title="5.命令行模式"></a>5.命令行模式</h4><p>常用命令：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109040949551.svg+xml" alt="[公式]"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202202271722004.png" alt="image-20220227172248760"></p>
 <p><code>:ZZ</code>：不存储直接离开（ctrl + z）</p>
 <p><code>:set nu</code>：设置行号，打开文本每一行都显示行号</p>
 <p>注意如果输入的命令不存在会返回127错误，而且会回到vim界面</p>
