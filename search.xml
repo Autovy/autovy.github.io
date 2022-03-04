@@ -1,6 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>开发原理|MySQL最佳实践</title>
+    <url>/2022/02/25/DevPrinciple/MySQL%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203041310207.png" alt="image-20220304131032975" style="zoom: 33%;">
+
+<p>MySQL  ❎</p>
+<p>OurSQL ✅</p>
+<span id="more"></span>
+
+<h3 id="Debain安装MySQL"><a href="#Debain安装MySQL" class="headerlink" title="Debain安装MySQL"></a>Debain安装MySQL</h3><h4 id="添加-MySQL-存储库"><a href="#添加-MySQL-存储库" class="headerlink" title="添加 MySQL 存储库"></a>添加 MySQL 存储库</h4><p>MySQL 服务器包可通过其官方存储库获得。 因此，我们现在将下载并安装 MySQL 存储库安装包</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://dev.mysql.com/get/mysql-apt-config_0.8.18-1_all.deb</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>dpkg</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo dpkg -i mysql-apt-config_0.8.18-1_all.deb</span><br></pre></td></tr></table></figure>
+
+<p>进入mysql安装页面选择ok即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203021941621.png" alt="image-20220302194144873"></p>
+<h4 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h4><p>等待存储库配置完成，然后使用 apt 命令更新存储库索引</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
+
+
+
+<p>安装mysql服务器</p>
+<p>使用apt-get install mysql-server安装时，如果出现报错Package ‘mysql-server’ has no installation candidate，可以使用下面的命令进行安装</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt-get install mariadb-server</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><p>理论上这时候的mysql服务已经安装完成了，我们可以通过命令service –status-all 查看到服务列表中有mariadb</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203021949399.png" alt="image-20220302194955961"></p>
+<p>但是使用mysql命令时，会出现以下报错，这是因为mariadb服务还未启动</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203021952567.png" alt="image-20220302195236210"></p>
+<p>使用以下命令启动即可</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">service mariadb start</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203021955103.png" alt="image-20220302195514826"></p>
+<h3 id="命令行准备数据库"><a href="#命令行准备数据库" class="headerlink" title="命令行准备数据库"></a>命令行准备数据库</h3><h4 id="root账号进入数据库"><a href="#root账号进入数据库" class="headerlink" title="root账号进入数据库"></a>root账号进入数据库</h4><p>mysql命令进入mysql服务</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql</span><br></pre></td></tr></table></figure>
+
+
+
+<p>修改root账号密码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022003140.png" alt="image-20220302200352926"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set password for root@localhost &#x3D; password(&quot;123456&quot;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>退出mysql服务，并使用root账号登录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022006437.png" alt></p>
+<h4 id="新用户与新数据库"><a href="#新用户与新数据库" class="headerlink" title="新用户与新数据库"></a>新用户与新数据库</h4><p>创建新数据库</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create database testdb;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查看已有数据库</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022010700.png" alt="image-20220302201054361"></p>
+<p>创建新用户</p>
+<p>@localhost设置只允许用户本地登录，并设置其密码为123456</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create user aut@localhost identifide by &#39;123456&#39;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022015408.png" alt="image-20220302201501975"></p>
+<p>查看用户列表</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select user for mysql.user</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022018844.png" alt="image-20220302201847575"></p>
+<p>分配新数据库给新用户</p>
+<p>注意这里是指将testdb库的所有表（testdb.*）的所有权限（all）给aut本地使用（localhost）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grant all on testdb.* to aut@localhost;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022027073.png" alt="image-20220302202739833"></p>
+<p>查看用户权限</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">show grants for aut@localhost;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022031370.png" alt="image-20220302203155016"></p>
+<h4 id="测试数据准备"><a href="#测试数据准备" class="headerlink" title="测试数据准备"></a>测试数据准备</h4><p>使用新用户aut连接mysql</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql -u aut -p</span><br></pre></td></tr></table></figure>
+
+
+
+<p>切换数据库到新数据库</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use testdb;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>创建一个只含一个字段的数据表</p>
+<p>test表只含有一个整型不为空的字段money</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create table test (money int not null)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>添加一条数据到表中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">insert test(money) values(5000) </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="MySQL事务隔离实验"><a href="#MySQL事务隔离实验" class="headerlink" title="MySQL事务隔离实验"></a>MySQL事务隔离实验</h3><p>新开一个终端使用连接上新数据库testdb（可以aut，也可以自己新建一个用户）</p>
+<h4 id="读未提交级别"><a href="#读未提交级别" class="headerlink" title="读未提交级别"></a>读未提交级别</h4><p>出现脏读问题</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022050355.jpeg" alt="img"></p>
+<h4 id="读已提交级别"><a href="#读已提交级别" class="headerlink" title="读已提交级别"></a>读已提交级别</h4><p>避免脏读，但是不可重复读</p>
+<h5 id="1-避免脏读测试"><a href="#1-避免脏读测试" class="headerlink" title="1.避免脏读测试"></a>1.避免脏读测试</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022051306.jpeg" alt="img"></p>
+<h5 id="2-不可重复读测试"><a href="#2-不可重复读测试" class="headerlink" title="2.不可重复读测试"></a>2.不可重复读测试</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022051474.jpeg" alt="img"></p>
+<h4 id="可重复读级别"><a href="#可重复读级别" class="headerlink" title="可重复读级别"></a>可重复读级别</h4><p>可以重复读，并且可以防止幻读</p>
+<h5 id="1-可重复读测试"><a href="#1-可重复读测试" class="headerlink" title="1.可重复读测试"></a>1.可重复读测试</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022052001.jpeg" alt="img"></p>
+<h5 id="2-防止幻读测试"><a href="#2-防止幻读测试" class="headerlink" title="2.防止幻读测试"></a>2.防止幻读测试</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022052706.jpeg" alt="img"></p>
+<h3 id="MySQL优化实验"><a href="#MySQL优化实验" class="headerlink" title="MySQL优化实验"></a>MySQL优化实验</h3><p>上面的实验全程在Linux环境中，在日常开发中我们可以使用数据库可视化工具如Navicat或IDEA自带的数据库工具，下面我主要使用Navicat进行操作</p>
+<p>此章节的优化实例来自一次对学校校团委物资管理系统的维护，鉴于此项目糟心的数据库设计，给我留下了深刻的印象，难以想象的是这样的项目竟然从16年运行至今</p>
+<h4 id="T-SQL脚本分表优化"><a href="#T-SQL脚本分表优化" class="headerlink" title="T-SQL脚本分表优化"></a>T-SQL脚本分表优化</h4><h5 id="1-相关表的结构"><a href="#1-相关表的结构" class="headerlink" title="1.相关表的结构"></a>1.相关表的结构</h5><p>此处展示的表结构为维护前</p>
+<p>物资申请表：共4817条数据</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203031543098.png" alt="image-20220303154338625"></p>
+<p>物资信息表：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203031545235.png" alt="image-20220303154513022"></p>
+<p>goods_count：当前仓库物品数（物理的）</p>
+<p>good_leftCount：当前物品可借数（网络的：存在部分未借出，但已被预订仍在审核中的物品）</p>
+<h5 id="2-优化思路：物资申请表分表"><a href="#2-优化思路：物资申请表分表" class="headerlink" title="2.优化思路：物资申请表分表"></a>2.优化思路：物资申请表分表</h5><p>从上面的tw_apply表就可以知道：</p>
+<ul>
+<li><p>在用户提出申请后，物资申请信息被后端拼成了一个字符串存储在apply_content（同时利用了前端的数据执行了物品可借数的预扣除，所以这部分没有用到物资申请信息字符串的解析）</p>
+</li>
+<li><p>通过审核后，物品正式借出，这时候只留有物资申请信息的字符串存储在数据库，所以需要后端对该字符串解析提取出申请物资与其借用数量，再去操作数据库</p>
+</li>
+</ul>
+<p>还好后端大哥没有把物资申请信息的字符串直接发给前端，我真的哭死，设计数据库的那个出来挨打（前端不需要解析，但是要拼接展示字符串）</p>
+<p>数据库设计十分不合理，甚至不符合第一范式，<strong>浪费数据库大量存储空间</strong>不说，而且后端拼接字符串解析字符串这一过程<strong>十分耗时且占用内存</strong>，而且最新的需求是需要增加一个审核过程申请物资调整功能</p>
+<p>所以我将物资申请表进行分表（水平分表），分出物资申请详情表并联系物资信息表，其结构如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203031646110.png" alt="image-20220303164602406"></p>
+<p>删除掉apply_content字段，节省数据库空间</p>
+<p>分表后，通过tw_applydetail表，我们对物资申请信息的所以内容进行操作，省去了物资审核接口对字符串解析的耗时过程并且方便审核过程申请物资调整功能的开发（通过tw_appdetail找到物品信息和物品数量）</p>
+<h5 id="3-优化操作：存储过程脚本"><a href="#3-优化操作：存储过程脚本" class="headerlink" title="3.优化操作：存储过程脚本"></a>3.优化操作：存储过程脚本</h5><p>存储过程（Stored Procedure）是一种在数据库中存储复杂程序，以便外部程序调用的一种数据库对象</p>
+<p>这里值得注意的是在遍历游标的循环中，如果查询不存在或为空会跳出循环</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DEFINER<span class="operator">=</span>`Autovy`@`localhost` <span class="keyword">PROCEDURE</span> `demo`()</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">		</span><br><span class="line"> <span class="comment">-- 定义变量</span></span><br><span class="line"><span class="keyword">DECLARE</span> i <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">DECLARE</span> s <span class="type">int</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">DECLARE</span> n TINYTEXT;</span><br><span class="line"><span class="keyword">DECLARE</span> m <span class="type">INT</span>(<span class="number">11</span>);</span><br><span class="line"> # 求分割符号<span class="string">&#x27;,&#x27;</span>的位置</span><br><span class="line"><span class="keyword">DECLARE</span> _index <span class="type">INT</span>;</span><br><span class="line"></span><br><span class="line"># 单个物品申请信息</span><br><span class="line"><span class="keyword">DECLARE</span> str TINYTEXT;</span><br><span class="line"></span><br><span class="line"># 单个物品申请信息长度</span><br><span class="line"><span class="keyword">DECLARE</span> strLength <span class="type">int</span>;</span><br><span class="line"></span><br><span class="line"># 物品名称</span><br><span class="line"><span class="keyword">DECLARE</span> goodName <span class="type">VARCHAR</span>(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"># 物品数量</span><br><span class="line"><span class="keyword">DECLARE</span> goodCount <span class="type">int</span>(<span class="number">11</span>);</span><br><span class="line"></span><br><span class="line"># 物品id</span><br><span class="line"><span class="keyword">DECLARE</span> goodId <span class="type">int</span>(<span class="number">11</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义游标，并将sql结果集赋值给游标</span></span><br><span class="line"><span class="keyword">DECLARE</span> apply_id1 <span class="keyword">CURSOR</span> <span class="keyword">FOR</span> <span class="keyword">SELECT</span> id, apply_content <span class="keyword">FROM</span> tw_apply <span class="keyword">WHERE</span> apply_content <span class="keyword">LIKE</span> &quot;本部%&quot;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 声明当游标遍历完后将标志变量置成1</span></span><br><span class="line"><span class="keyword">DECLARE</span> CONTINUE HANDLER <span class="keyword">FOR</span> <span class="keyword">NOT</span> FOUND <span class="keyword">SET</span> s<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 打开游标</span></span><br><span class="line"><span class="keyword">OPEN</span> apply_id1;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 将游标中的值赋值给变量，注意：变量名不要和返回列名同名，变量顺序要和sql结果顺序一致</span></span><br><span class="line"><span class="keyword">FETCH</span> apply_id1 <span class="keyword">into</span> m, n;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 当s != 1,一直循环</span></span><br><span class="line">while s<span class="operator">&lt;&gt;</span><span class="number">1</span> do</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">SET</span> _index <span class="operator">=</span> LOCATE(<span class="string">&#x27;;&#x27;</span>, n);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">-- 通过;分割单个物品的申请信息：北院—帐篷物品1个;北院—椅子物品1个;北院—桌子物品1个;</span></span><br><span class="line">	while _index <span class="operator">&gt;</span> <span class="number">0</span>  do</span><br><span class="line">		</span><br><span class="line">		<span class="comment">-- 拿到单个物品申请信息：本部——桌子物品1个</span></span><br><span class="line">		<span class="keyword">SET</span> str <span class="operator">=</span> <span class="keyword">LEFT</span>(n, _index<span class="number">-1</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">SET</span> strLength <span class="operator">=</span> LENGTH(str) <span class="operator">/</span> <span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">		<span class="comment">-- 拿到物品名称</span></span><br><span class="line">		<span class="keyword">SET</span> goodName <span class="operator">=</span> <span class="keyword">LEFT</span>(str, strLength);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">-- 拿到物品个数(类型转换为整数)</span></span><br><span class="line">		<span class="keyword">SET</span> goodCount <span class="operator">=</span> <span class="built_in">CAST</span>(<span class="keyword">LEFT</span>(<span class="keyword">RIGHT</span>(str, <span class="number">2</span>), <span class="number">1</span>) <span class="keyword">AS</span> signed) ;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">SELECT</span> goodName;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">-- 按物品名称查到物品id并存储到goodId中</span></span><br><span class="line">		<span class="comment">-- 这里如果查询不存在或为空会跳出游标循环，值得注意</span></span><br><span class="line">		<span class="keyword">SELECT</span> goods_id <span class="keyword">into</span> goodId <span class="keyword">FROM</span> tw_goods <span class="keyword">WHERE</span> goods_show <span class="keyword">LIKE</span> goodName <span class="keyword">ORDER</span> <span class="keyword">BY</span> goods_count <span class="keyword">DESC</span> LIMIT <span class="number">1</span>;</span><br><span class="line">			</span><br><span class="line">		<span class="comment">-- 插入数据</span></span><br><span class="line">		<span class="keyword">INSERT</span> tw_applydetail(apply_id, good_id, count) <span class="keyword">VALUES</span> (m, goodId, goodCount);</span><br><span class="line">			</span><br><span class="line">		<span class="comment">-- 移动到下个分界点</span></span><br><span class="line">		<span class="keyword">SET</span> n <span class="operator">=</span> SUBSTR(n <span class="keyword">FROM</span> _index<span class="operator">+</span><span class="number">1</span>);</span><br><span class="line">		<span class="keyword">SET</span> _index <span class="operator">=</span> LOCATE(<span class="string">&#x27;;&#x27;</span>, n);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">end</span> while;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">-- 执行业务逻辑</span></span><br><span class="line">	<span class="keyword">set</span> i <span class="operator">=</span> i<span class="operator">+</span><span class="number">1</span>;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 读取下一条数据，读取完成置变量s=1</span></span><br><span class="line"><span class="keyword">FETCH</span> apply_id1 <span class="keyword">into</span> m, n;</span><br><span class="line"><span class="keyword">end</span> while;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 关闭游标</span></span><br><span class="line"><span class="keyword">close</span> apply_id1;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
+
+<p>当时经过一天的对存储过程的学习，我总结出了以下经验：存储过程非常不方便调试，而且报错信息只定位不报错误类型（sql是这样的）。如果能重来，对数据库的批量操作，首选Python或Shell</p>
+<h5 id="4-优化结果"><a href="#4-优化结果" class="headerlink" title="4.优化结果"></a>4.优化结果</h5><ul>
+<li>截至目前物资申请表已有4817条数据，考虑到后面数据会长期积累，这样的优化是有必要的</li>
+<li>去掉后端耗时耗内存的字符串解析工作</li>
+<li>节省数据库存储空间，优化前申请表内存占0.79MB，优化后占0.56MB</li>
+</ul>
+<p>另外附加一个容量查询小工具，可查询数据库各表容量大小</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select</span><br><span class="line">table_schema as &#39;数据库&#39;,</span><br><span class="line">table_name as &#39;表名&#39;,</span><br><span class="line">table_rows as &#39;记录数&#39;,</span><br><span class="line">truncate(data_length&#x2F;1024&#x2F;1024, 2) as &#39;数据容量(MB)&#39;,</span><br><span class="line">truncate(index_length&#x2F;1024&#x2F;1024, 2) as &#39;索引容量(MB)&#39;</span><br><span class="line">from information_schema.tables</span><br><span class="line">where table_schema&#x3D;&#39;bgs&#39;</span><br><span class="line">order by data_length desc, index_length desc;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="索引优化查询"><a href="#索引优化查询" class="headerlink" title="索引优化查询"></a>索引优化查询</h4><h5 id="1-相关表结构"><a href="#1-相关表结构" class="headerlink" title="1.相关表结构"></a>1.相关表结构</h5><p>日志记录表：共33687条数据</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203031910440.png" alt="image-20220303191047146"></p>
+<h5 id="2-优化思路：添加索引"><a href="#2-优化思路：添加索引" class="headerlink" title="2.优化思路：添加索引"></a>2.优化思路：添加索引</h5><p>关于索引的知识点这里不细说，推荐阅读：<a href="https://javaguide.cn/database/mysql/mysql-index/">MySQL 索引详解</a></p>
+<p>由于日志表数据庞大，有3万条数据，为了达到快速通过用户名模糊查找到日志操作内容和操作时间，就需要用到索引，另外在模糊查询中，<strong>like语句要使索引生效，like后不能以%开始，也就是说 （like %字段名%） 、（like %字段名）这类语句会使索引失效，而（like 字段名）、（like 字段名%）这类语句索引是可以正常使用</strong></p>
+<p>所以我将查询的模糊匹配由“%xxxx%”改为“xxxx%”，只模糊匹配前面部分</p>
+<h5 id="3-优化操作"><a href="#3-优化操作" class="headerlink" title="3.优化操作"></a>3.优化操作</h5><p>这里直接使用Navicat可视化添加索引，因为后台查询日志是需要用用户名模糊查找到日志操作内容和操作时间，所以需要添加的索引为log_realnam</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203031939750.png" alt="image-20220303193939350"></p>
+<p>更改mybatis的sql映射，解决sql注入和索引失效问题</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT log_realname, log_content, log_time FROM tw_log WHERE log_realname LIKE &quot;%$&#123;log_name&#125;%&quot;;  </span><br></pre></td></tr></table></figure>
+
+
+
+<p>在这种情况下使用#程序会报错，新手程序员就把#号改成了$,这样如果java代码层面没有对用户输入的内容做处理势必会产生SQL注入漏洞。</p>
+<p>正确写法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT log_realname, log_content, log_time FROM tw_log WHERE log_realname LIKE concat(‘%’,#&#123;log_name&#125;, ‘%’)   </span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="4-优化结果-1"><a href="#4-优化结果-1" class="headerlink" title="4.优化结果"></a>4.优化结果</h5><ul>
+<li>添加索引前使用用户名模糊查询日志，耗时大约0.045s，添加索引后耗时大约0.032s，减少了磁盘IO，提高了查询速度</li>
+<li>修改mybatis中模糊查询的sql语句，解决索引失效的问题，并解决了模糊查询中拼接字符串的sql注入问题</li>
+</ul>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://bynss.com/linux/476637.html">怎样在 Debian 11 / Debian 10 上安装 MySQL 8.0 / 5.7</a></p>
+<p><a href="https://stackoverflow.com/questions/20259036/mysql-package-mysql-server-has-no-installation-candidate">install.packages - MySQL: Package ‘mysql-server’ has no installation candidate - Stack Overflow</a></p>
+<p><a href="https://javaguide.cn/database/mysql/a-thousand-lines-of-mysql-study-notes/">一千行 MySQL 学习笔记</a></p>
+<p><a href="https://javaguide.cn/database/mysql/transaction-isolation-level/">事务隔离级别(图文详解)</a></p>
+<p><a href="https://juejin.cn/post/6844903688553627661">你的like语句为啥没索引？</a></p>
+<p><a href="https://juejin.cn/post/6911101492497743879#heading-3">MySQL是如何优化模糊匹配like的SQL</a></p>
+<p><a href="https://www.cnblogs.com/hoojo/archive/2011/07/15/2107740.html">Transact-SQL 编程</a></p>
+<p><a href="https://segmentfault.com/a/1190000039248897">针对新手的MYSQL存储过程详解</a></p>
+]]></content>
+      <categories>
+        <category>开发原理</category>
+      </categories>
+      <tags>
+        <tag>开发原理</tag>
+        <tag>数据库</tag>
+        <tag>Mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java|Java多线程案例</title>
     <url>/2022/02/04/Java/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A1%88%E4%BE%8B/</url>
     <content><![CDATA[<img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022103663.jpeg" alt="Multithreading | threading-memes, multithreading-memes | ProgrammerHumor.io" style="zoom:80%;">
@@ -11693,197 +11884,6 @@
         <tag>入门教程</tag>
         <tag>汇编语言</tag>
         <tag>底层原理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>开发原理|MySQL最佳实践</title>
-    <url>/2021/02/25/DevPrinciple/MySQL%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</url>
-    <content><![CDATA[<img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203041310207.png" alt="image-20220304131032975" style="zoom: 33%;">
-
-<p>MySQL  ❎</p>
-<p>OurSQL ✅</p>
-<span id="more"></span>
-
-<h3 id="Debain安装MySQL"><a href="#Debain安装MySQL" class="headerlink" title="Debain安装MySQL"></a>Debain安装MySQL</h3><h4 id="添加-MySQL-存储库"><a href="#添加-MySQL-存储库" class="headerlink" title="添加 MySQL 存储库"></a>添加 MySQL 存储库</h4><p>MySQL 服务器包可通过其官方存储库获得。 因此，我们现在将下载并安装 MySQL 存储库安装包</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://dev.mysql.com/get/mysql-apt-config_0.8.18-1_all.deb</span><br></pre></td></tr></table></figure>
-
-<p>使用 <code>dpkg</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo dpkg -i mysql-apt-config_0.8.18-1_all.deb</span><br></pre></td></tr></table></figure>
-
-<p>进入mysql安装页面选择ok即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203021941621.png" alt="image-20220302194144873"></p>
-<h4 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h4><p>等待存储库配置完成，然后使用 apt 命令更新存储库索引</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
-
-
-
-<p>安装mysql服务器</p>
-<p>使用apt-get install mysql-server安装时，如果出现报错Package ‘mysql-server’ has no installation candidate，可以使用下面的命令进行安装</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt-get install mariadb-server</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h4><p>理论上这时候的mysql服务已经安装完成了，我们可以通过命令service –status-all 查看到服务列表中有mariadb</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203021949399.png" alt="image-20220302194955961"></p>
-<p>但是使用mysql命令时，会出现以下报错，这是因为mariadb服务还未启动</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203021952567.png" alt="image-20220302195236210"></p>
-<p>使用以下命令启动即可</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">service mariadb start</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203021955103.png" alt="image-20220302195514826"></p>
-<h3 id="命令行准备数据库"><a href="#命令行准备数据库" class="headerlink" title="命令行准备数据库"></a>命令行准备数据库</h3><h4 id="root账号进入数据库"><a href="#root账号进入数据库" class="headerlink" title="root账号进入数据库"></a>root账号进入数据库</h4><p>mysql命令进入mysql服务</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql</span><br></pre></td></tr></table></figure>
-
-
-
-<p>修改root账号密码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022003140.png" alt="image-20220302200352926"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">set password for root@localhost &#x3D; password(&quot;123456&quot;)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>退出mysql服务，并使用root账号登录</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022006437.png" alt></p>
-<h4 id="新用户与新数据库"><a href="#新用户与新数据库" class="headerlink" title="新用户与新数据库"></a>新用户与新数据库</h4><p>创建新数据库</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create database testdb;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>查看已有数据库</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022010700.png" alt="image-20220302201054361"></p>
-<p>创建新用户</p>
-<p>@localhost设置只允许用户本地登录，并设置其密码为123456</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create user aut@localhost identifide by &#39;123456&#39;;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022015408.png" alt="image-20220302201501975"></p>
-<p>查看用户列表</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select user for mysql.user</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022018844.png" alt="image-20220302201847575"></p>
-<p>分配新数据库给新用户</p>
-<p>注意这里是指将testdb库的所有表（testdb.*）的所有权限（all）给aut本地使用（localhost）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grant all on testdb.* to aut@localhost;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022027073.png" alt="image-20220302202739833"></p>
-<p>查看用户权限</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">show grants for aut@localhost;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022031370.png" alt="image-20220302203155016"></p>
-<h4 id="测试数据准备"><a href="#测试数据准备" class="headerlink" title="测试数据准备"></a>测试数据准备</h4><p>使用新用户aut连接mysql</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mysql -u aut -p</span><br></pre></td></tr></table></figure>
-
-
-
-<p>切换数据库到新数据库</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use testdb;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>创建一个只含一个字段的数据表</p>
-<p>test表只含有一个整型不为空的字段money</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">create table test (money int not null)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>添加一条数据到表中</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">insert test(money) values(5000) </span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="MySQL事务隔离实验"><a href="#MySQL事务隔离实验" class="headerlink" title="MySQL事务隔离实验"></a>MySQL事务隔离实验</h3><p>新开一个终端使用连接上新数据库testdb（可以aut，也可以自己新建一个用户）</p>
-<h4 id="读未提交级别"><a href="#读未提交级别" class="headerlink" title="读未提交级别"></a>读未提交级别</h4><p>出现脏读问题</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022050355.jpeg" alt="img"></p>
-<h4 id="读已提交级别"><a href="#读已提交级别" class="headerlink" title="读已提交级别"></a>读已提交级别</h4><p>避免脏读，但是不可重复读</p>
-<h5 id="1-避免脏读测试"><a href="#1-避免脏读测试" class="headerlink" title="1.避免脏读测试"></a>1.避免脏读测试</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022051306.jpeg" alt="img"></p>
-<h5 id="2-不可重复读测试"><a href="#2-不可重复读测试" class="headerlink" title="2.不可重复读测试"></a>2.不可重复读测试</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022051474.jpeg" alt="img"></p>
-<h4 id="可重复读级别"><a href="#可重复读级别" class="headerlink" title="可重复读级别"></a>可重复读级别</h4><p>可以重复读，并且可以防止幻读</p>
-<h5 id="1-可重复读测试"><a href="#1-可重复读测试" class="headerlink" title="1.可重复读测试"></a>1.可重复读测试</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022052001.jpeg" alt="img"></p>
-<h5 id="2-防止幻读测试"><a href="#2-防止幻读测试" class="headerlink" title="2.防止幻读测试"></a>2.防止幻读测试</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203022052706.jpeg" alt="img"></p>
-<h3 id="MySQL优化实验"><a href="#MySQL优化实验" class="headerlink" title="MySQL优化实验"></a>MySQL优化实验</h3><p>上面的实验全程在Linux环境中，在日常开发中我们可以使用数据库可视化工具如Navicat或IDEA自带的数据库工具，下面我主要使用Navicat进行操作</p>
-<p>此章节的优化实例来自一次对学校校团委物资管理系统的维护，鉴于此项目糟心的数据库设计，给我留下了深刻的印象，难以想象的是这样的项目竟然从16年运行至今</p>
-<h4 id="T-SQL脚本分表优化"><a href="#T-SQL脚本分表优化" class="headerlink" title="T-SQL脚本分表优化"></a>T-SQL脚本分表优化</h4><h5 id="1-相关表的结构"><a href="#1-相关表的结构" class="headerlink" title="1.相关表的结构"></a>1.相关表的结构</h5><p>此处展示的表结构为维护前</p>
-<p>物资申请表：共4817条数据</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203031543098.png" alt="image-20220303154338625"></p>
-<p>物资信息表：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203031545235.png" alt="image-20220303154513022"></p>
-<p>goods_count：当前仓库物品数（物理的）</p>
-<p>good_leftCount：当前物品可借数（网络的：存在部分未借出，但已被预订仍在审核中的物品）</p>
-<h5 id="2-优化思路：物资申请表分表"><a href="#2-优化思路：物资申请表分表" class="headerlink" title="2.优化思路：物资申请表分表"></a>2.优化思路：物资申请表分表</h5><p>从上面的tw_apply表就可以知道：</p>
-<ul>
-<li><p>在用户提出申请后，物资申请信息被后端拼成了一个字符串存储在apply_content（同时利用了前端的数据执行了物品可借数的预扣除，所以这部分没有用到物资申请信息字符串的解析）</p>
-</li>
-<li><p>通过审核后，物品正式借出，这时候只留有物资申请信息的字符串存储在数据库，所以需要后端对该字符串解析提取出申请物资与其借用数量，再去操作数据库</p>
-</li>
-</ul>
-<p>还好后端大哥没有把物资申请信息的字符串直接发给前端，我真的哭死，设计数据库的那个出来挨打（前端不需要解析，但是要拼接展示字符串）</p>
-<p>数据库设计十分不合理，甚至不符合第一范式，<strong>浪费数据库大量存储空间</strong>不说，而且后端拼接字符串解析字符串这一过程<strong>十分耗时且占用内存</strong>，而且最新的需求是需要增加一个审核过程申请物资调整功能</p>
-<p>所以我将物资申请表进行分表（水平分表），分出物资申请详情表并联系物资信息表，其结构如下</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203031646110.png" alt="image-20220303164602406"></p>
-<p>删除掉apply_content字段，节省数据库空间</p>
-<p>分表后，通过tw_applydetail表，我们对物资申请信息的所以内容进行操作，省去了物资审核接口对字符串解析的耗时过程并且方便审核过程申请物资调整功能的开发（通过tw_appdetail找到物品信息和物品数量）</p>
-<h5 id="3-优化操作：存储过程脚本"><a href="#3-优化操作：存储过程脚本" class="headerlink" title="3.优化操作：存储过程脚本"></a>3.优化操作：存储过程脚本</h5><p>存储过程（Stored Procedure）是一种在数据库中存储复杂程序，以便外部程序调用的一种数据库对象</p>
-<p>这里值得注意的是在遍历游标的循环中，如果查询不存在或为空会跳出循环</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> DEFINER<span class="operator">=</span>`Autovy`@`localhost` <span class="keyword">PROCEDURE</span> `demo`()</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">		</span><br><span class="line"> <span class="comment">-- 定义变量</span></span><br><span class="line"><span class="keyword">DECLARE</span> i <span class="type">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">DECLARE</span> s <span class="type">int</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">DECLARE</span> n TINYTEXT;</span><br><span class="line"><span class="keyword">DECLARE</span> m <span class="type">INT</span>(<span class="number">11</span>);</span><br><span class="line"> # 求分割符号<span class="string">&#x27;,&#x27;</span>的位置</span><br><span class="line"><span class="keyword">DECLARE</span> _index <span class="type">INT</span>;</span><br><span class="line"></span><br><span class="line"># 单个物品申请信息</span><br><span class="line"><span class="keyword">DECLARE</span> str TINYTEXT;</span><br><span class="line"></span><br><span class="line"># 单个物品申请信息长度</span><br><span class="line"><span class="keyword">DECLARE</span> strLength <span class="type">int</span>;</span><br><span class="line"></span><br><span class="line"># 物品名称</span><br><span class="line"><span class="keyword">DECLARE</span> goodName <span class="type">VARCHAR</span>(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"># 物品数量</span><br><span class="line"><span class="keyword">DECLARE</span> goodCount <span class="type">int</span>(<span class="number">11</span>);</span><br><span class="line"></span><br><span class="line"># 物品id</span><br><span class="line"><span class="keyword">DECLARE</span> goodId <span class="type">int</span>(<span class="number">11</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义游标，并将sql结果集赋值给游标</span></span><br><span class="line"><span class="keyword">DECLARE</span> apply_id1 <span class="keyword">CURSOR</span> <span class="keyword">FOR</span> <span class="keyword">SELECT</span> id, apply_content <span class="keyword">FROM</span> tw_apply <span class="keyword">WHERE</span> apply_content <span class="keyword">LIKE</span> &quot;本部%&quot;;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 声明当游标遍历完后将标志变量置成1</span></span><br><span class="line"><span class="keyword">DECLARE</span> CONTINUE HANDLER <span class="keyword">FOR</span> <span class="keyword">NOT</span> FOUND <span class="keyword">SET</span> s<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 打开游标</span></span><br><span class="line"><span class="keyword">OPEN</span> apply_id1;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 将游标中的值赋值给变量，注意：变量名不要和返回列名同名，变量顺序要和sql结果顺序一致</span></span><br><span class="line"><span class="keyword">FETCH</span> apply_id1 <span class="keyword">into</span> m, n;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 当s != 1,一直循环</span></span><br><span class="line">while s<span class="operator">&lt;&gt;</span><span class="number">1</span> do</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">SET</span> _index <span class="operator">=</span> LOCATE(<span class="string">&#x27;;&#x27;</span>, n);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">-- 通过;分割单个物品的申请信息：北院—帐篷物品1个;北院—椅子物品1个;北院—桌子物品1个;</span></span><br><span class="line">	while _index <span class="operator">&gt;</span> <span class="number">0</span>  do</span><br><span class="line">		</span><br><span class="line">		<span class="comment">-- 拿到单个物品申请信息：本部——桌子物品1个</span></span><br><span class="line">		<span class="keyword">SET</span> str <span class="operator">=</span> <span class="keyword">LEFT</span>(n, _index<span class="number">-1</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">SET</span> strLength <span class="operator">=</span> LENGTH(str) <span class="operator">/</span> <span class="number">5</span>;</span><br><span class="line">	</span><br><span class="line">		<span class="comment">-- 拿到物品名称</span></span><br><span class="line">		<span class="keyword">SET</span> goodName <span class="operator">=</span> <span class="keyword">LEFT</span>(str, strLength);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">-- 拿到物品个数(类型转换为整数)</span></span><br><span class="line">		<span class="keyword">SET</span> goodCount <span class="operator">=</span> <span class="built_in">CAST</span>(<span class="keyword">LEFT</span>(<span class="keyword">RIGHT</span>(str, <span class="number">2</span>), <span class="number">1</span>) <span class="keyword">AS</span> signed) ;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">SELECT</span> goodName;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">-- 按物品名称查到物品id并存储到goodId中</span></span><br><span class="line">		<span class="comment">-- 这里如果查询不存在或为空会跳出游标循环，值得注意</span></span><br><span class="line">		<span class="keyword">SELECT</span> goods_id <span class="keyword">into</span> goodId <span class="keyword">FROM</span> tw_goods <span class="keyword">WHERE</span> goods_show <span class="keyword">LIKE</span> goodName <span class="keyword">ORDER</span> <span class="keyword">BY</span> goods_count <span class="keyword">DESC</span> LIMIT <span class="number">1</span>;</span><br><span class="line">			</span><br><span class="line">		<span class="comment">-- 插入数据</span></span><br><span class="line">		<span class="keyword">INSERT</span> tw_applydetail(apply_id, good_id, count) <span class="keyword">VALUES</span> (m, goodId, goodCount);</span><br><span class="line">			</span><br><span class="line">		<span class="comment">-- 移动到下个分界点</span></span><br><span class="line">		<span class="keyword">SET</span> n <span class="operator">=</span> SUBSTR(n <span class="keyword">FROM</span> _index<span class="operator">+</span><span class="number">1</span>);</span><br><span class="line">		<span class="keyword">SET</span> _index <span class="operator">=</span> LOCATE(<span class="string">&#x27;;&#x27;</span>, n);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">end</span> while;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">-- 执行业务逻辑</span></span><br><span class="line">	<span class="keyword">set</span> i <span class="operator">=</span> i<span class="operator">+</span><span class="number">1</span>;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 读取下一条数据，读取完成置变量s=1</span></span><br><span class="line"><span class="keyword">FETCH</span> apply_id1 <span class="keyword">into</span> m, n;</span><br><span class="line"><span class="keyword">end</span> while;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 关闭游标</span></span><br><span class="line"><span class="keyword">close</span> apply_id1;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span></span><br></pre></td></tr></table></figure>
-
-<p>当时经过一天的对存储过程的学习，我总结出了以下经验：存储过程非常不方便调试，而且报错信息只定位不报错误类型（sql是这样的）。如果能重来，对数据库的批量操作，首选Python或Shell</p>
-<h5 id="4-优化结果"><a href="#4-优化结果" class="headerlink" title="4.优化结果"></a>4.优化结果</h5><ul>
-<li>截至目前物资申请表已有4817条数据，考虑到后面数据会长期积累，这样的优化是有必要的</li>
-<li>去掉后端耗时耗内存的字符串解析工作</li>
-<li>节省数据库存储空间，优化前申请表内存占0.79MB，优化后占0.56MB</li>
-</ul>
-<p>另外附加一个容量查询小工具，可查询数据库各表容量大小</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select</span><br><span class="line">table_schema as &#39;数据库&#39;,</span><br><span class="line">table_name as &#39;表名&#39;,</span><br><span class="line">table_rows as &#39;记录数&#39;,</span><br><span class="line">truncate(data_length&#x2F;1024&#x2F;1024, 2) as &#39;数据容量(MB)&#39;,</span><br><span class="line">truncate(index_length&#x2F;1024&#x2F;1024, 2) as &#39;索引容量(MB)&#39;</span><br><span class="line">from information_schema.tables</span><br><span class="line">where table_schema&#x3D;&#39;bgs&#39;</span><br><span class="line">order by data_length desc, index_length desc;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h4 id="索引优化查询"><a href="#索引优化查询" class="headerlink" title="索引优化查询"></a>索引优化查询</h4><h5 id="1-相关表结构"><a href="#1-相关表结构" class="headerlink" title="1.相关表结构"></a>1.相关表结构</h5><p>日志记录表：共33687条数据</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203031910440.png" alt="image-20220303191047146"></p>
-<h5 id="2-优化思路：添加索引"><a href="#2-优化思路：添加索引" class="headerlink" title="2.优化思路：添加索引"></a>2.优化思路：添加索引</h5><p>关于索引的知识点这里不细说，推荐阅读：<a href="https://javaguide.cn/database/mysql/mysql-index/">MySQL 索引详解</a></p>
-<p>由于日志表数据庞大，有3万条数据，为了达到快速通过用户名模糊查找到日志操作内容和操作时间，就需要用到索引，另外在模糊查询中，<strong>like语句要使索引生效，like后不能以%开始，也就是说 （like %字段名%） 、（like %字段名）这类语句会使索引失效，而（like 字段名）、（like 字段名%）这类语句索引是可以正常使用</strong></p>
-<p>所以我将查询的模糊匹配由“%xxxx%”改为“xxxx%”，只模糊匹配前面部分</p>
-<h5 id="3-优化操作"><a href="#3-优化操作" class="headerlink" title="3.优化操作"></a>3.优化操作</h5><p>这里直接使用Navicat可视化添加索引，因为后台查询日志是需要用用户名模糊查找到日志操作内容和操作时间，所以需要添加的索引为log_realnam</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202203031939750.png" alt="image-20220303193939350"></p>
-<p>更改mybatis的sql映射，解决sql注入和索引失效问题</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT log_realname, log_content, log_time FROM tw_log WHERE log_realname LIKE &quot;%$&#123;log_name&#125;%&quot;;  </span><br></pre></td></tr></table></figure>
-
-
-
-<p>在这种情况下使用#程序会报错，新手程序员就把#号改成了$,这样如果java代码层面没有对用户输入的内容做处理势必会产生SQL注入漏洞。</p>
-<p>正确写法：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT log_realname, log_content, log_time FROM tw_log WHERE log_realname LIKE concat(‘%’,#&#123;log_name&#125;, ‘%’)   </span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="4-优化结果-1"><a href="#4-优化结果-1" class="headerlink" title="4.优化结果"></a>4.优化结果</h5><ul>
-<li>添加索引前使用用户名模糊查询日志，耗时大约0.045s，添加索引后耗时大约0.032s，减少了磁盘IO，提高了查询速度</li>
-<li>修改mybatis中模糊查询的sql语句，解决索引失效的问题，并解决了模糊查询中拼接字符串的sql注入问题</li>
-</ul>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://bynss.com/linux/476637.html">怎样在 Debian 11 / Debian 10 上安装 MySQL 8.0 / 5.7</a></p>
-<p><a href="https://stackoverflow.com/questions/20259036/mysql-package-mysql-server-has-no-installation-candidate">install.packages - MySQL: Package ‘mysql-server’ has no installation candidate - Stack Overflow</a></p>
-<p><a href="https://javaguide.cn/database/mysql/a-thousand-lines-of-mysql-study-notes/">一千行 MySQL 学习笔记</a></p>
-<p><a href="https://javaguide.cn/database/mysql/transaction-isolation-level/">事务隔离级别(图文详解)</a></p>
-<p><a href="https://juejin.cn/post/6844903688553627661">你的like语句为啥没索引？</a></p>
-<p><a href="https://juejin.cn/post/6911101492497743879#heading-3">MySQL是如何优化模糊匹配like的SQL</a></p>
-<p><a href="https://www.cnblogs.com/hoojo/archive/2011/07/15/2107740.html">Transact-SQL 编程</a></p>
-<p><a href="https://segmentfault.com/a/1190000039248897">针对新手的MYSQL存储过程详解</a></p>
-]]></content>
-      <categories>
-        <category>开发原理</category>
-      </categories>
-      <tags>
-        <tag>开发原理</tag>
-        <tag>数据库</tag>
-        <tag>Mysql</tag>
       </tags>
   </entry>
   <entry>
