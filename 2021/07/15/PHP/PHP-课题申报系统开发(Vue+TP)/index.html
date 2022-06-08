@@ -29,15 +29,15 @@
 <meta property="og:site_name" content="Autovy&#39;s blog">
 <meta property="og:description" content="支持国产😇">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042317087.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041953941.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042256334.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042256152.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042258221.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042306119.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042309767.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042317087.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109041953941.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042256334.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042256152.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042258221.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042306119.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042309767.png">
 <meta property="article:published_time" content="2021-07-15T06:30:00.000Z">
-<meta property="article:modified_time" content="2021-09-04T15:21:24.613Z">
+<meta property="article:modified_time" content="2022-06-08T09:06:06.714Z">
 <meta property="article:author" content="Autovy">
 <meta property="article:tag" content="开发实战">
 <meta property="article:tag" content="框架学习">
@@ -46,7 +46,7 @@
 <meta property="article:tag" content="thinkphp">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042317087.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042317087.png">
 
 <link rel="canonical" href="https://autovy.github.io/2021/07/15/PHP/PHP-%E8%AF%BE%E9%A2%98%E7%94%B3%E6%8A%A5%E7%B3%BB%E7%BB%9F%E5%BC%80%E5%8F%91(Vue+TP)/">
 
@@ -286,7 +286,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042317087.png" alt="image-20210904231657416" style="zoom:150%;">
+        <img src="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042317087.png" alt="image-20210904231657416" style="zoom:150%;">
 
 <p>支持国产😇</p>
 <span id="more"></span>
@@ -325,7 +325,7 @@
 
 
 <h5 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h5><p>启动项目的命令需要看package.json文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109041953941.png" alt="image-20210904195358015"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109041953941.png" alt="image-20210904195358015"></p>
 <p>所以要用<code>npm run dev</code>启动项目</p>
 <h4 id="2-登录页面解析"><a href="#2-登录页面解析" class="headerlink" title="2.登录页面解析"></a>2.登录页面解析</h4><h5 id="ref访问子组件实例与元素"><a href="#ref访问子组件实例与元素" class="headerlink" title="ref访问子组件实例与元素"></a>ref访问子组件实例与元素</h5><p>vue的ref有类似于html的id的功能，可以用来给js访问子组件实例或元素</p>
 <p><strong>html</strong></p>
@@ -407,7 +407,7 @@
 
 
 <p>在phpstudy的网站设置中添加伪静态设置以对应.htaccess文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042256334.png" alt="image-20210904225150721"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042256334.png" alt="image-20210904225150721"></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">IfModule</span> <span class="attr">mod_rewrite.c</span>&gt;</span></span><br><span class="line">RewriteEngine On</span><br><span class="line">RewriteBase /</span><br><span class="line">RewriteRule ^index\.php$ - [L]</span><br><span class="line">RewriteCond %&#123;REQUEST_FILENAME&#125; !-f</span><br><span class="line">RewriteCond %&#123;REQUEST_FILENAME&#125; !-d</span><br><span class="line">RewriteRule . /index.php [L]</span><br><span class="line"><span class="tag">&lt;/<span class="name">IfModule</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
@@ -419,7 +419,7 @@
 
 
 <p>修改配置文件</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042256152.png" alt="image-20210904225437200"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042256152.png" alt="image-20210904225437200"></p>
 <p>在 location中增加if语句最终为</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span> / &#123;</span><br><span class="line">           <span class="attribute">index</span> index.php index.html;</span><br><span class="line">           <span class="attribute">if</span> (!-e $request_filename) &#123;</span><br><span class="line">              <span class="attribute">rewrite</span> <span class="regexp"> ^(.*)$</span>  /index.php?s=/<span class="variable">$1</span>  <span class="literal">last</span>;</span><br><span class="line">              break;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">400</span> /error/<span class="number">400</span>.html;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">403</span> /error/<span class="number">403</span>.html;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">404</span> /error/<span class="number">404</span>.html;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">500</span> /error/<span class="number">500</span>.html;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">501</span> /error/<span class="number">501</span>.html;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">502</span> /error/<span class="number">502</span>.html;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">503</span> /error/<span class="number">503</span>.html;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">504</span> /error/<span class="number">504</span>.html;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">505</span> /error/<span class="number">505</span>.html;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">506</span> /error/<span class="number">506</span>.html;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">507</span> /error/<span class="number">507</span>.html;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">509</span> /error/<span class="number">509</span>.html;</span><br><span class="line">           <span class="attribute">error_page</span> <span class="number">510</span> /error/<span class="number">510</span>.html;</span><br><span class="line">           <span class="attribute">include</span> D:/phpstudy_pro/WWW/ktsb/public/nginx.htaccess;</span><br><span class="line">           <span class="attribute">autoindex</span>  <span class="literal">off</span>;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
 
@@ -427,7 +427,7 @@
 
 
 
-<h4 id="2-数据库导入"><a href="#2-数据库导入" class="headerlink" title="2.数据库导入"></a>2.数据库导入</h4><h5 id="navicat执行sql文件错误"><a href="#navicat执行sql文件错误" class="headerlink" title="navicat执行sql文件错误"></a>navicat执行sql文件错误</h5><p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042258221.png" alt="image-20210904225833897"></p>
+<h4 id="2-数据库导入"><a href="#2-数据库导入" class="headerlink" title="2.数据库导入"></a>2.数据库导入</h4><h5 id="navicat执行sql文件错误"><a href="#navicat执行sql文件错误" class="headerlink" title="navicat执行sql文件错误"></a>navicat执行sql文件错误</h5><p><img src="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042258221.png" alt="image-20210904225833897"></p>
 <p>可以关闭以上两个选项查看执行错误</p>
 <h5 id="数据库严格模式与非严格模式"><a href="#数据库严格模式与非严格模式" class="headerlink" title="数据库严格模式与非严格模式"></a>数据库严格模式与非严格模式</h5><p>严格模式下</p>
 <ul>
@@ -440,7 +440,7 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;sql_mode&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>显示出模式的项</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042306119.png" alt="image-20210904230558730"></p>
+<p><img src="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042306119.png" alt="image-20210904230558730"></p>
 <p>所以需要移除<code>NO_ZERO_IN_DATE,NO_ZERO_DATE</code>，最终变为</p>
 <p><code>STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</code></p>
 <p>可以在root权限下运行命令</p>
@@ -449,7 +449,7 @@
 
 
 <p>也可以在phpstudy环境下修改为非严格模式</p>
-<p>​        <img src="https://cdn.jsdelivr.net/gh/Autovy/Image/img/202109042309767.png" alt="image-20210716155625246"></p>
+<p>​        <img src="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109042309767.png" alt="image-20210716155625246"></p>
 
     </div>
 
