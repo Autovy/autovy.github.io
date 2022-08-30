@@ -27,17 +27,17 @@
 <meta property="og:url" content="https://autovy.github.io/2021/03/28/PHP/PHP-thinkphp5/index.html">
 <meta property="og:site_name" content="Autovy&#39;s blog">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109041014601.jpeg">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109041015470.png">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109041015869.png">
+<meta property="og:image" content="https://raw.staticdn.net/Autovy/Image/master/img/202109041014601.jpeg">
+<meta property="og:image" content="https://raw.staticdn.net/Autovy/Image/master/img/202109041015470.png">
+<meta property="og:image" content="https://raw.staticdn.net/Autovy/Image/master/img/202109041015869.png">
 <meta property="article:published_time" content="2021-03-28T06:30:00.000Z">
-<meta property="article:modified_time" content="2022-06-08T09:06:19.852Z">
+<meta property="article:modified_time" content="2022-08-30T08:07:45.199Z">
 <meta property="article:author" content="Autovy">
 <meta property="article:tag" content="框架学习">
 <meta property="article:tag" content="后端">
 <meta property="article:tag" content="thinkphp">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109041014601.jpeg">
+<meta name="twitter:image" content="https://raw.staticdn.net/Autovy/Image/master/img/202109041014601.jpeg">
 
 <link rel="canonical" href="https://autovy.github.io/2021/03/28/PHP/PHP-thinkphp5/">
 
@@ -277,7 +277,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109041014601.jpeg" alt="img"></p>
+        <p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202109041014601.jpeg" alt="img"></p>
 <span id="more"></span>
 
 <h2 id="URL解析模式"><a href="#URL解析模式" class="headerlink" title="URL解析模式"></a>URL解析模式</h2><h3 id="1-URL解析"><a href="#1-URL解析" class="headerlink" title="1.URL解析"></a>1.URL解析</h3><p>（1）分析</p>
@@ -305,7 +305,7 @@
 <p>（3）关于环境</p>
 <p>修改apache配置文件，开启伪静态，即可将index.php省略</p>
 <h2 id="模块设计"><a href="#模块设计" class="headerlink" title="模块设计"></a>模块设计</h2><h3 id="1-目录结构"><a href="#1-目录结构" class="headerlink" title="1.目录结构"></a>1.目录结构</h3><p>tp5默认为多模块结构</p>
-<p><img src="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109041015470.png" alt="image-20210330203720332"></p>
+<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202109041015470.png" alt="image-20210330203720332"></p>
 <ul>
 <li><p>模块下的类库文件命名空间统一为：app\模块名：<code>namespace app\test\controller\Index</code>;</p>
 </li>
@@ -327,7 +327,7 @@
 
 <p>空模块只有在多模块开启，没有绑定模块情况下生效</p>
 <h3 id="3-环境变量"><a href="#3-环境变量" class="headerlink" title="3.环境变量"></a>3.环境变量</h3><p>tp5提供了一个类库Env来获取环境变量，如：<code>return env(&#39;app_path&#39;)</code></p>
-<p><img src="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202109041015869.png" alt="image-20210330210525103"></p>
+<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202109041015869.png" alt="image-20210330210525103"></p>
 <h2 id="控制器定义"><a href="#控制器定义" class="headerlink" title="控制器定义"></a>控制器定义</h2><h3 id="1-控制器要点"><a href="#1-控制器要点" class="headerlink" title="1.控制器要点"></a>1.控制器要点</h3><ul>
 <li>可以继承控制器基类，方便使用功能，但不是必要的</li>
 <li>如果控制器名有两个大写字母，如：class HelloWorld用<code>public/hello_world</code>这样的方式访问</li>
