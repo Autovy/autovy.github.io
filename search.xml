@@ -3223,7 +3223,14 @@
 
 <h4 id="四-缓存一致问题解决"><a href="#四-缓存一致问题解决" class="headerlink" title="四.缓存一致问题解决"></a>四.缓存一致问题解决</h4><p>基本：<a href="https://blog.csdn.net/bocai_xiaodaidai/article/details/124010396">缓存一致性问题解决基本方案</a></p>
 <p>进阶：<a href="https://mp.weixin.qq.com/s?__biz=MzIyOTYxNDI5OA==&mid=2247487312&idx=1&sn=fa19566f5729d6598155b5c676eee62d&chksm=e8beb8e5dfc931f3e35655da9da0b61c79f2843101c130cf38996446975014f958a6481aacf1&scene=178&cur_album_id=1699766580538032128#rd">缓存一致性问题解决进阶方案</a></p>
-<h3 id="微服务解析"><a href="#微服务解析" class="headerlink" title="微服务解析"></a>微服务解析</h3><h3 id="高并发高可用解析"><a href="#高并发高可用解析" class="headerlink" title="高并发高可用解析"></a>高并发高可用解析</h3><h3 id="系统设计与性能测试解析"><a href="#系统设计与性能测试解析" class="headerlink" title="系统设计与性能测试解析"></a>系统设计与性能测试解析</h3>]]></content>
+<h3 id="分布式微服务解析"><a href="#分布式微服务解析" class="headerlink" title="分布式微服务解析"></a>分布式微服务解析</h3><p>参考资料：</p>
+<p><a href="https://interview.javaguide.cn/#/./docs/g-4rpc">RPC与Dubbo</a></p>
+<p><a href="https://posts.careerengine.us/p/6239366b61a53a0ab80e3c5c">SpringCloud Alibaba 及其组件</a></p>
+<p><a href="https://interview.javaguide.cn/#/./docs/h-2消息队列">消息队列</a></p>
+<h3 id="高并发高可用解析"><a href="#高并发高可用解析" class="headerlink" title="高并发高可用解析"></a>高并发高可用解析</h3><p><a href="https://interview.javaguide.cn/#/./docs/i-0高可用系统设计指南">高可用系统设计指南</a></p>
+<p><a href="https://interview.javaguide.cn/#/./docs/i-2限流">限流相关算法</a></p>
+<h3 id="系统设计与性能测试解析"><a href="#系统设计与性能测试解析" class="headerlink" title="系统设计与性能测试解析"></a>系统设计与性能测试解析</h3><p><a href="https://www.yuque.com/books/share/04ac99ea-7726-4adb-8e57-bf21e2cc7183/unri6r">系统设计</a></p>
+]]></content>
       <categories>
         <category>Java</category>
       </categories>
