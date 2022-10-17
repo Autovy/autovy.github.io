@@ -14026,6 +14026,129 @@
       </tags>
   </entry>
   <entry>
+    <title>硬件开发项目实践</title>
+    <url>/2020/07/06/Hardware/%E7%A1%AC%E4%BB%B6%E5%AD%A6%E4%B9%A0-%E9%A1%B9%E7%9B%AE%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/test1.png" alt="test1"></p>
+<span id="more"></span>
+
+<p><a href="https://maiimg.com/dec/d94682769492@pdf">嵌入式面试宝典</a></p>
+<h3 id="施工工地智能安全帽设计"><a href="#施工工地智能安全帽设计" class="headerlink" title="施工工地智能安全帽设计"></a>施工工地智能安全帽设计</h3><h4 id="整体设计思路"><a href="#整体设计思路" class="headerlink" title="整体设计思路"></a>整体设计思路</h4><p>智能安全帽将安全性提升到了更高层次，借助人工智能和物联网技术，智能安全帽考虑到了工地上的各种情况，实现检测了相应的检测，获取的数据也可分析数据工人的各种情况，所得结果使对工地的各种设施的改善具有针对性。</p>
+<p>安全帽最主要的一个创新点就是它将能将所收集到的信息全都传输到客户端，使所有数据能够直观地呈现出来，对于制定更好的工地制度和管理工人有更加科学的参考作用。相比起传统安全帽，我们能提取到更多的信息，从而获得更大的工作效益。</p>
+<p> <img src="https://raw.staticdn.net/Autovy/Image/master/img/test1.png" alt="test1"></p>
+<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202210171142777.png" alt="image-20221017114248506"></p>
+<hr>
+<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202210171143807.png" alt="image-20221017114329781"></p>
+<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202210171143477.png" alt="image-20221017114347288"></p>
+<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202210171143477.png" alt></p>
+<h4 id="登记考勤"><a href="#登记考勤" class="headerlink" title="登记考勤"></a>登记考勤</h4><h5 id="1-功能概述"><a href="#1-功能概述" class="headerlink" title="1.功能概述"></a>1.功能概述</h5><p>当工人穿戴进入到与工地宝特定距离，工地宝与安全帽进行信息交流，利用非接触式IC卡技术，例如<strong>“Mifare”</strong>，基于<strong>ISO14443A&amp;B通信协议</strong>，由电磁波进行数据交换，安全帽向工地宝提交请求，工地宝将收集到的信息通过WiFi模块,<strong>“UART-WiFi透传模块”</strong>发送到数据中心，完成对工人的考勤。然后数据中心返回请求，通过安全帽的语音播报功能提示工人已经考勤完成。</p>
+<h5 id="2-相关元器件"><a href="#2-相关元器件" class="headerlink" title="2.相关元器件"></a>2.相关元器件</h5><p><a href="https://doc.embedfire.com/module/module_tutorial/zh/latest/Module_Manual/spi_class/rc522.html?highlight=mfrc522">RC55读写卡（非接触考勤）</a></p>
+<p><a href="https://doc.embedfire.com/module/module_tutorial/zh/latest/Module_Manual/port_class/esp8266.html">ESP8266模块（WIFI通信）</a></p>
+<h5 id="3-非接触式考勤实现"><a href="#3-非接触式考勤实现" class="headerlink" title="3.非接触式考勤实现"></a>3.非接触式考勤实现</h5><p><a href="http://news.eeworld.com.cn/mcu/ic538372.html">STM32 Mifare考勤</a></p>
+<h5 id="4-WIFI通信实现"><a href="#4-WIFI通信实现" class="headerlink" title="4.WIFI通信实现"></a>4.WIFI通信实现</h5><p><a href="https://blog.csdn.net/qq_35281599/article/details/80218856?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-80218856-blog-125433408.pc_relevant_multi_platform_whitelistv4&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-80218856-blog-125433408.pc_relevant_multi_platform_whitelistv4&utm_relevant_index=2">单片机间 WIFI通信</a></p>
+<h4 id="区域定位"><a href="#区域定位" class="headerlink" title="区域定位"></a>区域定位</h4><h5 id="1-功能概述-1"><a href="#1-功能概述-1" class="headerlink" title="1.功能概述"></a>1.功能概述</h5><p>其次，利用<strong>UWB技术</strong>实现人员位置定位功能，当工人穿戴安全帽在工作区域时，安全帽将坐标信息提交给数据中心，数据中心通过相关形成工人的时间/工作轨迹。在工人进入数据中心定义的危险坐标时，数据中心使安全帽通过语音播报模块发出警报。由此可以保证在事故时能准确地知道员工的位置方便救援，也有助于工人的管理。通过有效分析工人经常停留的区域，关联施工工序做出更加准确的工效分析</p>
+<h5 id="2-相关元器件-1"><a href="#2-相关元器件-1" class="headerlink" title="2.相关元器件"></a>2.相关元器件</h5><p><a href="https://www.ebyte.com/new-view-info.aspx?id=623">SX1280收发模块 （TOF测距）</a></p>
+<p><a href="https://wiki.dfrobot.com.cn/_SKU_SEN0140_10_DOF_Sensor传感器#target_1">DOF Sensor传感器（惯性导航）</a></p>
+<h5 id="3-TOF测距实现"><a href="#3-TOF测距实现" class="headerlink" title="3.TOF测距实现"></a>3.TOF测距实现</h5><p><a href="https://blog.csdn.net/yegeli/article/details/119734813?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-4-119734813-blog-125104327.pc_relevant_layerdownloadsortv1&spm=1001.2101.3001.4242.3&utm_relevant_index=7">ToF技术全解读</a></p>
+<p><a href="https://www.sohu.com/a/510240531_120070959">TOF 测距误差解决</a></p>
+<p><a href="https://blog.csdn.net/Learning1232/article/details/125104327">STM32 TOF实现</a></p>
+<h5 id="4-UWP定位实现"><a href="#4-UWP定位实现" class="headerlink" title="4.UWP定位实现"></a>4.UWP定位实现</h5><p><a href="https://www.infoq.cn/article/udrffdotywru23kbil3o">UWB定位技术原理</a></p>
+<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/image-20221017093753576.png" alt="image-20221017093753576"></p>
+<h5 id="5-惯性导航实现"><a href="#5-惯性导航实现" class="headerlink" title="5.惯性导航实现"></a>5.惯性导航实现</h5><p><a href="https://maiimg.com/dec/d92966763172@pdf">UWB_INS联合室内定位方法研究</a></p>
+<h4 id="环境检测"><a href="#环境检测" class="headerlink" title="环境检测"></a>环境检测</h4><h5 id="1-功能概述-2"><a href="#1-功能概述-2" class="headerlink" title="1.功能概述"></a>1.功能概述</h5><p>利用<strong>MQ-7传感器</strong>对空气中的一氧化碳含量进行检查，利用<strong>ME4-NH3传感器</strong>对空气中的氨气含量进行检测等等。可有效分析工人的工作环境。当检测到危险气体超标时，安全帽利用内置的<strong>“UART-WiFi透传模块”</strong>向“工地宝”提交信息，最终将数据呈现给数据中心，数据中心再通过安全帽的语音播模块警示工人</p>
+<h4 id="后台中心"><a href="#后台中心" class="headerlink" title="后台中心"></a>后台中心</h4><h5 id="1-功能概述-3"><a href="#1-功能概述-3" class="headerlink" title="1.功能概述"></a>1.功能概述</h5><p>后台控制中心对各个过程提交的数据进行汇总，并利用后台软件进行数据分析，例如对考勤信息进行处理，可以活动安全帽对应工人的综合素质信息、对作业人员的轨迹分析，可以得知工人是否严格按照计划作业，可在施工过程中提高作业效率等等。安全帽还有对工人身体状况的检查功能。实现智能语音播报功能。当施工人员进入施工现场，通过考勤点设置的“工地宝”，主动感应安全帽芯片发出的信号，区分队伍和个人，进行预警信息播报；若是安全帽通过以上数据检测到工人周遭环境较为危险时也会发出预警信号来警示工人，预警信息预置可通过使用手机端自助录入。并且设置应急按钮，预防安全帽检测不到的危险情况，影响到工人的人身安全，安全帽检测到的相关信息也会在PC端看到，在PC端我们还能实时观察到每个工人的位置，身体情况和周遭环境，在方便管理的同时也降低了发生事故的可能性</p>
+<h3 id="数字PID闭环电机调速系统"><a href="#数字PID闭环电机调速系统" class="headerlink" title="数字PID闭环电机调速系统"></a>数字PID闭环电机调速系统</h3><h4 id="整体设计思路-1"><a href="#整体设计思路-1" class="headerlink" title="整体设计思路"></a>整体设计思路</h4><p>设计制作数字PID闭环电机调速系统，要求达到以下技术指标：</p>
+<p>1）编写程序实现数字PID控制； </p>
+<p>2）能够跟踪显示电机实际运行速度，实现PID参数显示和修改；</p>
+<p>3）PID控制超调量小于40%，调节时间尽量短，具备一定的抗干扰性。</p>
+<h4 id="PID算法与PWM调速"><a href="#PID算法与PWM调速" class="headerlink" title="PID算法与PWM调速"></a>PID算法与PWM调速</h4><h5 id="1-相关元器件"><a href="#1-相关元器件" class="headerlink" title="1.相关元器件"></a>1.相关元器件</h5><p><a href="https://blog.csdn.net/m0_37763336/article/details/100343098">L298N（电机驱动）</a></p>
+<p>直流电机</p>
+<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202210171539008.png" alt="image-20221017153930568"></p>
+<h5 id="2-PID解析"><a href="#2-PID解析" class="headerlink" title="2.PID解析"></a>2.PID解析</h5><p>当电机转速的设定值突然改变,或电机的转速发生突变时,会引起偏差的阶跃,使error增大,PID的输出out将急剧增加或减小,以至于超过控制量的上下限,电机的转速SPEEDR虽然不断上升,但由于控制量受到限制,其增长的速度减慢,偏差error将比正常情况下持续更长的时间保持在较大的偏差值,该程序主要是把设定的转速现当前测量得到的转速来计算偏差，从而用PWM输出方式来确定输出脉冲的宽度，流程图如下：</p>
+<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202210171534830.gif" alt="微信图片_20220621223507"></p>
+<h5 id="3-PID实现"><a href="#3-PID实现" class="headerlink" title="3.PID实现"></a>3.PID实现</h5><p><a href="https://mbb.eet-china.com/forum/topic/72706_1_1.html">51单片机PID算法程序：算法详解及控制算法实例</a></p>
+<p><a href="https://www.sohu.com/a/332761659_465219">51单片机PID算法程序：算法详解及控制算法实例（有图）</a></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">PID_Controller</span><span class="params">(<span class="keyword">int</span> Target, <span class="keyword">int</span> Feedback)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">float</span> out;</span><br><span class="line">	<span class="comment">// 计算误差值</span></span><br><span class="line">	Error = Target - Feedback;</span><br><span class="line">	<span class="comment">// 覆盖误差积分</span></span><br><span class="line">	Integral_Error = Integral_Error + Error;</span><br><span class="line">	<span class="comment">// 计算微分误差</span></span><br><span class="line">	Differential_Error = Error - Error_last;</span><br><span class="line">	<span class="comment">// 记录误差值</span></span><br><span class="line">	Error_last = Error;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 计算PID控制数值</span></span><br><span class="line">	Proportion_OUT = KP * Error;</span><br><span class="line">	Integral_OUT = KI * Integral_Error;</span><br><span class="line">	Differential_OUT = KD * Differential_Error;</span><br><span class="line">	</span><br><span class="line">	out = Proportion_OUT + Integral_OUT + Differential_OUT;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(out&lt;=<span class="number">1</span>) out = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (out&gt;=CYCLE) PID_OUT = CYCLE;</span><br><span class="line">	</span><br><span class="line">	PID_OUT = (<span class="keyword">int</span>)out;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> PID_OUT;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="4-PWM调速"><a href="#4-PWM调速" class="headerlink" title="4.PWM调速"></a>4.PWM调速</h5><ul>
+<li><p>PWM意为脉冲宽度调制，可用于调整输出直流平均电压，对于矩形波而言，输出平均压等于峰值电压×占空比，占空比是一个脉冲周期内高电平时间与周期的比值，例如，峰值电压等于5V，占空比等于50%的方波信号平均电压等于2.5V</p>
+</li>
+<li><p>电机循环转动</p>
+<p>这里要注意循环一定是要放在main函数中的（否则如果是放在中断中，会卡死主流程），这里使用的方法是，中断触发电机开关，而main函数不断检测这个开关从而达到电机的循环转动</p>
+</li>
+<li><p>代码</p>
+<p>这里使用定时器 + 计数的方法来实现占空比（如果用延时方法，会造成阻塞）</p>
+</li>
+</ul>
+<h4 id="光电测速"><a href="#光电测速" class="headerlink" title="光电测速"></a>光电测速</h4><h5 id="1-相关元器件-1"><a href="#1-相关元器件-1" class="headerlink" title="1.相关元器件"></a>1.相关元器件</h5><p>MOC20T4 光电开关</p>
+<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202210171544523.png" alt="image-20221017154412399"></p>
+<h5 id="2-测速实现"><a href="#2-测速实现" class="headerlink" title="2.测速实现"></a>2.测速实现</h5><p>飞轮上有两个缺口凹槽，所以两次脉冲触发的时间里飞轮刚好转过半圈，这时可以通过周期来计算转速</p>
+<p><a href="https://jz.docin.com/p-683063591.html">基于C51单片机直流电机测速仪设计</a></p>
+<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202210171547339.png" alt="image-20221017154717264"></p>
+<h4 id="上下位机串口通讯"><a href="#上下位机串口通讯" class="headerlink" title="上下位机串口通讯"></a>上下位机串口通讯</h4><h5 id="1-下位机串口操作"><a href="#1-下位机串口操作" class="headerlink" title="1.下位机串口操作"></a>1.下位机串口操作</h5><p><a href="https://blog.csdn.net/weixin_42108484/article/details/81122119">C51/C52单片机的串口原理及参考代码_</a></p>
+<p><strong>串口初始化</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UART_Init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	PCON &amp;= <span class="number">0x7F</span>;		<span class="comment">//波特率不倍速</span></span><br><span class="line">	SCON = <span class="number">0x50</span>;		<span class="comment">//8位数据,可变波特率</span></span><br><span class="line">	TMOD &amp;= <span class="number">0x0F</span>;		<span class="comment">//清除定时器1模式位</span></span><br><span class="line">	TMOD |= <span class="number">0x20</span>;		<span class="comment">//设定定时器1为8位自动重装方式</span></span><br><span class="line">	TL1 = <span class="number">0xFA</span>;		<span class="comment">//设定定时初值</span></span><br><span class="line">	TH1 = <span class="number">0xFA</span>;		<span class="comment">//设定定时器重装值</span></span><br><span class="line">	ET1 = <span class="number">0</span>;		<span class="comment">//允许定时器1中断</span></span><br><span class="line">	TR1 = <span class="number">1</span>;		<span class="comment">//启动定时器1</span></span><br><span class="line">	EA=<span class="number">1</span>;</span><br><span class="line">	ES=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>串口通讯接收</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*------------------------------------------------</span></span><br><span class="line"><span class="comment">                 串口通讯子程序</span></span><br><span class="line"><span class="comment">------------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UART_Routine</span><span class="params">()</span> interrupt 4</span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(RI==<span class="number">1</span>)					<span class="comment">//如果接收标志位为1，接收到了数据</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">switch</span>(SBUF)</span><br><span class="line">		&#123;	</span><br><span class="line">         <span class="comment">// 此处添加接收到的16进制数跳转程序       </span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-上位机串口操作"><a href="#2-上位机串口操作" class="headerlink" title="2.上位机串口操作"></a>2.上位机串口操作</h5><p><a href="https://blog.csdn.net/niu2212035673/article/details/76598940">Qt的QString字符串操作</a></p>
+<p><a href="https://taotaodiy-qt.readthedocs.io/en/latest/project/serialPort.html#">Qt 串口助手开发笔记</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/181695725">C++正则表达式的使用</a></p>
+<p><strong>串口搜索</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Widget::on_serialSearchButton_clicked</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个串口对象</span></span><br><span class="line">    serialPort = <span class="keyword">new</span> QSerialPort(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 搜索所有可用串口</span></span><br><span class="line">    ui-&gt;serialBox-&gt;clear();</span><br><span class="line">    foreach(<span class="keyword">const</span> QSerialPortInfo &amp;info, QSerialPortInfo::availablePorts())&#123;</span><br><span class="line">        ui-&gt;serialBox-&gt;addItem(info.portName());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>串口连接</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 串口设置 */</span></span><br><span class="line"><span class="comment">// 端口设置</span></span><br><span class="line">serialPort-&gt;setPortName(ui-&gt;serialBox-&gt;currentText());</span><br><span class="line"><span class="comment">// 波特率设置</span></span><br><span class="line">serialPort-&gt;setBaudRate(ui-&gt;baudrateBox-&gt;currentText().toInt());</span><br><span class="line"><span class="comment">// 默认数据位为8</span></span><br><span class="line">serialPort-&gt;setDataBits(QSerialPort::Data8);</span><br><span class="line"><span class="comment">// 默认停止位为one</span></span><br><span class="line">serialPort-&gt;setStopBits(QSerialPort::OneStop);</span><br><span class="line"><span class="comment">// 默认无校验位</span></span><br><span class="line">serialPort-&gt;setParity(QSerialPort::NoParity);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 串口开启</span></span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span> == serialPort-&gt;open(QIODevice::ReadWrite))&#123;</span><br><span class="line">    serialSwitch = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 连接串口并让serialPort_Read()异步读取串口数据</span></span><br><span class="line">    connect(serialPort, SIGNAL(readyRead()), <span class="keyword">this</span>, SLOT(serialPort_Read()));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    QMessageBox::critical(<span class="keyword">this</span>, <span class="string">&quot;提示&quot;</span>, <span class="string">&quot;串口打开失败&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>读取串口数据</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Widget::serialPort_Read</span><span class="params">()</span></span>&#123;</span><br><span class="line">         QString data = serialPort-&gt;readAll();</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span>(data.isEmpty())&#123;</span><br><span class="line">             <span class="keyword">return</span>;</span><br><span class="line">         &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>串口发送16进制指令</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">serialPort-&gt;write(QByteArray::fromHex(<span class="string">&quot;0&quot;</span>));</span><br><span class="line">serialPort-&gt;write(QByteArray::fromHex(<span class="string">&quot;1&quot;</span>));</span><br><span class="line">serialPort-&gt;write(QByteArray::fromHex(<span class="string">&quot;2&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-上位机曲线绘制"><a href="#3-上位机曲线绘制" class="headerlink" title="3.上位机曲线绘制"></a>3.上位机曲线绘制</h5><p><a href="https://zhuangzuoyi.github.io/using-Qt-Charts/">Qt Charts使用指南</a></p>
+<p><a href="https://github.com/yzhengBTT/QtDynamicCurveGraphDemo">动态曲线案例</a></p>
+<p><strong>Charts画布设置</strong></p>
+<p>Qt Creator的UI设计中并没有Charts相关的组件，这里主要通过提升graphicsView组件来添加Charts画布</p>
+<p><img src="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202206181109138.png" alt="image-20220618110940947"></p>
+<p><strong>添加点到曲线</strong></p>
+<p>为了实现动态曲线，下面提供了scroll扩展X轴和重设X轴范围两种方案</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">series-&gt;append(QPointF(numX, speed));</span><br><span class="line"><span class="comment">// X轴范围增加式</span></span><br><span class="line"><span class="keyword">if</span>(numX &gt; <span class="number">500</span>)&#123;</span><br><span class="line">    axisX-&gt;setRange(<span class="number">0</span>, numX + <span class="number">5</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// X轴拓展滚动式</span></span><br><span class="line"> qreal x = chart-&gt;plotArea().width() / <span class="number">100</span>;</span><br><span class="line"> <span class="keyword">if</span>(numX &gt; <span class="number">500</span>)&#123;</span><br><span class="line">   chart-&gt;scroll(x,<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>图表初始化</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">    <span class="comment">// 坐标轴实例化</span></span><br><span class="line">    axisX = <span class="keyword">new</span> QValueAxis();</span><br><span class="line">    axisY = <span class="keyword">new</span> QValueAxis();</span><br><span class="line">    <span class="comment">// 划分个数</span></span><br><span class="line">    axisX-&gt;setTickCount(<span class="number">11</span>);</span><br><span class="line">    axisY-&gt;setTickCount(<span class="number">31</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设定坐标轴范围</span></span><br><span class="line">    axisX-&gt;setRange(<span class="number">0</span>,<span class="number">500</span>);</span><br><span class="line">    axisY-&gt;setRange(<span class="number">0</span>,<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 坐标轴描述</span></span><br><span class="line">    axisX-&gt;setTitleText(<span class="string">&quot;采集次数&quot;</span>);</span><br><span class="line">    axisY-&gt;setTitleText(<span class="string">&quot;转速&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建曲线绘制对象</span></span><br><span class="line">    series = <span class="keyword">new</span> QSplineSeries();</span><br><span class="line">    <span class="comment">// 设置数据点可见</span></span><br><span class="line"><span class="comment">//    series-&gt;setPointsVisible(true);</span></span><br><span class="line">    <span class="comment">// 图例名称</span></span><br><span class="line">    series-&gt;setName(<span class="string">&quot;speed&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 实例化图表</span></span><br><span class="line">    chart = <span class="keyword">new</span> QChart();</span><br><span class="line">    chart-&gt;setTitle(<span class="string">&quot;转速波形图&quot;</span>);</span><br><span class="line">    <span class="comment">// 坐标轴添加到图表指定位置</span></span><br><span class="line">    chart-&gt;addAxis(axisX, Qt::AlignBottom);</span><br><span class="line">    chart-&gt;addAxis(axisY, Qt::AlignLeft);</span><br><span class="line">    <span class="comment">// 曲线对象添加到图表上</span></span><br><span class="line">    chart-&gt;addSeries(series);</span><br><span class="line">    <span class="comment">// 动画使曲线绘制显示更加平滑</span></span><br><span class="line">    chart-&gt;setAnimationOptions(QChart::SeriesAnimations);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 曲线关联XY轴</span></span><br><span class="line">    series-&gt;attachAxis(axisX);</span><br><span class="line">    series-&gt;attachAxis(axisY);</span><br><span class="line"></span><br><span class="line">    ui-&gt;dataChart-&gt;setChart(chart);</span><br><span class="line">    <span class="comment">// 设置抗锯齿，让曲线更顺滑</span></span><br><span class="line">    ui-&gt;dataChart-&gt;setRenderHint(QPainter::Antialiasing);</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>硬件开发</category>
+      </categories>
+      <tags>
+        <tag>底层原理</tag>
+        <tag>硬件开发</tag>
+        <tag>项目实践</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C语言|最简管理系统</title>
     <url>/2020/06/15/CLanguage/C%E8%AF%AD%E8%A8%80-%E6%9C%80%E7%AE%80%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<p>C语言结课作业：编写一个小型工资管理系统，用来管理职工的个人基本信息及工资薪酬等数据。在技术要求方面仅仅是要求了使用结构体数据类型，但基于我们的学习进度，考察的应该是用数组来储存。</p>
