@@ -27,17 +27,17 @@
 <meta property="og:url" content="https://autovy.github.io/2022/01/20/Java/Java-Socket%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="Autovy&#39;s blog">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.staticdn.net/Autovy/Image/master/img/202202252305878.png">
-<meta property="og:image" content="https://raw.staticdn.net/Autovy/Image/master/img/202202251212126.png">
-<meta property="og:image" content="https://raw.staticdn.net/Autovy/Image/master/img/202202251257783.png">
+<meta property="og:image" content="https://raw.githubusercontents.com/Autovy/Image/master/img/202202252305878.png">
+<meta property="og:image" content="https://raw.githubusercontents.com/Autovy/Image/master/img/202202251212126.png">
+<meta property="og:image" content="https://raw.githubusercontents.com/Autovy/Image/master/img/202202251257783.png">
 <meta property="article:published_time" content="2022-01-20T15:45:00.000Z">
-<meta property="article:modified_time" content="2022-08-30T08:07:45.172Z">
+<meta property="article:modified_time" content="2022-10-19T12:02:12.612Z">
 <meta property="article:author" content="Autovy">
 <meta property="article:tag" content="开发实战">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.staticdn.net/Autovy/Image/master/img/202202252305878.png">
+<meta name="twitter:image" content="https://raw.githubusercontents.com/Autovy/Image/master/img/202202252305878.png">
 
 <link rel="canonical" href="https://autovy.github.io/2022/01/20/Java/Java-Socket%E7%BC%96%E7%A8%8B%E6%8C%87%E5%8D%97/">
 
@@ -277,12 +277,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202202252305878.png" alt="That is a good excuse"></p>
+        <p><img src="https://raw.githubusercontents.com/Autovy/Image/master/img/202202252305878.png" alt="That is a good excuse"></p>
 <span id="more"></span>
 
 <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Socket编程是指编写在多台计算机上执行的程序，其中的设备都使用网络相互连接</p>
 <p>Socket常用的通信协议有UDP和TCP，本文主要介绍通过TCP/IP网络协议进行Socket编程</p>
-<h3 id="Socket通信流程"><a href="#Socket通信流程" class="headerlink" title="Socket通信流程"></a>Socket通信流程</h3><p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202202251212126.png" alt="img"></p>
+<h3 id="Socket通信流程"><a href="#Socket通信流程" class="headerlink" title="Socket通信流程"></a>Socket通信流程</h3><p><img src="https://raw.githubusercontents.com/Autovy/Image/master/img/202202251212126.png" alt="img"></p>
 <ul>
 <li>服务端和客户端初始化 <code>socket</code>，得到文件描述符；</li>
 <li>服务端调用 <code>bind</code>，将绑定在 IP 地址和端口;</li>
@@ -316,7 +316,7 @@
 
 
 <p>若启动服务端时出现以下报错，是出现了端口占用，可以修改端口也可以关闭占用端口的进程</p>
-<p><img src="https://raw.staticdn.net/Autovy/Image/master/img/202202251257783.png" alt="image-20220225125717019"></p>
+<p><img src="https://raw.githubusercontents.com/Autovy/Image/master/img/202202251257783.png" alt="image-20220225125717019"></p>
 <p>Windows下使用命令行关闭占用端口的进程</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 参看端口号含6666的条目</span><br><span class="line">netstat -ano|findstr &quot;6666&quot;</span><br><span class="line"></span><br><span class="line">// 根据pid查询对应的应用程序</span><br><span class="line">tasklist|findstr &quot;1828&quot;</span><br><span class="line"></span><br><span class="line">// 杀死进程</span><br><span class="line">taskkill /f /pid 1828</span><br></pre></td></tr></table></figure>
 
