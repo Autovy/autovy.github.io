@@ -35,13 +35,14 @@
 <meta property="og:image" content="https://raw.githubusercontents.com/Autovy/Image/master/img/202210171143477.png">
 <meta property="og:image" content="https://raw.githubusercontents.com/Autovy/Image/master/img/202210171143477.png">
 <meta property="og:image" content="https://raw.githubusercontents.com/Autovy/Image/master/img/image-20221017093753576.png">
+<meta property="og:image" content="https://raw.githubusercontents.com/Autovy/ImageExpand/master//img/202210232023066.png">
 <meta property="og:image" content="https://raw.githubusercontents.com/Autovy/Image/master/img/202210171539008.png">
 <meta property="og:image" content="https://raw.githubusercontents.com/Autovy/Image/master/img/202210171534830.gif">
 <meta property="og:image" content="https://raw.githubusercontents.com/Autovy/Image/master/img/202210171544523.png">
 <meta property="og:image" content="https://raw.githubusercontents.com/Autovy/Image/master/img/202210171547339.png">
 <meta property="og:image" content="https://fastly.jsdelivr.net/gh/Autovy/Image/img/202206181109138.png">
 <meta property="article:published_time" content="2020-07-06T06:30:00.000Z">
-<meta property="article:modified_time" content="2022-10-23T11:15:10.656Z">
+<meta property="article:modified_time" content="2022-10-23T12:27:39.959Z">
 <meta property="article:author" content="Autovy">
 <meta property="article:tag" content="底层原理">
 <meta property="article:tag" content="硬件开发">
@@ -335,6 +336,7 @@
 <h5 id="4-UWP定位实现"><a href="#4-UWP定位实现" class="headerlink" title="4.UWP定位实现"></a>4.UWP定位实现</h5><p><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/udrffdotywru23kbil3o">UWB定位技术原理</a></p>
 <p><img src="https://raw.githubusercontents.com/Autovy/Image/master/img/image-20221017093753576.png" alt="image-20221017093753576"></p>
 <h5 id="5-惯性导航实现"><a href="#5-惯性导航实现" class="headerlink" title="5.惯性导航实现"></a>5.惯性导航实现</h5><p><a target="_blank" rel="noopener" href="https://maiimg.com/dec/d92966763172@pdf">UWB_INS联合室内定位方法研究</a></p>
+<p><img src="https://raw.githubusercontents.com/Autovy/ImageExpand/master//img/202210232023066.png" alt="image-20221023202347586"></p>
 <h4 id="环境检测"><a href="#环境检测" class="headerlink" title="环境检测"></a>环境检测</h4><h5 id="1-功能概述-2"><a href="#1-功能概述-2" class="headerlink" title="1.功能概述"></a>1.功能概述</h5><p>利用<strong>MQ-7传感器</strong>对空气中的一氧化碳含量进行检查，利用<strong>ME4-NH3传感器</strong>对空气中的氨气含量进行检测等等。可有效分析工人的工作环境。当检测到危险气体超标时，安全帽利用内置的<strong>“UART-WiFi透传模块”</strong>向“工地宝”提交信息，最终将数据呈现给数据中心，数据中心再通过安全帽的语音播模块警示工人</p>
 <h4 id="后台中心"><a href="#后台中心" class="headerlink" title="后台中心"></a>后台中心</h4><h5 id="1-功能概述-3"><a href="#1-功能概述-3" class="headerlink" title="1.功能概述"></a>1.功能概述</h5><p>后台控制中心对各个过程提交的数据进行汇总，并利用后台软件进行数据分析，例如对考勤信息进行处理，可以活动安全帽对应工人的综合素质信息、对作业人员的轨迹分析，可以得知工人是否严格按照计划作业，可在施工过程中提高作业效率等等。安全帽还有对工人身体状况的检查功能。实现智能语音播报功能。当施工人员进入施工现场，通过考勤点设置的“工地宝”，主动感应安全帽芯片发出的信号，区分队伍和个人，进行预警信息播报；若是安全帽通过以上数据检测到工人周遭环境较为危险时也会发出预警信号来警示工人，预警信息预置可通过使用手机端自助录入。并且设置应急按钮，预防安全帽检测不到的危险情况，影响到工人的人身安全，安全帽检测到的相关信息也会在PC端看到，在PC端我们还能实时观察到每个工人的位置，身体情况和周遭环境，在方便管理的同时也降低了发生事故的可能性</p>
 <h3 id="数字PID闭环电机调速系统"><a href="#数字PID闭环电机调速系统" class="headerlink" title="数字PID闭环电机调速系统"></a>数字PID闭环电机调速系统</h3><h4 id="整体设计思路-1"><a href="#整体设计思路-1" class="headerlink" title="整体设计思路"></a>整体设计思路</h4><p>设计制作数字PID闭环电机调速系统，要求达到以下技术指标：</p>
