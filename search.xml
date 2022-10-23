@@ -14032,13 +14032,13 @@
 <span id="more"></span>
 
 <p><a href="https://maiimg.com/dec/d94682769492@pdf">嵌入式面试宝典</a></p>
-<p><a href="https://maiimg.com/dec/a97490272594@pdf">STM32库函数开发</a></p>
-<p><a href="https://doc.embedfire.com/mcu/stm32/f103mini/std/zh/latest/index.html#">STM32库开发实战指南</a></p>
 <h3 id="单片机总结"><a href="#单片机总结" class="headerlink" title="单片机总结"></a>单片机总结</h3><h4 id="单片机结构与系统"><a href="#单片机结构与系统" class="headerlink" title="单片机结构与系统"></a>单片机结构与系统</h4><h5 id="1-单片机分类"><a href="#1-单片机分类" class="headerlink" title="1.单片机分类"></a>1.单片机分类</h5><p><img src="https://pic2.zhimg.com/80/v2-76ba188475e7c8d60504ed0f621dcb18_1440w.webp?source=1940ef5c" alt="单片机家族"></p>
 <h5 id="2-单片机系统"><a href="#2-单片机系统" class="headerlink" title="2.单片机系统"></a>2.单片机系统</h5><p><a href="https://www.ziliaoku.com/res/info_7d86cf020138458eae0cd742bc462fd5.html">单片机基础知识</a></p>
 <p><a href="https://www.cnblogs.com/shuwen666/p/16122825.html">C51单片机中断系统</a></p>
 <p><a href="https://www.cnblogs.com/Poppings/p/14556300.html">C51定时器计数器</a></p>
 <p><a href="https://www.cnblogs.com/chulin/p/12306368.html">C51单片机时钟系统</a></p>
+<p><a href="https://maiimg.com/dec/a97490272594@pdf">STM32库函数开发</a></p>
+<p><a href="https://doc.embedfire.com/mcu/stm32/f103mini/std/zh/latest/index.html#">STM32库开发实战指南</a></p>
 <h5 id="3-单片机体系与结构"><a href="#3-单片机体系与结构" class="headerlink" title="3.单片机体系与结构"></a>3.单片机体系与结构</h5><p><a href="https://juejin.cn/post/6956114974473191437">ARM体系与结构</a></p>
 <h4 id="常用外设模块与原理"><a href="#常用外设模块与原理" class="headerlink" title="常用外设模块与原理"></a>常用外设模块与原理</h4><p><a href="https://doc.embedfire.com/module/module_tutorial/zh/latest/index.html">STM32模块例程介绍</a></p>
 <h5 id="1-项目涉及模块"><a href="#1-项目涉及模块" class="headerlink" title="1.项目涉及模块"></a>1.项目涉及模块</h5><p><a href="https://doc.embedfire.com/module/module_tutorial/zh/latest/Module_Manual/spi_class/rc522.html?highlight=mfrc522">RC55读写卡（非接触考勤）</a></p>
