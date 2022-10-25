@@ -14040,6 +14040,10 @@
 <p><a href="https://maiimg.com/dec/a97490272594@pdf">STM32库函数开发</a></p>
 <p><a href="https://doc.embedfire.com/mcu/stm32/f103mini/std/zh/latest/index.html#">STM32库开发实战指南</a></p>
 <h5 id="3-单片机体系与结构"><a href="#3-单片机体系与结构" class="headerlink" title="3.单片机体系与结构"></a>3.单片机体系与结构</h5><p><a href="https://juejin.cn/post/6956114974473191437">ARM体系与结构</a></p>
+<h4 id="常用通信协议介绍"><a href="#常用通信协议介绍" class="headerlink" title="常用通信协议介绍"></a>常用通信协议介绍</h4><p><a href="https://www.jianshu.com/p/2432c1e27440">硬件通信协议简介</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/452881964">硬件常用通信协议详解</a></p>
+<h4 id="C-C-基础"><a href="#C-C-基础" class="headerlink" title="C/C++基础"></a>C/C++基础</h4><p><a href="https://juejin.cn/post/6951391020768559111">单片机C/C++常见面试题</a></p>
+<h4 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h4><p><a href="https://maiimg.com/dec/d94682769492@pdf#%5B%7B%22num%22%3A212%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2Cnull%2C265.99628%2Cnull%5D">数据结构与算法</a></p>
 <h4 id="常用外设模块与原理"><a href="#常用外设模块与原理" class="headerlink" title="常用外设模块与原理"></a>常用外设模块与原理</h4><p><a href="https://doc.embedfire.com/module/module_tutorial/zh/latest/index.html">STM32模块例程介绍</a></p>
 <h5 id="1-项目涉及模块"><a href="#1-项目涉及模块" class="headerlink" title="1.项目涉及模块"></a>1.项目涉及模块</h5><p><a href="https://doc.embedfire.com/module/module_tutorial/zh/latest/Module_Manual/spi_class/rc522.html?highlight=mfrc522">RC55读写卡（非接触考勤）</a></p>
 <p><a href="https://doc.embedfire.com/module/module_tutorial/zh/latest/Module_Manual/port_class/esp8266.html">ESP8266模块（WIFI通信）</a></p>
@@ -14051,10 +14055,6 @@
 <p><a href="https://doc.embedfire.com/module/module_tutorial/zh/latest/Module_Manual/port_class/hc05.html">HC05蓝牙模块</a></p>
 <p><a href="https://doc.embedfire.com/module/module_tutorial/zh/latest/Module_Manual/iic_class/oled.html">OLED模块</a></p>
 <p><a href="https://did321.github.io/2019/04/07/C51单片机学习笔记-五-——数码管的静态显示和动态显示/">数码管模块</a></p>
-<h4 id="常用通信协议介绍"><a href="#常用通信协议介绍" class="headerlink" title="常用通信协议介绍"></a>常用通信协议介绍</h4><p><a href="https://www.jianshu.com/p/2432c1e27440">硬件通信协议简介</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/452881964">硬件常用通信协议详解</a></p>
-<h4 id="C-C-基础"><a href="#C-C-基础" class="headerlink" title="C/C++基础"></a>C/C++基础</h4><p><a href="https://juejin.cn/post/6951391020768559111">单片机C/C++常见面试题</a></p>
-<h4 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h4><p><a href="https://maiimg.com/dec/d94682769492@pdf#%5B%7B%22num%22%3A212%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2Cnull%2C265.99628%2Cnull%5D">数据结构与算法</a></p>
 <h3 id="施工工地智能安全帽设计"><a href="#施工工地智能安全帽设计" class="headerlink" title="施工工地智能安全帽设计"></a>施工工地智能安全帽设计</h3><h4 id="整体设计思路"><a href="#整体设计思路" class="headerlink" title="整体设计思路"></a>整体设计思路</h4><p>智能安全帽将安全性提升到了更高层次，借助人工智能和物联网技术，智能安全帽考虑到了工地上的各种情况，实现检测了相应的检测，获取的数据也可分析数据工人的各种情况，所得结果使对工地的各种设施的改善具有针对性。</p>
 <p>安全帽最主要的一个创新点就是它将能将所收集到的信息全都传输到客户端，使所有数据能够直观地呈现出来，对于制定更好的工地制度和管理工人有更加科学的参考作用。相比起传统安全帽，我们能提取到更多的信息，从而获得更大的工作效益。</p>
 <p> <img src="https://raw.githubusercontents.com/Autovy/Image/master/img/test1.png" alt="test1"></p>
